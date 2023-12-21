@@ -46,7 +46,7 @@ export type ResourceQueryInput = {
   order?: string;
 };
 
-export function DataTable<TData, TValue> ({
+export function DataTable<TData, TValue>({
   columns,
   data,
   emptyState,
@@ -98,16 +98,16 @@ export function DataTable<TData, TValue> ({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
               </TableRow>
             ))}
           </TableHeader>
-          
+
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -131,10 +131,13 @@ export function DataTable<TData, TValue> ({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  {isFiltered ?
+                  {isFiltered ? (
                     <EmptyFilterState />
-                    : emptyState ? emptyState : "No results yet"
-                  }
+                  ) : emptyState ? (
+                    emptyState
+                  ) : (
+                    "No results yet"
+                  )}
                 </TableCell>
               </TableRow>
             )}
@@ -145,12 +148,6 @@ export function DataTable<TData, TValue> ({
   );
 }
 
-
-
-function EmptyFilterState(){
-      return (
-            <div className="w-full">
-                  empty filter
-            </div>
-      )
+function EmptyFilterState() {
+  return <div className="w-full">empty filter</div>;
 }

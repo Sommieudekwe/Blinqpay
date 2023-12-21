@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       <div className="w-full max-h-screen overflow-y-scroll bg-primary">
         <Header />
-        <main className=" w-full h-full">{children}</main>
+        <main className=" w-full h-full px-[4.5rem] pt-7">{children}</main>
       </div>
     </section>
   );
