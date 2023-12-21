@@ -14,6 +14,7 @@ module.exports = {
         primary: "#020014",
         input: "#15122C",
         "button-primary": "#4A33FB",
+        "primary-dashboard": "#04002A",
       },
     },
   },
