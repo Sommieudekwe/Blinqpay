@@ -50,8 +50,6 @@ export const columns: ColumnDef<IBankHistory>[] = [
             cell: ({ row }) =>
             {
                   const { status } = row.original
-
-
                   return (
                         <p className={cn('capitalize', status === 'successful' ? "text-green-400" : status === "failed" ? "text-red-400" : "text-white")}
                         >
@@ -64,13 +62,20 @@ export const columns: ColumnDef<IBankHistory>[] = [
       {
             accessorKey: "id",
             header: "",
+            meta: {
+                  align: 'right'
+            },
             cell: ({ row }) =>
             {
                   return (
-                        <Button
-                        >
-                              Get Receipt
-                        </Button>
+                        <div className="float-right">
+                              <Button
+                                    className="text-right"
+                              >
+                                    Get Receipt
+                              </Button>
+                        </div>
+
                   );
             },
       },
