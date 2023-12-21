@@ -3,12 +3,12 @@ import Sidebar from "@/components/Dashboard/Sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="min-h-screen flex bg-primary-dashboard text-white pl-9">
+    <section className="min-h-screen flex bg-primary-dashboard text-white px-9">
       <Sidebar />
 
-      <div className="w-full max-h-screen overflow-y-scroll bg-primary">
+      <div className="w-full">
         <Header />
-        <main className=" w-full h-full">{children}</main>
+        <main className="bg-primary">{children}</main>
       </div>
     </section>
   );

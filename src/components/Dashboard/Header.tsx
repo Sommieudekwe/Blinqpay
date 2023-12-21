@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <nav className="flex items-center justify-between h-20 w-full">
+    <nav className="flex items-center justify-between h-20 w-full bg-primary-dashboard sticky top-0 z-10">
       {/* Logo and search input */}
       <div className="flex items-center w-1/2">
         {/* Search */}
