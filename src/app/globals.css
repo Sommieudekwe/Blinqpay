@@ -26,10 +26,10 @@ body {
     rgb(var(--background-start-rgb));
 } */
 
-/* .br {
+.br {
 	@apply border-[0.5px] border-red-400;
 }
 
 .bg {
 	@apply border-[0.5px] border-green-400;
-} */
+}
