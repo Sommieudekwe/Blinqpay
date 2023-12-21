@@ -54,7 +54,7 @@ export default function Dashboard() {
 
           <h3 className="opacity-50">Current Orders</h3>
 
-          <h4 className="mt-3 text-2xl">100</h4>
+          <h4 className="mt-3 text-2xl">1000</h4>
         </div>
       </div>
     </div>
