@@ -37,10 +37,14 @@ const routes = [
 
 export default function Sidebar() {
   return (
-    <aside className="w-64 space-y-8">
+    <aside className="w-64 space-y-8 pt-5">
+      <div>
+        <div className="text-3xl">BlinqPay</div>
+      </div>
+
       {routes.map((route, index) => (
         <div key={index} className="flex items-center gap-6">
-          <Image src={route.icon} width={24} height={24} />
+          <Image src={route.icon} width={24} height={24} alt="icon" />
           <span className="opacity-70">{route.name}</span>
         </div>
       ))}
