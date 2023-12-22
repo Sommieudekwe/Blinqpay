@@ -31,6 +31,13 @@ module.exports = {
         cancel: "#EC4545",
         "onboard-bg": "#04021D",
       },
+      fontFamily: {
+        aeonikbold: ["var(--font-aeonikProBold)"],
+        aeoniklight: ["var(--font-aeonikProLight)"],
+        aeonikRegular: ["var(--font-aeonikProRegular)"],
+        inter: ["var(--font-inter)"],
+      },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

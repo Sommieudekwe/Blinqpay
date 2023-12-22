@@ -16,7 +16,7 @@ export default function Login() {
       {/* Get started */}
       <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white p-5 border-opacity-25">
         <div>
-          <h3 className="text-4xl">Login</h3>
+          <h3 className="text-4xl font-aeonikbold">Login</h3>
           <p className="opacity-60 mt-2">
             Create an account to start your journey
           </p>
