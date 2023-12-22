@@ -15,7 +15,7 @@ export const dashboardData: IDashboard[] = [
     accountNumber: "20561222355",
     bankName: "Kuda Microfinance Bank",
     amount: "200,000,000",
-    status: "Pending",
+    status: "Successful",
     rate: "1,165.70",
   },
 
@@ -33,7 +33,7 @@ export const dashboardData: IDashboard[] = [
     accountNumber: "20561222355",
     bankName: "GT Bank",
     amount: "200,000,000",
-    status: "Pending",
+    status: "Successful",
     rate: "1,165.70",
   },
 
@@ -51,7 +51,7 @@ export const dashboardData: IDashboard[] = [
     accountNumber: "20561222355",
     bankName: "GT Bank",
     amount: "200,000,000",
-    status: "Pending",
+    status: "Failed",
     rate: "1,165.70",
   },
 ];
