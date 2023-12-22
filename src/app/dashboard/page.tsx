@@ -1,4 +1,8 @@
 import Image from "next/image";
+import { DataTable } from "@/components/ui/data-table";
+import { dashboardColumn } from "./home/column";
+import { dashboardData } from "./home/data";
+import { Button } from "@/components/ui/button";
 
 export default function Dashboard() {
   return (
@@ -57,6 +61,24 @@ export default function Dashboard() {
           <h4 className="mt-3 text-2xl">1000</h4>
         </div>
       </div>
+
+      <div className="flex justify-between items-center mt-5">
+        <h3 className="text-2xl">Active Orders</h3>
+
+        <div className="flex gap-x-5">
+          <div>
+            <Button className="bg-button-primary">Pay all</Button>
+          </div>
+          <div>
+            <Button className="bg-transparent">Cancel all</Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Table */}
+      <section className="w-full h-full mt-10">
+        <DataTable columns={dashboardColumn} data={dashboardData} />
+      </section>
     </div>
   );
 }

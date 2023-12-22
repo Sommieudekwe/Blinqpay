@@ -28,6 +28,8 @@ module.exports = {
         "border-fade": "#ffffff25",
         "button-bg": "#07041B",
         "light-green": "#058658",
+        cancel: "#EC4545",
+        "onboard-bg": "#04021D",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

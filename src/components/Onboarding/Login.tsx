@@ -1,13 +1,20 @@
+import Image from "next/image";
+
 export default function Login() {
   return (
     <div className="grid grid-cols-2 bg-primary text-white lg:px-36 min-h-screen items-center">
       {/* Illustration */}
       <div>
-        <div className="h-[600px] w-[500px] bg-white"></div>
+        <Image
+          src="/onboarding/login.svg"
+          alt="register"
+          width={517}
+          height={514}
+        />
       </div>
 
       {/* Get started */}
-      <div className="w-[35rem] mx-auto">
+      <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white p-5 border-opacity-25">
         <div>
           <h3 className="text-4xl">Login</h3>
           <p className="opacity-60 mt-2">
