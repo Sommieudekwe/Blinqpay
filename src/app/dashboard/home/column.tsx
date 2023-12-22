@@ -2,24 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { IBankHistory } from "@/types";
+import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const columns: ColumnDef<IBankHistory>[] = [
-  {
-    accessorKey: "id",
-    header: "#",
-    cell: ({ row }) => row.index + 1,
-  },
+export const columns: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "accountName",
     header: "Account Name",
     accessorFn: (row) => row.accountName,
-  },
-  {
-    accessorKey: "bankName",
-    header: "Bank Name",
-    accessorFn: (row) => row.bankName,
   },
 
   {
@@ -29,15 +19,17 @@ export const columns: ColumnDef<IBankHistory>[] = [
   },
 
   {
+    accessorKey: "bankName",
+    header: "Bank Name",
+    accessorFn: (row) => row.bankName,
+  },
+
+  {
     accessorKey: "amount",
-    header: "Amount (NGN)",
+    header: "Amount",
     accessorFn: (row) => row.amount,
   },
-  {
-    accessorKey: "date",
-    header: "Date",
-    accessorFn: (row) => row.date,
-  },
+
   {
     accessorKey: "status",
     header: "Status",
@@ -47,9 +39,9 @@ export const columns: ColumnDef<IBankHistory>[] = [
         <p
           className={cn(
             "capitalize",
-            status === "successful"
+            status === "Successful"
               ? "text-green-400"
-              : status === "failed"
+              : status === "Failed"
               ? "text-red-400"
               : "text-white"
           )}
@@ -59,16 +51,31 @@ export const columns: ColumnDef<IBankHistory>[] = [
       );
     },
   },
+
   {
-    accessorKey: "id",
-    header: "",
-    meta: {
-      align: "right",
-    },
+    accessorKey: "rate",
+    header: "Rate",
+    accessorFn: (row) => row.rate,
+  },
+
+  {
+    accessorKey: "action",
+    header: "Action",
     cell: ({ row }) => {
       return (
         <div className="float-right">
-          <Button className="text-right">Get Receipt</Button>
+          <Button className="text-right">Pay now</Button>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "action",
+    header: "Action",
+    cell: ({ row }) => {
+      return (
+        <div className="float-right">
+          <Button className="text-right">Cancel</Button>
         </div>
       );
     },

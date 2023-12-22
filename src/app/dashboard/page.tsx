@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { DataTable } from "@/components/ui/data-table";
+import { columns } from "./bank-history/column";
+import { dashboardData } from "./home/data";
 
 export default function Dashboard() {
   return (
@@ -57,6 +60,11 @@ export default function Dashboard() {
           <h4 className="mt-3 text-2xl">1000</h4>
         </div>
       </div>
+
+
+      <section className="w-full h-full">
+        <DataTable columns={columns} data={dashboardData} />
+      </section>
     </div>
   );
 }
