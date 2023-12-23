@@ -1,73 +1,41 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-const services = [
-  {
-    name: "Binance",
-    icon: "/dashboard/connectivity/binance.svg",
-    availability: true,
-  },
-  {
-    name: "Bybit",
-    icon: "/dashboard/connectivity/bybit.svg",
-    availability: false,
-  },
-  {
-    name: "Remitano",
-    icon: "/dashboard/connectivity/remitano.svg",
-    availability: false,
-  },
-  {
-    name: "Kuda",
-    icon: "/dashboard/connectivity/kuda.svg",
-    availability: true,
-  },
-
-  {
-    name: "Lenco",
-    icon: "/dashboard/connectivity/lenco.svg",
-    availability: false,
-  },
-  {
-    name: "Providus",
-    icon: "/dashboard/connectivity/providus.svg",
-    availability: false,
-  },
-  {
-    name: "Paxful",
-    icon: "/dashboard/connectivity/paxful.svg",
-    availability: true,
-  },
-  {
-    name: "Kucoin",
-    icon: "/dashboard/connectivity/kucoin.svg",
-    availability: false,
-  },
-  {
-    name: "Moniepoint",
-    icon: "/dashboard/connectivity/moniepoint.svg",
-    availability: false,
-  },
-];
+import { useRouter } from "next/navigation";
+import { bankList } from "./constants";
 
 export default function Connectivity() {
+  const router = useRouter();
+
+  const AvailableBanks = ["Binance", "Kuda", "Paxful"];
+
+  function handleConnect(bankName: string) {
+    return router.push(`/dashboard/connectivity/${bankName}`);
+  }
+
   return (
-    <div className="grid grid-cols-1 grid-cols-2 lg:grid-cols-3 gap-9 pt-20 px-9">
-      {services.map((service, index) => (
-        <div
-          key={index}
-          className="p-5 bg-[#0C0A1D] border border-white border-opacity-15 text-center flex flex-col items-center"
-        >
-          <div>
-            <img src={service.icon} alt={service.icon} />
-          </div>
-          <div className="mt-5">
-            <Button className={``} disabled={!service.availability}>
-              {service.availability === true ? "Connect" : "Coming Soon"}
+    <section className="w-full h-full">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-20 px-9">
+        {bankList.map((bank, index) => (
+          <div
+            key={index}
+            className="w-full p-5 space-y-8 flex flex-col items-center border border-border-connect bg-bank-bg"
+          >
+            <div className="w-full max-w-[16.25rem] relative h-[3.438rem]">
+              <Image src={bank.logo} alt={"bank logo"} fill />
+            </div>
+
+            <Button
+              onClick={() => handleConnect(bank.name)}
+              variant={"outline"}
+              disabled={!AvailableBanks.includes(bank.name)}
+            >
+              {AvailableBanks.includes(bank.name) ? "Connect" : "Comming Soon"}
             </Button>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   );
 }
