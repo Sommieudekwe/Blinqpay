@@ -23,7 +23,7 @@ const routes: IRoutes[] = [
   {
     name: "Connectivity",
     icon: "/dashboard/sidebar/connectivity.svg",
-    link: "/connectivity",
+    link: "/dashboard/connectivity",
   },
   {
     name: "Subscription",
@@ -55,7 +55,7 @@ export default function Sidebar()
       {routes.map((route, index) => (
         <Link href={route.link} key={index} className={"flex items-center gap-6"}>
           <Image src={route.icon} width={24} height={24} alt="icon" />
-          <span className={cn("opacity-70", pathname === route.link ? "text-button-primary": "")}>{route.name}</span>
+          <span className={cn("opacity-70", pathname === route.link || pathname.includes(route.link) ? "text-button-primary": "")}>{route.name}</span>
         </Link>
       ))}
     </aside>
