@@ -23,3 +23,6 @@ export interface IDashboard {
   rate: string;
   amount: string;
 }
+export interface IbankList {
+  [x: string]: string;
+}

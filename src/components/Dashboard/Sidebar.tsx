@@ -57,7 +57,7 @@ export default function Sidebar({ setOpen }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-autolg:w-64 space-y-8 pt-5">
+    <aside className="w-auto lg:w-64 space-y-8 pt-5">
       <div>
         <div className="text-3xl hidden lg:block">BlinqPay</div>
       </div>
@@ -73,7 +73,9 @@ export default function Sidebar({ setOpen }: SidebarProps) {
           <span
             className={cn(
               "opacity-70",
-              pathname === route.link ? "text-button-primary" : ""
+              pathname === route.link || pathname.includes(route.link)
+                ? "text-button-primary"
+                : ""
             )}
           >
             {route.name}

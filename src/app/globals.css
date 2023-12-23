@@ -33,3 +33,8 @@ body {
 .bg {
 	@apply border-[0.5px] border-green-400;
 }
+
+.col{
+  border-radius: 36px;
+background: #ffffff0a;;
+}
