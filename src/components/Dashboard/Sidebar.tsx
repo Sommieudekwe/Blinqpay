@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { cn } from "@/lib/utils";
 import { IRoutes } from "@/types";
@@ -6,10 +6,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-
 const routes: IRoutes[] = [
-  { name: "Dashboard", icon: "/dashboard/sidebar/dashboard.svg", link: "/dashboard" },
-  { name: "Sell", icon: "/dashboard/sidebar/sell.svg", link: "/dashboard/sell" },
+  {
+    name: "Dashboard",
+    icon: "/dashboard/sidebar/dashboard.svg",
+    link: "/dashboard",
+  },
+  {
+    name: "Sell",
+    icon: "/dashboard/sidebar/sell.svg",
+    link: "/dashboard/sell",
+  },
   {
     name: "Bank History",
     icon: "/dashboard/sidebar/bank.svg",
@@ -23,7 +30,7 @@ const routes: IRoutes[] = [
   {
     name: "Connectivity",
     icon: "/dashboard/sidebar/connectivity.svg",
-    link: "/connectivity",
+    link: "/dashboard/connectivity",
   },
   {
     name: "Subscription",
@@ -42,20 +49,30 @@ const routes: IRoutes[] = [
   },
 ];
 
-export default function Sidebar()
-{
+export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 space-y-8 pt-5">
+    <aside className="w-auto lg:w-64 space-y-8 pt-5">
       <div>
-        <div className="text-3xl">BlinqPay</div>
+        <div className="text-3xl hidden lg:block">BlinqPay</div>
       </div>
 
       {routes.map((route, index) => (
-        <Link href={route.link} key={index} className={"flex items-center gap-6"}>
+        <Link
+          href={route.link}
+          key={index}
+          className={"flex items-center gap-6"}
+        >
           <Image src={route.icon} width={24} height={24} alt="icon" />
-          <span className={cn("opacity-70", pathname === route.link ? "text-button-primary": "")}>{route.name}</span>
+          <span
+            className={cn(
+              "opacity-70",
+              pathname === route.link ? "text-button-primary" : ""
+            )}
+          >
+            {route.name}
+          </span>
         </Link>
       ))}
     </aside>
