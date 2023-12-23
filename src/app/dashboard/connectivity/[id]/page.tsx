@@ -2,7 +2,6 @@
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
-import { bankList } from "../page";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,6 +14,7 @@ import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
+import { bankList } from "../constants";
 
 const ConnectionDetailsSchema = yup.object().shape({
   api_key: yup.string().required("Api key is required!"),
