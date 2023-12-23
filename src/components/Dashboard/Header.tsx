@@ -8,7 +8,7 @@ export default function Header() {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between h-20 w-full bg-primary-dashboard sticky top-0 z-10 px-5 lg:px-10">
+    <nav className="flex items-center justify-between h-20 w-full bg-primary-dashboard sticky top-0 z-10 lg:px-10">
       {/* Logo and search input */}
       <div className="hidden lg:flex items-center w-1/2">
         {/* Search */}
@@ -22,7 +22,7 @@ export default function Header() {
       </div>
 
       {/* Timer and profile */}
-      <div className="flex justify-between items-center w-full lg:w-1/2">
+      <div className="flex justify-between items-center w-full lg:w-1/2 px-5 lg:px-0">
         <div className="hidden lg:block">
           <div className="bg-button-primary bg-opacity-20 rounded-3xl py-3 px-12">
             30 : 20 : 2
@@ -52,8 +52,8 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="block lg:hidden absolute top-10">
-          <Sidebar />
+        <div className="block lg:hidden absolute top-20 bg-primary-dashboard w-full min-h-[calc(100vh-80px)] z-20 px-5">
+          <Sidebar setOpen={setOpen} />
         </div>
       )}
     </nav>

@@ -49,11 +49,15 @@ const routes: IRoutes[] = [
   },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  setOpen?: (value: boolean) => void;
+}
+
+export default function Sidebar({ setOpen }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-auto lg:w-64 space-y-8 pt-5">
+    <aside className="w-autolg:w-64 space-y-8 pt-5">
       <div>
         <div className="text-3xl hidden lg:block">BlinqPay</div>
       </div>
@@ -63,6 +67,7 @@ export default function Sidebar() {
           href={route.link}
           key={index}
           className={"flex items-center gap-6"}
+          onClick={() => setOpen?.(false)}
         >
           <Image src={route.icon} width={24} height={24} alt="icon" />
           <span
