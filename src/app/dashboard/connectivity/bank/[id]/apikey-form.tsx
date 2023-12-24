@@ -20,6 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import React from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { IBankDetailsProps } from "@/types";
+import Link from "next/link";
 
 const ConnectionDetailsSchema = yup.object().shape({
       api_key: yup.string().required("Api key is required!"),
@@ -93,7 +94,11 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
                                                       />
                                                 </FormControl>
                                                 <FormDescription>
-                                                      Can’t find your API Key? Watch this video
+                                                      Can’t find your API Key?
+                                                      <Link href={"/"} className="text-button-primary">
+                                                            Watch this video
+                                                      </Link>
+
                                                 </FormDescription>
                                                 <FormMessage />
                                           </FormItem>
@@ -115,7 +120,10 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
                                                       />
                                                 </FormControl>
                                                 <FormDescription>
-                                                      Don’t have a tracking reference? Generate here
+                                                      Don’t have a tracking reference?
+                                                      <Link href={"/"} className="text-button-primary">
+                                                            Watch this video
+                                                      </Link>
                                                 </FormDescription>
                                                 <FormMessage />
                                           </FormItem>

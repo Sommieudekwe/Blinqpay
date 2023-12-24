@@ -8,7 +8,7 @@ import { bankList } from "./constants";
 export default function Connectivity() {
   const router = useRouter();
 
-  const AvailableBanks = ["Binance", "Kuda", "Paxful"];
+  const AvailableBanks = ["Binance", "Kuda", "Paxful", 'Moniepoint'];
   const AllBanks = ["Providus", "Kuda", "Moniepoint"];
 
   function handleConnect(bankName: string) {
