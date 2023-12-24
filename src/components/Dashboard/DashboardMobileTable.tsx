@@ -9,9 +9,10 @@ import Image from "next/image";
 
 interface TableProps {
   data: IDashboard[];
+  onOpenDialog: (type: "pay" | "cancel") => void;
 }
 
-export default function MobileTable({ data }: TableProps) {
+export default function MobileTable({ data, onOpenDialog }: TableProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState<"pay" | "cancel" | null>(null);
   // const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -20,8 +21,9 @@ export default function MobileTable({ data }: TableProps) {
     setModalType(type);
     // setSelectedId(id);
     setIsOpen(true);
-    console.log(isOpen);
   };
+
+  console.log(isOpen);
 
   return (
     <div className="w-full">
@@ -51,10 +53,10 @@ export default function MobileTable({ data }: TableProps) {
           </div>
 
           <div className="inline-flex flex-col space-y-2">
-            <Button onClick={() => handleOpenModal("pay")}>Pay now</Button>
+            <Button onClick={() => onOpenDialog("pay")}>Pay now</Button>
             <Button
               className="text-cancel border border-cancel border-opacity-25"
-              onClick={() => handleOpenModal("cancel")}
+              onClick={() => onOpenDialog("cancel")}
             >
               Cancel
             </Button>
@@ -62,9 +64,8 @@ export default function MobileTable({ data }: TableProps) {
         </div>
       ))}
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        {/* <DialogOverlay /> */}
-        <DialogContent className="text-center text-white">
+      {/* <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="text-center text-white bg-red-500 !z-50">
           {modalType === "pay" ? (
             <div>Successful</div>
           ) : modalType === "cancel" ? (
@@ -78,9 +79,11 @@ export default function MobileTable({ data }: TableProps) {
 
               <p>Are you sure you want to cancel this order?</p>
             </div>
-          ) : null}
+          ) : (
+            <div>Hello</div>
+          )}
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 }
