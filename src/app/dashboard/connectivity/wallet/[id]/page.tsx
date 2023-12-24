@@ -27,7 +27,8 @@ import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
-import { bankList } from "../constants";
+import { bankList } from "@/app/dashboard/connectivity/constants";
+
 
 const ConnectionDetailsSchema = yup.object().shape({
   api_key: yup.string().required("Api key is required!"),
