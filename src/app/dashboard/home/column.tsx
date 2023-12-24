@@ -40,10 +40,10 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
           className={cn(
             "capitalize",
             status === "Successful"
-              ? "text-green-400"
+              ? "text-success"
               : status === "Failed"
-              ? "text-red-400"
-              : "text-[#F2AF2C]"
+              ? "text-failed"
+              : "text-pending"
           )}
         >
           {status}
@@ -64,7 +64,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-center">
-          <Button className="text-right">Pay now</Button>
+          <Button className="text-right font-normal">Pay now</Button>
         </div>
       );
     },
