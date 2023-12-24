@@ -26,3 +26,8 @@ export interface IDashboard {
 export interface IbankList {
   [x: string]: string;
 }
+
+export interface IBankDetailsProps{
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+  handleConnectToBank: () => void;
+}

@@ -9,9 +9,11 @@ export default function Connectivity() {
   const router = useRouter();
 
   const AvailableBanks = ["Binance", "Kuda", "Paxful"];
+  const AllBanks = ["Providus", "Kuda", "Moniepoint"];
 
   function handleConnect(bankName: string) {
-    return router.push(`/dashboard/connectivity/${bankName}`);
+    if(AllBanks.includes(bankName)) return router.push(`/dashboard/connectivity/bank/${bankName}`) 
+    return router.push(`/dashboard/connectivity/wallet/${bankName}`);
   }
 
   return (
