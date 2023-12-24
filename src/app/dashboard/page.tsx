@@ -1,11 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import { DataTable } from "@/components/ui/data-table";
 import { dashboardColumn } from "./home/column";
 import { dashboardData } from "./home/data";
 import { Button } from "@/components/ui/button";
 import MobileTable from "@/components/Dashboard/DashboardMobileTable";
-
+import { useState } from "react";
+import { Dialog, DialogContent } from "@radix-ui/react-dialog";
 export default function Dashboard() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogType, setDialogType] = useState<"cancel" | "pay" | null>(null);
+
+  const openDialog = (type: "cancel" | "pay") => {
+    setDialogType(type);
+    setIsDialogOpen(true);
+  };
+
   return (
     <div className="">
       <div className="lg:flex justify-between">
@@ -87,7 +98,28 @@ export default function Dashboard() {
         </div>
 
         <div className="lg:hidden">
-          <MobileTable data={dashboardData} />
+          <MobileTable data={dashboardData} onOpenDialog={openDialog} />
+
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogContent className="text-center text-white bg-red-500 !z-50">
+              {dialogType === "pay" ? (
+                <div>Successful</div>
+              ) : dialogType === "cancel" ? (
+                <div>
+                  <Image
+                    src="./dashboard/warning.svg"
+                    alt="warning"
+                    width={88}
+                    height={88}
+                  />
+
+                  <p>Are you sure you want to cancel this order?</p>
+                </div>
+              ) : (
+                <div>Hello</div>
+              )}
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
     </div>

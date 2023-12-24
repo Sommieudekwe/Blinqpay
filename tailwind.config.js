@@ -40,9 +40,6 @@ module.exports = {
         rate: "#4B34FF",
       },
       fontFamily: {
-        aeonikbold: ["var(--font-aeonikProBold)"],
-        aeoniklight: ["var(--font-aeonikProLight)"],
-        aeonikRegular: ["var(--font-aeonikProRegular)"],
         inter: ["var(--font-inter)"],
       },
 

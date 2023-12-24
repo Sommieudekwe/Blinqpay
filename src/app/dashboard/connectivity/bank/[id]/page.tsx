@@ -4,12 +4,7 @@ import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
-import
-  {
-    Dialog,
-    DialogContent,
-
-  } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 import Link from "next/link";
 import React from "react";
@@ -19,9 +14,7 @@ import { bankList } from "@/app/dashboard/connectivity/constants";
 import BankDetailsForm from "./details-form";
 import BankAPIDetailsForm from "./apikey-form";
 
-
-export default function Connectivity()
-{
+export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<number>(1);
   const { id } = useParams();
@@ -31,15 +24,13 @@ export default function Connectivity()
    *
    *
    */
-  function getBankLogo(bankName: string): string
-  {
+  function getBankLogo(bankName: string): string {
     const bank = bankList.find((bank) => bank.name === bankName);
     return bank?.logo as string;
   }
 
-  function handleConnectToBank()
-  {
-    setIsSuccess(true)
+  function handleConnectToBank() {
+    setIsSuccess(true);
   }
   /*
    *
@@ -49,13 +40,16 @@ export default function Connectivity()
    */
   return (
     <section className="w-full h-full lg:pt-16">
-
       <div className="pagination w-full flex justify-center">
         <div className="w-[18.75rem] flex justify-between">
           <div className={cn("h-1 w-[8.75rem] bg-white")}></div>
-          <div className={cn("h-1 w-[8.75rem] bg-white", step === 1 ? "opacity-10" : "opacity-100")}></div>
+          <div
+            className={cn(
+              "h-1 w-[8.75rem] bg-white",
+              step === 1 ? "opacity-10" : "opacity-100"
+            )}
+          ></div>
         </div>
-
       </div>
       <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-[1.875rem] border-opacity-25 mt-[6rem]">
         {/* logo */}
@@ -63,9 +57,14 @@ export default function Connectivity()
           <Image src={getBankLogo(id as string)} alt={"bank logo"} fill />
         </div>
 
-        {
-          step === 1 ? <BankDetailsForm setStep={setStep} /> : <BankAPIDetailsForm setStep={setStep} handleConnectToBank={handleConnectToBank} />
-        }
+        {step === 1 ? (
+          <BankDetailsForm setStep={setStep} />
+        ) : (
+          <BankAPIDetailsForm
+            setStep={setStep}
+            handleConnectToBank={handleConnectToBank}
+          />
+        )}
       </div>
 
       <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
@@ -97,7 +96,6 @@ export default function Connectivity()
           </Link>
         </DialogContent>
       </Dialog>
-
     </section>
   );
 }

@@ -2,26 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import localFont from "next/font/local";
-import { Toaster } from "@/components/ui/toaster"
-
-
-
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
-const aeonikProBoldFont = localFont({
-  src: "../../public/fonts/aeonikProTRIAL-Bold.otf",
-  variable: "--font-aeonikProBold",
-});
-
-const aeonikProLight = localFont({
-  src: "../../public/fonts/aeonikProTRIAL-Light.otf",
-  variable: "--font-aeonikProLight",
-});
-
-const aeonikProRegular = localFont({
-  src: "../../public/fonts/aeonikProTRIAL-Regular.otf",
-  variable: "--font-aeonikProRegular",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,9 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} ${aeonikProBoldFont.variable} ${aeonikProLight.variable} ${aeonikProRegular.variable}`}
-      >
+      <body className={`${inter.className}`}>
         {children}
         <Toaster />
       </body>
