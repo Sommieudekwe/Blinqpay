@@ -120,6 +120,21 @@ export default function Dashboard() {
               )}
             </DialogContent>
           </Dialog>
+
+          {/* {isDialogOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+              <div className="bg-white p-4 rounded-lg">
+                <h2 className="text-lg font-bold mb-4">Success</h2>
+                You are correct
+                <button
+                  // onClick={onClose}
+                  className="mt-4 py-2 px-4 bg-blue-500 text-white rounded"
+                >
+                  Close Modal
+                </button>
+              </div>
+            </div>
+          )} */}
         </div>
       </section>
     </div>

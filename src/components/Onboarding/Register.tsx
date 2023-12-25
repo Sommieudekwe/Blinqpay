@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Register() {
   return (
-    <div className="grid grid-cols-2 bg-primary text-white lg:px-36 min-h-screen items-center">
+    <div className="lg:grid grid-cols-2 bg-primary text-white lg:px-36 min-h-screen items-center pt-4 g:pt-0">
       {/* Illustration */}
-      <div>
+      <div className="hidden lg:block">
         <Image
           src="/onboarding/signup.svg"
           alt="register"
@@ -14,7 +14,7 @@ export default function Register() {
       </div>
 
       {/* Get started */}
-      <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white p-5 border-opacity-25">
+      <div className="lg:w-[35rem] mx-auto lg:rounded-xl lg:bg-onboard-bg lg:border border-white p-5 border-opacity-25">
         <div>
           <h3 className="text-4xl">Get Started</h3>
           <p className="opacity-60 mt-2">
@@ -23,7 +23,7 @@ export default function Register() {
         </div>
 
         <form action="" className="mt-8">
-          <div className="flex gap-x-6">
+          <div className="lg:flex gap-x-6">
             <div className="w-full">
               <label htmlFor="firstname" className="text-sm">
                 First Name
@@ -36,7 +36,7 @@ export default function Register() {
                 className="rounded-xl w-full px-4 py-2 bg-input mt-1 outline-none border border-white border-opacity-25"
               />
             </div>
-            <div className="w-full">
+            <div className="w-full mt-6 lg:mt-0">
               <label htmlFor="lastname" className="text-sm">
                 Last Name
               </label>
@@ -76,7 +76,7 @@ export default function Register() {
             />
           </div>
 
-          <div className="flex gap-x-6 mt-6">
+          <div className="lg:flex gap-x-6 mt-6">
             <div className="w-full">
               <label htmlFor="password" className="text-sm">
                 Password
@@ -89,7 +89,7 @@ export default function Register() {
                 className="rounded-xl w-full px-4 py-2 bg-input mt-1 outline-none border border-white border-opacity-25"
               />
             </div>
-            <div className="w-full">
+            <div className="w-full mt-6 lg:mt-0">
               <label htmlFor="confirm" className="text-sm">
                 Confirm Password
               </label>
@@ -107,8 +107,9 @@ export default function Register() {
             <span className="opacity-60">
               By clicking continue, you accept Blinqpay&apos;s
             </span>
-            <span>Terms of Service</span>
-            <span className="opacity-60">and</span> <span>Privacy Policy</span>.
+            <span> Terms of Service</span>
+            <span className="opacity-60"> and </span>
+            <span>Privacy Policy</span>.
           </div>
 
           <div className="space-y-4 mt-10">

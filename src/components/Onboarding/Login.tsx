@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Login() {
   return (
-    <div className="grid grid-cols-2 bg-primary text-white lg:px-36 min-h-screen items-center">
+    <div className="lg:grid grid-cols-2 bg-primary text-white lg:px-36 min-h-screen items-center pt-12 lg:pt-0">
       {/* Illustration */}
-      <div>
+      <div className="hidden lg:block">
         <Image
           src="/onboarding/login.svg"
           alt="register"
@@ -14,9 +14,9 @@ export default function Login() {
       </div>
 
       {/* Get started */}
-      <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white p-5 border-opacity-25">
+      <div className="w-full lg:w-[35rem] mx-auto lg:rounded-xl lg:bg-onboard-bg lg:border border-white p-5 border-opacity-25">
         <div>
-          <h3 className="text-4xl font-aeonikbold">Login</h3>
+          <h3 className="text-4xl font-bold">Login</h3>
           <p className="opacity-60 mt-2">
             Create an account to start your journey
           </p>
@@ -61,10 +61,12 @@ export default function Login() {
               </button>
             </div>
 
-            <span className="text-center block opacity-25 mt-12">
-              Don&apos;t have an account?{" "}
+            <div className="mt-12 flex justify-center gap-x-1">
+              <span className="text-center block opacity-25">
+                Don&apos;t have an account?
+              </span>
               <span className="text-[#6E5BFF] opacity-100">Sign Up</span>
-            </span>
+            </div>
           </div>
         </form>
       </div>
