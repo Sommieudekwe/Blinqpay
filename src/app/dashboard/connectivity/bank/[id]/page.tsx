@@ -11,8 +11,8 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import { bankList } from "@/app/dashboard/connectivity/constants";
-import BankDetailsForm from "./details-form";
-import BankAPIDetailsForm from "./apikey-form";
+import BankDetailsForm from "../../../../../components/Dashboard/connectivity/details-form";
+import BankAPIDetailsForm from "../../../../../components/Dashboard/connectivity/apikey-form";
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
