@@ -45,7 +45,7 @@ const routes: IRoutes[] = [
   {
     name: "Settings",
     icon: "/dashboard/sidebar/settings.svg",
-    link: "/settings",
+    link: "/dashboard/settings",
   },
 ];
 
