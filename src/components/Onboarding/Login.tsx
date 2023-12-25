@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <div className="lg:grid grid-cols-2 bg-primary text-white lg:px-36 min-h-screen items-center pt-12 lg:pt-0">
+    <div className="lg:grid grid-cols-2 gap-x-12 xl:gap-x-20 bg-primary text-white lg:px-24 xl:px-36 min-h-screen items-center pt-12 lg:pt-0">
       {/* Illustration */}
       <div className="hidden lg:block">
         <Image
@@ -15,7 +15,7 @@ export default function Login() {
       </div>
 
       {/* Get started */}
-      <div className="w-full lg:w-[35rem] mx-auto lg:rounded-xl lg:bg-onboard-bg lg:border border-white p-5 border-opacity-25">
+      <div className="w-full lg:max-w-[35rem] mx-auto lg:rounded-xl lg:bg-onboard-bg lg:border border-white p-5 border-opacity-25">
         <div>
           <h3 className="text-4xl font-bold">Login</h3>
           <p className="opacity-60 mt-2">
