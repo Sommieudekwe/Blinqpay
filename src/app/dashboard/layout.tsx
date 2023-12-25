@@ -8,9 +8,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Sidebar />
       </div>
 
-      <div className="w-full max-h-screen overflow-y-scroll">
+      <div className="w-full">
         <Header />
-        <main className=" w-full h-full px-5 lg:px-[4.5rem] pt-12 lg:pt-7 bg-primary">
+        <main className=" w-full min-h-[calc(100vh-80px)] px-5 lg:px-[4.5rem] pt-12 lg:pt-7 bg-primary">
           {children}
         </main>
       </div>
