@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -49,23 +50,34 @@ export default function Login() {
             />
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 text-center">
             <div className="w-ful">
-              <button className="bg-button-primary rounded-3xl w-full py-3">
+              <Link
+                href="/login"
+                className="bg-button-primary block rounded-3xl w-full py-3"
+              >
                 Log In
-              </button>
+              </Link>
             </div>
             <div className="w-full mt-4">
-              <button className="rounded-3xl w-full py-3 border border-white border-opacity-25">
+              <Link
+                href=""
+                className="rounded-3xl block w-full py-3 border border-white border-opacity-25"
+              >
                 Forget Password
-              </button>
+              </Link>
             </div>
 
             <div className="mt-12 flex justify-center gap-x-1">
               <span className="text-center block opacity-25">
                 Don&apos;t have an account?
               </span>
-              <span className="text-[#6E5BFF] opacity-100">Sign Up</span>
+              <Link
+                href="/signup"
+                className="text-[#6E5BFF] block text-center opacity-100"
+              >
+                Sign Up
+              </Link>
             </div>
           </div>
         </form>

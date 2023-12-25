@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import * as React from "react";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -50,6 +51,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   emptyState,
+  show_pagination = true,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
 
@@ -144,6 +146,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+      {show_pagination && table.getRowModel().rows?.length > 0 && <DataTablePagination table={table} />}
+
     </div>
   );
 }

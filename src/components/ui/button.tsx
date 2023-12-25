@@ -14,6 +14,8 @@ const buttonVariants = cva(
         outline: "bg-button-connect rounded-[2.25rem] text-white hover: focus-visible:ring-ring-button-connect",
         primary:
           "bg-button-primary  rounded-[4.625rem] px-5 p-4 text-white font-medium hover: focus-visible:ring-ring-button-primary",
+          "ghost-red":
+          "bg-transparent border border-ghost-border rounded-[4.625rem] px-5 p-4 text-ghost-text font-medium hover: focus-visible:ring-ring-ghost-text",
       },
       size: {
         default: "h-10 px-4",

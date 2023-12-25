@@ -38,6 +38,9 @@ module.exports = {
         pending: "#F2AF2C",
         failed: "#EC4545",
         rate: "#4B34FF",
+        switch: "#3524BC",
+        "ghost-border": "#7C2F2F",
+        "ghost-text": "#D53030",
       },
       fontFamily: {
         inter: ["var(--font-inter)"],

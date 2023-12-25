@@ -29,7 +29,6 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 import { bankList } from "@/app/dashboard/connectivity/constants";
 
-
 const ConnectionDetailsSchema = yup.object().shape({
   api_key: yup.string().required("Api key is required!"),
   secret_key: yup.string().required("Secret key is required"),
@@ -183,7 +182,7 @@ export default function Connectivity() {
             <p className="font-medium text-typography text-center mt-6">
               Can’t find your secret key, API Key or User ID?{" "}
               <Link href={"/"} className="text-button-primary">
-                Watch this video
+                Watch this
               </Link>
             </p>
           </form>
