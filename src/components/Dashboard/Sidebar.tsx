@@ -57,7 +57,7 @@ export default function Sidebar({ setOpen }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-auto lg:w-64 space-y-8 pt-5">
+    <aside className="w-auto lg:w-44 xl:w-[13rem] space-y-8 pt-5">
       <div>
         <div className="text-3xl font-bold hidden lg:block">BlinqPay</div>
       </div>

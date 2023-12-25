@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Register() {
   return (
@@ -112,16 +113,22 @@ export default function Register() {
             <span>Privacy Policy</span>.
           </div>
 
-          <div className="space-y-4 mt-10">
+          <div className="space-y-4 mt-10 text-center">
             <div className="w-full">
-              <button className="bg-button-primary rounded-3xl w-full py-3">
+              <Link
+                href="/login"
+                className="bg-button-primary block rounded-3xl w-full py-3"
+              >
                 Log In
-              </button>
+              </Link>
             </div>
             <div className="w-full">
-              <button className="rounded-3xl w-full py-3 border border-white border-opacity-25">
+              <Link
+                href="signup"
+                className="rounded-3xl w-full py-3 block border border-white border-opacity-25"
+              >
                 Sign Up
-              </button>
+              </Link>
             </div>
           </div>
         </form>
