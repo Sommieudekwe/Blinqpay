@@ -22,6 +22,7 @@ import React from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { IBankDetailsProps } from "@/types";
 import Link from "next/link";
+import Select from "@/components/ui/select";
 
 const Schema = yup.object().shape({
       bankName: yup.string().required("Bank name is required"),
@@ -35,6 +36,23 @@ const Schema = yup.object().shape({
 type SchemaTypes = yup.InferType<
       typeof Schema
 >;
+
+const Banks = [
+      {
+            label: "Kuda",
+            value: "kuda",
+      },
+      {
+            label: "Moniepoint",
+            value: "Moniepoint",
+      },
+
+      {
+            label: "Providus Bank",
+            value: "Providus Bank",
+      },
+];
+
 
 export default function PayMethodForm()
 {
@@ -80,11 +98,17 @@ export default function PayMethodForm()
                                           <FormItem>
                                                 <FormLabel htmlFor="bankName">Bank Name</FormLabel>
                                                 <FormControl>
-                                                      <Input
+                                                      {/* <Input
                                                             id="bankName"
                                                             placeholder="Bank Name"
                                                             {...field}
                                                             error={form.formState.errors?.bankName?.message}
+                                                      /> */}
+                                                      <Select
+                                                            onChange={field.onChange}
+                                                            value={field.value}
+                                                            placeholder={"Choose"}
+                                                            options={Banks}
                                                       />
                                                 </FormControl>
                                                 <FormMessage />

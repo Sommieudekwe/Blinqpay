@@ -55,7 +55,10 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "rate",
     header: "Rate",
-    accessorFn: (row) => row.rate,
+    // accessorFn: (row) => row.rate,
+    cell: ({row}) => {
+      return <p className="text-button-primary">{row.original.rate}</p>
+    }
   },
 
   {
