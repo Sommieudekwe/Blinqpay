@@ -4,8 +4,6 @@ import { IDashboard } from "@/types";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogOverlay } from "@radix-ui/react-dialog";
-import Image from "next/image";
 
 interface TableProps {
   data: IDashboard[];
@@ -22,8 +20,6 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
     // setSelectedId(id);
     setIsOpen(true);
   };
-
-  console.log(isOpen);
 
   return (
     <div className="w-full">
