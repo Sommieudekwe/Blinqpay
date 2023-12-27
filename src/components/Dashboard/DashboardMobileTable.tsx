@@ -2,8 +2,9 @@
 
 import { IDashboard } from "@/types";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, formatAmount } from "@/lib/utils";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 interface TableProps {
   data: IDashboard[];
@@ -23,16 +24,19 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
 
   return (
     <div className="w-full">
+      <div className="my-7">
+        <Input type="search" placeholder="Search History" />
+      </div>
       {data.map((d, index) => (
         <div
           key={index}
           className="border-b border-t border-white border-opacity-25 py-6 flex justify-between"
         >
-          <div className="space-y-2">
+          <div className="space-y-3">
             <h3 className="opacity-60">{d.accountName}</h3>
             <p className="opacity-60">{d.accountNumber}</p>
             <p className="opacity-60">{d.bankName}</p>
-            <p className="">&#8358;{d.amount}</p>
+            <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
             <p className="text-rate">&#8358;{d.rate}</p>
             <p
               className={cn(

@@ -21,13 +21,24 @@ export interface IDashboard {
   bankName: string;
   status: "Pending" | "Successful" | "Failed";
   rate: string;
-  amount: string;
+  amount: number;
 }
 export interface IbankList {
   [x: string]: string;
 }
 
-export interface IBankDetailsProps{
+export interface IBankDetailsProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   handleConnectToBank: () => void;
+}
+
+export interface IOrderHistory {
+  id: string;
+  orderNumber: number;
+  accountName: string;
+  // bankName: string;
+  accountNumber: number;
+  amount: number;
+  date: string;
+  status: "Pending" | "Successful" | "Failed";
 }
