@@ -74,3 +74,4 @@ export const columns: ColumnDef<IBankHistory>[] = [
     },
   },
 ];
+ 

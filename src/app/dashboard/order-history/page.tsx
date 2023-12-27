@@ -1,7 +1,7 @@
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./column";
 import { orderHistoryData } from "./data";
-import OrderHistoryMobileTable from "@/components/Dashboard/OrderHistory/OrderHistoryMobileTable";
+import OrderHistoryMobileTable from "@/app/dashboard/order-history/OrderHistoryMobileTable";
 
 export default function OrderHistory() {
   return (

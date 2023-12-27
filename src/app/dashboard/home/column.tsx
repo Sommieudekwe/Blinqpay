@@ -39,9 +39,9 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
         <p
           className={cn(
             "capitalize",
-            status === "Successful"
+            status === "successful"
               ? "text-success"
-              : status === "Failed"
+              : status === "failed"
               ? "text-failed"
               : "text-pending"
           )}
