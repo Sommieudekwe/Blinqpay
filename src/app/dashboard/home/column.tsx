@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, formatAmount } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -27,7 +27,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "amount",
     header: "Amount",
-    accessorFn: (row) => row.amount,
+    cell: ({ row }) => <p>&#8358;{formatAmount(row.original.amount)}</p>,
   },
 
   {

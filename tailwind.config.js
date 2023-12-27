@@ -21,7 +21,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#020014",
-        input: "#15122C",
+        input: "#04021D",
         "button-primary": "#4A33FB",
         "primary-dashboard": "#04002A",
         "text-fade": "#f5f5f599",
