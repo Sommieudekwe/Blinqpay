@@ -3,8 +3,8 @@
 import { IDashboard } from "@/types";
 import { useState } from "react";
 import { cn, formatAmount } from "@/lib/utils";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
 
 interface TableProps {
   data: IDashboard[];
@@ -41,9 +41,9 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
             <p
               className={cn(
                 "capitalize rounded-3xl px-2.5 py-1 text-sm",
-                d.status === "Successful"
+                d.status === "successful"
                   ? "text-success bg-success bg-opacity-10 inline-flex"
-                  : d.status === "Failed"
+                  : d.status === "failed"
                   ? "text-failed bg-failed bg-opacity-10 inline-flex"
                   : "text-pending bg-pending bg-opacity-10 inline-flex"
               )}

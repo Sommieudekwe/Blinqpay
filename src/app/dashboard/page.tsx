@@ -5,7 +5,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { dashboardColumn } from "./home/column";
 import { dashboardData } from "./home/data";
 import { Button } from "@/components/ui/button";
-import MobileTable from "@/components/Dashboard/DashboardMobileTable";
+import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
 

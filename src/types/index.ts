@@ -19,7 +19,7 @@ export interface IDashboard {
   accountName: string;
   accountNumber: string;
   bankName: string;
-  status: "Pending" | "Successful" | "Failed";
+  status: "pending" | "successful" | "failed";
   rate: string;
   amount: number;
 }
@@ -40,5 +40,5 @@ export interface IOrderHistory {
   accountNumber: number;
   amount: number;
   date: string;
-  status: "Pending" | "Successful" | "Failed";
+  status: "pending" | "successful" | "failed";
 }

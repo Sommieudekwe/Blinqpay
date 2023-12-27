@@ -50,9 +50,9 @@ export const columns: ColumnDef<IOrderHistory>[] = [
         <p
           className={cn(
             "capitalize",
-            status === "Successful"
+            status === "successful"
               ? "text-success"
-              : status === "Failed"
+              : status === "failed"
               ? "text-failed"
               : "text-pending"
           )}
