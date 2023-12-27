@@ -9,7 +9,7 @@ export const orderHistoryData: IOrderHistory[] = [
     accountNumber: 2056122256,
     amount: 2000000,
     date: "22-04-2023",
-    status: "Successful",
+    status: "successful",
   },
 
   {
@@ -20,7 +20,7 @@ export const orderHistoryData: IOrderHistory[] = [
     accountNumber: 2056122256,
     amount: 2000000,
     date: "22-04-2023",
-    status: "Successful",
+    status: "successful",
   },
 
   {
@@ -31,7 +31,7 @@ export const orderHistoryData: IOrderHistory[] = [
     accountNumber: 2056122256,
     amount: 2000000,
     date: "22-04-2023",
-    status: "Successful",
+    status: "successful",
   },
 
   {
@@ -42,7 +42,7 @@ export const orderHistoryData: IOrderHistory[] = [
     accountNumber: 2056122256,
     amount: 2000000,
     date: "22-04-2023",
-    status: "Successful",
+    status: "successful",
   },
 
   {
@@ -53,7 +53,7 @@ export const orderHistoryData: IOrderHistory[] = [
     accountNumber: 2056122256,
     amount: 2000000,
     date: "22-04-2023",
-    status: "Successful",
+    status: "successful",
   },
   {
     id: "1",
@@ -63,6 +63,6 @@ export const orderHistoryData: IOrderHistory[] = [
     accountNumber: 2056122256,
     amount: 2000000,
     date: "22-04-2023",
-    status: "Successful",
+    status: "successful",
   },
 ];
