@@ -32,7 +32,7 @@ export default function Dashboard() {
               height={20}
             />
           </p>
-          <h2 className="text-3xl flex items-center gap-x-2 font-bold">
+          <h2 className="text-4xl flex items-center gap-x-2 font-bold">
             &#8358;200,000,000
             <Image
               src="/dashboard/lock.svg"
@@ -42,16 +42,9 @@ export default function Dashboard() {
             />
           </h2>
         </div>
-        <div>
-          <div className="bg-light-green bg-opacity-10 text-light-green py-3 px-10 rounded-3xl inline-flex lg:flex items-center gap-x-3 mt-4 lg:mt-0">
-            <Image
-              src="/dashboard/mark.svg"
-              alt="mark"
-              width={16}
-              height={16}
-            />
-            API Activated
-          </div>
+        <div className="bg-light-green bg-opacity-10 text-light-green py-3 px-10 rounded-3xl inline-flex lg:flex items-center gap-x-3 mt-4 lg:mt-0">
+          <Image src="/dashboard/mark.svg" alt="mark" width={16} height={16} />
+          API Activated
         </div>
       </div>
 
@@ -62,27 +55,27 @@ export default function Dashboard() {
 
           <h3 className="opacity-50">Total Transfer Count</h3>
 
-          <h4 className="mt-3 text-[1.35rem] font-bold">5000</h4>
+          <h4 className="mt-3 text-2xl font-bold">5000</h4>
         </div>
         <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
-          <span className="text-2xl absolute right-5 top-0">...</span>
+          <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Total Amount Transferred</h3>
 
-          <h4 className="mt-3 text-[1.35rem] font-bold">&#8358;11,000,000</h4>
+          <h4 className="mt-3 text-2xl font-bold">&#8358;11,000,000</h4>
         </div>
 
         <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
-          <span className="text-2xl absolute right-5 top-0">...</span>
+          <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Current Orders</h3>
 
-          <h4 className="mt-3 text-[1.35rem] font-bold">1000</h4>
+          <h4 className="mt-3 text-2xl font-bold">1000</h4>
         </div>
       </div>
 
       <div className="flex justify-between items-center mt-8 lg:mt-5">
-        <h3 className="text-[1.35rem] font-bold">Active Orders</h3>
+        <h3 className="text-2xl font-bold">Active Orders</h3>
 
         <div className="flex gap-x-1.5 lg:gap-x-5">
           <div>
