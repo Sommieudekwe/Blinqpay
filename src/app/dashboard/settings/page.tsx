@@ -17,6 +17,10 @@ import ChangePassword from "@/components/Dashboard/settings/edit-password-form";
 import ChangePin from "@/components/Dashboard/settings/edit-pin-form";
 import PayMethodForm from "@/components/Dashboard/settings/payment-method";
 import UnlistBank from "@/components/Dashboard/settings/unlist-bank-form";
+import useEndpoint from "@/lib/apiCall";
+import apiCAll from "@/lib/apiCall";
+import { loginAPI, registerAPI } from "@/axios/endpoints/auth";
+import { notify } from "@/components/ui/toast";
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
@@ -70,8 +74,27 @@ export default function Connectivity() {
     return bank?.logo as string;
   }
 
-  function handleConnectToBank() {
+  async function handleConnectToBank() {
     setIsSuccess(true);
+
+    // usage for ge request
+    await apiCAll({
+      url: "/api/connet",
+      method: "get",
+      sCB(res) {
+          console.log(res);
+      },
+      eCB(res) {
+          console.log(res)
+      },
+      toast: true
+    })
+
+    // method two
+    // const {error, serverResponse} = await registerAPI({name: "ifeoluwa"})
+
+    
+
   }
   /*
    *

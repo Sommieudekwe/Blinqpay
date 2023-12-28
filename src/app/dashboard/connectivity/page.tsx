@@ -4,19 +4,35 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { bankList } from "./constants";
+import { useStore } from "@/context/strore";
+import { notify } from "@/components/ui/toast";
 
-export default function Connectivity() {
+export default function Connectivity()
+{
   const router = useRouter();
-
   const AvailableBanks = ["Binance", "Kuda", "Paxful", "Moniepoint"];
   const AllBanks = ["Providus", "Kuda", "Moniepoint"];
-
-  function handleConnect(bankName: string) {
+  const {loggedIn} = useStore()
+  console.log('user logged in?', loggedIn);
+  
+  /*
+  *
+  *
+  *
+  *
+   */
+  function handleConnect(bankName: string)
+  {
     if (AllBanks.includes(bankName))
       return router.push(`/dashboard/connectivity/bank/${bankName}`);
     return router.push(`/dashboard/connectivity/wallet/${bankName}`);
   }
-
+  /*
+  *
+  *
+  *
+  *
+   */
   return (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
