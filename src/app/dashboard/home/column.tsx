@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, formatAmount } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -21,13 +21,13 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "bankName",
     header: "Bank Name",
-    accessorFn: (row) => row.bankName,
+    cell: ({ row }) => <p className="w-28">{row.original.bankName}</p>,
   },
 
   {
     accessorKey: "amount",
     header: "Amount",
-    accessorFn: (row) => row.amount,
+    cell: ({ row }) => <p>&#8358;{formatAmount(row.original.amount)}</p>,
   },
 
   {
@@ -39,9 +39,9 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
         <p
           className={cn(
             "capitalize",
-            status === "Successful"
+            status === "successful"
               ? "text-success"
-              : status === "Failed"
+              : status === "failed"
               ? "text-failed"
               : "text-pending"
           )}
@@ -56,9 +56,9 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "rate",
     header: "Rate",
     // accessorFn: (row) => row.rate,
-    cell: ({row}) => {
-      return <p className="text-button-primary">{row.original.rate}</p>
-    }
+    cell: ({ row }) => {
+      return <p className="text-button-primary">&#8358;{row.original.rate}</p>;
+    },
   },
 
   {

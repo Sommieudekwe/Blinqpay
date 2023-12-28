@@ -35,7 +35,7 @@ const routes: IRoutes[] = [
   {
     name: "Subscription",
     icon: "/dashboard/sidebar/subscription.svg",
-    link: "subscription",
+    link: "/dashboard/subscription",
   },
   {
     name: "Partners",

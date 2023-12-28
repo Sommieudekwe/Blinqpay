@@ -5,14 +5,15 @@ import { DataTable } from "@/components/ui/data-table";
 import { dashboardColumn } from "./home/column";
 import { dashboardData } from "./home/data";
 import { Button } from "@/components/ui/button";
-import MobileTable from "@/components/Dashboard/DashboardMobileTable";
+import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
 import { useState } from "react";
-import { Dialog, DialogContent } from "@radix-ui/react-dialog";
+import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
+
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogType, setDialogType] = useState<"cancel" | "pay" | null>(null);
 
-  const openDialog = (type: "cancel" | "pay") => {
+  const openDialog = (type: "cancel" | "pay" | null) => {
     setDialogType(type);
     setIsDialogOpen(true);
   };
@@ -49,15 +50,14 @@ export default function Dashboard() {
 
       {/* Transfer details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-12 gap-y-5">
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-4">
+        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Total Transfer Count</h3>
 
           <h4 className="mt-3 text-2xl font-bold">5000</h4>
         </div>
-
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-4">
+        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Total Amount Transferred</h3>
@@ -65,7 +65,7 @@ export default function Dashboard() {
           <h4 className="mt-3 text-2xl font-bold">&#8358;11,000,000</h4>
         </div>
 
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-4">
+        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Current Orders</h3>
@@ -84,12 +84,18 @@ export default function Dashboard() {
             </Button>
           </div>
           <div>
-            <Button className="bg-transparent text-[.75rem] lg:text-base">
+            <Button
+              className="bg-transparent text-[.75rem] lg:text-base"
+              onClick={() => openDialog(null)}
+            >
               Cancel all
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Search icon */}
+      <div></div>
 
       {/* Table */}
       <section className="w-full h-full mt-10">
@@ -101,40 +107,50 @@ export default function Dashboard() {
           <MobileTable data={dashboardData} onOpenDialog={openDialog} />
 
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogContent className="text-center text-white bg-red-500 !z-50">
+            <DialogContent className="text-center text-white">
               {dialogType === "pay" ? (
                 <div>Successful</div>
               ) : dialogType === "cancel" ? (
-                <div>
+                <div className="flex flex-col items-center">
                   <Image
                     src="./dashboard/warning.svg"
                     alt="warning"
                     width={88}
                     height={88}
+                    className="flexn justify-center"
                   />
 
-                  <p>Are you sure you want to cancel this order?</p>
+                  <p className="mt-5 font-medium text-lg lg:text-2xl">
+                    Are you sure you want to cancel this order?
+                  </p>
+
+                  <Button variant="primary" className="w-full mt-12">
+                    Yes
+                  </Button>
+                  <Button className="w-full mt-5">No</Button>
                 </div>
-              ) : (
-                <div>Hello</div>
-              )}
+              ) : dialogType === null ? (
+                <div className="flex flex-col items-center">
+                  <Image
+                    src="./dashboard/warning.svg"
+                    alt="warning"
+                    width={88}
+                    height={88}
+                    className="flexn justify-center"
+                  />
+
+                  <p className="mt-5 font-medium text-lg lg:text-2xl">
+                    Are you sure you want to cancel all order?
+                  </p>
+
+                  <Button variant="primary" className="w-full mt-12">
+                    Yes
+                  </Button>
+                  <Button className="w-full mt-5">No</Button>
+                </div>
+              ) : null}
             </DialogContent>
           </Dialog>
-
-          {/* {isDialogOpen && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-              <div className="bg-white p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-4">Success</h2>
-                You are correct
-                <button
-                  // onClick={onClose}
-                  className="mt-4 py-2 px-4 bg-blue-500 text-white rounded"
-                >
-                  Close Modal
-                </button>
-              </div>
-            </div>
-          )} */}
         </div>
       </section>
     </div>
