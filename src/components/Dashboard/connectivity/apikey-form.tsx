@@ -18,9 +18,10 @@ import * as yup from "yup";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import React from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/toast/use-toast";
 import { IBankDetailsProps } from "@/types";
 import Link from "next/link";
+import { notify } from "@/components/ui/toast";
 
 const ConnectionDetailsSchema = yup.object().shape({
       api_key: yup.string().required("Api key is required!"),
@@ -58,10 +59,8 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
       async function onSubmit(values: ConnectionDetailsSchemaTypes)
       {
             if (!values.agree)
-                  return toast({
-                        variant: "destructive",
-                        title: "Agree to terms and conditions!",
-                  });
+
+                  return notify.error("Agree to terms and conditions!iiii")
 
             handleConnectToBank();
       }

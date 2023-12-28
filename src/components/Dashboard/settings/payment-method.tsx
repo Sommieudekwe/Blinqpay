@@ -19,7 +19,7 @@ import * as yup from "yup";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import React from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/toast/use-toast";
 import { IBankDetailsProps } from "@/types";
 import Link from "next/link";
 import Select from "@/components/ui/select";

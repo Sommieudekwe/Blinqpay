@@ -42,3 +42,34 @@ export interface IOrderHistory {
   date: string;
   status: "pending" | "successful" | "failed";
 }
+
+export type ResponsTypes = Promise<{
+	error: boolean;
+	serverResponse: {
+		[key: string]: any;
+	};
+}>;
+
+
+
+export interface NotifyProps {
+  title:
+  | string
+  | (string &
+  React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>)
+  | (string & Iterable<React.ReactNode>)
+  | (string & React.ReactPortal)
+  | undefined;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+
+}
+
+export interface NotifyVariant {
+  error: (title: NotifyProps["title"], action?: NotifyProps["action"]) => void;
+  warn: (title: NotifyProps["title"], action?: NotifyProps["action"]) => void;
+  success: (title: NotifyProps["title"], action?: NotifyProps["action"]) => void;
+}
+
