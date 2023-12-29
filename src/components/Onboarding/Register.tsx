@@ -107,14 +107,14 @@ export default function Register() {
    *
    */
   return (
-    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4 g:pt-0">
+    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4">
       {/* Illustration */}
       <div className="hidden lg:block">
         <Image
           src="/onboarding/signup.svg"
           alt="register"
           width={500}
-          height={514}
+          height={490}
         />
       </div>
 
@@ -143,7 +143,7 @@ export default function Register() {
                     </FormLabel>
                     <FormControl>
                       <Input
-                      className="bg-auth-input"
+                        className="bg-auth-input"
                         id="firstName"
                         placeholder="First name"
                         {...field}
@@ -165,7 +165,7 @@ export default function Register() {
                     </FormLabel>
                     <FormControl>
                       <Input
-                      className="bg-auth-input"
+                        className="bg-auth-input"
                         id="lastName"
                         placeholder="Last name"
                         {...field}
@@ -188,7 +188,7 @@ export default function Register() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                    className="bg-auth-input"
+                      className="bg-auth-input"
                       type="email"
                       id="email"
                       placeholder="Email"
@@ -213,7 +213,7 @@ export default function Register() {
 
                     <FormControl>
                       <Input
-                      className="bg-auth-input"
+                        className="bg-auth-input"
                         id="phoneNumber"
                         placeholder="+234"
                         {...field}
@@ -235,7 +235,7 @@ export default function Register() {
                     </FormLabel>
                     <FormControl>
                       <Input
-                      className="bg-auth-input"
+                        className="bg-auth-input"
                         id="referral"
                         placeholder="(optional)"
                         {...field}
