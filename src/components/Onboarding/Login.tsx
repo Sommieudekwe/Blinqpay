@@ -128,6 +128,7 @@ export default function Login()
                   <FormLabel htmlFor="email" className="text-sm">Email</FormLabel>
                   <FormControl>
                     <Input
+                    className="bg-auth-input"
                       type="email"
                       id="email"
                       placeholder="Email"
@@ -151,6 +152,7 @@ export default function Login()
                   <FormControl>
                     <PasswordInput
                       id="password"
+                      className="bg-auth-input"
                       placeholder="*******"
                       {...field}
                       error={form.formState.errors?.password?.message}
