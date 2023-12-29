@@ -11,7 +11,7 @@ interface TableProps {
 export default function BankHistoryDashboard({ data }: TableProps) {
   return (
     <div className="w-full">
-      <h3 className="text-xl font-semibold">Order History </h3>
+      <h3 className="text-xl font-semibold">Bank History </h3>
 
       <div className="my-7">
         <Input type="search" placeholder="Search History" />

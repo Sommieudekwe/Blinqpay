@@ -26,7 +26,9 @@ export default function OrderHistoryMobileTable({ data }: TableProps) {
             <h3 className="opacity-60">{d.accountName}</h3>
             <p className="opacity-60">{d.accountNumber}</p>
             <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
-            <p className="opacityu-60"></p>
+            {/* <p className="opacityu-60"></p> */}
+          </div>
+          <div>
             <p
               className={cn(
                 "capitalize rounded-3xl px-2.5 py-1 text-sm",
