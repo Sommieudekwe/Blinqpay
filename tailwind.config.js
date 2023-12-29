@@ -49,6 +49,7 @@ module.exports = {
         switch: "#3524BC",
         "ghost-border": "#7C2F2F",
         "ghost-text": "#D53030",
+        "auth-input": "#15122C",
       },
       fontFamily: {
         inter: ["var(--font-inter)"],

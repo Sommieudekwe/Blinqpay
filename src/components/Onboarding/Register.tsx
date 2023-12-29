@@ -1,16 +1,120 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import * as yup from "yup";
+import { Input, PasswordInput } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Button, buttonVariants } from "../ui/button";
+import { cn, saveToken } from "@/lib/utils";
+import React from "react";
+import apiCAll from "@/lib/apiCall";
+import { notify } from "../ui/toast";
+import { useRouter } from "next/navigation";
+
+const Schema = yup.object().shape({
+  firstName: yup.string().required("First name is required!"),
+  lastName: yup.string().required("Last name is required!"),
+  referral: yup.string(),
+  email: yup.string().required("Email is required!"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(12, "Password must be at least 8 characters")
+    .max(20, "Password cannot exceed 20 characters")
+    .matches(
+      /^(?=.*[A-Z])(?=.*\d).+$/,
+      "Password must contain at least one  uppercase and one number"
+    ),
+  phoneNumber: yup.string().required("Phone number is required"),
+  confirmPassword: yup
+    .string()
+    .required("Confirm password is required")
+    .oneOf([yup.ref("password"), ""], "Passwords must match"),
+});
+
+type SchemaTypes = yup.InferType<typeof Schema>;
+
+const defaultValues: SchemaTypes = {
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  confirmPassword: "",
+};
 
 export default function Register() {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const router = useRouter();
+
+  const form = useForm<SchemaTypes>({
+    resolver: yupResolver(Schema),
+    defaultValues,
+    mode: "all",
+  });
+
+  /*
+   *
+   *
+   *
+   *
+   */
+  async function onSubmit(values: SchemaTypes) {
+    let requiredValues = {
+      lastName: values.lastName,
+      firstName: values.firstName,
+      email: values.email,
+      phone: values.phoneNumber,
+      password: values.password,
+    };
+    try {
+      setIsLoading(true);
+
+      await apiCAll({
+        url: "/auth/create",
+        method: "POST",
+        data: requiredValues,
+        sCB(res) {
+          if (res.message === "Success") {
+            setIsLoading(false);
+            router.push("/onboarding");
+          }
+        },
+        eCB(res) {
+          console.log(res.message, "ecb");
+          setIsLoading(false);
+        },
+        toast: true,
+      });
+    } catch (error) {
+      console.log(error, "==> error");
+    }
+  }
+  /*
+   *
+   *
+   *
+   *
+   */
   return (
-    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4 g:pt-0">
+    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4">
       {/* Illustration */}
       <div className="hidden lg:block">
         <Image
           src="/onboarding/signup.svg"
           alt="register"
           width={500}
-          height={500}
+          height={490}
         />
       </div>
 
@@ -23,115 +127,206 @@ export default function Register() {
           </p>
         </div>
 
-        <form action="" className="mt-8 lg:mt-4 xl:mt-8">
-          <div className="lg:flex gap-x-6">
-            <div className="w-full">
-              <label htmlFor="firstname" className="text-sm">
-                First Name
-              </label>
-              <br />
-              <input
-                type="text"
-                placeholder="First name"
-                id="firstname"
-                className="rounded-xl w-full px-4 py-2 bg-input mt-1 outline-none border border-white border-opacity-25"
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="w-full mt-8 lg:mt-4 xl:mt-8"
+          >
+            <div className="lg:flex gap-x-6 w-full">
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel htmlFor="firstName" className="text-sm">
+                      First Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-auth-input"
+                        id="firstName"
+                        placeholder="First name"
+                        {...field}
+                        error={form.formState.errors?.firstName?.message}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div className="w-full mt-6 lg:mt-0">
-              <label htmlFor="lastname" className="text-sm">
-                Last Name
-              </label>
-              <br />
-              <input
-                type="text"
-                placeholder="Last name"
-                id="lastname"
-                className="rounded-xl w-full px-4 py-2 bg-input mt-1 outline-none border border-white border-opacity-25"
-              />
-            </div>
-          </div>
 
-          <div className="mt-6 lg:mt-4 xl:mt-6">
-            <label htmlFor="email" className="text-sm">
-              Email
-            </label>
-            <br />
-            <input
-              type="email"
-              placeholder="Email"
-              id="email"
-              className="rounded-xl px-4 py-2 bg-input mt-1 w-full outline-none border border-white border-opacity-25"
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel htmlFor="lastName" className="text-sm">
+                      Last Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-auth-input"
+                        id="lastName"
+                        placeholder="Last name"
+                        {...field}
+                        error={form.formState.errors?.lastName?.message}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem className="mt-6 lg:mt-4 xl:mt-6">
+                  <FormLabel htmlFor="email" className="text-sm">
+                    Email
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="bg-auth-input"
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      {...field}
+                      error={form.formState.errors?.email?.message}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          <div className="mt-6 lg:mt-4 xl:mt-6">
-            <label htmlFor="phone" className="text-sm">
-              Phone number
-            </label>
-            <br />
-            <input
-              type="tel"
-              placeholder="+234"
-              id="phone"
-              className="rounded-xl px-4 py-2 bg-input mt-1 w-full outline-none border border-white border-opacity-25"
-            />
-          </div>
+            <div className="gap-6 lg:gap-4 xl:gap-6 w-full grid grid-cols-2 mt-6 lg:mt-4 xl:mt-6">
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="referral" className="text-sm">
+                      Phone Number
+                    </FormLabel>
 
-          <div className="lg:flex gap-x-6 mt-6 lg:mt-4 xl:mt-6">
-            <div className="w-full">
-              <label htmlFor="password" className="text-sm">
-                Password
-              </label>
-              <br />
-              <input
-                type="text"
-                placeholder="First name"
-                id="password"
-                className="rounded-xl w-full px-4 py-2 bg-input mt-1 outline-none border border-white border-opacity-25"
+                    <FormControl>
+                      <Input
+                        className="bg-auth-input"
+                        id="phoneNumber"
+                        placeholder="+234"
+                        {...field}
+                        error={form.formState.errors?.phoneNumber?.message}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="referral"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel htmlFor="referral" className="text-sm">
+                      Referral Code
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-auth-input"
+                        id="referral"
+                        placeholder="(optional)"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        // type="password"
+                        className="bg-auth-input"
+                        id="password"
+                        placeholder="8 characters minimum"
+                        {...field}
+                        error={form.formState.errors?.password?.message}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="confirmPassword">
+                      Confirm Password
+                    </FormLabel>
+                    <FormControl>
+                      <PasswordInput
+                        // type="password"
+                        className="bg-auth-input"
+                        id="confirmPassword"
+                        placeholder="8 characters minimum"
+                        {...field}
+                        error={form.formState.errors?.confirmPassword?.message}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </div>
-            <div className="w-full mt-6 lg:mt-0">
-              <label htmlFor="confirm" className="text-sm">
-                Confirm Password
-              </label>
-              <br />
-              <input
-                type="text"
-                placeholder="Last name"
-                id="confirm"
-                className="rounded-xl w-full px-4 py-2 bg-input mt-1 outline-none border border-white border-opacity-25"
-              />
-            </div>
-          </div>
 
-          <div className="max-w-[23rem] mx-auto text-center mt-10 lg:mt-6 xl:mt-10">
-            <span className="opacity-60">
-              By clicking continue, you accept Blinqpay&apos;s
-            </span>
-            <span> Terms of Service</span>
-            <span className="opacity-60"> and </span>
-            <span>Privacy Policy</span>.
-          </div>
+            <div className="max-w-[23rem] mx-auto text-center mt-10 lg:mt-6 xl:mt-10">
+              <span className="opacity-60">
+                By clicking continue, you accept Blinqpay&apos;s
+              </span>
+              <span> Terms of Service</span>
+              <span className="opacity-60"> and </span>
+              <span>Privacy Policy</span>.
+            </div>
 
-          <div className="space-y-4 mt-10 lg:mt-6 xl:mt-10 text-center">
-            <div className="w-full">
-              <Link
-                href="/login"
-                className="bg-button-primary block rounded-3xl w-full py-3"
-              >
-                Log In
-              </Link>
+            <div className="mt-10 text-center space-y-4 lg:mt-6 xl:mt-10">
+              <div className="w-ful">
+                <Button
+                  isLoading={isLoading}
+                  variant={"primary"}
+                  className="w-full py-3"
+                  size={"lg"}
+                >
+                  Sign Up
+                </Button>
+              </div>
+
+              <div className="w-full mt-4">
+                <Link
+                  href="/onboarding"
+                  className={cn(
+                    "w-full",
+                    buttonVariants({ variant: "default", size: "lg" })
+                  )}
+                >
+                  Log In
+                </Link>
+              </div>
             </div>
-            <div className="w-full">
-              <Link
-                href="signup"
-                className="rounded-3xl w-full py-3 block border border-white border-opacity-25"
-              >
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </form>
+          </form>
+        </Form>
       </div>
     </div>
   );
