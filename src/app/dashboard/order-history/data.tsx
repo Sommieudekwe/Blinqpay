@@ -3,7 +3,7 @@ import { IOrderHistory } from "@/types";
 export const orderHistoryData: IOrderHistory[] = [
   {
     id: "1",
-    orderNumber: 24567,
+    orderNumber: 234567890345674,
     accountName: "Somto Chukwu Udekewe",
     // bankName: "Kuda Bank",
     accountNumber: 2056122256,
@@ -14,7 +14,7 @@ export const orderHistoryData: IOrderHistory[] = [
 
   {
     id: "1",
-    orderNumber: 24567,
+    orderNumber: 234567890345674,
     accountName: "Somto Chukwu Udekewe",
     // bankName: "Kuda Bank",
     accountNumber: 2056122256,
@@ -25,7 +25,7 @@ export const orderHistoryData: IOrderHistory[] = [
 
   {
     id: "1",
-    orderNumber: 24567,
+    orderNumber: 234567890345674,
     accountName: "Somto Chukwu Udekewe",
     // bankName: "Kuda Bank",
     accountNumber: 2056122256,
@@ -36,7 +36,7 @@ export const orderHistoryData: IOrderHistory[] = [
 
   {
     id: "1",
-    orderNumber: 24567,
+    orderNumber: 234567890345674,
     accountName: "Somto Chukwu Udekewe",
     // bankName: "Kuda Bank",
     accountNumber: 2056122256,
@@ -47,7 +47,7 @@ export const orderHistoryData: IOrderHistory[] = [
 
   {
     id: "1",
-    orderNumber: 24567,
+    orderNumber: 234567890345674,
     accountName: "Somto Chukwu Udekewe",
     // bankName: "Kuda Bank",
     accountNumber: 2056122256,
@@ -57,7 +57,7 @@ export const orderHistoryData: IOrderHistory[] = [
   },
   {
     id: "1",
-    orderNumber: 24567,
+    orderNumber: 234567890345674,
     accountName: "Somto Chukwu Udekewe",
     // bankName: "Kuda Bank",
     accountNumber: 2056122256,

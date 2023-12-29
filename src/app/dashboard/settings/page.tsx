@@ -38,7 +38,7 @@ export default function Connectivity() {
       action: () => setIsSuccess(true),
     },
     {
-      name: "Create a Virtual Account",
+      name: "Create Kuda Virtual Account",
       label: "Create",
       action: () => setChangePass(true),
     },
@@ -53,10 +53,15 @@ export default function Connectivity() {
       action: () => setShowTerms(true),
     },
     {
-      name: "Unlist a Bank",
-      label: "Details",
-      action: () => setUnlist(true),
+      name: "Third Party",
+      label: "Switch",
+      action: () => console.log("switch toggled"),
     },
+    // {
+    //   name: "Unlist a Bank",
+    //   label: "Details",
+    //   action: () => setUnlist(true),
+    // },
     {
       name: "Payment methods",
       label: "Manage",
@@ -82,19 +87,16 @@ export default function Connectivity() {
       url: "/api/connet",
       method: "get",
       sCB(res) {
-          console.log(res);
+        console.log(res);
       },
       eCB(res) {
-          console.log(res)
+        console.log(res);
       },
-      toast: true
-    })
+      toast: true,
+    });
 
     // method two
     // const {error, serverResponse} = await registerAPI({name: "ifeoluwa"})
-
-    
-
   }
   /*
    *
@@ -134,9 +136,13 @@ export default function Connectivity() {
           <div key={index} className="w-full flex justify-between items-center">
             <p className="text-white">{setting.name}</p>
 
-            <Button onClick={setting.action} className="w-24">
-              {setting.label}
-            </Button>
+            {setting.label !== "Switch" ? (
+              <Button className="w-24" onClick={setting.action}>
+                {setting.label}
+              </Button>
+            ) : (
+              <Switch />
+            )}
           </div>
         ))}
         <div className="w-full flex justify-between items-center">

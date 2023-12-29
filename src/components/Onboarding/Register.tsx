@@ -3,14 +3,14 @@ import Link from "next/link";
 
 export default function Register() {
   return (
-    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-24 xl:px-36 min-h-screen items-center pt-4 g:pt-0">
+    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4 g:pt-0">
       {/* Illustration */}
       <div className="hidden lg:block">
         <Image
           src="/onboarding/signup.svg"
           alt="register"
-          width={517}
-          height={514}
+          width={500}
+          height={500}
         />
       </div>
 
@@ -23,7 +23,7 @@ export default function Register() {
           </p>
         </div>
 
-        <form action="" className="mt-8">
+        <form action="" className="mt-8 lg:mt-4 xl:mt-8">
           <div className="lg:flex gap-x-6">
             <div className="w-full">
               <label htmlFor="firstname" className="text-sm">
@@ -51,7 +51,7 @@ export default function Register() {
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 lg:mt-4 xl:mt-6">
             <label htmlFor="email" className="text-sm">
               Email
             </label>
@@ -64,7 +64,7 @@ export default function Register() {
             />
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 lg:mt-4 xl:mt-6">
             <label htmlFor="phone" className="text-sm">
               Phone number
             </label>
@@ -77,7 +77,7 @@ export default function Register() {
             />
           </div>
 
-          <div className="lg:flex gap-x-6 mt-6">
+          <div className="lg:flex gap-x-6 mt-6 lg:mt-4 xl:mt-6">
             <div className="w-full">
               <label htmlFor="password" className="text-sm">
                 Password
@@ -104,7 +104,7 @@ export default function Register() {
             </div>
           </div>
 
-          <div className="max-w-[23rem] mx-auto text-center mt-10">
+          <div className="max-w-[23rem] mx-auto text-center mt-10 lg:mt-6 xl:mt-10">
             <span className="opacity-60">
               By clicking continue, you accept Blinqpay&apos;s
             </span>
@@ -113,7 +113,7 @@ export default function Register() {
             <span>Privacy Policy</span>.
           </div>
 
-          <div className="space-y-4 mt-10 text-center">
+          <div className="space-y-4 mt-10 lg:mt-6 xl:mt-10 text-center">
             <div className="w-full">
               <Link
                 href="/login"
