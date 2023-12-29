@@ -138,6 +138,7 @@ export default function Register()
                     <FormLabel htmlFor="firstName" className="text-sm">First Name</FormLabel>
                     <FormControl>
                       <Input
+                      className="bg-auth-input"
                         id="firstName"
                         placeholder="First name"
                         {...field}
@@ -157,6 +158,7 @@ export default function Register()
                     <FormLabel htmlFor="lastName" className="text-sm">Last Name</FormLabel>
                     <FormControl>
                       <Input
+                      className="bg-auth-input"
                         id="lastName"
                         placeholder="Last name"
                         {...field}
@@ -178,6 +180,7 @@ export default function Register()
                   <FormLabel htmlFor="email" className="text-sm">Email</FormLabel>
                   <FormControl>
                     <Input
+                    className="bg-auth-input"
                       type="email"
                       id="email"
                       placeholder="Email"
@@ -201,6 +204,7 @@ export default function Register()
 
                     <FormControl>
                       <Input
+                      className="bg-auth-input"
                         id="phoneNumber"
                         placeholder="+234"
                         {...field}
@@ -220,6 +224,7 @@ export default function Register()
                     <FormLabel htmlFor="referral" className="text-sm">Referral Code</FormLabel>
                     <FormControl>
                       <Input
+                      className="bg-auth-input"
                         id="referral"
                         placeholder="(optional)"
                         {...field}
@@ -238,7 +243,7 @@ export default function Register()
                     <FormControl>
                       <PasswordInput
                         // type="password"
-
+                        className="bg-auth-input"
                         id="password"
                         placeholder="8 characters minimum"
                         {...field}
@@ -262,6 +267,7 @@ export default function Register()
                     <FormControl>
                       <PasswordInput
                         // type="password"
+                        className="bg-auth-input"
                         id="confirmPassword"
                         placeholder="8 characters minimum"
                         {...field}
