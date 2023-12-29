@@ -19,6 +19,9 @@ export default function Dashboard() {
     setIsDialogOpen(true);
   };
 
+
+  // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
+  
   const [isBlurred, setIsBlurred] = useState(false);
 
   const handleBlurToggle = () => {
