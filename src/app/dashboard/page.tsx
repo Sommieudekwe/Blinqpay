@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
+import { getToken, hasToken } from "@/lib/utils";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -17,6 +18,10 @@ export default function Dashboard() {
     setDialogType(type);
     setIsDialogOpen(true);
   };
+
+
+  // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
+  
 
   return (
     <div className="">

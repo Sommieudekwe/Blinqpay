@@ -1,8 +1,8 @@
-import Login from "@/components/Onboarding/Login";
+import Register from "@/components/Onboarding/Register";
 export default function Home() {
   return (
     <main className="">
-      <Login />
+      <Register />
     </main>
   );
 }
