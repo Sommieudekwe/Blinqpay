@@ -22,6 +22,11 @@ export default function Dashboard() {
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
   
+  const [isBlurred, setIsBlurred] = useState(false);
+
+  const handleBlurToggle = () => {
+    setIsBlurred((prevIsBlurred) => !prevIsBlurred);
+  };
 
   return (
     <div className="">
@@ -37,15 +42,22 @@ export default function Dashboard() {
               height={20}
             />
           </p>
-          <h2 className="text-4xl flex items-center gap-x-2 font-bold">
-            &#8358;200,000,000
+          <div className="flex items-center gap-2">
+            <h2
+              className={`text-4xl flex items-center gap-x-2 font-bold ${
+                isBlurred ? "blur" : ""
+              }`}
+            >
+              &#8358;200,000,000
+            </h2>
             <Image
-              src="/dashboard/lock.svg"
+              src={isBlurred ? "/dashboard/eye.svg" : "/dashboard/lock.svg"}
               alt="lock"
               width={20}
               height={16}
+              onClick={handleBlurToggle}
             />
-          </h2>
+          </div>
         </div>
         <div className="bg-light-green bg-opacity-10 text-light-green py-3 px-10 rounded-3xl inline-flex lg:flex items-center gap-x-3 mt-4 lg:mt-0">
           <Image src="/dashboard/mark.svg" alt="mark" width={16} height={16} />

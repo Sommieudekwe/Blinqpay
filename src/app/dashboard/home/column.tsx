@@ -8,31 +8,33 @@ import { ColumnDef } from "@tanstack/react-table";
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "accountName",
-    header: "Account Name",
+    header: () => <p className="w-40">Account Name</p>,
     accessorFn: (row) => row.accountName,
   },
 
   {
     accessorKey: "accountNumber",
-    header: "Account Number",
+    header: () => <p className="w-32">Account Number</p>,
     accessorFn: (row) => row.accountNumber,
   },
 
   {
     accessorKey: "bankName",
-    header: "Bank Name",
+    header: () => <p className="w-28">Bank Name</p>,
     cell: ({ row }) => <p className="w-28">{row.original.bankName}</p>,
   },
 
   {
     accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => <p>&#8358;{formatAmount(row.original.amount)}</p>,
+    header: () => <p className="w-28">Amount</p>,
+    cell: ({ row }) => (
+      <p className="">&#8358;{formatAmount(row.original.amount)}</p>
+    ),
   },
 
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => <p className="w-28 text-">Status</p>,
     cell: ({ row }) => {
       const { status } = row.original;
       return (
@@ -54,7 +56,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
 
   {
     accessorKey: "rate",
-    header: "Rate",
+    header: () => <p className="w-28">Rate</p>,
     // accessorFn: (row) => row.rate,
     cell: ({ row }) => {
       return <p className="text-button-primary">&#8358;{row.original.rate}</p>;
@@ -63,10 +65,10 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
 
   {
     accessorKey: "action",
-    header: () => <div className="text-center">Action</div>,
+    header: () => <div className="w-28">Action</div>,
     cell: ({ row }) => {
       return (
-        <div className="text-center">
+        <div className="">
           <Button className="text-right font-normal">Pay now</Button>
         </div>
       );
@@ -74,10 +76,10 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   },
   {
     accessorKey: "action",
-    header: () => <div className="text-right">Action</div>,
+    header: () => <div className="text-center w-28">Action</div>,
     cell: ({ row }) => {
       return (
-        <div className="text-right">
+        <div className="w-28 text-center">
           <Button className="text-cancel border border-cancel border-opacity-25">
             Cancel
           </Button>

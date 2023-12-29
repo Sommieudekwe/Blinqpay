@@ -108,7 +108,7 @@ export default function Register()
    *
    */
   return (
-    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-24 xl:px-36 min-h-screen items-center pt-4 g:pt-0">
+    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4 g:pt-0">
       {/* Illustration */}
       <div className="hidden lg:block">
         <Image src="/onboarding/signup.svg" alt="register" width={517} height={514} />
@@ -273,7 +273,6 @@ export default function Register()
                   </FormItem>
                 )}
               />
-
 
             </div>
 
