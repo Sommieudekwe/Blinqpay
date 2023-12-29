@@ -1,13 +1,13 @@
 import { fmtResponse, getToken, hasToken, removeToken } from "@/lib/utils";
 import axios, { AxiosRequestConfig } from "axios";
 
-let baseURL = "https://baseurl.link.url"
+let baseURL = "https://binq-be-c73cb866fca4.herokuapp.com/api/v1"
 
 const service = axios.create({
   baseURL,
   headers: {
-    "X-API-KEY": "idris",
-    "iden-unique_key": "quadraple-and-hello-edfojoidfj",
+    // "X-API-KEY": "idris",
+    // "iden-unique_key": "quadraple-and-hello-edfojoidfj",
   },
 });
 
@@ -20,7 +20,6 @@ service.interceptors.request.use(
     }
 
     if (hasToken() && getToken() !== false) {
-      // config.headers.Authorization = `Bearer ${token}`;
       config.headers.Authorization = `Bearer ${String(getToken())}`;
     }
 
