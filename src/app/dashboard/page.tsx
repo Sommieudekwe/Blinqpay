@@ -115,7 +115,9 @@ export default function Dashboard() {
 
           <h3 className="opacity-50">Total Amount Transferred</h3>
 
-          <h4 className="mt-3 text-2xl font-bold">&#8358;11,000,000</h4>
+          <h4 className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}>
+            &#8358;11,000,000
+          </h4>
         </div>
 
         <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">

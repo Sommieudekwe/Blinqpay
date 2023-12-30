@@ -40,7 +40,7 @@ const routes: IRoutes[] = [
   {
     name: "Partners",
     icon: "/dashboard/sidebar/partners.svg",
-    link: "/partners",
+    link: "/dashboard/partners",
   },
   {
     name: "Settings",
