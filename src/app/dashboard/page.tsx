@@ -9,6 +9,23 @@ import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
 import { getToken, hasToken } from "@/lib/utils";
+import Dropdown from "@/components/Dashboard/Dropdown";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuLabel,
+//   DropdownMenuSeparator,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
+import { ChevronUp } from "lucide-react";
+
+const availableBanks = [
+  { name: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
+  { name: "Moniepoint", img: "/dashboard/banks/kuda.svg" },
+  { name: "Access bank", img: "/dashboard/banks/kuda.svg" },
+  { name: "First bank", img: "/dashboard/banks/kuda.svg" },
+];
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -19,9 +36,8 @@ export default function Dashboard() {
     setIsDialogOpen(true);
   };
 
-
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
-  
+
   const [isBlurred, setIsBlurred] = useState(false);
 
   const handleBlurToggle = () => {
@@ -29,7 +45,6 @@ export default function Dashboard() {
   };
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
-  
 
   return (
     <div className="">
@@ -62,9 +77,27 @@ export default function Dashboard() {
             />
           </div>
         </div>
-        <div className="bg-light-green bg-opacity-10 text-light-green py-3 px-10 rounded-3xl inline-flex lg:flex items-center gap-x-3 mt-4 lg:mt-0">
-          <Image src="/dashboard/mark.svg" alt="mark" width={16} height={16} />
-          API Activated
+        <div className="relative">
+          {/* <div className="bg-light-green bg-opacity-10 text-light-green py-3 px-10 rounded-3xl inline-flex lg:flex items-center gap-x-3 mt-4 lg:mt-0">
+            <Image
+              src="/dashboard/mark.svg"
+              alt="mark"
+              width={16}
+              height={16}
+            />
+            API Activated
+            
+          </div> */}
+          <div className="flex items-center">
+            <p className="opacity-60 mb-2 ">Available Banks</p>
+          </div>
+          <div className="">
+            <Dropdown options={availableBanks} />
+          </div>
+
+          {/* <DropdownMenu>
+            <DropdownMenuTrigger></DropdownMenuTrigger>
+          </DropdownMenu> */}
         </div>
       </div>
 
@@ -82,7 +115,9 @@ export default function Dashboard() {
 
           <h3 className="opacity-50">Total Amount Transferred</h3>
 
-          <h4 className="mt-3 text-2xl font-bold">&#8358;11,000,000</h4>
+          <h4 className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}>
+            &#8358;11,000,000
+          </h4>
         </div>
 
         <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
