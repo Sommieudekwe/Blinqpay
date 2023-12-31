@@ -15,11 +15,11 @@ import
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button, buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn, saveToken } from "@/lib/utils";
 import React from "react";
 import apiCAll from "@/lib/apiCall";
-import { notify } from "../ui/toast";
+import { notify } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 
 
@@ -128,7 +128,7 @@ export default function Login()
                   <FormLabel htmlFor="email" className="text-sm">Email</FormLabel>
                   <FormControl>
                     <Input
-                    className="bg-auth-input"
+                    className="bg-auth-input "
                       type="email"
                       id="email"
                       placeholder="Email"
@@ -173,7 +173,7 @@ export default function Login()
 
               <div className="w-full mt-4">
                 <Link
-                  href="/forgot-password"
+                  href="/auth/forget-password"
                   className={cn("w-full", buttonVariants({ variant: "default", size: "lg" }))}
                 >
                   Forget Password
