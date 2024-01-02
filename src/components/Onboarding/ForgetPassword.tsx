@@ -92,7 +92,7 @@ export default function ForgetPassword()
   *
   */
   return (
-    <main className="bg-primary-dashboard text-white p-10 w-[35rem] shadow-xl">
+    <main className="bg-primary-dashboard text-white p-5 md:p-10 md:w-[35rem] shadow-xl">
       <div>
         <h3 className="text-4xl">Find your BlinqPag account</h3>
         <p className="mt-2 opacity-60">
@@ -135,6 +135,9 @@ export default function ForgetPassword()
 
         </form>
       </Form>
+
+
+
     </main>
   );
 }
