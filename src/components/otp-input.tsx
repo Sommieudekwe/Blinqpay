@@ -4,8 +4,7 @@ import { Icons } from "./icons";
 import OtpInput from "react-otp-input";
 import * as React from "react";
 
-interface OtpProps
-{
+interface OtpProps {
   code: string;
   setCode: React.Dispatch<React.SetStateAction<string>>;
   onPasteHandler?: (data: string) => void;
@@ -16,7 +15,7 @@ interface OtpProps
   defaultMinutes?: number;
 }
 
-export function OTP ({
+export function OTP({
   code,
   setCode,
   onPasteHandler,
@@ -25,51 +24,42 @@ export function OTP ({
   handleResend,
   defaultSeconds = 59,
   defaultMinutes = 1,
-}: OtpProps)
-{
+}: OtpProps) {
   const [seconds, setSeconds] = React.useState<number>(defaultSeconds);
   const [minutes, setMinutes] = React.useState<number>(defaultMinutes);
 
-  const handlePaste: React.ClipboardEventHandler = (event) =>
-  {
+  const handlePaste: React.ClipboardEventHandler = (event) => {
     const data = event.clipboardData.getData("text");
 
     console.log(data);
+    // This data is being sent to the otp.tsx  as the otp
     setCode(data);
     onPasteHandler && onPasteHandler(data);
   };
 
-  const resendHandler = () =>
-  {
+  const resendHandler = () => {
     setSeconds(59);
     setMinutes(1);
     handleResend && handleResend();
   };
 
-  React.useEffect(() =>
-  {
-    const interval = setInterval(() =>
-    {
-      if (seconds > 0)
-      {
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
         setSeconds(seconds - 1);
       }
 
-      if (seconds === 0)
-      {
-        if (minutes === 0)
-        {
+      if (seconds === 0) {
+        if (minutes === 0) {
           clearInterval(interval);
-        } else
-        {
+        } else {
           setMinutes(minutes - 1);
           setSeconds(59);
         }
       }
     }, 1000);
 
-    return () =>
-    {
+    return () => {
       clearInterval(interval);
     };
   });
@@ -83,7 +73,8 @@ export function OTP ({
         shouldAutoFocus
         skipDefaultStyles={true}
         containerStyle={" space-x-2"}
-        inputStyle={`otp-input bg-auth-input text-white text-opacity-40  w-12 h-12 text-white  focus:outline-none text-center rounded-[12px] border ${error ? "border-destructive" : "border-border-connect"
+        inputStyle={`otp-input bg-auth-input text-white text-opacity-40  w-12 h-12 text-white  focus:outline-none text-center rounded-[12px] border ${
+          error ? "border-destructive" : "border-border-connect"
         }`}
         numInputs={6}
         renderInput={(props) => <input {...props} />}
@@ -104,4 +95,3 @@ export function OTP ({
     </div>
   );
 }
-

@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import
-{
+import {
   Form,
   FormControl,
   FormDescription,
@@ -42,16 +41,17 @@ const Schema = yup.object().shape({
 
 type SchemaTypes = yup.InferType<typeof Schema>;
 
-interface IResectPassword
-{
+interface IResectPassword {
   credential: { email: string; code: string };
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ResetPassword({ credential, setOpen }: IResectPassword)
-{
+export default function ResetPassword({
+  credential,
+  setOpen,
+}: IResectPassword) {
   const { push } = useRouter();
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const defaultValues: SchemaTypes = {
     newPassword: "",
@@ -69,34 +69,28 @@ export default function ResetPassword({ credential, setOpen }: IResectPassword)
    *
    *
    */
-  async function onSubmit(values: SchemaTypes)
-  {
-    setIsLoading(true)
+  async function onSubmit(values: SchemaTypes) {
+    setIsLoading(true);
     const resetDetails = {
       ...credential,
-      password: values.newPassword
-    }
+      password: values.newPassword,
+    };
 
     await apiCAll({
       url: "/auth/password/reset",
       method: "POST",
       data: resetDetails,
       toast: true,
-      sCB(res)
-      {
-
-        setIsLoading(false)
+      sCB(res) {
+        setIsLoading(false);
         console.log(res);
-        setOpen(false)
-        return push("/onboarding")
-
+        setOpen(false);
+        return push("/onboarding");
       },
-      eCB(res)
-      {
-        setIsLoading(false)
-
+      eCB(res) {
+        setIsLoading(false);
       },
-    })
+    });
   }
   /*
    *
@@ -153,8 +147,12 @@ export default function ResetPassword({ credential, setOpen }: IResectPassword)
             )}
           />
         </div>
-        <Button isLoading={isLoading} variant={"primary"} className="w-full mt-[3rem]">
-        Reset
+        <Button
+          isLoading={isLoading}
+          variant={"primary"}
+          className="w-full mt-[3rem]"
+        >
+          Reset
         </Button>
       </form>
     </Form>
