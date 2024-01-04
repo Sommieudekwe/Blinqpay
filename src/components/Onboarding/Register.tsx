@@ -29,7 +29,7 @@ const Schema = yup.object().shape({
   password: yup
     .string()
     .required("Password is required")
-    .min(12, "Password must be at least 8 characters")
+    .min(12, "Password must be at least 12 characters")
     .max(20, "Password cannot exceed 20 characters")
     .matches(
       /^(?=.*[A-Z])(?=.*\d).+$/,
@@ -58,8 +58,13 @@ export default function Register() {
   const router = useRouter();
 
   const form = useForm<SchemaTypes>({
+    // Tells react-hook-form to use yup validation.
     resolver: yupResolver(Schema),
+
+    // Default values for form fields
     defaultValues,
+
+    // Triggers validation onBlur, onFocus etc
     mode: "all",
   });
 
@@ -256,7 +261,7 @@ export default function Register() {
                         // type="password"
                         className="bg-auth-input"
                         id="password"
-                        placeholder="8 characters minimum"
+                        placeholder="12 minimum characters"
                         {...field}
                         error={form.formState.errors?.password?.message}
                       />
@@ -280,7 +285,7 @@ export default function Register() {
                         // type="password"
                         className="bg-auth-input"
                         id="confirmPassword"
-                        placeholder="8 characters minimum"
+                        placeholder="12 minimum characters"
                         {...field}
                         error={form.formState.errors?.confirmPassword?.message}
                       />

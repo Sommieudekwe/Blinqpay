@@ -13,10 +13,14 @@ export default function Partners() {
   };
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Dashboard for Blinqpay Partners</h1>
+      <div className="lg:flex justify-between gap-x-8 items-center grid grid-cols-2">
+        <h1 className="text-lg md:text-2xl font-bold">
+          Dashboard for Blinqpay Partners
+        </h1>
 
-        <Button variant="primary">Copy referral link</Button>
+        <Button variant="primary" className="">
+          Copy referral link
+        </Button>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-12 gap-y-5">
         <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">

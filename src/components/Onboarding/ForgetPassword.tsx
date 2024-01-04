@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 
 import apiCAll from "@/lib/apiCall";
 import { saveToken } from "@/lib/utils";
@@ -7,11 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import
-{
+import {
   Form,
   FormControl,
-  FormField,  
+  FormField,
   FormItem,
   FormLabel,
   FormMessage,
@@ -21,27 +19,19 @@ import { Button } from "@/components/ui/button";
 
 import * as yup from "yup";
 
-
 const Schema = yup.object().shape({
   email: yup.string().required("Email is required!"),
 });
 
-
-type SchemaTypes = yup.InferType<
-  typeof Schema
->;
+type SchemaTypes = yup.InferType<typeof Schema>;
 
 const defaultValues: SchemaTypes = {
   email: "",
 };
 
-
-
-
-export default function ForgetPassword()
-{
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const router = useRouter()
+export default function ForgetPassword() {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<SchemaTypes>({
     resolver: yupResolver(Schema),
@@ -49,52 +39,44 @@ export default function ForgetPassword()
     mode: "all",
   });
   /*
-*
-*
-*
-*
-*/
-  async function onSubmit(values: SchemaTypes)
-  {
-    try
-    {
-      setIsLoading(true)
+   *
+   *
+   *
+   *
+   */
+  async function onSubmit(values: SchemaTypes) {
+    try {
+      setIsLoading(true);
 
       await apiCAll({
         url: "/auth/password/forgot",
         method: "POST",
         data: values,
-        sCB(res)
-        {
+        sCB(res) {
           console.log(res);
-          setIsLoading(false)
-          router.push(`/auth/otp?email=${values.email}`)
+          setIsLoading(false);
+          router.push(`/auth/otp?email=${values.email}`);
         },
-        eCB(res)
-        {
+        eCB(res) {
           console.log(res.message, "ecb");
-          setIsLoading(false)
+          setIsLoading(false);
         },
         toast: true,
-      })
-
-
-    } catch (error)
-    {
+      });
+    } catch (error) {
       console.log(error, "==> error");
-
     }
   }
   /*
-  *
-  *
-  *
-  *
-  */
+   *
+   *
+   *
+   *
+   */
   return (
     <main className="bg-primary-dashboard text-white p-5 md:p-10 md:w-[35rem] shadow-xl">
       <div>
-        <h3 className="text-4xl">Find your BlinqPag account</h3>
+        <h3 className="text-2xl md:text-4xl">Find your BlinqPag account</h3>
         <p className="mt-2 opacity-60">
           Enter the email, phone number, or username associated with your
           account to change your password.
@@ -111,7 +93,9 @@ export default function ForgetPassword()
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="email" className="text-sm">Email</FormLabel>
+                <FormLabel htmlFor="email" className="text-sm">
+                  Email
+                </FormLabel>
                 <FormControl>
                   <Input
                     className="bg-auth-input"
@@ -127,17 +111,18 @@ export default function ForgetPassword()
             )}
           />
 
-          <div className="mt-[7.813rem]">
-            <Button isLoading={isLoading} variant={'primary'} className="w-full py-3" size={'lg'}>
+          <div className="mt-16 lg:mt-[7.813rem]">
+            <Button
+              isLoading={isLoading}
+              variant={"primary"}
+              className="w-full py-3"
+              size={"lg"}
+            >
               Next
             </Button>
           </div>
-
         </form>
       </Form>
-
-
-
     </main>
   );
 }

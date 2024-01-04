@@ -1,7 +1,7 @@
 import { fmtResponse, getToken, hasToken, removeToken } from "@/lib/utils";
 import axios, { AxiosRequestConfig } from "axios";
 
-let baseURL = "https://binq-be-c73cb866fca4.herokuapp.com/api/v1"
+let baseURL = "https://binq-be-c73cb866fca4.herokuapp.com/api/v1";
 
 const service = axios.create({
   baseURL,
@@ -28,7 +28,7 @@ service.interceptors.request.use(
 
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // Add a response interceptor
@@ -70,7 +70,7 @@ service.interceptors.response.use(
         serverResponse: data,
       };
     }
-  },
+  }
 );
 
 export default service;
