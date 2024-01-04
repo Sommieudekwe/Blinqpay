@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 
 import apiCAll from "@/lib/apiCall";
 import { saveToken } from "@/lib/utils";
@@ -8,7 +7,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm, Form, set } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import * as yup from "yup";
 import { OTP } from "../otp-input";
@@ -21,38 +26,33 @@ import Image from "next/image";
 import { Dialog, DialogClose, DialogContent } from "@/components/ui/dialog";
 import { Separator } from "../ui/separator";
 
-
-
-
-
-export default function Otp()
-{
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+export default function Otp() {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [open, setOpen] = React.useState<boolean>(false);
-  const [code, setCode] = React.useState<string>('')
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [email, setEmail] = React.useState<string>(searchParams.get('email') as string)
-  console.log();
+  const [code, setCode] = React.useState<string>("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [email, setEmail] = React.useState<string>(
+    searchParams.get("email") as string
+  );
 
   /*
-  *
-  *
-  *
-  *
-  */
-  async function handleSubmitOTP()
-  {
-    setIsLoading(true)
-    if (code.length < 6) return notify.error('Code is less that 6 digits!')
+   *
+   *
+   *
+   *
+   */
+  async function handleSubmitOTP() {
+    setIsLoading(true);
+    if (code.length < 6) return notify.error("Code is less that 6 digits!");
 
     const credentials = {
-      email: email || searchParams.get('email'),
-      code
-    }
+      email: email || searchParams.get("email"),
+      code,
+    };
 
-    setOpen(true)
-    setIsLoading(false)
+    setOpen(true);
+    setIsLoading(false);
 
     // await apiCAll({
     //   url: "/auth/verify/email",
@@ -73,35 +73,31 @@ export default function Otp()
     // })
   }
 
-  async function handleResendCode()
-  {
-    setIsLoading(true)
-    if (!email || !searchParams.get('email')) return notify.error('No email provided!!')
-
+  async function handleResendCode() {
+    setIsLoading(true);
+    if (!email || !searchParams.get("email"))
+      return notify.error("No email provided!!");
 
     await apiCAll({
       url: "/auth/verify/email/code/resend",
       method: "POST",
       data: { email },
       toast: true,
-      sCB(res)
-      {
+      sCB(res) {
         console.log(res);
-        setIsLoading(false)
-
+        setIsLoading(false);
       },
       eCB(res) {
-        setIsLoading(false)
-          
+        setIsLoading(false);
       },
-    })
+    });
   }
   /*
-  *
-  *
-  *
-  *
-  */
+   *
+   *
+   *
+   *
+   */
   return (
     <>
       <main className="bg-primary-dashboard text-white p-5 md:p-10 md:w-[30rem] flex flex-col items-center text-left  md:text-center">
@@ -113,13 +109,19 @@ export default function Otp()
         </div>
 
         <div className="w-auto mt-[2.625rem]">
+          {/* Will need this in the other otp */}
           <OTP code={code} setCode={setCode} error={false} />
         </div>
 
-        <Button onClick={handleSubmitOTP} isLoading={isLoading} variant={'primary'} className="w-full py-3 mt-6" size={'lg'}>
+        <Button
+          onClick={handleSubmitOTP}
+          isLoading={isLoading}
+          variant={"primary"}
+          className="w-full py-3 mt-6"
+          size={"lg"}
+        >
           Verify code
         </Button>
-
 
         <div className="mt-12 flex justify-center gap-x-1">
           <span className="text-center block opacity-25">
@@ -141,7 +143,7 @@ export default function Otp()
             <DialogClose asChild>
               <Image
                 src={"/dashboard/settings/x.svg"}
-                alt="cancle"
+                alt="cancel"
                 width={45}
                 height={45}
               />
@@ -150,7 +152,7 @@ export default function Otp()
 
           <Separator className="mb-5 mt-3 opacity-40 h-[0.038rem]" />
 
-          <ResetPassword setOpen={setOpen}  credential={{email, code}}/>
+          <ResetPassword setOpen={setOpen} credential={{ email, code }} />
         </DialogContent>
       </Dialog>
     </>
