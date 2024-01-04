@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { partnersColumn } from "./column";
 import { partnersData } from "./data";
+import PartnersMobileTable from "./PartnersMobileTable";
 
 export default function Partners() {
   const [isBlurred, setIsBlurred] = useState(false);
@@ -67,6 +68,9 @@ export default function Partners() {
 
         <div className="hidden lg:block">
           <DataTable columns={partnersColumn} data={partnersData} />
+        </div>
+        <div className="lg:hidden">
+          <PartnersMobileTable data={partnersData} />
         </div>
       </div>
     </div>
