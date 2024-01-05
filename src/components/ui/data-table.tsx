@@ -38,6 +38,7 @@ interface DataTableProps<TData, TValue> {
   queryType?: string;
   propertyString?: string;
   dummyData?: TData[];
+  noHeader?: boolean;
 }
 
 export type ResourceQueryInput = {
@@ -51,6 +52,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   emptyState,
+  noHeader,
   show_pagination = true,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
@@ -93,7 +95,10 @@ export function DataTable<TData, TValue>({
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup, index) => (
-              <TableRow className="border-b-transparent" key={index}>
+              <TableRow
+                className={`border-b-transparent ${noHeader ? "hidden" : ""}`}
+                key={index}
+              >
                 {headerGroup.headers.map((header, index) => {
                   return (
                     <TableHead key={index}>
@@ -146,8 +151,9 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {show_pagination && table.getRowModel().rows?.length > 0 && <DataTablePagination table={table} />}
-
+      {show_pagination && table.getRowModel().rows?.length > 0 && (
+        <DataTablePagination table={table} />
+      )}
     </div>
   );
 }
