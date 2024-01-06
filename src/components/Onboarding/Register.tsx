@@ -87,7 +87,7 @@ export default function Register() {
         sCB(res) {
           if (res.message === "Success") {
             setIsLoading(false);
-            router.push("/onboarding");
+            router.push(`/auth/verify-email?email=${values.email}`);
           }
         },
         eCB(res) {

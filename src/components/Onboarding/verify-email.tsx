@@ -5,7 +5,7 @@ import apiCAll from "@/lib/apiCall";
 import { saveToken } from "@/lib/utils";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, Form, set } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
@@ -15,17 +15,12 @@ import { OTP } from "../otp-input";
 import Link from "next/link";
 import { notify } from "@/components/ui/toast";
 
-import ChangePassword from "../Dashboard/settings/edit-password-form";
-import ResetPassword from "./reset-password";
-import Image from "next/image";
-import { Dialog, DialogClose, DialogContent } from "@/components/ui/dialog";
-import { Separator } from "../ui/separator";
 
 
 
 
 
-export default function Otp()
+export default function VerifyEmail()
 {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [open, setOpen] = React.useState<boolean>(false);
@@ -33,8 +28,6 @@ export default function Otp()
   const router = useRouter()
   const searchParams = useSearchParams()
   const [email, setEmail] = React.useState<string>(searchParams.get('email') as string)
-  console.log();
-
   /*
   *
   *
@@ -46,9 +39,30 @@ export default function Otp()
     setIsLoading(true)
     if (code.length < 6) return notify.error('Code is less that 6 digits!')
 
+    const credentials = {
+      email: email || searchParams.get('email'),
+      code
+    }
+    
 
-    setOpen(true)
-    setIsLoading(false)
+    await apiCAll({
+      url: "/auth/verify/email",
+      method: "POST",
+      data: credentials,
+      toast: true,
+      sCB(res)
+      {
+        console.log(res);
+        setIsLoading(false)
+        return router.push("/onboarding");
+             
+
+      },
+      eCB(err)
+      {
+        setIsLoading(false)
+      }
+    })
   }
 
   async function handleResendCode()
@@ -80,13 +94,21 @@ export default function Otp()
   *
   *
   */
+  useEffect(() => {
+    if(!email) setEmail(searchParams.get('email') as string)
+  }, [email, searchParams])
+/*
+  *
+  *
+  *
+  *
+  */
   return (
-    <>
       <main className="bg-primary-dashboard text-white p-5 md:p-10 md:w-[30rem] flex flex-col items-center text-left  md:text-center">
         <div>
           <h3 className="text-4xl font-bold">Verify your account</h3>
           <p className="mt-2 opacity-60">
-            We sent you a verification code to your mail at fiyin@gmail.com
+            We sent you a verification code to your mail at {email}
           </p>
         </div>
 
@@ -112,25 +134,5 @@ export default function Otp()
         </div>
       </main>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className=" text-left text-white">
-          <div className="inline-flex justify-between">
-            <p className="font-bold text-white text-xl">Change password</p>
-            <DialogClose asChild>
-              <Image
-                src={"/dashboard/settings/x.svg"}
-                alt="cancle"
-                width={45}
-                height={45}
-              />
-            </DialogClose>
-          </div>
-
-          <Separator className="mb-5 mt-3 opacity-40 h-[0.038rem]" />
-
-          <ResetPassword setOpen={setOpen}  credential={{email, code}}/>
-        </DialogContent>
-      </Dialog>
-    </>
   );
 }
