@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
 import { getToken, hasToken } from "@/lib/utils";
 import Dropdown from "@/components/Dashboard/Dropdown";
+import { formatAmount } from "@/lib/utils";
 // import {
 //   DropdownMenu,
 //   DropdownMenuContent,
@@ -18,14 +19,23 @@ import Dropdown from "@/components/Dashboard/Dropdown";
 //   DropdownMenuSeparator,
 //   DropdownMenuTrigger,
 // } from "@/components/ui/dropdown-menu";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, PlusCircle } from "lucide-react";
 
 const availableBanks = [
-  { name: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
-  { name: "Moniepoint", img: "/dashboard/banks/kuda.svg" },
-  { name: "Access bank", img: "/dashboard/banks/kuda.svg" },
-  { name: "First bank", img: "/dashboard/banks/kuda.svg" },
+  { label: "Kuda bank", value: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
+  {
+    label: "Moniepoint",
+    value: "Moniepoint",
+    img: "/dashboard/banks/kuda.svg",
+  },
+  {
+    label: "Access bank",
+    value: "Access bank",
+    img: "/dashboard/banks/kuda.svg",
+  },
+  { label: "First bank", value: "Firstbank", img: "/dashboard/banks/kuda.svg" },
 ];
+import Select from "@/components/ui/select";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -78,26 +88,17 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="relative">
-          {/* <div className="bg-light-green bg-opacity-10 text-light-green py-3 px-10 rounded-3xl inline-flex lg:flex items-center gap-x-3 mt-4 lg:mt-0">
-            <Image
-              src="/dashboard/mark.svg"
-              alt="mark"
-              width={16}
-              height={16}
-            />
-            API Activated
-            
-          </div> */}
           <div className="flex items-center">
             <p className="opacity-60 mb-2 ">Available Banks</p>
           </div>
-          <div className="">
-            <Dropdown options={availableBanks} />
+          <div className="text-center">
+            <Select
+              placeholder={availableBanks[0].label}
+              options={availableBanks}
+              className="w-36"
+            />
+            {/* <Dropdown options={availableBanks} /> */}
           </div>
-
-          {/* <DropdownMenu>
-            <DropdownMenuTrigger></DropdownMenuTrigger>
-          </DropdownMenu> */}
         </div>
       </div>
 
@@ -120,12 +121,18 @@ export default function Dashboard() {
           </h4>
         </div>
 
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
-          <span className="text-3xl absolute right-5 top-0">...</span>
+        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4 flex items-center justify-between">
+          <div>
+            <h3 className="opacity-50">Wallet Ballance</h3>
 
-          <h3 className="opacity-50">Current Orders</h3>
+            <h4 className="mt-3 text-2xl font-bold">
+              &#8358;{formatAmount(10000)}
+            </h4>
+          </div>
 
-          <h4 className="mt-3 text-2xl font-bold">1000</h4>
+          <div>
+            <PlusCircle />
+          </div>
         </div>
       </div>
 

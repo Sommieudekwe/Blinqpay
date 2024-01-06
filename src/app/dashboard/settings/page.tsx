@@ -214,7 +214,7 @@ export default function Connectivity() {
       <Dialog open={changePayMethod} onOpenChange={setChangePayMethod}>
         <DialogContent className=" text-left text-white">
           <div className="inline-flex justify-between">
-            <p className="font-bold text-white text-xl">Payment Method</p>
+            <p className="font-bold text-white text-xl">Payment Methods</p>
             <DialogClose asChild>
               <Image
                 src={"/dashboard/settings/x.svg"}
@@ -234,7 +234,7 @@ export default function Connectivity() {
       <Dialog open={showTerms} onOpenChange={setShowTerms}>
         <DialogContent className=" text-left text-white w-full  max-w-[1003px] h-[577px]">
           <div className="inline-flex justify-between">
-            <p className="font-bold text-white text-xl">Payment Method</p>
+            <p className="font-bold text-white text-xl">Privacy Policy</p>
             <DialogClose>
               <Image
                 src={"/dashboard/settings/x.svg"}
@@ -300,11 +300,11 @@ export default function Connectivity() {
       <Dialog open={unlist} onOpenChange={setUnlist}>
         <DialogContent className=" text-left text-white">
           <div className="inline-flex justify-between">
-            <p className="font-bold text-white text-xl">Payment Method</p>
+            <p className="font-bold text-white text-xl">Unlist Bank</p>
             <DialogClose asChild>
               <Image
                 src={"/dashboard/settings/x.svg"}
-                alt="cancle"
+                alt="cancel"
                 width={45}
                 height={45}
               />
