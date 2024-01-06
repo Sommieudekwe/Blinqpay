@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const routes: IRoutes[] = [
   {
     name: "Dashboard",
-    icon: "/dashboard/sidebar/dashboard.svg",
+    icon: "/dashboard/sidebar/home.svg",
     link: "/dashboard",
   },
   {
