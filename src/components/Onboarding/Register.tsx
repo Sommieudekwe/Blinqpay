@@ -29,7 +29,7 @@ const Schema = yup.object().shape({
   password: yup
     .string()
     .required("Password is required")
-    .min(12, "Password must be at least 8 characters")
+    .min(12, "Password must be at least 12 characters")
     .max(20, "Password cannot exceed 20 characters")
     .matches(
       /^(?=.*[A-Z])(?=.*\d).+$/,
