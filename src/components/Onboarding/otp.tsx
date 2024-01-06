@@ -46,31 +46,9 @@ export default function Otp() {
     setIsLoading(true);
     if (code.length < 6) return notify.error("Code is less that 6 digits!");
 
-    const credentials = {
-      email: email || searchParams.get("email"),
-      code,
-    };
 
-    setOpen(true);
-    setIsLoading(false);
-
-    // await apiCAll({
-    //   url: "/auth/verify/email",
-    //   method: "POST",
-    //   data: credentials,
-    //   toast: true,
-    //   sCB(res)
-    //   {
-    //     console.log(res);
-    //     setIsLoading(false)
-    //     return setIsSuccess(true)
-
-    //   },
-    //   eCB(err)
-    //   {
-    //     setIsLoading(false)
-    //   }
-    // })
+    setOpen(true)
+    setIsLoading(false)
   }
 
   async function handleResendCode() {
