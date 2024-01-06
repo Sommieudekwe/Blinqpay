@@ -83,3 +83,13 @@ export interface IPartners {
   date: string;
   time: string;
 }
+
+export interface ISell {
+  type: string;
+  amount: number;
+  status: "pending" | "successful" | "failed";
+  date: string;
+  time: string;
+  countdown: string;
+  info: string
+}

@@ -57,9 +57,16 @@ export default function Register() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
 
+  // Instead of using { register, handleSubmit etc } you can access those with form.handleSubmut().
+  // form.register etc, you just have to spread Form like this <Form { ...form } />
   const form = useForm<SchemaTypes>({
+    // Tells react-hook-form to use yup validation.
     resolver: yupResolver(Schema),
+
+    // Default values for form fields
     defaultValues,
+
+    // Triggers validation onBlur, onFocus etc
     mode: "all",
   });
 
@@ -136,23 +143,26 @@ export default function Register() {
               <FormField
                 control={form.control}
                 name="firstName"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel htmlFor="firstName" className="text-sm">
-                      First Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        className="bg-auth-input"
-                        id="firstName"
-                        placeholder="First name"
-                        {...field}
-                        error={form.formState.errors?.firstName?.message}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                render={({ field }) => {
+                  // console.log("This is the field", field);
+                  return (
+                    <FormItem className="w-full">
+                      <FormLabel htmlFor="firstName" className="text-sm">
+                        First Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className="bg-auth-input"
+                          id="firstName"
+                          placeholder="First name"
+                          {...field}
+                          error={form.formState.errors?.firstName?.message}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
 
               <FormField
@@ -256,7 +266,7 @@ export default function Register() {
                         // type="password"
                         className="bg-auth-input"
                         id="password"
-                        placeholder="8 characters minimum"
+                        placeholder="12 minimum characters"
                         {...field}
                         error={form.formState.errors?.password?.message}
                       />
@@ -280,7 +290,7 @@ export default function Register() {
                         // type="password"
                         className="bg-auth-input"
                         id="confirmPassword"
-                        placeholder="8 characters minimum"
+                        placeholder="12 minimum characters"
                         {...field}
                         error={form.formState.errors?.confirmPassword?.message}
                       />
