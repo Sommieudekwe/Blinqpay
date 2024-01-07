@@ -32,16 +32,16 @@ export default function Connectivity() {
 
   const { id } = useParams();
   const settings = [
-    {
-      name: "Password",
-      label: "Change",
-      action: () => setIsSuccess(true),
-    },
-    {
-      name: "Create Kuda Virtual Account",
-      label: "Create",
-      action: () => setChangePass(true),
-    },
+    // {
+    //   name: "Password",
+    //   label: "Change",
+    //   action: () => setIsSuccess(true),
+    // },
+    // {
+    //   name: "Create Kuda Virtual Account",
+    //   label: "Create",
+    //   action: () => setChangePass(true),
+    // },
     {
       name: "PIN",
       label: "Change",
@@ -120,12 +120,12 @@ export default function Connectivity() {
             </div>
           </div>
 
-          <Image
+          {/* <Image
             width={76}
             height={26}
             src={"/dashboard/settings/level1.svg"}
             alt={"badge"}
-          />
+          /> */}
         </div>
 
         <Button className="mt-12 lg:mt-0">Update Profile</Button>
@@ -145,11 +145,11 @@ export default function Connectivity() {
             )}
           </div>
         ))}
-        <div className="w-full flex justify-between items-center">
+        {/* <div className="w-full flex justify-between items-center">
           <p className="text-white font-medium">Light mode/dark mode</p>
 
           <Switch />
-        </div>
+        </div> */}
 
         <div className="inline-flex">
           <Button variant={"ghost-red"} className="space-x-2 mt-8">

@@ -95,7 +95,7 @@ export default function Dashboard() {
             <Select
               placeholder={availableBanks[0].label}
               options={availableBanks}
-              className="w-36"
+              className="w-44"
             />
             {/* <Dropdown options={availableBanks} /> */}
           </div>
@@ -129,17 +129,13 @@ export default function Dashboard() {
               &#8358;{formatAmount(10000)}
             </h4>
           </div>
-
-          <div>
-            <PlusCircle />
-          </div>
         </div>
       </div>
 
-      <div className="flex justify-between items-center mt-8 lg:mt-5">
-        <h3 className="text-2xl font-bold">Active Orders</h3>
+      <div className="grid grid-cols-3 mt-8 lg:mt-5">
+        <h3 className="text-2xl col-span-1 font-bold">100 Active Orders</h3>
 
-        <div className="flex gap-x-1.5 lg:gap-x-5">
+        <div className="flex gap-x-1.5 lg:gap-x-5 col-span-2 justify-end">
           <div>
             <Button className="bg-button-primary text-[.75rem] lg:text-base">
               Pay all

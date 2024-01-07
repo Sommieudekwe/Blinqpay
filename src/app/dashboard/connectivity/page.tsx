@@ -7,31 +7,29 @@ import { bankList } from "./constants";
 import { useStore } from "@/context/strore";
 import { notify } from "@/components/ui/toast";
 
-export default function Connectivity()
-{
+export default function Connectivity() {
   const router = useRouter();
   const AvailableBanks = ["Binance", "Kuda", "Paxful", "Moniepoint"];
   const AllBanks = ["Providus", "Kuda", "Moniepoint"];
-  const {loggedIn} = useStore()
-  console.log('user logged in?', loggedIn);
-  
+  const { loggedIn } = useStore();
+  console.log("user logged in?", loggedIn);
+
   /*
-  *
-  *
-  *
-  *
+   *
+   *
+   *
+   *
    */
-  function handleConnect(bankName: string)
-  {
+  function handleConnect(bankName: string) {
     if (AllBanks.includes(bankName))
       return router.push(`/dashboard/connectivity/bank/${bankName}`);
     return router.push(`/dashboard/connectivity/wallet/${bankName}`);
   }
   /*
-  *
-  *
-  *
-  *
+   *
+   *
+   *
+   *
    */
   return (
     <section className="w-full h-full">

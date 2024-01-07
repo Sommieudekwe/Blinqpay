@@ -116,17 +116,25 @@ export default function Register() {
   return (
     <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4">
       {/* Illustration */}
-      <div className="hidden lg:block">
+      <div>
         <Image
           src="/onboarding/signup.svg"
           alt="register"
           width={500}
           height={490}
+          className="hidden xl:block"
+        />
+        <Image
+          src="/onboarding/signup.svg"
+          alt="register"
+          width={360}
+          height={350}
+          className="hidden lg:block xl:hidden"
         />
       </div>
 
       {/* Get started */}
-      <div className="w-full lg:max-w-[35rem] mx-auto lg:rounded-xl lg:bg-onboard-bg lg:border border-white p-5 border-opacity-25">
+      <div className="w-full mx-auto sm:rounded-xl sm:bg-onboard-bg sm:border border-white p-5 border-opacity-25 sm:max-w-xl lg:max-w-[35rem]">
         <div>
           <h3 className="text-4xl font-bold">Get Started</h3>
           <p className="opacity-60 mt-2">
