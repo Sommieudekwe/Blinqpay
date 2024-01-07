@@ -80,7 +80,6 @@ export default function Connectivity() {
             <p className="opacity-60 font-aeonikRegular text-lg">
               API Connected
             </p>
-
             <p className="font-bold text-3xl">Successfully</p>
           </div>
 
