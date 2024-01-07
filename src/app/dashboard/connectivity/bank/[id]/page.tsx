@@ -51,7 +51,7 @@ export default function Connectivity() {
           ></div>
         </div>
       </div>
-      <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-[1.875rem] border-opacity-25 mt-[6rem]">
+      <div className="max-w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
         {/* logo */}
         <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto">
           <Image src={getBankLogo(id as string)} alt={"bank logo"} fill />
@@ -66,9 +66,8 @@ export default function Connectivity() {
           />
         )}
       </div>
-
       <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-        <DialogContent className=" text-center text-white">
+        <DialogContent className="text-center text-white">
           <Image
             src={"/dashboard/success.svg"}
             alt="success icon"
@@ -81,7 +80,6 @@ export default function Connectivity() {
             <p className="opacity-60 font-aeonikRegular text-lg">
               API Connected
             </p>
-
             <p className="font-bold text-3xl">Successfully</p>
           </div>
 

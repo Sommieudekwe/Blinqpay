@@ -45,7 +45,7 @@ export default function Header() {
         >
           <div className="h-[43px] w-[43px] bg-white rounded-full"></div>
           <div>
-            <h3 className="text-sm md:text-xl font-bold">Somto Udekwu</h3>
+            <h3 className="text-sm md:text-xl font-bold">SU</h3>
             <p className="opacity-40 text-[.75rem] md:text-base">Merchant</p>
           </div>
         </div>

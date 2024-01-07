@@ -85,7 +85,7 @@ export default function Connectivity() {
    */
   return (
     <section className="w-full h-full lg:pt-16">
-      <div className="w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-[1.875rem] border-opacity-25">
+      <div className="max-w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 mb-4 px-4 md:px-[1.875rem] border-opacity-25">
         {/* logo */}
         <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto">
           <Image src={getBankLogo(id as string)} alt={"bank logo"} fill />
