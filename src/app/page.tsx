@@ -1,18 +1,26 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { hasToken } from "@/lib/utils";
+import { notify } from "@/components/ui/toast";
 
-const Home = () => {
+const Home = () =>
+{
   const router = useRouter();
+  const pathname = usePathname();
   /*
    *
    *
    *
    *
    */
-  function protectedRuteHandler() {
-    // logic ro redirect none authenticated user.
+  function protectedRuteHandler()
+  {
+    notify.warn("checking user validity!")
+    if (pathname.includes("/dashboard") && !hasToken()) return router.push("/onboarding");
+    return router.push("/dashboard");
+
   }
   /*
    *
@@ -20,8 +28,10 @@ const Home = () => {
    *
    *
    */
-  React.useEffect(() => {
-    router.push("/onboarding");
+  React.useEffect(() =>
+  {
+    protectedRuteHandler()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   return null;

@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button, buttonVariants } from "../ui/button";
-import { cn, saveToken } from "@/lib/utils";
+import { cn, formatPhone, saveToken } from "@/lib/utils";
 import React from "react";
 import apiCAll from "@/lib/apiCall";
 import { notify } from "../ui/toast";
@@ -62,14 +62,12 @@ export default function Register() {
   const form = useForm<SchemaTypes>({
     // Tells react-hook-form to use yup validation.
     resolver: yupResolver(Schema),
-
     // Default values for form fields
     defaultValues,
 
     // Triggers validation onBlur, onFocus etc
     mode: "all",
   });
-
   /*
    *
    *
@@ -81,12 +79,14 @@ export default function Register() {
       lastName: values.lastName,
       firstName: values.firstName,
       email: values.email,
-      phone: values.phoneNumber,
+      phone: formatPhone(values.phoneNumber),
       password: values.password,
     };
+
+
     try {
       setIsLoading(true);
-
+      
       await apiCAll({
         url: "/auth/create",
         method: "POST",
