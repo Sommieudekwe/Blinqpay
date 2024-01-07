@@ -9,6 +9,19 @@ export function formatAmount(amount: number) {
   return amount.toLocaleString();
 }
 
+export function formatPhone(phoneNumber: string) {
+
+  if (/^\+\d{1,3}\d{10}$/.test(phoneNumber)) {
+    return phoneNumber; 
+  }
+
+  if (!phoneNumber.startsWith("0")) {
+    phoneNumber = "0" + phoneNumber;
+  }
+
+  return "+234" + phoneNumber.slice(1);
+}
+
 import Cookies from "js-cookie";
 
 export function saveToken(token: string) {
