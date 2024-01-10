@@ -4,6 +4,7 @@ import { bankHistoryData } from "./data";
 import BankHistoryDashboard from "@/app/dashboard/bank-history/BankHistoryMobile";
 
 export default function BankHistory() {
+
   return (
     <section className="w-full h-full">
       <div className="hidden lg:block">

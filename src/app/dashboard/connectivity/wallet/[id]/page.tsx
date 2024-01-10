@@ -28,11 +28,12 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { bankList } from "@/app/dashboard/connectivity/constants";
+import apiCAll from "@/lib/apiCall";
 
 const ConnectionDetailsSchema = yup.object().shape({
   api_key: yup.string().required("Api key is required!"),
   secret_key: yup.string().required("Secret key is required"),
-  user_id: yup.string().required("UserID is required"),
+  user_id: yup.string(),
   agree: yup.boolean().required("Agree to terms"),
 });
 
@@ -42,6 +43,7 @@ type ConnectionDetailsSchemaTypes = yup.InferType<
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { id } = useParams();
   const { toast } = useToast();
   const defaultValues: ConnectionDetailsSchemaTypes = {
@@ -69,13 +71,38 @@ export default function Connectivity() {
   }
 
   async function onSubmit(values: ConnectionDetailsSchemaTypes) {
+    setIsLoading(true)
+    
     if (!values.agree)
       return toast({
         variant: "destructive",
         title: "Agree to terms and conditions!",
       });
 
-    setIsSuccess(true);
+      const walletCredentials = {
+        name: String(id).toUpperCase(),
+        apiKey: values.api_key,
+        apiSecret: values.secret_key
+    }
+
+      try {
+        await apiCAll({
+          url: "/exchange/connect",
+          data: walletCredentials,
+          toast: true,
+          method: "post",
+          sCB() {
+            setIsLoading(false);
+            setIsSuccess(true);              
+          },
+          eCB() {
+            setIsLoading(false);
+          },
+        })
+        
+      } catch (error) {
+        
+      }
   }
   /*
    *
@@ -176,7 +203,7 @@ export default function Connectivity() {
                 )}
               />
             </div>
-            <Button variant={"primary"} className="w-full mt-[4rem]">
+            <Button isLoading={isLoading} variant={"primary"} className="w-full mt-[4rem]">
               Submit
             </Button>
             <p className="font-medium text-typography text-center mt-6">
