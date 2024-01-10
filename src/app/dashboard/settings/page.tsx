@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { removeToken } from "@/lib/utils";
 
 import Link from "next/link";
 import React from "react";
@@ -21,6 +22,7 @@ import useEndpoint from "@/lib/apiCall";
 import apiCAll from "@/lib/apiCall";
 import { loginAPI, registerAPI } from "@/axios/endpoints/auth";
 import { notify } from "@/components/ui/toast";
+import { useRouter } from "next/navigation";
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
@@ -29,6 +31,8 @@ export default function Connectivity() {
   const [showTerms, setShowTerms] = React.useState<boolean>(false);
   const [changePayMethod, setChangePayMethod] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<number>(1);
+
+  const router = useRouter();
 
   const { id } = useParams();
   const settings = [
@@ -98,12 +102,18 @@ export default function Connectivity() {
     // method two
     // const {error, serverResponse} = await registerAPI({name: "ifeoluwa"})
   }
+
+  const handleSignOut = () => {
+    removeToken();
+    router.push("/onboarding");
+  };
   /*
    *
    *
    *
    *
    */
+
   return (
     <section className="w-full h-full lg:pt-24">
       <div className="w-full max-w-[42rem] mx-auto rounded-xl bg-onboard-bg border border-white px-5 lg:px-10 py-5 border-opacity-25 lg:flex justify-between">
@@ -152,7 +162,11 @@ export default function Connectivity() {
         </div> */}
 
         <div className="inline-flex">
-          <Button variant={"ghost-red"} className="space-x-2 mt-8">
+          <Button
+            variant={"ghost-red"}
+            className="space-x-2 mt-8"
+            onClick={handleSignOut}
+          >
             <p>Sign out</p>
 
             <svg
