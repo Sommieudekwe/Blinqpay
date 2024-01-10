@@ -152,3 +152,16 @@ export const bankHistoryData: IBankHistory[] = [
     no: 15,
   },
 ];
+
+
+// "id": 1,
+//                 "rate": "1233.06000000",
+//                 "amount": "80025.59000000",
+//                 "bankName": "Kuda bank",
+//                 "accountName": "JOSIAH UCHENNA UGWOKE",
+//                 "accountNumber": "3000005022",
+//                 "orderNumber": "20576119908216725504",
+//                 "merchantId": 1,
+//                 "status": "PENDING",
+//                 "createdAt": "2024-01-07T12:43:54.005Z",
+//                 "updatedAt": "2024-01-07T12:43:54.005Z"

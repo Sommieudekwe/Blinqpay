@@ -40,7 +40,7 @@ export interface IOrderHistory {
   accountNumber: number;
   amount: number;
   date: string;
-  status: "pending" | "successful" | "failed";
+  status: "PENDING" | "SUCCESSFULL" | "FAILED";
 }
 
 export type ResponsTypes = Promise<{

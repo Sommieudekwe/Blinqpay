@@ -46,11 +46,11 @@ service.interceptors.response.use(
     const { response } = error;
 
     const unauthorized = [
-      "User not authorized!",
+      "Invalid authentication. Try again!",
       "No token provided",
       "there was a problem retrieving your profile",
-    ]; // Subject to modification.
-
+    ];
+    
     if (unauthorized.includes(response?.data.message)) {
       removeToken();
     }

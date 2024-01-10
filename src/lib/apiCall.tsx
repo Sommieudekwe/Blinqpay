@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import service from "../axios";
 import { ResponsTypes } from "@/types";
@@ -15,8 +17,8 @@ interface EndPointTypes {
 const apiCAll = async (props: EndPointTypes) => {
   /*
 	use like this: 
-       const {errMess, result, success } = useEndpoint(url, method, data, successCB, errCB)
-       */
+  const {errMess, result, success } = useEndpoint(url, method, data, successCB, errCB)
+  */
 
   let response = {
     errMsg: "",

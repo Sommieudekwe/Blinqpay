@@ -32,9 +32,9 @@ export default function OrderHistoryMobileTable({ data }: TableProps) {
             <p
               className={cn(
                 "capitalize rounded-3xl px-2.5 py-1 text-sm",
-                d.status === "successful"
+                d.status === "SUCCESSFULL"
                   ? "text-success bg-success bg-opacity-10 inline-flex"
-                  : d.status === "failed"
+                  : d.status === "FAILED"
                   ? "text-failed bg-failed bg-opacity-10 inline-flex"
                   : "text-pending bg-pending bg-opacity-10 inline-flex"
               )}
