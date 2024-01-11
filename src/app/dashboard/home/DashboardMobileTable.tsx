@@ -2,7 +2,7 @@
 
 import { IDashboard } from "@/types";
 import { useState } from "react";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, formatAmount2 } from "@/lib/utils";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 
@@ -36,14 +36,14 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
             <h3 className="opacity-60">{d.accountName}</h3>
             <p className="opacity-60">{d.accountNumber}</p>
             <p className="opacity-60">{d.bankName}</p>
-            <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
-            <p className="text-rate">&#8358;{d.rate}</p>
+            <p className="opacity-60">{formatAmount2(d.amount)}</p>
+            <p className="text-rate">{formatAmount2(Number(d.rate))}</p>
             <p
               className={cn(
                 "capitalize rounded-3xl px-2.5 py-1 text-sm",
-                d.status === "successful"
+                d.status === "SUCCESSFULL"
                   ? "text-success bg-success bg-opacity-10 inline-flex"
-                  : d.status === "failed"
+                  : d.status === "FAILED"
                   ? "text-failed bg-failed bg-opacity-10 inline-flex"
                   : "text-pending bg-pending bg-opacity-10 inline-flex"
               )}

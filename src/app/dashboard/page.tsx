@@ -70,7 +70,7 @@ export default function Dashboard() {
     }
 
   }
-  
+
   useEffect(() =>
   {
     getActiveOrders()
@@ -194,7 +194,7 @@ export default function Dashboard() {
         </div>
 
         <div className="lg:hidden">
-          <MobileTable data={dashboardData} onOpenDialog={openDialog} />
+          <MobileTable data={data} onOpenDialog={openDialog} />
 
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent className="text-center text-white">
