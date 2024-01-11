@@ -125,7 +125,7 @@ export default function Connectivity() {
             </Avatar>
 
             <div className="h-[2.938rem]">
-              <p className="text-white font-bold text-xl">Somto Udekwe</p>
+              <p className="text-white font-bold text-xl">Olawale Chinedu</p>
               <p className="text-white font-medium opacity-40">Merchant</p>
             </div>
           </div>
