@@ -6,7 +6,7 @@ import { dashboardColumn } from "./home/column";
 import { dashboardData } from "./home/data";
 import { Button } from "@/components/ui/button";
 import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
 import { getToken, hasToken } from "@/lib/utils";
 import Dropdown from "@/components/Dashboard/Dropdown";
@@ -37,6 +37,7 @@ const availableBanks = [
   { label: "First bank", value: "Firstbank", img: "/dashboard/banks/kuda.svg" },
 ];
 import Select from "@/components/ui/select";
+import apiCAll from "@/lib/apiCall";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -46,6 +47,36 @@ export default function Dashboard() {
     setDialogType(type);
     setIsDialogOpen(true);
   };
+
+  const [data, setData] = useState([])
+
+
+  async function getActiveOrders()
+  {
+    try
+    {
+      await apiCAll({
+        url: "/order/all?q=ademide&page=1&pageSize=10",
+        method: "get",
+        sCB(res)
+        {
+          setData(res.data.data)
+          
+        },
+      })
+    } catch (error)
+    {
+      console.log(error, "this is the error!!");
+    }
+
+  }
+  
+  useEffect(() =>
+  {
+    getActiveOrders()
+
+  }, [])
+
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
 
@@ -159,7 +190,7 @@ export default function Dashboard() {
       {/* Table */}
       <section className="w-full h-full mt-10">
         <div className="hidden lg:block">
-          <DataTable columns={dashboardColumn} data={dashboardData} />
+          <DataTable columns={dashboardColumn} data={data} />
         </div>
 
         <div className="lg:hidden">

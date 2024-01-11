@@ -9,6 +9,22 @@ export function formatAmount(amount: number) {
   return amount.toLocaleString();
 }
 
+export const formatAmount2 = (amount: number, shortFrom?: boolean) => {
+  const currency = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "NGN",
+  });
+  const res = currency.format(amount);
+
+  if (shortFrom) {
+    return res;
+  } else {
+    const formattedCurrency = res.replace("NGN", "₦");
+
+    return formattedCurrency;
+  }
+};
+
 export function formatPhone(phoneNumber: string) {
 
   if (/^\+\d{1,3}\d{10}$/.test(phoneNumber)) {

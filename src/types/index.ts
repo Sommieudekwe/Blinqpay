@@ -19,7 +19,7 @@ export interface IDashboard {
   accountName: string;
   accountNumber: string;
   bankName: string;
-  status: "pending" | "successful" | "failed";
+  status: "PENDING" | "SUCCESSFULL" | "FAILED";
   rate: string;
   amount: number;
 }

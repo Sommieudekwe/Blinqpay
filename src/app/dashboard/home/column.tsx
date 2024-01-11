@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, formatAmount2 } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -28,7 +28,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "amount",
     header: () => <p className="w-28">Amount</p>,
     cell: ({ row }) => (
-      <p className="">&#8358;{formatAmount(row.original.amount)}</p>
+      <p className="">{formatAmount2(row.original.amount)}</p>
     ),
   },
 
@@ -41,9 +41,9 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
         <p
           className={cn(
             "capitalize",
-            status === "successful"
+            status === "SUCCESSFULL"
               ? "text-success"
-              : status === "failed"
+              : status === "FAILED"
               ? "text-failed"
               : "text-pending"
           )}
@@ -59,7 +59,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     header: () => <p className="w-28">Rate</p>,
     // accessorFn: (row) => row.rate,
     cell: ({ row }) => {
-      return <p className="text-button-primary">&#8358;{row.original.rate}</p>;
+      return <p className="text-button-primary">{formatAmount2(Number(row.original.rate))}</p>;
     },
   },
 
