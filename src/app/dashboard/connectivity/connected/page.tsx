@@ -9,35 +9,36 @@ import { bankList } from "../constants";
 import { useEffect, useState } from "react";
 import apiCAll from "@/lib/apiCall";
 import { IbankList } from "@/types";
+import { AlertTriangle } from "lucide-react";
 
-export default function Connected()
-{
+export default function Connected() {
   const router = useRouter();
   const { loggedIn } = useStore();
   console.log("user logged in?", loggedIn);
-  const [data, setData] = useState<IbankList[]>([])
+  const [data, setData] = useState<IbankList[]>([]);
   /*
    *
    *
    *
    *
    */
-  async function getConnectedBanl()
-  {
-    try
-    {
+  async function getConnectedBank() {
+    try {
       await apiCAll({
         url: "/exchange/all",
         method: "get",
-        sCB(res)
-        {
+        sCB(res) {
           console.log(res);
-          const connectedBank = bankList.filter((bank) => res.data.some((connectedBank: any) => bank.name.toUpperCase() === connectedBank.name))
-          setData(connectedBank)
+          const connectedBank = bankList.filter((bank) =>
+            res.data.some(
+              (connectedBank: any) =>
+                bank.name.toUpperCase() === connectedBank.name
+            )
+          );
+          setData(connectedBank);
         },
-      })
-    } catch (error)
-    {
+      });
+    } catch (error) {
       console.log(error, "this is the error!!");
     }
   }
@@ -47,17 +48,16 @@ export default function Connected()
    *
    *
    */
-  useEffect(() =>
-  {
-    getConnectedBanl()
-  }, [router])
+  useEffect(() => {
+    getConnectedBank();
+  }, [router]);
   /*
- *
- *
- *
- *
- */
-  return data.length > 0 ?  (
+   *
+   *
+   *
+   *
+   */
+  return data.length > 0 ? (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
         {data.map((bank, index) => (
@@ -69,15 +69,24 @@ export default function Connected()
               <Image src={bank.logo} alt={"bank logo"} fill />
             </div>
 
-            <Button
-              variant={"outline"}
-              disabled={true}
-            >
+            <Button variant={"outline"} disabled={true}>
               Connected
             </Button>
           </div>
         ))}
       </div>
     </section>
-  ) : null;
+  ) : (
+    <div>
+      <div className="flex flex-col justify-center items-center h-[80vh]">
+        <div>
+          <AlertTriangle size={36} />
+        </div>
+
+        <div className="max-w-sm text-center mt-2">
+          <span className="text-xl">No Exchange connected yet</span>
+        </div>
+      </div>
+    </div>
+  );
 }

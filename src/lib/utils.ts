@@ -5,14 +5,40 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// export function formatAmount(amount: number) {
+//   return amount.toLocaleString();
+// }
+
 export function formatAmount(amount: number) {
-  return amount.toLocaleString();
+  const numericAmount = Number(amount);
+
+  if (isNaN(numericAmount)) {
+    return "Invalid Amount";
+  }
+
+  const formattedAmount = numericAmount.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  return formattedAmount;
+}
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  // Extract components
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
 }
 
 export function formatPhone(phoneNumber: string) {
-
   if (/^\+\d{1,3}\d{10}$/.test(phoneNumber)) {
-    return phoneNumber; 
+    return phoneNumber;
   }
 
   if (!phoneNumber.startsWith("0")) {

@@ -18,12 +18,12 @@ export default function Sell() {
         <span className="text-xl">
           Contact Us on{" "}
           <a
-            href="tel:+234810651694"
+            href="https://wa.me/+234810651694"
             className="underline underline-offset-2 text-blue-500"
           >
             WhatsApp
           </a>{" "}
-          to join the OTC community and sell your assets instantly
+          to join the OTC community and sell your assets instantly.
         </span>
       </div>
 
