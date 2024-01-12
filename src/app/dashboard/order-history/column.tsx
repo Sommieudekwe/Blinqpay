@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, formatDate } from "@/lib/utils";
 import { IOrderHistory } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -23,11 +23,11 @@ export const columns: ColumnDef<IOrderHistory>[] = [
     header: "Account Name",
     accessorFn: (row) => row.accountName,
   },
-  //   {
-  //     accessorKey: "bankName",
-  //     header: "Bank Name",
-  //     accessorFn: (row) => row.bankName,
-  //   },
+  {
+    accessorKey: "bankName",
+    header: "Bank Name",
+    accessorFn: (row) => row.bankName,
+  },
 
   {
     accessorKey: "accountNumber",
@@ -66,6 +66,7 @@ export const columns: ColumnDef<IOrderHistory>[] = [
   {
     accessorKey: "date",
     header: "Date",
-    accessorFn: (row) => row.date,
+    // accessorFn: (row) => <p>{formatDate(row.createdAt)}</p>,
+    cell: ({ row }) => <p>{formatDate(row.original.createdAt)}</p>,
   },
 ];

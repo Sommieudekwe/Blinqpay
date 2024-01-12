@@ -36,10 +36,10 @@ export interface IOrderHistory {
   id: string;
   orderNumber: number;
   accountName: string;
-  // bankName: string;
+  bankName: string;
   accountNumber: number;
   amount: number;
-  date: string;
+  createdAt: string;
   status: "PENDING" | "SUCCESSFULL" | "FAILED";
 }
 
@@ -91,5 +91,5 @@ export interface ISell {
   date: string;
   time: string;
   countdown: string;
-  info: string
+  info: string;
 }

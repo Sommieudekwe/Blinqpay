@@ -1,7 +1,7 @@
 "use client";
 
 import { IOrderHistory } from "@/types";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, formatDate } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 
 interface TableProps {
@@ -24,8 +24,11 @@ export default function OrderHistoryMobileTable({ data }: TableProps) {
           <div className="space-y-3">
             <p className="opacity-60">{d.orderNumber}</p>
             <h3 className="opacity-60">{d.accountName}</h3>
-            <p className="opacity-60">{d.accountNumber}</p>
+            <p className="opacity-60">
+              {d.accountNumber} [ {d.bankName} ]
+            </p>
             <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
+            <p className="opacity-60">{formatDate(d.createdAt)}</p>
             {/* <p className="opacityu-60"></p> */}
           </div>
           <div>

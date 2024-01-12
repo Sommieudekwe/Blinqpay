@@ -133,10 +133,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 mt-8 lg:mt-5">
-        <h3 className="text-2xl col-span-1 font-bold">100 Active Orders</h3>
+      <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
+        <h3 className=" sm:text-2xl col-span-2 font-bold">100 Active Orders</h3>
 
-        <div className="flex gap-x-1.5 lg:gap-x-5 col-span-2 justify-end">
+        <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
           <div>
             <Button className="bg-button-primary text-[.75rem] lg:text-base">
               Pay all
