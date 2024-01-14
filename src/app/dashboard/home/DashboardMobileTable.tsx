@@ -37,7 +37,7 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
               {capitalizeFirstLetter(d.accountName)}
             </h3>
             <p className="opacity-60">{d.accountNumber}</p>
-            <p className="opacity-60">{d.bankName}</p>
+            <p className="opacity-60">{capitalizeFirstLetter(d.bankName)}</p>
             <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
             <p className="text-rate">&#8358;{formatAmount(d.rate)}</p>
             <p
