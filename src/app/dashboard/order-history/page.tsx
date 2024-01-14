@@ -14,7 +14,7 @@ export default function OrderHistory() {
   async function getOrders() {
     try {
       await apiCAll({
-        url: "/order/all?q=ademide&page=1&pageSize=10",
+        url: "order/history?page=1&pageSize=10",
         method: "get",
         sCB(res) {
           setData(res.data.data);
@@ -42,6 +42,6 @@ export default function OrderHistory() {
       </div>
     </section>
   ) : (
-    <div>Loading ...</div>
+    <div>No order history</div>
   );
 }
