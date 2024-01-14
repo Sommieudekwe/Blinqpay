@@ -2,7 +2,7 @@
 
 import { IDashboard } from "@/types";
 import { useState } from "react";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 
@@ -33,11 +33,13 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
           className="border-b border-t border-white border-opacity-25 py-6 flex justify-between"
         >
           <div className="space-y-3">
-            <h3 className="opacity-60">{d.accountName}</h3>
+            <h3 className="opacity-60">
+              {capitalizeFirstLetter(d.accountName)}
+            </h3>
             <p className="opacity-60">{d.accountNumber}</p>
             <p className="opacity-60">{d.bankName}</p>
             <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
-            <p className="text-rate">&#8358;{d.rate}</p>
+            <p className="text-rate">&#8358;{formatAmount(d.rate)}</p>
             <p
               className={cn(
                 "capitalize rounded-3xl px-2.5 py-1 text-sm",

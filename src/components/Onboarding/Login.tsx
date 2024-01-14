@@ -69,7 +69,6 @@ export default function Login() {
         },
         toast: true,
       });
-      
     } catch (error) {
       console.log(error, "==> error");
     }
@@ -189,7 +188,7 @@ export default function Login() {
                   Don&apos;t have an account?
                 </span>
                 <Link
-                  href="/onboarding/register"
+                  href="/auth/register"
                   className="text-[#6E5BFF] block text-center opacity-100"
                 >
                   Sign Up

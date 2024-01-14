@@ -3,14 +3,16 @@
 import Image from "next/image";
 import { DataTable } from "@/components/ui/data-table";
 import { dashboardColumn } from "./home/column";
-import { dashboardData } from "./home/data";
+// import { dashboardData } from "./home/data";
 import { Button } from "@/components/ui/button";
 import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
 import { getToken, hasToken } from "@/lib/utils";
 import Dropdown from "@/components/Dashboard/Dropdown";
 import { formatAmount } from "@/lib/utils";
+import apiCAll from "@/lib/apiCall";
+import { IDashboard } from "@/types";
 
 // import {
 //   DropdownMenu,
@@ -56,6 +58,29 @@ export default function Dashboard() {
   };
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
+
+  // order/all?q=ademide&page=1&pageSize=10
+  const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
+  async function getPendingOrders() {
+    try {
+      await apiCAll({
+        url: "/order/all?q=&page=1&pageSize=10",
+        method: "get",
+        sCB(res) {
+          setPendingOrders(res.data.data);
+          console.log("res:", res);
+        },
+      });
+    } catch (error) {
+      console.log(error, "this is the error");
+    }
+  }
+
+  useEffect(() => {
+    getPendingOrders();
+  }, []);
+
+  console.log(pendingOrders);
 
   return (
     <div className="">
@@ -134,7 +159,9 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
-        <h3 className=" sm:text-2xl col-span-2 font-bold">100 Active Orders</h3>
+        <h3 className=" sm:text-2xl col-span-2 font-bold">
+          {pendingOrders.length} Active Orders
+        </h3>
 
         <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
           <div>
@@ -159,11 +186,11 @@ export default function Dashboard() {
       {/* Table */}
       <section className="w-full h-full mt-10">
         <div className="hidden lg:block">
-          <DataTable columns={dashboardColumn} data={dashboardData} />
+          <DataTable columns={dashboardColumn} data={pendingOrders} />
         </div>
 
         <div className="lg:hidden">
-          <MobileTable data={dashboardData} onOpenDialog={openDialog} />
+          <MobileTable data={pendingOrders} onOpenDialog={openDialog} />
 
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent className="text-center text-white">

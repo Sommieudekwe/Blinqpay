@@ -29,7 +29,9 @@ export default function OrderHistory() {
     getOrders();
   }, []);
 
-  return (
+  console.log(data);
+
+  return data.length > 1 ? (
     <section className="w-full h-full">
       <div className="hidden lg:block">
         <DataTable columns={columns} data={data} />
@@ -39,5 +41,7 @@ export default function OrderHistory() {
         <OrderHistoryMobileTable data={data} />
       </div>
     </section>
+  ) : (
+    <div>Loading ...</div>
   );
 }

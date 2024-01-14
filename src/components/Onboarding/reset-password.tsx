@@ -85,7 +85,7 @@ export default function ResetPassword({
         setIsLoading(false);
         console.log(res);
         setOpen(false);
-        return push("/onboarding");
+        return push("/auth");
       },
       eCB(res) {
         setIsLoading(false);

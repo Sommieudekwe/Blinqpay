@@ -84,7 +84,7 @@ export default function Connected() {
         </div>
 
         <div className="max-w-sm text-center mt-2">
-          <span className="text-xl">No Exchange connected yet</span>
+          <span className="text-xl">No Exchange connected yet.</span>
         </div>
       </div>
     </div>
