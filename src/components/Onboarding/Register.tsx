@@ -83,10 +83,9 @@ export default function Register() {
       password: values.password,
     };
 
-
     try {
       setIsLoading(true);
-      
+
       await apiCAll({
         url: "/auth/create",
         method: "POST",
@@ -333,7 +332,7 @@ export default function Register() {
 
               <div className="w-full mt-4">
                 <Link
-                  href="/onboarding"
+                  href="/auth"
                   className={cn(
                     "w-full",
                     buttonVariants({ variant: "default", size: "lg" })

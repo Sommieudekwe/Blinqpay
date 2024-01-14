@@ -105,7 +105,7 @@ export default function Connectivity() {
 
   const handleSignOut = () => {
     removeToken();
-    router.push("/onboarding");
+    router.push("/auth");
   };
   /*
    *

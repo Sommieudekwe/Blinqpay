@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -9,7 +9,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "accountName",
     header: () => <p className="w-40">Account Name</p>,
-    accessorFn: (row) => row.accountName,
+    accessorFn: (row) => capitalizeFirstLetter(row.accountName),
   },
 
   {
@@ -59,7 +59,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     header: () => <p className="w-28">Rate</p>,
     // accessorFn: (row) => row.rate,
     cell: ({ row }) => {
-      return <p className="text-button-primary">&#8358;{row.original.rate}</p>;
+      return <p className="text-button-primary">&#8358;{formatAmount(row.original.rate)}</p>;
     },
   },
 

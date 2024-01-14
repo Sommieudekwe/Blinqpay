@@ -20,8 +20,10 @@ export interface IDashboard {
   accountNumber: string;
   bankName: string;
   status: "pending" | "successful" | "failed";
-  rate: string;
+  rate: number;
   amount: number;
+  createdAt: string;
+  orderNumber: number;
 }
 export interface IbankList {
   [x: string]: string;

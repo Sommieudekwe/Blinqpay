@@ -18,7 +18,7 @@ export default function Sell() {
         <span className="text-xl">
           Contact Us on{" "}
           <a
-            href="https://wa.me/+234810651694"
+            href=""
             className="underline underline-offset-2 text-blue-500"
           >
             WhatsApp
