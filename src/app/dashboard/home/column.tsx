@@ -21,7 +21,9 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "bankName",
     header: () => <p className="w-28">Bank Name</p>,
-    cell: ({ row }) => <p className="w-28">{row.original.bankName}</p>,
+    cell: ({ row }) => (
+      <p className="w-28">{capitalizeFirstLetter(row.original.bankName)}</p>
+    ),
   },
 
   {
@@ -59,7 +61,11 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     header: () => <p className="w-28">Rate</p>,
     // accessorFn: (row) => row.rate,
     cell: ({ row }) => {
-      return <p className="text-button-primary">&#8358;{formatAmount(row.original.rate)}</p>;
+      return (
+        <p className="text-button-primary">
+          &#8358;{formatAmount(row.original.rate)}
+        </p>
+      );
     },
   },
 
