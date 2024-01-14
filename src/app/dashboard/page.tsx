@@ -64,7 +64,7 @@ export default function Dashboard() {
   async function getPendingOrders() {
     try {
       await apiCAll({
-        url: "/order/all?q=&page=1&pageSize=10",
+        url: "/order/all?page=1&pageSize=10",
         method: "get",
         sCB(res) {
           setPendingOrders(res.data.data);
@@ -203,7 +203,7 @@ export default function Dashboard() {
                     alt="warning"
                     width={88}
                     height={88}
-                    className="flexn justify-center"
+                    className="flex justify-center"
                   />
 
                   <p className="mt-5 font-medium text-lg lg:text-2xl">
@@ -222,7 +222,7 @@ export default function Dashboard() {
                     alt="warning"
                     width={88}
                     height={88}
-                    className="flexn justify-center"
+                    className="flex justify-center"
                   />
 
                   <p className="mt-5 font-medium text-lg lg:text-2xl">
