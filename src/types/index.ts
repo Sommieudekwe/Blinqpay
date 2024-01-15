@@ -16,6 +16,7 @@ export interface IBankHistory {
 }
 
 export interface IDashboard {
+  id: number;
   accountName: string;
   accountNumber: string;
   bankName: string;

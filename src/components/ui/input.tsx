@@ -50,7 +50,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
               stroke="#667085"
               strokeWidth="2"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
@@ -85,14 +85,14 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
                   stroke="#667085"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M10.1292 9.50002C11.51 9.50002 12.6292 8.38073 12.6292 7.00002C12.6292 5.61931 11.51 4.50002 10.1292 4.50002C8.74853 4.50002 7.62924 5.61931 7.62924 7.00002C7.62924 8.38073 8.74853 9.50002 10.1292 9.50002Z"
                   stroke="#667085"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>
@@ -114,14 +114,14 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
                   stroke="#667085"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M10.1292 9.50002C11.51 9.50002 12.6292 8.38073 12.6292 7.00002C12.6292 5.61931 11.51 4.50002 10.1292 4.50002C8.74853 4.50002 7.62924 5.61931 7.62924 7.00002C7.62924 8.38073 8.74853 9.50002 10.1292 9.50002Z"
                   stroke="#667085"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  stroke-linejoin="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </span>
