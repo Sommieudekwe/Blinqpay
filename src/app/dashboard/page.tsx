@@ -65,7 +65,6 @@ export default function Dashboard() {
           setPendingOrders(res.data.data);
         },
       });
-      9899;
     } catch (error) {
       console.log(error, "this is the error");
     }
@@ -75,28 +74,24 @@ export default function Dashboard() {
     getPendingOrders();
   }, []);
 
-  console.log(pendingOrders);
-
   async function handleCancelPendingOrder() {
     try {
       await apiCAll({
         url: `/order/${cancelOrderId}/cancel`,
         method: "post",
         sCB(res) {
-          console.log("order cancelled", res.data);
+          console.log("order cancelled", res);
+          // Remove order from pending orders
           setPendingOrders((prevPendingOrders) =>
             // Pending orders need to be updated, since filter creates a new array, we need to set the pendingorders back to the newly created array
-
             prevPendingOrders.filter((oId) => cancelOrderId !== oId.id)
           );
           setIsDialogOpen(false);
-          // Remove order from pending orders
         },
       });
     } catch (error) {
       console.error(error, "Can't cancel pending order");
     }
-    console.log(`Order with ID ${cancelOrderId} has been cancelled`);
   }
 
   return (
@@ -239,7 +234,12 @@ export default function Dashboard() {
                     >
                       Yes
                     </Button>
-                    <Button className="w-full mt-5">No</Button>
+                    <Button
+                      className="w-full mt-5"
+                      onClick={() => setIsDialogOpen(false)}
+                    >
+                      No
+                    </Button>
                   </div>
                 ) : dialogType === null ? (
                   <div className="flex flex-col items-center">
