@@ -55,7 +55,6 @@ export default function Dashboard() {
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
 
-  // order/all?q=ademide&page=1&pageSize=10
   async function getPendingOrders() {
     try {
       await apiCAll({
@@ -264,7 +263,12 @@ export default function Dashboard() {
                     >
                       Yes
                     </Button>
-                    <Button className="w-full mt-5">No</Button>
+                    <Button
+                      className="w-full mt-5"
+                      onClick={() => setIsDialogOpen(false)}
+                    >
+                      No
+                    </Button>
                   </div>
                 ) : null}
               </DialogContent>
