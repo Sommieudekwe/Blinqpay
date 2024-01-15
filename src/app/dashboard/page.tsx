@@ -75,7 +75,7 @@ export default function Dashboard() {
     getPendingOrders();
   }, []);
 
-  // console.log(pendingOrders);
+  console.log(pendingOrders);
 
   async function handleCancelPendingOrder() {
     try {
@@ -201,7 +201,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length > 1 ? (
+      {pendingOrders.length >= 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
