@@ -15,7 +15,7 @@ export default function Sell() {
       </div>
 
       <div className="max-w-sm text-center mt-2">
-        <span className="text-xl">
+        {/* <span className="text-xl">
           Contact Us on{" "}
           <a
             href=""
@@ -24,6 +24,12 @@ export default function Sell() {
             WhatsApp
           </a>{" "}
           to join the OTC community and sell your assets instantly.
+        </span> */}
+        <span className="text-xl">
+          Connect to customer support{" "}
+          <a href="" className="underline underline-offset-2 text-blue-500">
+            WhatsApp
+          </a>
         </span>
       </div>
 
