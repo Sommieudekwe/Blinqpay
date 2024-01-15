@@ -8,19 +8,13 @@ import { Input } from "../../../components/ui/input";
 
 interface TableProps {
   data: IDashboard[];
-  onOpenDialog: (type: "pay" | "cancel") => void;
+  onOpenDialog: (type: "pay" | "cancel", orderId?: number) => void;
 }
 
 export default function MobileTable({ data, onOpenDialog }: TableProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState<"pay" | "cancel" | null>(null);
   // const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  const handleOpenModal = (type: "pay" | "cancel") => {
-    setModalType(type);
-    // setSelectedId(id);
-    setIsOpen(true);
-  };
 
   return (
     <div className="w-full">
@@ -58,7 +52,7 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
             <Button onClick={() => onOpenDialog("pay")}>Pay now</Button>
             <Button
               className="text-cancel border border-cancel border-opacity-25"
-              onClick={() => onOpenDialog("cancel")}
+              onClick={() => onOpenDialog("cancel", d.id)}
             >
               Cancel
             </Button>

@@ -14,16 +14,6 @@ import { formatAmount } from "@/lib/utils";
 import apiCAll from "@/lib/apiCall";
 import { IDashboard } from "@/types";
 
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-import { ChevronUp, PlusCircle } from "lucide-react";
-
 const availableBanks = [
   { label: "Kuda bank", value: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
   {
@@ -44,15 +34,20 @@ import EmptyState from "@/components/empty-state";
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogType, setDialogType] = useState<"cancel" | "pay" | null>(null);
+  const [isBlurred, setIsBlurred] = useState(false);
+  const [cancelOrderId, setCancelOrderId] = useState<number | null>(null);
+  const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
 
-  const openDialog = (type: "cancel" | "pay" | null) => {
+  const openDialog = (type: "cancel" | "pay" | null, orderId?: number) => {
+    if (type === "cancel" && orderId) {
+      setCancelOrderId(orderId);
+    }
+
     setDialogType(type);
     setIsDialogOpen(true);
   };
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
-
-  const [isBlurred, setIsBlurred] = useState(false);
 
   const handleBlurToggle = () => {
     setIsBlurred((prevIsBlurred) => !prevIsBlurred);
@@ -61,7 +56,6 @@ export default function Dashboard() {
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
 
   // order/all?q=ademide&page=1&pageSize=10
-  const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
   async function getPendingOrders() {
     try {
       await apiCAll({
@@ -71,6 +65,7 @@ export default function Dashboard() {
           setPendingOrders(res.data.data);
         },
       });
+      9899;
     } catch (error) {
       console.log(error, "this is the error");
     }
@@ -79,6 +74,30 @@ export default function Dashboard() {
   useEffect(() => {
     getPendingOrders();
   }, []);
+
+  // console.log(pendingOrders);
+
+  async function handleCancelPendingOrder() {
+    try {
+      await apiCAll({
+        url: `/order/${cancelOrderId}/cancel`,
+        method: "post",
+        sCB(res) {
+          console.log("order cancelled", res.data);
+          setPendingOrders((prevPendingOrders) =>
+            // Pending orders need to be updated, since filter creates a new array, we need to set the pendingorders back to the newly created array
+
+            prevPendingOrders.filter((oId) => cancelOrderId !== oId.id)
+          );
+          setIsDialogOpen(false);
+          // Remove order from pending orders
+        },
+      });
+    } catch (error) {
+      console.error(error, "Can't cancel pending order");
+    }
+    console.log(`Order with ID ${cancelOrderId} has been cancelled`);
+  }
 
   return (
     <div className="">
@@ -213,7 +232,11 @@ export default function Dashboard() {
                       Are you sure you want to cancel this order?
                     </p>
 
-                    <Button variant="primary" className="w-full mt-12">
+                    <Button
+                      variant="primary"
+                      className="w-full mt-12"
+                      onClick={handleCancelPendingOrder}
+                    >
                       Yes
                     </Button>
                     <Button className="w-full mt-5">No</Button>
@@ -232,7 +255,13 @@ export default function Dashboard() {
                       Are you sure you want to cancel all order?
                     </p>
 
-                    <Button variant="primary" className="w-full mt-12">
+                    <Button
+                      variant="primary"
+                      className="w-full mt-12"
+                      onClick={() =>
+                        console.log("All order has been cancelled")
+                      }
+                    >
                       Yes
                     </Button>
                     <Button className="w-full mt-5">No</Button>
@@ -244,7 +273,7 @@ export default function Dashboard() {
         </section>
       ) : (
         <div className="mt-10">
-          <EmptyState label="No pending order" />
+          <EmptyState label="No pending order." />
         </div>
       )}
     </div>
