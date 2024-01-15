@@ -186,7 +186,7 @@ export default function Dashboard() {
       {/* Table */}
       <section className="w-full h-full mt-10">
         <div className="hidden lg:block">
-          <DataTable columns={dashboardColumn} data={pendingOrders} />
+          <DataTable columns={dashboardColumn} data={pendingOrders} emptyStateLabel="No active orders yet." />
         </div>
 
         <div className="lg:hidden">
