@@ -39,6 +39,7 @@ const availableBanks = [
   { label: "First bank", value: "Firstbank", img: "/dashboard/banks/kuda.svg" },
 ];
 import Select from "@/components/ui/select";
+import EmptyState from "@/components/empty-state";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -68,7 +69,6 @@ export default function Dashboard() {
         method: "get",
         sCB(res) {
           setPendingOrders(res.data.data);
-          console.log("res:", res);
         },
       });
     } catch (error) {
@@ -79,8 +79,6 @@ export default function Dashboard() {
   useEffect(() => {
     getPendingOrders();
   }, []);
-
-  console.log(pendingOrders);
 
   return (
     <div className="">
@@ -184,61 +182,71 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      <section className="w-full h-full mt-10">
-        <div className="hidden lg:block">
-          <DataTable columns={dashboardColumn} data={pendingOrders} emptyStateLabel="No active orders yet." />
+      {pendingOrders.length > 1 ? (
+        <section className="w-full h-full mt-10">
+          <div className="hidden lg:block">
+            <DataTable
+              columns={dashboardColumn}
+              data={pendingOrders}
+              emptyStateLabel="No active orders yet."
+            />
+          </div>
+
+          <div className="lg:hidden">
+            <MobileTable data={pendingOrders} onOpenDialog={openDialog} />
+
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogContent className="text-center text-white">
+                {dialogType === "pay" ? (
+                  <div>Successful</div>
+                ) : dialogType === "cancel" ? (
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src="./dashboard/warning.svg"
+                      alt="warning"
+                      width={88}
+                      height={88}
+                      className="flex justify-center"
+                    />
+
+                    <p className="mt-5 font-medium text-lg lg:text-2xl">
+                      Are you sure you want to cancel this order?
+                    </p>
+
+                    <Button variant="primary" className="w-full mt-12">
+                      Yes
+                    </Button>
+                    <Button className="w-full mt-5">No</Button>
+                  </div>
+                ) : dialogType === null ? (
+                  <div className="flex flex-col items-center">
+                    <Image
+                      src="./dashboard/warning.svg"
+                      alt="warning"
+                      width={88}
+                      height={88}
+                      className="flex justify-center"
+                    />
+
+                    <p className="mt-5 font-medium text-lg lg:text-2xl">
+                      Are you sure you want to cancel all order?
+                    </p>
+
+                    <Button variant="primary" className="w-full mt-12">
+                      Yes
+                    </Button>
+                    <Button className="w-full mt-5">No</Button>
+                  </div>
+                ) : null}
+              </DialogContent>
+            </Dialog>
+          </div>
+        </section>
+      ) : (
+        <div className="mt-10">
+          <EmptyState label="No pending order" />
         </div>
-
-        <div className="lg:hidden">
-          <MobileTable data={pendingOrders} onOpenDialog={openDialog} />
-
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogContent className="text-center text-white">
-              {dialogType === "pay" ? (
-                <div>Successful</div>
-              ) : dialogType === "cancel" ? (
-                <div className="flex flex-col items-center">
-                  <Image
-                    src="./dashboard/warning.svg"
-                    alt="warning"
-                    width={88}
-                    height={88}
-                    className="flex justify-center"
-                  />
-
-                  <p className="mt-5 font-medium text-lg lg:text-2xl">
-                    Are you sure you want to cancel this order?
-                  </p>
-
-                  <Button variant="primary" className="w-full mt-12">
-                    Yes
-                  </Button>
-                  <Button className="w-full mt-5">No</Button>
-                </div>
-              ) : dialogType === null ? (
-                <div className="flex flex-col items-center">
-                  <Image
-                    src="./dashboard/warning.svg"
-                    alt="warning"
-                    width={88}
-                    height={88}
-                    className="flex justify-center"
-                  />
-
-                  <p className="mt-5 font-medium text-lg lg:text-2xl">
-                    Are you sure you want to cancel all order?
-                  </p>
-
-                  <Button variant="primary" className="w-full mt-12">
-                    Yes
-                  </Button>
-                  <Button className="w-full mt-5">No</Button>
-                </div>
-              ) : null}
-            </DialogContent>
-          </Dialog>
-        </div>
-      </section>
+      )}
     </div>
   );
 }

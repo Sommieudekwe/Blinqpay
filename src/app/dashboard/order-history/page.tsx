@@ -7,7 +7,7 @@ import OrderHistoryMobileTable from "@/app/dashboard/order-history/OrderHistoryM
 import apiCAll from "@/lib/apiCall";
 import { useEffect, useState } from "react";
 import { IOrderHistory } from "@/types";
-import EmptyState from "@/components/empty-stat";
+import EmptyState from "@/components/empty-state";
 
 export default function OrderHistory() {
   const [data, setData] = useState<IOrderHistory[]>([]);
@@ -43,6 +43,6 @@ export default function OrderHistory() {
       </div>
     </section>
   ) : (
-    <EmptyState label="No order history found."/>
+    <EmptyState label="No order history found." />
   );
 }

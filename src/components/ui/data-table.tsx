@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/table";
 import * as React from "react";
 import { DataTablePagination } from "./data-table-pagination";
-import EmptyState from "../empty-stat";
+import EmptyState from "../empty-state";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
   emptyState,
   noHeader,
   show_pagination = true,
-  emptyStateLabel
+  emptyStateLabel,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
 
@@ -146,7 +146,7 @@ export function DataTable<TData, TValue>({
                   ) : emptyState ? (
                     emptyState
                   ) : (
-                   <EmptyState label={emptyStateLabel}/>
+                    <EmptyState label={emptyStateLabel} />
                   )}
                 </TableCell>
               </TableRow>
