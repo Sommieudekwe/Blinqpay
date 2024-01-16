@@ -140,7 +140,7 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
-        <div className="flex items-center gap-4 col-span-2">
+        <div className="md:flex items-center gap-4 col-span-2">
           <h3 className="sm:text-2xl font-bold">
             <span>{pendingOrders.length} Active Orders</span>
           </h3>
