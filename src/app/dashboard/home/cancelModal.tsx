@@ -4,27 +4,19 @@ import apiCAll from "@/lib/apiCall";
 import Image from "next/image";
 import { useState } from "react";
 
-interface dataProps
-{
+interface dataProps {
   orderId: number;
-
 }
 
-export default function CancelModal({
-  orderId
-}: dataProps)
-{
-  const [open, setOpen] = useState(false)
+export default function CancelModal({ orderId }: dataProps) {
+  const [open, setOpen] = useState(false);
 
-  async function handleCancelPendingOrder()
-  {
-    try
-    {
+  async function handleCancelPendingOrder() {
+    try {
       await apiCAll({
         url: `/order/${orderId}/cancel`,
         method: "post",
-        sCB(res)
-        {
+        sCB(res) {
           console.log("order cancelled", res);
           // // Remove order from pending orders
           // setPendingOrders((prevPendingOrders) =>
@@ -34,8 +26,7 @@ export default function CancelModal({
           // setIsDialogOpen(false);
         },
       });
-    } catch (error)
-    {
+    } catch (error) {
       console.error(error, "Can't cancel pending order");
     }
   }
@@ -43,7 +34,9 @@ export default function CancelModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-primary text-cancel border border-cancel border-opacity-25 ">Cancel</Button>
+        <Button className="bg-primary text-cancel border border-cancel border-opacity-25 hover:opacity-80">
+          Cancel
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="text-center text-white">
@@ -107,7 +100,6 @@ export default function CancelModal({
           </div>
         ) : null} */}
 
-
         <div className="flex flex-col items-center">
           <Image
             src="./dashboard/warning.svg"
@@ -128,10 +120,7 @@ export default function CancelModal({
           >
             Yes
           </Button>
-          <Button
-            className="w-full mt-5"
-            onClick={() => setOpen(false)}
-          >
+          <Button className="w-full mt-5" onClick={() => setOpen(false)}>
             No
           </Button>
         </div>
