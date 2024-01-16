@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import CancelModal from "./cancelModal";
 
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
@@ -84,11 +85,13 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "action",
     header: () => <div className="text-center w-28">Action</div>,
     cell: ({ row }) => {
+      const {id} = row.original
       return (
         <div className="w-28 text-center">
-          <Button className="text-cancel border border-cancel border-opacity-25">
+          {/* <Button className="text-cancel border border-cancel border-opacity-25">
             Cancel
-          </Button>
+          </Button> */}
+          <CancelModal orderId={id}/>
         </div>
       );
     },
