@@ -13,6 +13,8 @@ import Dropdown from "@/components/Dashboard/Dropdown";
 import { formatAmount } from "@/lib/utils";
 import apiCAll from "@/lib/apiCall";
 import { IDashboard } from "@/types";
+import { useOrders } from "@/context/pendingOrder";
+import { RotateCcw } from "lucide-react";
 
 const availableBanks = [
   { label: "Kuda bank", value: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
@@ -36,7 +38,7 @@ export default function Dashboard() {
   const [dialogType, setDialogType] = useState<"cancel" | "pay" | null>(null);
   const [isBlurred, setIsBlurred] = useState(false);
   const [cancelOrderId, setCancelOrderId] = useState<number | null>(null);
-  const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
+  // const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
 
   const openDialog = (type: "cancel" | "pay" | null, orderId?: number) => {
     if (type === "cancel" && orderId) {
@@ -55,44 +57,11 @@ export default function Dashboard() {
 
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
 
-  // order/all?q=ademide&page=1&pageSize=10
-  async function getPendingOrders() {
-    try {
-      await apiCAll({
-        url: "/order/all?page=1&pageSize=10",
-        method: "get",
-        sCB(res) {
-          setPendingOrders(res.data.data);
-        },
-      });
-    } catch (error) {
-      console.log(error, "this is the error");
-    }
-  }
-
+  // Get store values
+  const { pendingOrders, getPendingOrders, isLoading } = useOrders();
   useEffect(() => {
     getPendingOrders();
   }, []);
-
-  async function handleCancelPendingOrder() {
-    try {
-      await apiCAll({
-        url: `/order/${cancelOrderId}/cancel`,
-        method: "post",
-        sCB(res) {
-          console.log("order cancelled", res);
-          // Remove order from pending orders
-          setPendingOrders((prevPendingOrders) =>
-            // Pending orders need to be updated, since filter creates a new array, we need to set the pendingorders back to the newly created array
-            prevPendingOrders.filter((oId) => cancelOrderId !== oId.id)
-          );
-          setIsDialogOpen(false);
-        },
-      });
-    } catch (error) {
-      console.error(error, "Can't cancel pending order");
-    }
-  }
 
   return (
     <div className="">
@@ -171,9 +140,20 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
-        <h3 className=" sm:text-2xl col-span-2 font-bold">
-          {pendingOrders.length} Active Orders
-        </h3>
+        <div className="md:flex items-center gap-4 col-span-2">
+          <h3 className="sm:text-2xl font-bold">
+            <span>{pendingOrders.length} Active Orders</span>
+          </h3>
+          <button
+            onClick={getPendingOrders}
+            className="flex gap-1 items-center text-blue-600"
+          >
+            refresh
+            <span className={`${isLoading ? "animate-spin" : ""}`}>
+              <RotateCcw size={14} />
+            </span>
+          </button>
+        </div>
 
         <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
           <div>
@@ -208,67 +188,6 @@ export default function Dashboard() {
 
           <div className="lg:hidden">
             <MobileTable data={pendingOrders} onOpenDialog={openDialog} />
-
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogContent className="text-center text-white">
-                {dialogType === "pay" ? (
-                  <div>Successful</div>
-                ) : dialogType === "cancel" ? (
-                  <div className="flex flex-col items-center">
-                    <Image
-                      src="./dashboard/warning.svg"
-                      alt="warning"
-                      width={88}
-                      height={88}
-                      className="flex justify-center"
-                    />
-
-                    <p className="mt-5 font-medium text-lg lg:text-2xl">
-                      Are you sure you want to cancel this order?
-                    </p>
-
-                    <Button
-                      variant="primary"
-                      className="w-full mt-12"
-                      onClick={handleCancelPendingOrder}
-                    >
-                      Yes
-                    </Button>
-                    <Button
-                      className="w-full mt-5"
-                      onClick={() => setIsDialogOpen(false)}
-                    >
-                      No
-                    </Button>
-                  </div>
-                ) : dialogType === null ? (
-                  <div className="flex flex-col items-center">
-                    <Image
-                      src="./dashboard/warning.svg"
-                      alt="warning"
-                      width={88}
-                      height={88}
-                      className="flex justify-center"
-                    />
-
-                    <p className="mt-5 font-medium text-lg lg:text-2xl">
-                      Are you sure you want to cancel all order?
-                    </p>
-
-                    <Button
-                      variant="primary"
-                      className="w-full mt-12"
-                      onClick={() =>
-                        console.log("All order has been cancelled")
-                      }
-                    >
-                      Yes
-                    </Button>
-                    <Button className="w-full mt-5">No</Button>
-                  </div>
-                ) : null}
-              </DialogContent>
-            </Dialog>
           </div>
         </section>
       ) : (

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useStore } from "@/context/strore";
+import { useStore } from "@/context/store";
 import { notify } from "@/components/ui/toast";
 import { bankList } from "../constants";
 import { useEffect, useState } from "react";

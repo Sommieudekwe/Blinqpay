@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { bankList } from "./constants";
-import { useStore } from "@/context/strore";
+import { useStore } from "@/context/store";
 import { notify } from "@/components/ui/toast";
 
 export default function Connectivity() {

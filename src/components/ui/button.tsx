@@ -9,12 +9,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-button-bg border border-border-fade rounded-[22px] text-white hover: focus-visible:ring-ring-button-bg",
+          "bg-button-bg border border-border-fade rounded-[22px] text-white hover: focus-visible:ring-ring-button-bg hover:opacity-80",
         link: "",
-        outline: "bg-button-connect rounded-[2.25rem] text-white hover: focus-visible:ring-ring-button-connect",
+        outline:
+          "bg-button-connect rounded-[2.25rem] text-white hover: focus-visible:ring-ring-button-connect",
         primary:
           "bg-button-primary  rounded-[4.625rem] px-5 p-4 text-white font-medium hover: focus-visible:ring-ring-button-primary",
-          "ghost-red":
+        "ghost-red":
           "bg-transparent border border-ghost-border rounded-[4.625rem] px-5 p-4 text-ghost-text font-medium hover: focus-visible:ring-ring-ghost-text",
       },
       size: {
