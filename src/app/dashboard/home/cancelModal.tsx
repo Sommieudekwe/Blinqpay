@@ -43,7 +43,7 @@ export default function CancelModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="text-cancel border border-cancel border-opacity-25">Cancel</Button>
+        <Button className="bg-primary text-cancel border border-cancel border-opacity-25 ">Cancel</Button>
       </DialogTrigger>
 
       <DialogContent className="text-center text-white">
