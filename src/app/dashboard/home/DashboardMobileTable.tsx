@@ -9,10 +9,10 @@ import CancelModal from "./cancelModal";
 
 interface TableProps {
   data: IDashboard[];
-  onOpenDialog: (type: "pay" | "cancel", orderId?: number) => void;
+  // onOpenDialog: (type: "pay" | "cancel", orderId?: number) => void;
 }
 
-export default function MobileTable({ data, onOpenDialog }: TableProps) {
+export default function MobileTable({ data }: TableProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [modalType, setModalType] = useState<"pay" | "cancel" | null>(null);
   // const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -50,7 +50,7 @@ export default function MobileTable({ data, onOpenDialog }: TableProps) {
           </div>
 
           <div className="inline-flex flex-col space-y-2">
-            <Button onClick={() => onOpenDialog("pay")}>Pay now</Button>
+            <Button>Pay now</Button>
             <CancelModal orderId={d.id} />
           </div>
         </div>

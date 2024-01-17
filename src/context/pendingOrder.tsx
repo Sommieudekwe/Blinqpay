@@ -14,12 +14,15 @@ interface OrdersContextProps {
   getPendingOrders: () => void;
   setPendingOrders: Dispatch<SetStateAction<IDashboard[]>>;
   isLoading: boolean;
+  pendingOrdersIds: number[];
+  setPendingOrdersIds: Dispatch<SetStateAction<number[]>>;
 }
 
 const OrdersContext = createContext<OrdersContextProps | undefined>(undefined);
 
 const OrdersProvider = ({ children }: { children: React.ReactNode }) => {
   const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
+  const [pendingOrdersIds, setPendingOrdersIds] = useState<number[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getPendingOrders = async () => {
@@ -29,7 +32,9 @@ const OrdersProvider = ({ children }: { children: React.ReactNode }) => {
         url: "/order/all?page=1&pageSize=10",
         method: "get",
         sCB(res) {
-          setPendingOrders(res.data.data);
+          const orders: IDashboard[] = res.data.data;
+          setPendingOrders(orders);
+          setPendingOrdersIds(orders.map((order) => order.id));
         },
       });
     } catch (error) {
@@ -41,7 +46,14 @@ const OrdersProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <OrdersContext.Provider
-      value={{ pendingOrders, getPendingOrders, setPendingOrders, isLoading }}
+      value={{
+        pendingOrders,
+        getPendingOrders,
+        setPendingOrders,
+        isLoading,
+        pendingOrdersIds,
+        setPendingOrdersIds,
+      }}
     >
       {children}
     </OrdersContext.Provider>
