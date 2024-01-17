@@ -35,17 +35,10 @@ import EmptyState from "@/components/empty-state";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogType, setDialogType] = useState<"cancel" | "pay" | null>(null);
   const [isBlurred, setIsBlurred] = useState(false);
-  const [cancelOrderId, setCancelOrderId] = useState<number | null>(null);
-  // const [pendingOrders, setPendingOrders] = useState<IDashboard[]>([]);
+  const [loading, setIsLoading] = useState(false);
 
-  const openDialog = (type: "cancel" | "pay" | null, orderId?: number) => {
-    if (type === "cancel" && orderId) {
-      setCancelOrderId(orderId);
-    }
-
-    setDialogType(type);
+  const openDialog = () => {
     setIsDialogOpen(true);
   };
 
@@ -58,7 +51,42 @@ export default function Dashboard() {
   // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
 
   // Get store values
-  const { pendingOrders, getPendingOrders, isLoading } = useOrders();
+  const {
+    pendingOrders,
+    getPendingOrders,
+    isLoading,
+    pendingOrdersIds,
+    setPendingOrdersIds,
+    setPendingOrders,
+  } = useOrders();
+
+  const handleCallAllOrder = async () => {
+    setIsLoading(true);
+    apiCAll({
+      method: "post",
+      url: "/order/cancel",
+      data: { orderIds: pendingOrdersIds },
+      sCB(res) {
+        console.log(res, "All order has been cancelled");
+        setPendingOrders([]);
+        setIsLoading(false);
+        setIsDialogOpen(false);
+        setPendingOrdersIds([]);
+      },
+      eCB(res) {
+        console.error(res);
+        setIsLoading(false);
+        setIsLoading(false);
+      },
+      toast: true,
+    });
+  };
+
+  const handleNoConfirmation = () => {
+    setPendingOrdersIds([]);
+    setIsDialogOpen(false);
+  };
+
   useEffect(() => {
     getPendingOrders();
   }, []);
@@ -164,7 +192,7 @@ export default function Dashboard() {
           <div>
             <Button
               className="bg-transparent text-[.75rem] lg:text-base"
-              onClick={() => openDialog(null)}
+              onClick={() => openDialog()}
             >
               Cancel all
             </Button>
@@ -187,7 +215,7 @@ export default function Dashboard() {
           </div>
 
           <div className="lg:hidden">
-            <MobileTable data={pendingOrders} onOpenDialog={openDialog} />
+            <MobileTable data={pendingOrders} />
           </div>
         </section>
       ) : (
@@ -195,6 +223,36 @@ export default function Dashboard() {
           <EmptyState label="No pending order." />
         </div>
       )}
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="text-center text-white">
+          <div className="flex flex-col items-center">
+            <Image
+              src="./dashboard/warning.svg"
+              alt="warning"
+              width={88}
+              height={88}
+              className="flex justify-center"
+            />
+
+            <p className="mt-5 font-medium text-lg lg:text-2xl">
+              Are you sure you want to cancel this order?
+            </p>
+
+            <Button
+              variant="primary"
+              className="w-full mt-12"
+              onClick={handleCallAllOrder}
+              isLoading={loading}
+            >
+              Yes
+            </Button>
+            <Button className="w-full mt-5" onClick={handleNoConfirmation}>
+              No
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
