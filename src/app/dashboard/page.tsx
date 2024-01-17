@@ -174,11 +174,11 @@ export default function Dashboard() {
           </h3>
           <button
             onClick={getPendingOrders}
-            className="flex gap-1 items-center text-blue-600"
+            className="gap-1 items-center text-blue-600 hidden md:flex"
           >
             refresh
             <span className={`${isLoading ? "animate-spin" : ""}`}>
-              <RotateCcw size={14} />
+              <RotateCcw size={12} />
             </span>
           </button>
         </div>
@@ -198,6 +198,15 @@ export default function Dashboard() {
             </Button>
           </div>
         </div>
+        <button
+          onClick={getPendingOrders}
+          className="gap-1 items-center text-blue-600 flex mt-5 md:hidden"
+        >
+          refresh
+          <span className={`${isLoading ? "animate-spin" : ""}`}>
+            <RotateCcw size={12} />
+          </span>
+        </button>
       </div>
 
       {/* Search icon */}
