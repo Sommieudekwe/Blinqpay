@@ -80,7 +80,7 @@ export default function Login() {
    *
    */
   return (
-    <div className="lg:grid grid-cols-2 gap-x-12 xl:gap-x-20 bg-primary text-white lg:px-24 xl:px-36 min-h-screen items-center pt-12 lg:pt-0">
+    <div className="lg:grid grid-cols-2 gap-x-12 xl:gap-x-20 bg-milky sm:bg-white dark:bg-primary dark:text-white lg:px-24 xl:px-36 min-h-screen items-center pt-12 lg:pt-0">
       {/* Illustration */}
       <div>
         <Image
@@ -100,7 +100,7 @@ export default function Login() {
       </div>
 
       {/* Get started */}
-      <div className="w-full mx-auto sm:rounded-xl sm:bg-onboard-bg sm:border border-white p-5 border-opacity-25 sm:max-w-xl lg:max-w-[35rem]">
+      <div className="w-full mx-auto sm:rounded-xl sm:bg-milky dark:sm:bg-onboard-bg sm:border border-white p-5 border-opacity-25 sm:max-w-xl lg:max-w-[35rem]">
         <div>
           <h3 className="text-4xl font-bold">Login</h3>
           <p className="opacity-60 mt-2">
@@ -123,7 +123,7 @@ export default function Login() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-auth-input "
+                      className="dark:bg-auth-input"
                       type="email"
                       id="email"
                       placeholder="Email"
@@ -147,7 +147,7 @@ export default function Login() {
                   <FormControl>
                     <PasswordInput
                       id="password"
-                      className="bg-auth-input"
+                      className="dark:bg-auth-input"
                       placeholder="*******"
                       {...field}
                       error={form.formState.errors?.password?.message}
@@ -174,10 +174,7 @@ export default function Login() {
               <div className="w-full mt-4">
                 <Link
                   href="/auth/forget-password"
-                  className={cn(
-                    "w-full",
-                    buttonVariants({ variant: "default", size: "lg" })
-                  )}
+                  className={cn("w-full", buttonVariants({ size: "lg" }))}
                 >
                   Forget Password
                 </Link>

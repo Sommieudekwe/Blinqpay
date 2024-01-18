@@ -132,7 +132,13 @@ export default function Sidebar({ setOpen }: SidebarProps) {
             className={"flex items-center gap-6"}
             onClick={() => setOpen?.(false)}
           >
-            <Image src={route.icon} width={24} height={24} alt="icon" />
+            <Image
+              src={route.icon}
+              width={24}
+              height={24}
+              alt="icon"
+              color=""
+            />
             <span
               className={cn(
                 "opacity-70",

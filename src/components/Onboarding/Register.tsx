@@ -113,7 +113,7 @@ export default function Register() {
    *
    */
   return (
-    <div className="lg:grid grid-cols-2 gap-x-20 bg-primary text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4">
+    <div className="lg:grid grid-cols-2 gap-x-20 bg-milky sm:bg-white dark:bg-primary dark:text-white lg:px-20 xl:px-36 min-h-screen items-center pt-4 lg:pt-2 xl:pt-4">
       {/* Illustration */}
       <div>
         <Image
@@ -133,7 +133,7 @@ export default function Register() {
       </div>
 
       {/* Get started */}
-      <div className="w-full mx-auto sm:rounded-xl sm:bg-onboard-bg sm:border border-white p-5 border-opacity-25 sm:max-w-xl lg:max-w-[35rem]">
+      <div className="w-full mx-auto sm:rounded-xl sm:bg-milky dark:sm:bg-onboard-bg sm:border border-white p-5 border-opacity-25 sm:max-w-xl lg:max-w-[35rem]">
         <div>
           <h3 className="text-4xl font-bold">Get Started</h3>
           <p className="opacity-60 mt-2">
@@ -159,7 +159,7 @@ export default function Register() {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="bg-auth-input"
+                          className="dark:bg-auth-input"
                           id="firstName"
                           placeholder="First name"
                           {...field}
@@ -182,7 +182,7 @@ export default function Register() {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-auth-input"
+                        className="dark:bg-auth-input"
                         id="lastName"
                         placeholder="Last name"
                         {...field}
@@ -205,7 +205,7 @@ export default function Register() {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-auth-input"
+                      className="dark:bg-auth-input"
                       type="email"
                       id="email"
                       placeholder="Email"
@@ -224,13 +224,13 @@ export default function Register() {
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel htmlFor="referral" className="text-sm">
+                    <FormLabel htmlFor="phoneNumber" className="text-sm">
                       Phone Number
                     </FormLabel>
 
                     <FormControl>
                       <Input
-                        className="bg-auth-input"
+                        className="dark:bg-auth-input"
                         id="phoneNumber"
                         placeholder="+234"
                         {...field}
@@ -252,7 +252,7 @@ export default function Register() {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="bg-auth-input"
+                        className="dark:bg-auth-input"
                         id="referral"
                         placeholder="(optional)"
                         {...field}
@@ -271,7 +271,7 @@ export default function Register() {
                     <FormControl>
                       <PasswordInput
                         // type="password"
-                        className="bg-auth-input"
+                        className="dark:bg-auth-input"
                         id="password"
                         placeholder="12 minimum characters"
                         {...field}
@@ -295,7 +295,7 @@ export default function Register() {
                     <FormControl>
                       <PasswordInput
                         // type="password"
-                        className="bg-auth-input"
+                        className="dark:bg-auth-input"
                         id="confirmPassword"
                         placeholder="12 minimum characters"
                         {...field}
@@ -307,15 +307,6 @@ export default function Register() {
                   </FormItem>
                 )}
               />
-            </div>
-
-            <div className="max-w-[23rem] mx-auto text-center mt-10 lg:mt-6 xl:mt-10">
-              <span className="opacity-60">
-                By clicking continue, you accept Blinqpay&apos;s
-              </span>
-              <span> Terms of Service</span>
-              <span className="opacity-60"> and </span>
-              <span>Privacy Policy</span>.
             </div>
 
             <div className="mt-10 text-center space-y-4 lg:mt-6 xl:mt-10">
@@ -341,6 +332,15 @@ export default function Register() {
                   Log In
                 </Link>
               </div>
+            </div>
+
+            <div className="max-w-[23rem] mx-auto text-center mt-10 lg:mt-6 xl:mt-10">
+              <span className="opacity-60">
+                By clicking continue, you accept Blinqpay&apos;s
+              </span>
+              <span> Terms of Service</span>
+              <span className="opacity-60"> and </span>
+              <span>Privacy Policy</span>.
             </div>
           </form>
         </Form>

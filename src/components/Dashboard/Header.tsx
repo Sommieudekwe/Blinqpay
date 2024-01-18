@@ -8,7 +8,7 @@ export default function Header() {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between h-20 w-full bg-primary-dashboard sticky top-0 z-10 lg:px-10">
+    <nav className="flex items-center justify-between h-20 w-full lg:bg-milky bg-white dark:bg-primary-dashboard sticky top-0 z-10 lg:px-10">
       {/* Logo and search input */}
       <div className="hidden lg:flex items-center w-1/2">
         {/* Search */}
@@ -16,7 +16,7 @@ export default function Header() {
           <input
             type="text"
             placeholder="Search Orders"
-            className="bg-input rounded-3xl border border-white border-opacity-25 outline-none py-3 px-5 w-2/3"
+            className="dark:bg-input rounded-3xl border border-white border-opacity-25 outline-none py-3 px-5 w-2/3"
           />
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function Header() {
             isOpen ? "hidden lg:block" : "block"
           }`}
         >
-          <div className="h-[43px] w-[43px] bg-white rounded-full"></div>
+          <div className="h-[43px] w-[43px] bg-slate-300 rounded-full"></div>
           <div>
             <h3 className="text-sm md:text-xl font-bold">OC</h3>
             <p className="opacity-40 text-[.75rem] md:text-base">Merchant</p>

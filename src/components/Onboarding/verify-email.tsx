@@ -95,7 +95,7 @@ export default function VerifyEmail() {
    *
    */
   return (
-    <main className="bg-primary-dashboard text-white p-5 md:p-10 md:w-[30rem] flex flex-col items-center text-left  md:text-center">
+    <main className="by-milky dark:bg-primary-dashboard dark:text-white p-5 md:p-10 md:w-[30rem] flex flex-col items-center text-left  md:text-center">
       <div>
         <h3 className="text-4xl font-bold">Verify your account</h3>
         <p className="mt-2 opacity-60">

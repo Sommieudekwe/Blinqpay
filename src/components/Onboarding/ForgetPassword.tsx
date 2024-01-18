@@ -74,7 +74,7 @@ export default function ForgetPassword() {
    *
    */
   return (
-    <main className="bg-primary-dashboard text-white p-5 md:p-10 md:w-[35rem] shadow-xl">
+    <main className="bg-milky dark:bg-primary-dashboard dark:text-white p-5 md:p-10 md:w-[35rem] shadow-xl">
       <div>
         <h3 className="text-2xl md:text-4xl">Find your BlinqPag account</h3>
         <p className="mt-2 opacity-60">
@@ -98,7 +98,7 @@ export default function ForgetPassword() {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-auth-input"
+                    className="dark:bg-auth-input"
                     type="email"
                     id="email"
                     placeholder="Email or Phone Number"

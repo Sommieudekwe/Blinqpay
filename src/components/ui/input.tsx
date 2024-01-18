@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex h-12 w-full rounded-[12px] border-2 border-border-connect bg-input px-5 py-4 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-[450] placeholder:text-button-connect focus-visible:outline-none focus-visible:border-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
+          "flex h-12 w-full rounded-[12px] border-2 dark:border-white border-opacity-20 border-black border-border-connect bg-white dark:bg-input px-5 py-4 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-[450] dark:placeholder:text-button-connect focus-visible:outline-none focus-visible:border-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
           error
             ? "border-red-500 focus-visible:ring-red-400"
             : "focus-visible:ring-ring",
@@ -58,7 +58,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           type={showPassword ? "text" : "password"}
           className={cn(
-            "flex h-12 w-full rounded-[12px] border-2 border-border-connect bg-input px-5 pl-8 py-4 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-[450] placeholder:text-button-connect focus-visible:outline-none focus-visible:border-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
+            "flex h-12 w-full rounded-[12px] border-2 border-border-connect dark:bg-input px-5 pl-8 py-4 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:font-[450] dark:placeholder:text-button-connect focus-visible:outline-none focus-visible:border-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50",
             error
               ? "border-red-500 focus-visible:ring-red-400"
               : "focus-visible:ring-ring",

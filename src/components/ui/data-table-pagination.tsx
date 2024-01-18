@@ -13,7 +13,9 @@ interface DataTablePaginationProps<TData> {
   table: Table<TData>;
 }
 
-export function DataTablePagination<TData> ({ table }: DataTablePaginationProps<TData>) {
+export function DataTablePagination<TData>({
+  table,
+}: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-[12px]">
@@ -40,11 +42,16 @@ export function DataTablePagination<TData> ({ table }: DataTablePaginationProps<
       <div className="flex items-center space-x-[16px]">
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
           <span>
-            {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1} -
-            {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + table.getRowModel().rows?.length}
+            {table.getState().pagination.pageIndex *
+              table.getState().pagination.pageSize +
+              1}{" "}
+            -
+            {table.getState().pagination.pageIndex *
+              table.getState().pagination.pageSize +
+              table.getRowModel().rows?.length}
             <span className="text-black-100">
-              {" "}of{" "}
-              {table.getFilteredRowModel().rows.length}
+              {" "}
+              of {table.getFilteredRowModel().rows.length}
             </span>
           </span>
         </div>
