@@ -139,14 +139,14 @@ export default function Dashboard() {
 
       {/* Transfer details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-12 gap-y-5">
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Total Transfer Count</h3>
 
           <h4 className="mt-3 text-2xl font-bold">5000</h4>
         </div>
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Total Amount Transferred</h3>
@@ -156,7 +156,7 @@ export default function Dashboard() {
           </h4>
         </div>
 
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4 flex items-center justify-between">
+        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4 flex items-center justify-between">
           <div>
             <h3 className="opacity-50">Wallet Ballance</h3>
 
@@ -174,18 +174,18 @@ export default function Dashboard() {
           </h3>
           <button
             onClick={getPendingOrders}
-            className="flex gap-1 items-center text-blue-600"
+            className="gap-1 items-center text-blue-600 hidden md:flex"
           >
             refresh
             <span className={`${isLoading ? "animate-spin" : ""}`}>
-              <RotateCcw size={14} />
+              <RotateCcw size={12} />
             </span>
           </button>
         </div>
 
         <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
           <div>
-            <Button className="bg-button-primary text-[.75rem] lg:text-base">
+            <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white">
               Pay all
             </Button>
           </div>
@@ -198,6 +198,15 @@ export default function Dashboard() {
             </Button>
           </div>
         </div>
+        <button
+          onClick={getPendingOrders}
+          className="gap-1 items-center text-blue-600 flex mt-5 md:hidden"
+        >
+          refresh
+          <span className={`${isLoading ? "animate-spin" : ""}`}>
+            <RotateCcw size={12} />
+          </span>
+        </button>
       </div>
 
       {/* Search icon */}

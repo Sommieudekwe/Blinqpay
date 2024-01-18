@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { removeToken } from "@/lib/utils";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { bankList } from "@/app/dashboard/connectivity/constants";
 import ChangePassword from "@/components/Dashboard/settings/edit-password-form";
@@ -23,6 +23,7 @@ import apiCAll from "@/lib/apiCall";
 import { loginAPI, registerAPI } from "@/axios/endpoints/auth";
 import { notify } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
@@ -31,10 +32,16 @@ export default function Connectivity() {
   const [showTerms, setShowTerms] = React.useState<boolean>(false);
   const [changePayMethod, setChangePayMethod] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<number>(1);
+  const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
-
+  const { theme, setTheme } = useTheme();
   const { id } = useParams();
+
+  const handleThemeChange = (isChecked: boolean) => {
+    const newTheme = isChecked ? "light" : "dark";
+    setTheme(newTheme);
+  };
   const settings = [
     // {
     //   name: "Password",
@@ -114,6 +121,14 @@ export default function Connectivity() {
    *
    */
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <section className="w-full h-full lg:pt-24">
       <div className="w-full max-w-[42rem] mx-auto rounded-xl bg-onboard-bg border border-white px-5 lg:px-10 py-5 border-opacity-25 lg:flex justify-between">
@@ -155,11 +170,16 @@ export default function Connectivity() {
             )}
           </div>
         ))}
-        {/* <div className="w-full flex justify-between items-center">
-          <p className="text-white font-medium">Light mode/dark mode</p>
+        <div className="w-full flex justify-between items-center">
+          <p className="text-white font-medium">Light mode</p>
 
-          <Switch />
-        </div> */}
+          <div>
+            <Switch
+              checked={theme === "light"}
+              onCheckedChange={handleThemeChange}
+            />
+          </div>
+        </div>
 
         <div className="inline-flex">
           <Button

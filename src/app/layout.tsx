@@ -6,6 +6,7 @@ import StoreProvider from "@/context/store";
 import React from "react";
 import { OrdersProvider } from "@/context/pendingOrder";
 import Guard from "@/lib/guard";
+import { ThemeProvider } from "@/lib/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +21,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className}`}>
-        <Guard>
-          <StoreProvider>
-            <OrdersProvider>{children}</OrdersProvider>
-          </StoreProvider>
-          <Toaster />
-        </Guard>
+        <ThemeProvider enableSystem={true} attribute="class">
+          <Guard>
+            <StoreProvider>
+              <OrdersProvider>{children}</OrdersProvider>
+            </StoreProvider>
+            <Toaster />
+          </Guard>
+        </ThemeProvider>
       </body>
     </html>
   );

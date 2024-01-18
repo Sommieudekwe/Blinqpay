@@ -50,6 +50,7 @@ module.exports = {
         "ghost-border": "#7C2F2F",
         "ghost-text": "#D53030",
         "auth-input": "#15122C",
+        milky: "#F3F3F3",
       },
       fontFamily: {
         inter: ["var(--font-inter)"],

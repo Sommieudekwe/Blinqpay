@@ -76,7 +76,9 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     cell: ({ row }) => {
       return (
         <div className="">
-          <Button className="text-right font-normal">Pay now</Button>
+          <Button className="text-right font-normal bg-[#E9E7F5]">
+            Pay now
+          </Button>
         </div>
       );
     },
@@ -85,13 +87,10 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "action",
     header: () => <div className="text-center w-28">Action</div>,
     cell: ({ row }) => {
-      const {id} = row.original
+      const { id } = row.original;
       return (
         <div className="w-28 text-center">
-          {/* <Button className="text-cancel border border-cancel border-opacity-25">
-            Cancel
-          </Button> */}
-          <CancelModal orderId={id}/>
+          <CancelModal orderId={id} />
         </div>
       );
     },

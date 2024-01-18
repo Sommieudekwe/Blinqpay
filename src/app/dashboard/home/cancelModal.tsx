@@ -41,12 +41,12 @@ export default function CancelModal({ orderId }: dataProps) {
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
-        <Button className="bg-primary text-cancel border border-cancel border-opacity-25 hover:opacity-80">
+        <Button className="dark:bg-primary !text-cancel border !border-cancel !border-opacity-25 hover:opacity-80">
           Cancel
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="text-center text-white">
+      <DialogContent className="text-center dark:text-white">
         <div className="flex flex-col items-center">
           <Image
             src="./dashboard/warning.svg"
