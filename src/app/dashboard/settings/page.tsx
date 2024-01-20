@@ -177,8 +177,8 @@ export default function Connectivity() {
 
           <div>
             <Switch
-            // checked={theme === "light"}
-            // onCheckedChange={handleThemeChange}
+              checked={theme === "light"}
+              onCheckedChange={handleThemeChange}
             />
           </div>
         </div>
