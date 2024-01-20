@@ -139,76 +139,82 @@ export default function Dashboard() {
       </div>
 
       {/* Transfer details */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-12 gap-y-5">
-        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
-          <span className="text-3xl absolute right-5 top-0">...</span>
+      <div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-12 gap-y-5">
+          <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+            <span className="text-3xl absolute right-5 top-0">...</span>
 
-          <h3 className="opacity-50">Total Transfer Count</h3>
+            <h3 className="opacity-50">Total Transfer Count</h3>
 
-          <h4 className="mt-3 text-2xl font-bold">5000</h4>
-        </div>
-        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
-          <span className="text-3xl absolute right-5 top-0">...</span>
+            <h4 className="mt-3 text-2xl font-bold">5000</h4>
+          </div>
+          <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+            <span className="text-3xl absolute right-5 top-0">...</span>
 
-          <h3 className="opacity-50">Total Amount Transferred</h3>
+            <h3 className="opacity-50">Total Amount Transferred</h3>
 
-          <h4 className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}>
-            &#8358;11,000,000
-          </h4>
-        </div>
-
-        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4 flex items-center justify-between">
-          <div>
-            <h3 className="opacity-50">Wallet Ballance</h3>
-
-            <h4 className="mt-3 text-2xl font-bold">
-              &#8358;{formatAmount(10000)}
+            <h4
+              className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}
+            >
+              &#8358;11,000,000
             </h4>
           </div>
-        </div>
-      </div>
 
-      <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
-        <div className="md:flex items-center gap-4 col-span-2">
-          <h3 className="sm:text-2xl font-bold">
-            <span>{pendingOrders.length} Active Orders</span>
-          </h3>
-          <button
-            onClick={getPendingOrders}
-            className="gap-1 items-center text-blue-600 hidden md:flex"
-          >
-            refresh
-            <div className="h-6 w-6  border flex items-center justify-center border-blue-600 rounded-md">
-              <div className={`${isLoading ? "animate-spin" : ""}`}>
-                <RefreshCcw size={12} />
-              </div>
+          <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4 flex items-center justify-between">
+            <div>
+              <h3 className="opacity-50">Wallet Ballance</h3>
+
+              <h4 className="mt-3 text-2xl font-bold">
+                &#8358;{formatAmount(10000)}
+              </h4>
             </div>
-          </button>
+          </div>
         </div>
 
-        <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
-          <div>
-            <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white">
-              Pay all
-            </Button>
-          </div>
-          <div>
-            <Button
-              className="bg-transparent text-[.75rem] lg:text-base"
-              onClick={() => openDialog()}
+        <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
+          <div className="md:flex items-center gap-4 col-span-2">
+            <h3 className="sm:text-2xl font-bold">
+              <span>{pendingOrders.length} Active Orders</span>
+            </h3>
+            <button
+              onClick={getPendingOrders}
+              className="gap-1 items-center text-blue-600 hidden md:flex"
             >
-              Cancel all
-            </Button>
+              refresh
+              <div className="h-6 w-6 border flex items-center justify-center border-blue-600 rounded-md">
+                <div className={`${isLoading ? "animate-spin" : ""}`}>
+                  <RefreshCcw size={12} />
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
+            <div>
+              <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white">
+                Pay all
+              </Button>
+            </div>
+            <div>
+              <Button
+                className="bg-transparent text-[.75rem] lg:text-base"
+                onClick={() => openDialog()}
+              >
+                Cancel all
+              </Button>
+            </div>
           </div>
         </div>
         <button
           onClick={getPendingOrders}
-          className="gap-1 items-center text-blue-600 flex mt-5 md:hidden"
+          className="gap-1 grid grid-cols-2 items-center text-blue-600 mt-5 md:hidden"
         >
-          refresh
-          <span className={`${isLoading ? "animate-spin" : ""}`}>
-            <RefreshCcw size={12} />
-          </span>
+          <p>refresh</p>
+          <div className="h-6 w-6 border flex items-center justify-center border-blue-600 rounded-md">
+            <div className={`${isLoading ? "animate-spin" : ""}`}>
+              <RefreshCcw size={12} />
+            </div>
+          </div>
         </button>
       </div>
 
