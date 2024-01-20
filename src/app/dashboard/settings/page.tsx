@@ -131,7 +131,7 @@ export default function Connectivity() {
 
   return (
     <section className="w-full h-full lg:pt-24">
-      <div className="w-full max-w-[42rem] mx-auto rounded-xl bg-onboard-bg border border-white px-5 lg:px-10 py-5 border-opacity-25 lg:flex justify-between">
+      <div className="w-full max-w-[42rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white px-5 lg:px-10 py-5 border-opacity-25 lg:flex justify-between">
         <div className="profile flex items-center justify-between h-[2.938rem] w-auto space-x-7">
           <div className="flex space-x-2">
             <Avatar className="w-[2.688rem] h-[2.688rem]">
@@ -140,8 +140,10 @@ export default function Connectivity() {
             </Avatar>
 
             <div className="h-[2.938rem]">
-              <p className="text-white font-bold text-xl">Olawale Chinedu</p>
-              <p className="text-white font-medium opacity-40">Merchant</p>
+              <p className="dark:text-white font-bold text-xl">
+                Olawale Chinedu
+              </p>
+              <p className="dark:text-white font-medium opacity-40">Merchant</p>
             </div>
           </div>
 
@@ -153,16 +155,16 @@ export default function Connectivity() {
           /> */}
         </div>
 
-        <Button className="mt-12 lg:mt-0">Update Profile</Button>
+        <Button className="mt-12 lg:mt-0 border-2">Update Profile</Button>
       </div>
 
-      <div className="w-full max-w-[42rem] mx-auto rounded-xl bg-onboard-bg border border-white px-5 lg:px-10 py-5 border-opacity-25 mt-5 space-y-4">
+      <div className="w-full max-w-[42rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white px-5 lg:px-10 py-5 border-opacity-25 mt-5 space-y-4">
         {settings.map((setting, index) => (
           <div key={index} className="w-full flex justify-between items-center">
-            <p className="text-white">{setting.name}</p>
+            <p className="dark:text-white">{setting.name}</p>
 
             {setting.label !== "Switch" ? (
-              <Button className="w-24" onClick={setting.action}>
+              <Button className="w-24 border-2" onClick={setting.action}>
                 {setting.label}
               </Button>
             ) : (
@@ -171,12 +173,12 @@ export default function Connectivity() {
           </div>
         ))}
         <div className="w-full flex justify-between items-center">
-          <p className="text-white font-medium">Light mode</p>
+          <p className="dark:text-white font-medium">Light mode</p>
 
           <div>
             <Switch
-              checked={theme === "light"}
-              onCheckedChange={handleThemeChange}
+            // checked={theme === "light"}
+            // onCheckedChange={handleThemeChange}
             />
           </div>
         </div>

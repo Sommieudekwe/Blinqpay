@@ -8,7 +8,7 @@ export default function Header() {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between h-20 w-full lg:bg-milky bg-white dark:bg-primary-dashboard sticky top-0 z-10 lg:px-10">
+    <nav className="flex items-center justify-between h-20 w-full lg:bg-[#EFEFEF] bg-white dark:bg-primary-dashboard sticky top-0 z-10 lg:px-10">
       {/* Logo and search input */}
       <div className="hidden lg:flex items-center w-1/2">
         {/* Search */}
@@ -52,7 +52,7 @@ export default function Header() {
       </div>
 
       {isOpen && (
-        <div className="block lg:hidden absolute top-20 bg-primary-dashboard w-full min-h-[calc(100vh-80px)] z-20 px-5">
+        <div className="block lg:hidden absolute top-20 bg-white dark:bg-primary-dashboard w-full min-h-[calc(100vh-80px)] z-20 px-5">
           <Sidebar setOpen={setOpen} />
         </div>
       )}

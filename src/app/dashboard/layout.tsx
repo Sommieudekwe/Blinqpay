@@ -3,7 +3,7 @@ import Sidebar from "@/components/Dashboard/Sidebar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="min-h-screen flex bg-milky dark:bg-primary-dashboard dark:text-white lg:pl-4 xl:pl-9">
+    <section className="min-h-screen flex bg-[#EFEFEF] dark:bg-primary-dashboard dark:text-white lg:pl-4 xl:pl-9">
       <div className="hidden lg:block fixed h-full">
         <Sidebar />
       </div>

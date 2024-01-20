@@ -63,13 +63,13 @@ export default function Connected() {
         {data.map((bank, index) => (
           <div
             key={index}
-            className="w-full p-5 space-y-8 flex flex-col items-center border border-border-connect bg-bank-bg"
+            className="w-full p-5 space-y-8 flex flex-col items-center border dark:border-border-connect bg-milky dark:bg-bank-bg"
           >
             <div className="w-full max-w-[16.25rem] relative h-[3.438rem]">
               <Image src={bank.logo} alt={"bank logo"} fill />
             </div>
 
-            <Button variant={"outline"} disabled={true}>
+            <Button variant={"outline"} disabled={true} className="bg-gray-300">
               Connected
             </Button>
           </div>

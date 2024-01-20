@@ -19,7 +19,7 @@ export default function BankHistoryDashboard({ data }: TableProps) {
       {data.map((d, index) => (
         <div
           key={index}
-          className="border-b border-t border-white border-opacity-25 py-6 flex justify-between"
+          className="border-b border-t dark:border-white dark:border-opacity-25 py-6 flex justify-between"
         >
           <div className="flex justify-between w-full">
             <div className="space-y-3">

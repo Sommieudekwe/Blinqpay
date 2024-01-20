@@ -24,14 +24,14 @@ export default function Partners() {
         </Button>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-12 gap-y-5">
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Number of users</h3>
 
           <h4 className="mt-3 text-2xl font-bold">200</h4>
         </div>
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <h3 className="opacity-50">Revenue</h3>
@@ -49,7 +49,7 @@ export default function Partners() {
           </h4>
         </div>
 
-        <div className="relative bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
+        <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
           <span className="text-3xl absolute right-5 top-0">...</span>
 
           <div>

@@ -19,7 +19,7 @@ export default function OrderHistoryMobileTable({ data }: TableProps) {
       {data.map((d, index) => (
         <div
           key={index}
-          className="border-b border-t border-white border-opacity-25 py-6 flex justify-between"
+          className="border-b border-t dark:border-white dark:border-opacity-25 py-6 flex justify-between"
         >
           <div className="space-y-3">
             <p className="opacity-60">{d.orderNumber}</p>
