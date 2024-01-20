@@ -14,7 +14,8 @@ import { formatAmount } from "@/lib/utils";
 import apiCAll from "@/lib/apiCall";
 import { IDashboard } from "@/types";
 import { useOrders } from "@/context/pendingOrder";
-import { RotateCcw } from "lucide-react";
+
+import { RefreshCcw } from "lucide-react";
 
 const availableBanks = [
   { label: "Kuda bank", value: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
@@ -177,9 +178,11 @@ export default function Dashboard() {
             className="gap-1 items-center text-blue-600 hidden md:flex"
           >
             refresh
-            <span className={`${isLoading ? "animate-spin" : ""}`}>
-              <RotateCcw size={12} />
-            </span>
+            <div className="h-6 w-6  border flex items-center justify-center border-blue-600 rounded-md">
+              <div className={`${isLoading ? "animate-spin" : ""}`}>
+                <RefreshCcw size={12} />
+              </div>
+            </div>
           </button>
         </div>
 
@@ -204,7 +207,7 @@ export default function Dashboard() {
         >
           refresh
           <span className={`${isLoading ? "animate-spin" : ""}`}>
-            <RotateCcw size={12} />
+            <RefreshCcw size={12} />
           </span>
         </button>
       </div>
