@@ -51,7 +51,7 @@ export const columns: ColumnDef<IBankHistory>[] = [
               ? "text-green-400"
               : status === "failed"
               ? "text-red-400"
-              : "text-white"
+              : "text-pending"
           )}
         >
           {status}
@@ -74,4 +74,3 @@ export const columns: ColumnDef<IBankHistory>[] = [
     },
   },
 ];
- 

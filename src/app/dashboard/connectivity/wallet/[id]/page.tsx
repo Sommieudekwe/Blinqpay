@@ -112,7 +112,7 @@ export default function Connectivity() {
    */
   return (
     <section className="w-full h-full lg:pt-16">
-      <div className="max-w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 mb-4 px-4 md:px-[1.875rem] border-opacity-25">
+      <div className="max-w-[35rem] mx-auto rounded-xl bg-[#f5f5f5] dark:bg-onboard-bg border border-white py-10 mb-4 px-4 md:px-[1.875rem] border-opacity-25">
         {/* logo */}
         <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto">
           <Image src={getBankLogo(id as string)} alt={"bank logo"} fill />
@@ -210,7 +210,7 @@ export default function Connectivity() {
             >
               Submit
             </Button>
-            <p className="font-medium text-typography text-center mt-6">
+            <p className="font-medium text-black opacity-35 dark:opacity-100 dark:text-typography text-center mt-6">
               Can’t find your secret key, API Key or User ID?{" "}
               <Link href={"/"} className="text-button-primary">
                 Watch this
@@ -221,7 +221,7 @@ export default function Connectivity() {
       </div>
 
       <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-        <DialogContent className=" text-center text-white">
+        <DialogContent className=" text-center dark:text-white">
           <Image
             src={"/dashboard/success.svg"}
             alt="success icon"
