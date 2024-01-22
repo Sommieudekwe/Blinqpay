@@ -22,25 +22,33 @@ import { useToast } from "@/components/ui/toast/use-toast";
 import { IBankDetailsProps } from "@/types";
 import Link from "next/link";
 import { notify } from "@/components/ui/toast";
+import { IBankDetails } from "@/app/dashboard/connectivity/bank/[id]/page";
 
 const ConnectionDetailsSchema = yup.object().shape({
-      api_key: yup.string().required("Api key is required!"),
-      tracking: yup.string().required("Tracking reference is required"),
+      apiKey: yup.string().required("Api key is required!"),
+      accountReference: yup.string().required("accountReference reference is required"),
       narration: yup.string().required("Naration is required"),
       agree: yup.boolean().required("Agree to terms"),
 
 });
 
-type ConnectionDetailsSchemaTypes = yup.InferType<
+export type ConnectionDetailsSchemaTypes = yup.InferType<
       typeof ConnectionDetailsSchema
 >;
 
-export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBankDetailsProps)
+
+interface IBankDetailsForm {
+	bankDetails: IBankDetails;
+      isLoading: boolean;
+	setBankDetails:  React.Dispatch<React.SetStateAction<IBankDetails>>;
+}
+
+
+export default function BankAPIDetailsForm({ isLoading, handleConnectToBank, setBankDetails, bankDetails }: IBankDetailsProps & IBankDetailsForm)
 {
-      const { toast } = useToast();
       const defaultValues: ConnectionDetailsSchemaTypes = {
-            api_key: "",
-            tracking: "",
+            apiKey: "",
+            accountReference: "",
             narration: "",
             agree: false
       };
@@ -58,11 +66,16 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
        */
       async function onSubmit(values: ConnectionDetailsSchemaTypes)
       {
-            if (!values.agree)
-
+            if (!values.agree){
                   return notify.error("Agree to terms and conditions!iiii")
-
-            handleConnectToBank();
+            }
+            //  setBankDetails({
+            //             ...bankDetails,
+            //             apiKey: values.apiKey,
+            //             accountReference: values.accountReference,
+            //             narration: values.narration
+            //        })
+            handleConnectToBank(values);
       }
       /*
        *
@@ -80,16 +93,16 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
                         <div className="space-y-6">
                               <FormField
                                     control={form.control}
-                                    name="api_key"
+                                    name="apiKey"
                                     render={({ field }) => (
                                           <FormItem>
-                                                {/* <FormLabel htmlFor="api_key">API Key</FormLabel> */}
+                                                {/* <FormLabel htmlFor="apiKey">API Key</FormLabel> */}
                                                 <FormControl>
                                                       <Input
-                                                            id="api_key"
+                                                            id="apiKey"
                                                             placeholder="API Key"
                                                             {...field}
-                                                            error={form.formState.errors?.api_key?.message}
+                                                            error={form.formState.errors?.apiKey?.message}
                                                       />
                                                 </FormControl>
                                                 <FormDescription>
@@ -106,20 +119,20 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
 
                               <FormField
                                     control={form.control}
-                                    name="tracking"
+                                    name="accountReference"
                                     render={({ field }) => (
                                           <FormItem>
                                                 {/* <FormLabel htmlFor="secret_key">API Key</FormLabel> */}
                                                 <FormControl>
                                                       <Input
-                                                            id="tracking"
-                                                            placeholder="SVirtual Account Tracking Reference"
+                                                            id="accountReference"
+                                                            placeholder="SVirtual Account accountReference Reference"
                                                             {...field}
-                                                            error={form.formState.errors?.tracking?.message}
+                                                            error={form.formState.errors?.accountReference?.message}
                                                       />
                                                 </FormControl>
                                                 <FormDescription>
-                                                      Don’t have a tracking reference?
+                                                      Don’t have a accountReference reference?
                                                       <Link href={"/"} className="text-button-primary">
                                                             Watch this video
                                                       </Link>
@@ -149,7 +162,7 @@ export default function BankAPIDetailsForm({ setStep, handleConnectToBank }: IBa
 
 
                         </div>
-                        <Button variant={"primary"} className="w-full mt-[3.7rem]">
+                        <Button isLoading={isLoading} variant={"primary"} className="w-full mt-[3.7rem]">
                               Submit
                         </Button>
                         <FormField

@@ -38,6 +38,21 @@ export default function Connected() {
           setData(connectedBank);
         },
       });
+
+      await apiCAll({
+        url: "/bank/all",
+        method: "get",
+        sCB(res) {
+          console.log(res);
+          const connectedBank = bankList.filter((bank) =>
+            res.data.some(
+              (connectedBank: any) =>
+                bank.name.toUpperCase() === connectedBank.name
+            )
+          );
+          setData((prev) => [...prev, ...connectedBank]);
+        },
+      });
     } catch (error) {
       console.log(error, "this is the error!!");
     }

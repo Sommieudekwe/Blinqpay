@@ -12,25 +12,76 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { bankList } from "@/app/dashboard/connectivity/constants";
 import BankDetailsForm from "../../../../../components/Dashboard/connectivity/details-form";
-import BankAPIDetailsForm from "../../../../../components/Dashboard/connectivity/apikey-form";
+import BankAPIDetailsForm, { ConnectionDetailsSchemaTypes } from "../../../../../components/Dashboard/connectivity/apikey-form";
+import apiCAll from "@/lib/apiCall";
 
-export default function Connectivity() {
+
+export interface IBankDetails
+{
+  name: string;
+  apiKey: string;
+  phone: string;
+  email: string;
+  accountNumber: string;
+  narration: string;
+  accountReference: string;
+}
+export default function Connectivity()
+{
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
+  const [isLoading, setisLoading] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<number>(1);
   const { id } = useParams();
+  const [bankDetails, setBankDetails] = React.useState<IBankDetails>({
+    name: String(id).toUpperCase(),
+    apiKey: "",
+    phone: "",
+    email: "",
+    accountNumber: "",
+    narration: "",
+    accountReference: "",
+  });
   /*
    *
    *
    *
    *
    */
-  function getBankLogo(bankName: string): string {
+  function getBankLogo(bankName: string): string
+  {
     const bank = bankList.find((bank) => bank.name === bankName);
     return bank?.logo as string;
   }
 
-  function handleConnectToBank() {
-    setIsSuccess(true);
+  async function handleConnectToBank(apiVAlues: ConnectionDetailsSchemaTypes)
+  {
+
+    setisLoading(true)
+
+    await apiCAll({
+      url: "/bank/connect",
+      method: "post",
+      data: {
+        ...bankDetails,
+        apiKey: apiVAlues.apiKey,
+        accountReference: apiVAlues.accountReference,
+        narration: apiVAlues.narration
+      },
+      toast: true,
+      sCB(res)
+      {
+        console.log(res);
+
+        setisLoading(false)
+        setIsSuccess(true);
+
+      },
+      eCB(res)
+      {
+        setisLoading(false)
+
+      },
+    })
   }
   /*
    *
@@ -43,12 +94,7 @@ export default function Connectivity() {
       <div className="pagination w-full flex justify-center">
         <div className="w-[18.75rem] flex justify-between">
           <div className={cn("h-1 w-[8.75rem] bg-white")}></div>
-          <div
-            className={cn(
-              "h-1 w-[8.75rem] bg-white",
-              step === 1 ? "opacity-10" : "opacity-100"
-            )}
-          ></div>
+          <div className={cn("h-1 w-[8.75rem] bg-white", step === 1 ? "opacity-10" : "opacity-100")}></div>
         </div>
       </div>
       <div className="max-w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
@@ -58,38 +104,27 @@ export default function Connectivity() {
         </div>
 
         {step === 1 ? (
-          <BankDetailsForm setStep={setStep} />
+          <BankDetailsForm setStep={setStep} bankDetails={bankDetails} setBankDetails={setBankDetails} />
         ) : (
           <BankAPIDetailsForm
             setStep={setStep}
             handleConnectToBank={handleConnectToBank}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+            isLoading={isLoading}
           />
         )}
       </div>
       <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
         <DialogContent className="text-center text-white">
-          <Image
-            src={"/dashboard/success.svg"}
-            alt="success icon"
-            width={88}
-            height={88}
-            className="mx-auto"
-          />
+          <Image src={"/dashboard/success.svg"} alt="success icon" width={88} height={88} className="mx-auto" />
 
           <div className="space-y-3 mt-4">
-            <p className="opacity-60 font-aeonikRegular text-lg">
-              API Connected
-            </p>
+            <p className="opacity-60 font-aeonikRegular text-lg">API Connected</p>
             <p className="font-bold text-3xl">Successfully</p>
           </div>
 
-          <Link
-            href={"/dashboard"}
-            className={cn(
-              "w-full mt-[1.938rem]",
-              buttonVariants({ variant: "primary" })
-            )}
-          >
+          <Link href={"/dashboard"} className={cn("w-full mt-[1.938rem]", buttonVariants({ variant: "primary" }))}>
             Go to Dashboard
           </Link>
         </DialogContent>

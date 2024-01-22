@@ -1,3 +1,5 @@
+import { ConnectionDetailsSchemaTypes } from "@/components/Dashboard/connectivity/apikey-form";
+
 export interface IRoutes {
   name: string;
   icon: string;
@@ -32,7 +34,7 @@ export interface IbankList {
 
 export interface IBankDetailsProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  handleConnectToBank: () => void;
+  handleConnectToBank: (apiVAlues: ConnectionDetailsSchemaTypes) => void;
 }
 
 export interface IOrderHistory {
