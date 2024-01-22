@@ -3,19 +3,16 @@
 import Image from "next/image";
 import { DataTable } from "@/components/ui/data-table";
 import { dashboardColumn } from "./home/column";
-// import { dashboardData } from "./home/data";
 import { Button } from "@/components/ui/button";
 import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
 import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogOverlay } from "@/components/ui/dialog";
-import { getToken, hasToken } from "@/lib/utils";
-import Dropdown from "@/components/Dashboard/Dropdown";
 import { formatAmount } from "@/lib/utils";
 import apiCAll from "@/lib/apiCall";
-import { IDashboard } from "@/types";
 import { useOrders } from "@/context/pendingOrder";
-
+import { Icons } from "@/components/icons";
 import { RefreshCcw } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const availableBanks = [
   { label: "Kuda bank", value: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
@@ -114,13 +111,26 @@ export default function Dashboard() {
             >
               &#8358;200,000,000
             </h2>
-            <Image
+            <div onClick={handleBlurToggle}>
+              {isBlurred ? (
+                <div>
+                  <Icons.Eye stroke="white" className="dark:block hidden" />
+                  <Icons.Eye stroke="black" className="block dark:hidden" />
+                </div>
+              ) : (
+                <div>
+                  <Icons.Lock stroke="white" className="dark:block hidden" />
+                  <Icons.Lock stroke="black" className="block dark:hidden" />
+                </div>
+              )}
+            </div>
+            {/* <Image
               src={isBlurred ? "/dashboard/eye.svg" : "/dashboard/lock.svg"}
               alt="lock"
               width={20}
               height={16}
               onClick={handleBlurToggle}
-            />
+            /> */}
           </div>
         </div>
         <div className="relative">
@@ -171,17 +181,16 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-5 mt-8 lg:mt-5 items-center">
-          <div className="md:flex items-center gap-4 col-span-2">
-            <h3 className="sm:text-2xl font-bold">
+        <div className="grid grid-cols-8 mt-8 lg:mt-5 items-center">
+          <div className="flex items-center gap-0.5 col-span-3">
+            <h3 className="text-[.85rem] sm:text-2xl font-bold whitespace-nowrap">
               <span>{pendingOrders.length} Active Orders</span>
             </h3>
             <button
               onClick={getPendingOrders}
-              className="gap-1 items-center text-blue-600 hidden md:flex"
+              className="gap-1 items-center text-gray-500 flex"
             >
-              refresh
-              <div className="h-6 w-6 border flex items-center justify-center border-blue-600 rounded-md">
+              <div className="h-5 w-5 rounded-md border-2 flex items-center justify-center border-gray-500">
                 <div className={`${isLoading ? "animate-spin" : ""}`}>
                   <RefreshCcw size={12} />
                 </div>
@@ -189,7 +198,7 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <div className="flex gap-x-1.5 lg:gap-x-5 col-span-3 justify-end">
+          <div className="flex gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
             <div>
               <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white">
                 Pay all
@@ -205,7 +214,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <button
+        {/* <button
           onClick={getPendingOrders}
           className="gap-1 grid grid-cols-2 items-center text-blue-600 mt-5 md:hidden"
         >
@@ -215,7 +224,7 @@ export default function Dashboard() {
               <RefreshCcw size={12} />
             </div>
           </div>
-        </button>
+        </button> */}
       </div>
 
       {/* Search icon */}
