@@ -187,7 +187,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-8 mt-8 lg:mt-5 items-center">
           <div className="flex items-center gap-0.5 col-span-3">
-            <h3 className="text-[.85rem] sm:text-2xl font-bold whitespace-nowrap">
+            <h3 className="text-lg sm:text-2xl font-bold whitespace-nowrap">
               <span>{pendingOrders.length} Active Orders</span>
             </h3>
             <button
