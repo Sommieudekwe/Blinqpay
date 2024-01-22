@@ -193,8 +193,14 @@ export default function Select({
           {label && <SelectLabel>{label}</SelectLabel>}
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
-              <div className="flex gap-2">
-                {option.img && <img src={option.img} alt="img" />}
+              <div className="flex items-center gap-2">
+                {option.img && (
+                  <img
+                    src={option.img}
+                    alt="img"
+                    style={{ height: "26px", width: "26px" }}
+                  />
+                )}
 
                 {option.label}
               </div>

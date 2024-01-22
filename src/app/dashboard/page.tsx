@@ -19,14 +19,18 @@ const availableBanks = [
   {
     label: "Moniepoint",
     value: "Moniepoint",
-    img: "/dashboard/banks/kuda.svg",
+    img: "/dashboard/banks/moniepoint.svg",
   },
+  // {
+  //   label: "Access bank",
+  //   value: "Access bank",
+  //   img: "/dashboard/banks/kuda.svg",
+  // },
   {
-    label: "Access bank",
-    value: "Access bank",
-    img: "/dashboard/banks/kuda.svg",
+    label: "Providus bank",
+    value: "Firstbank",
+    img: "/dashboard/banks/providus.svg",
   },
-  { label: "First bank", value: "Firstbank", img: "/dashboard/banks/kuda.svg" },
 ];
 import Select from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
