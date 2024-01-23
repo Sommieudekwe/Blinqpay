@@ -1,6 +1,6 @@
 export interface IRoutes {
   name: string;
-  icon: string;
+  icon: () => React.ReactElement<React.SVGProps<SVGSVGElement>>;
   link: string;
 }
 
