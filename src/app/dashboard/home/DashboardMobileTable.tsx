@@ -50,7 +50,7 @@ export default function MobileTable({ data }: TableProps) {
           </div>
 
           <div className="inline-flex flex-col space-y-2">
-            <Button>Pay now</Button>
+            <Button className="whitespace-nowrap">Pay now</Button>
             <CancelModal orderId={d.id} />
           </div>
         </div>

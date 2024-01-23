@@ -18,42 +18,82 @@ import { useState } from "react";
 const routes: IRoutes[] = [
   {
     name: "Dashboard",
-    icon: "/dashboard/sidebar/home.svg",
+    icon: () => (
+      <div>
+        <Icons.Home fill="white" className="dark:block hidden" />
+        <Icons.Home fill="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard",
   },
   {
     name: "Sell",
-    icon: "/dashboard/sidebar/sell.svg",
+    icon: () => (
+      <div>
+        <Icons.Sell stroke="white" className="dark:block hidden" />
+        <Icons.Sell stroke="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/sell",
   },
   {
     name: "Bank History",
-    icon: "/dashboard/sidebar/bank.svg",
+    icon: () => (
+      <div>
+        <Icons.Bank stroke="white" className="dark:block hidden" />
+        <Icons.Bank stroke="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/bank-history",
   },
   {
     name: "Order History",
-    icon: "/dashboard/sidebar/order.svg",
+    icon: () => (
+      <div>
+        <Icons.Order stroke="white" className="dark:block hidden" />
+        <Icons.Order stroke="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/order-history",
   },
   {
     name: "Connectivity",
-    icon: "/dashboard/sidebar/connectivity.svg",
+    icon: () => (
+      <div>
+        <Icons.Connectivity stroke="white" className="dark:block hidden" />
+        <Icons.Connectivity stroke="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/connectivity",
   },
   {
     name: "Subscription",
-    icon: "/dashboard/sidebar/subscription.svg",
+    icon: () => (
+      <div>
+        <Icons.Subscription stroke="white" className="dark:block hidden" />
+        <Icons.Subscription stroke="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/subscription",
   },
   {
     name: "Partners",
-    icon: "/dashboard/sidebar/partners.svg",
+    icon: () => (
+      <div>
+        <Icons.Partners fill="white" className="dark:block hidden" />
+        <Icons.Partners fill="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/partners",
   },
   {
     name: "Settings",
-    icon: "/dashboard/sidebar/settings.svg",
+    icon: () => (
+      <div>
+        <Icons.Settings stroke="white" className="dark:block hidden" />
+        <Icons.Settings stroke="black" className="dark:hidden block" />
+      </div>
+    ),
     link: "/dashboard/settings",
   },
 ];
@@ -81,7 +121,7 @@ export default function Sidebar({ setOpen }: SidebarProps) {
               className="trigger py-2  w-full flex items-center justify-between pr-3"
             >
               <div className="gap-6 flex items-center ">
-                <Image src={route.icon} width={24} height={24} alt="icon" />
+                {route.icon()}
                 <p>{route.name}</p>
               </div>
 
@@ -132,19 +172,14 @@ export default function Sidebar({ setOpen }: SidebarProps) {
             className={"flex items-center gap-6"}
             onClick={() => setOpen?.(false)}
           >
-            <Image
-              src={route.icon}
-              width={24}
-              height={24}
-              alt="icon"
-              color=""
-            />
+            {route.icon()}
             <span
               className={cn(
                 "opacity-70",
-                pathname === route.link || pathname.includes(route.link)
-                  ? "text-button-primary"
-                  : ""
+                // pathname === route.link || pathname.includes(route.link)
+                //   ? "text-button-primary"
+                //   : ""
+                pathname === route.link ? "text-button-primary" : ""
               )}
             >
               {route.name}

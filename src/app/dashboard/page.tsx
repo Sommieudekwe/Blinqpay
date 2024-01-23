@@ -186,8 +186,8 @@ export default function Dashboard() {
         </div>
 
         <div className="grid grid-cols-8 mt-8 lg:mt-5 items-center">
-          <div className="flex items-center gap-0.5 col-span-3">
-            <h3 className="text-lg sm:text-2xl font-bold whitespace-nowrap">
+          <div className="flex items-center gap-2 col-span-3">
+            <h3 className="sm:text-2xl font-bold whitespace-nowrap">
               <span>{pendingOrders.length} Active Orders</span>
             </h3>
             <button
@@ -202,7 +202,7 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <div className="flex gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
+          <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
             <div>
               <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white">
                 Pay all
