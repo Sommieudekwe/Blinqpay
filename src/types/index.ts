@@ -96,3 +96,12 @@ export interface ISell {
   countdown: string;
   info: string;
 }
+
+export interface IProviders {
+  createdAt: string;
+  id: number;
+  name: string;
+  status: "ACTIVE" | "COMING_SOON" | null;
+  type: "BANK" | null | "EXCHANGES";
+  updatedAt: string;
+}

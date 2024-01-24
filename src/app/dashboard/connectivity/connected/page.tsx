@@ -8,55 +8,38 @@ import { notify } from "@/components/ui/toast";
 import { bankList } from "../constants";
 import { useEffect, useState } from "react";
 import apiCAll from "@/lib/apiCall";
-import { IbankList } from "@/types";
+import { IProviders } from "@/types";
 import { AlertTriangle } from "lucide-react";
 
 export default function Connected() {
   const router = useRouter();
   const { loggedIn } = useStore();
   console.log("user logged in?", loggedIn);
-  const [data, setData] = useState<IbankList[]>([]);
-  /*
-   *
-   *
-   *
-   *
-   */
-  async function getConnectedBank() {
+  const [data, setData] = useState<IProviders[]>([]);
+
+  async function getConnectedProviders() {
     try {
       await apiCAll({
-        url: "/exchange/all",
+        url: "provider/connected",
         method: "get",
         sCB(res) {
+          setData(res.data);
+        },
+        eCB(res) {
           console.log(res);
-          const connectedBank = bankList.filter((bank) =>
-            res.data.some(
-              (connectedBank: any) =>
-                bank.name.toUpperCase() === connectedBank.name
-            )
-          );
-          setData(connectedBank);
         },
       });
     } catch (error) {
-      console.log(error, "this is the error!!");
+      console.error(error);
     }
   }
-  /*
-   *
-   *
-   *
-   *
-   */
+
   useEffect(() => {
-    getConnectedBank();
-  }, [router]);
-  /*
-   *
-   *
-   *
-   *
-   */
+    console.log(data);
+
+    getConnectedProviders();
+  }, []);
+
   return data.length > 0 ? (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
@@ -66,7 +49,8 @@ export default function Connected() {
             className="w-full p-5 space-y-8 flex flex-col items-center border dark:border-border-connect bg-milky dark:bg-bank-bg"
           >
             <div className="w-full max-w-[16.25rem] relative h-[3.438rem]">
-              <Image src={bank.logo} alt={"bank logo"} fill />
+              {/* Add image when they come from the backend */}
+              {/* <Image src={bank.logo} alt={"bank logo"} fill /> */}
             </div>
 
             <Button variant={"outline"} disabled={true} className="bg-gray-300">
