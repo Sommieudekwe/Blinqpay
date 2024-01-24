@@ -102,6 +102,6 @@ export interface IProviders {
   id: number;
   name: string;
   status: "ACTIVE" | "COMING_SOON" | null;
-  type: "BANK" | null | "EXCHANGES";
+  type: "BANK" | null | "EXCHANGE";
   updatedAt: string;
 }

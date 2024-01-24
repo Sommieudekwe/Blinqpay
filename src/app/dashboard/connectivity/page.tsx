@@ -20,10 +20,14 @@ export default function Connectivity() {
     []
   );
 
-  function handleConnect(bankName: string) {
+  function handleConnect(type: "BANK" | "EXCHANGE" | null, bankName: string) {
     // if (AllBanks.includes(bankName))
     //   return router.push(`/dashboard/connectivity/bank/${bankName}`);
     // return router.push(`/dashboard/connectivity/wallet/${bankName}`);
+    if (type === "BANK") {
+      return router.push(`/dashboard/connectivity/bank/${bankName}`);
+    }
+    return router.push(`/dashboard/connectivity/wallet/${bankName}`);
   }
 
   async function getAllProviders() {
@@ -46,6 +50,8 @@ export default function Connectivity() {
   useEffect(() => {
     getAllProviders();
   }, []);
+
+  console.log(availableProviders);
 
   return (
     <section className="w-full h-full">
@@ -79,7 +85,7 @@ export default function Connectivity() {
             </div>
             <div>{providers.name}</div>
             <Button
-              // onClick={() => handleConnect(bank.name)}
+              onClick={() => handleConnect(providers.type, providers.name)}
               variant={"outline"}
               disabled={
                 providers.status === "COMING_SOON" ||
