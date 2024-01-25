@@ -163,9 +163,7 @@ export default function Sidebar({ setOpen }: SidebarProps) {
                     <span
                       className={cn(
                         "opacity-70",
-                        pathname === item.link || pathname.includes(item.link)
-                          ? "text-button-primary"
-                          : ""
+                        pathname === item.link ? "text-button-primary" : ""
                       )}
                     >
                       {item.name}

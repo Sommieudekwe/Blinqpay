@@ -96,7 +96,7 @@ export default function Connectivity() {
 
     try {
       await apiCAll({
-        url: "/exchange/connect",
+        url: "provider/connect/binance",
         data: walletCredentials,
         toast: true,
         method: "post",

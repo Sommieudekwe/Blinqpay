@@ -35,10 +35,10 @@ export default function Connected() {
   }
 
   useEffect(() => {
-    console.log(data);
-
     getConnectedProviders();
   }, []);
+
+  console.log(data);
 
   return data.length > 0 ? (
     <section className="w-full h-full">
