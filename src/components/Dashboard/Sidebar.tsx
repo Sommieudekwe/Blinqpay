@@ -118,19 +118,29 @@ export default function Sidebar({ setOpen }: SidebarProps) {
             <div
               role="button"
               onClick={() => setShowConnectArray((p) => !p)}
-              className="trigger py-2  w-full flex items-center justify-between pr-3"
+              className="trigger py-2 w-full flex items-center justify-between pr-3"
             >
               <div className="gap-6 flex items-center ">
                 {route.icon()}
                 <p>{route.name}</p>
               </div>
 
-              <Icons.ArrowIcon
-                className={cn(
-                  "transition-all",
-                  showConnectAray ? "rotate-90" : "rotate-0"
-                )}
-              />
+              <div>
+                <Icons.ArrowIcon
+                  stroke="white"
+                  className={cn(
+                    "transition-all dark:block hidden",
+                    showConnectAray ? "rotate-90" : "rotate-0"
+                  )}
+                />
+                <Icons.ArrowIcon
+                  stroke="black"
+                  className={cn(
+                    "transition-all dark:hidden block",
+                    showConnectAray ? "rotate-90" : "rotate-0"
+                  )}
+                />
+              </div>
             </div>
 
             {showConnectAray && (
@@ -176,9 +186,6 @@ export default function Sidebar({ setOpen }: SidebarProps) {
             <span
               className={cn(
                 "opacity-70",
-                // pathname === route.link || pathname.includes(route.link)
-                //   ? "text-button-primary"
-                //   : ""
                 pathname === route.link ? "text-button-primary" : ""
               )}
             >
