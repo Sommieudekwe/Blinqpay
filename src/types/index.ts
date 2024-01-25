@@ -1,3 +1,5 @@
+import { ConnectionDetailsSchemaTypes } from "@/components/Dashboard/connectivity/apikey-form";
+
 export interface IRoutes {
   name: string;
   icon: () => React.ReactElement<React.SVGProps<SVGSVGElement>>;
@@ -32,7 +34,7 @@ export interface IbankList {
 
 export interface IBankDetailsProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  handleConnectToBank: () => void;
+  handleConnectToBank: (apiVAlues: ConnectionDetailsSchemaTypes) => void;
 }
 
 export interface IOrderHistory {
@@ -95,4 +97,13 @@ export interface ISell {
   time: string;
   countdown: string;
   info: string;
+}
+
+export interface IProviders {
+  createdAt: string;
+  id: number;
+  name: string;
+  status: "ACTIVE" | "COMING_SOON" | null;
+  type: "BANK" | null | "EXCHANGE";
+  updatedAt: string;
 }

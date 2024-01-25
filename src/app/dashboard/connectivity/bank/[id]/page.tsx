@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -12,12 +12,38 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { bankList } from "@/app/dashboard/connectivity/constants";
 import BankDetailsForm from "../../../../../components/Dashboard/connectivity/details-form";
-import BankAPIDetailsForm from "../../../../../components/Dashboard/connectivity/apikey-form";
+import { useStore } from "@/context/store";
+import BankAPIDetailsForm, {
+  ConnectionDetailsSchemaTypes,
+} from "../../../../../components/Dashboard/connectivity/apikey-form";
+import apiCAll from "@/lib/apiCall";
 
+export interface IBankDetails {
+  name: string;
+  apiKey: string;
+  phone: string;
+  email: string;
+  accountNumber: string;
+  narration: string;
+  accountReference: string;
+}
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
+  const [isLoading, setisLoading] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<number>(1);
   const { id } = useParams();
+  const { providers, getAllProviders } = useStore();
+  const data = providers.filter((provider) => provider.name === id);
+  console.log(data);
+  const [bankDetails, setBankDetails] = React.useState<IBankDetails>({
+    name: String(id).toUpperCase(),
+    apiKey: "",
+    phone: "",
+    email: "",
+    accountNumber: "",
+    narration: "",
+    accountReference: "",
+  });
   /*
    *
    *
@@ -29,8 +55,29 @@ export default function Connectivity() {
     return bank?.logo as string;
   }
 
-  function handleConnectToBank() {
-    setIsSuccess(true);
+  async function handleConnectToBank(apiVAlues: ConnectionDetailsSchemaTypes) {
+    setisLoading(true);
+
+    await apiCAll({
+      url: "provider/connect/kuda",
+      method: "post",
+      data: {
+        ...bankDetails,
+        apiKey: apiVAlues.apiKey,
+        accountReference: apiVAlues.accountReference,
+        narration: apiVAlues.narration,
+      },
+      toast: true,
+      sCB(res) {
+        console.log(res);
+
+        setisLoading(false);
+        setIsSuccess(true);
+      },
+      eCB(res) {
+        setisLoading(false);
+      },
+    });
   }
   /*
    *
@@ -38,6 +85,9 @@ export default function Connectivity() {
    *
    *
    */
+  useEffect(() => {
+    getAllProviders();
+  }, []);
   return (
     <section className="w-full h-full lg:pt-16">
       <div className="pagination w-full flex justify-center">
@@ -52,17 +102,27 @@ export default function Connectivity() {
         </div>
       </div>
       <div className="max-w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
+        {data.map((d, i) => (
+          <div key={i}>{d.name}</div>
+        ))}
         {/* logo */}
         <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto">
-          <Image src={getBankLogo(id as string)} alt={"bank logo"} fill />
+          {/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
         </div>
 
         {step === 1 ? (
-          <BankDetailsForm setStep={setStep} />
+          <BankDetailsForm
+            setStep={setStep}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+          />
         ) : (
           <BankAPIDetailsForm
             setStep={setStep}
             handleConnectToBank={handleConnectToBank}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+            isLoading={isLoading}
           />
         )}
       </div>

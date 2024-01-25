@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -29,6 +29,7 @@ import { cn } from "@/lib/utils";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { bankList } from "@/app/dashboard/connectivity/constants";
 import apiCAll from "@/lib/apiCall";
+import { useStore } from "@/context/store";
 
 const ConnectionDetailsSchema = yup.object().shape({
   api_key: yup.string().required("Api key is required!"),
@@ -52,6 +53,11 @@ export default function Connectivity() {
     user_id: "",
     agree: false,
   };
+
+  const { providers, getAllProviders } = useStore();
+
+  const data = providers.filter((provider) => provider.name === id);
+  console.log(data);
 
   const form = useForm<ConnectionDetailsSchemaTypes>({
     resolver: yupResolver(ConnectionDetailsSchema),
@@ -90,7 +96,7 @@ export default function Connectivity() {
 
     try {
       await apiCAll({
-        url: "/exchange/connect",
+        url: "provider/connect/binance",
         data: walletCredentials,
         toast: true,
         method: "post",
@@ -110,12 +116,17 @@ export default function Connectivity() {
    *
    *
    */
+
+  useEffect(() => {
+    getAllProviders();
+  }, []);
   return (
     <section className="w-full h-full lg:pt-16">
       <div className="max-w-[35rem] mx-auto rounded-xl bg-[#f5f5f5] dark:bg-onboard-bg border border-white py-10 mb-4 px-4 md:px-[1.875rem] border-opacity-25">
         {/* logo */}
+
         <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto">
-          <Image src={getBankLogo(id as string)} alt={"bank logo"} fill />
+          {/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
         </div>
 
         <Form {...form}>
