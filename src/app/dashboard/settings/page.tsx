@@ -146,13 +146,6 @@ export default function Connectivity() {
               <p className="dark:text-white font-medium opacity-40">Merchant</p>
             </div>
           </div>
-
-          {/* <Image
-            width={76}
-            height={26}
-            src={"/dashboard/settings/level1.svg"}
-            alt={"badge"}
-          /> */}
         </div>
 
         <Button className="mt-12 lg:mt-0 border-2">Update Profile</Button>
