@@ -14,9 +14,9 @@ export default function Connectivity() {
   console.log("user logged in?", loggedIn);
 
   function handleConnect(
-    type: "BANK" | "EXCHANGE" | null,
-    bankName: string,
-    id: number
+    type: "BANK" | "EXCHANGE" | null | undefined,
+    bankName?: string,
+    id?: number
   ) {
     if (type === "BANK") {
       return router.push(`/dashboard/connectivity/bank/${bankName}`);
