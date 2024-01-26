@@ -169,7 +169,7 @@ export {
 
 export interface SelectProps {
   className?: string;
-  placeholder: string;
+  placeholder?: string;
   value?: string;
   onChange?: (value: string) => string | void;
   label?: string;
