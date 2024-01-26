@@ -21,7 +21,7 @@ import { IBankDetails } from "@/app/dashboard/connectivity/bank/[id]/page";
 import { formatPhone } from "@/lib/utils";
 
 const ConnectionDetailsSchema = yup.object().shape({
-  email: yup.string().required("Email is required!").lowercase(),
+  email: yup.string().required("Email is required!"),
   accountNumber: yup.string().required("Account is required"),
   phone: yup.string().required("Phone number is required"),
 });

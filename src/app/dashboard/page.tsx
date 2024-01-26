@@ -14,9 +14,13 @@ import { Icons } from "@/components/icons";
 import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import {SelectConnectedBanks} from "@/components/ui/select";
+import { SelectConnectedBanks } from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
 import { IProviders } from "@/types";
+
+type AccountBalance = {
+  availableBalance: number;
+};
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -24,7 +28,9 @@ export default function Dashboard() {
   const [loading, setIsLoading] = useState(false);
   const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
   const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
-  const [accountBalance, setAccountBalance] = useState(null);
+  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
+    null
+  );
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -116,9 +122,6 @@ export default function Dashboard() {
     getAllConnectedBanks();
   }, []);
 
-  console.log(selectedBankId);
-  console.log(accountBalance);
-
   return (
     <div className="">
       <div className="lg:flex justify-between">
@@ -139,8 +142,11 @@ export default function Dashboard() {
                 isBlurred ? "blur" : ""
               }`}
             >
-              {/*  Account Balance rendered here. First check whether there is a connected bank */}
-              &#8358;{formatAmount(accountBalance?.availableBalance)}
+              {accountBalance !== null ? (
+                <p>&#8358;{formatAmount(accountBalance?.availableBalance)}</p>
+              ) : (
+                <p>&#8358;0.00</p>
+              )}
             </h2>
             <div onClick={handleBlurToggle}>
               {isBlurred ? (
@@ -163,7 +169,9 @@ export default function Dashboard() {
           </div>
           <div className="text-center">
             <SelectConnectedBanks
-              placeholder={connectedBanks[0]?.name}
+              // placeholder={connectedBanks[0]?.name}
+
+              placeholder="Select Bank"
               options={connectedBanks}
               className="w-44"
               onChange={handleSelectChange}
@@ -210,7 +218,7 @@ export default function Dashboard() {
             <h3 className="sm:text-2xl font-bold whitespace-nowrap">
               <span>{pendingOrders.length} Active Orders</span>
             </h3>
-            <button
+            {/* <button
               onClick={getPendingOrders}
               className="gap-1 items-center text-gray-500 flex"
             >
@@ -219,7 +227,7 @@ export default function Dashboard() {
                   <RefreshCcw size={12} />
                 </div>
               </div>
-            </button>
+            </button> */}
           </div>
 
           <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
@@ -238,17 +246,28 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        {/* <button
+        <button
           onClick={getPendingOrders}
-          className="gap-1 grid grid-cols-2 items-center text-blue-600 mt-5 md:hidden"
+          className="flex gap-2 items-center bg-button-primary p-2 rounded-md mt-5 md:hidden text-white"
         >
-          <p>refresh</p>
-          <div className="h-6 w-6 border flex items-center justify-center border-blue-600 rounded-md">
+          <p>REFRESH</p>
+          <div className="h-6 w-6 border flex items-center justify-center border-white rounded-md">
             <div className={`${isLoading ? "animate-spin" : ""}`}>
               <RefreshCcw size={12} />
             </div>
           </div>
-        </button> */}
+        </button>
+
+        <button
+          onClick={getPendingOrders}
+          className="flex gap-2 items-center p-2 md:hidden text-black fixed bottom-5 left-1/2 transform -translate-x-1/2 justify-center w-16 h-16 rounded-full bg-gray-500"
+        >
+          <div className="h-8 w-8 flex items-center justify-center border-white rounded-md">
+            <div className={`${isLoading ? "animate-spin" : ""}`}>
+              <RefreshCcw size={26} />
+            </div>
+          </div>
+        </button>
       </div>
 
       {/* Search icon */}

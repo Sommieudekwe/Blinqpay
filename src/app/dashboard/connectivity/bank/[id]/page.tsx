@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ArrowLeft } from "lucide-react";
 
 import Link from "next/link";
 import React from "react";
@@ -57,12 +58,22 @@ export default function Connectivity() {
 
   async function handleConnectToBank(apiVAlues: ConnectionDetailsSchemaTypes) {
     setisLoading(true);
+    const { email } = bankDetails;
+
+    console.log({
+      ...bankDetails,
+      email: email.toLowerCase(),
+      apiKey: apiVAlues.apiKey,
+      accountReference: apiVAlues.accountReference,
+      narration: apiVAlues.narration,
+    });
 
     await apiCAll({
       url: "provider/connect/kuda",
       method: "post",
       data: {
         ...bankDetails,
+        email: email.toLowerCase(),
         apiKey: apiVAlues.apiKey,
         accountReference: apiVAlues.accountReference,
         narration: apiVAlues.narration,
@@ -101,12 +112,20 @@ export default function Connectivity() {
           ></div>
         </div>
       </div>
-      <div className="max-w-[35rem] mx-auto rounded-xl bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
+
+      <div className="max-w-[35rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
+        <div>
+          {step !== 1 && <ArrowLeft size={36} onClick={() => setStep(1)} />}
+        </div>
         {data.map((d, i) => (
-          <div key={i}>{d.name}</div>
+          <div key={i} className="text-center">
+            {d.name}
+          </div>
         ))}
+
         {/* logo */}
-        <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto">
+        {/* <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto"> */}
+        <div className="w-full max-w-[16.25rem] relative h-[rem] mx-auto">
           {/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
         </div>
 
@@ -127,7 +146,7 @@ export default function Connectivity() {
         )}
       </div>
       <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-        <DialogContent className="text-center text-white">
+        <DialogContent className="text-center dark:text-white">
           <Image
             src={"/dashboard/success.svg"}
             alt="success icon"
