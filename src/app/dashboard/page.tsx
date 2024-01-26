@@ -140,7 +140,7 @@ export default function Dashboard() {
               }`}
             >
               {/*  Account Balance rendered here. First check whether there is a connected bank */}
-              &#8358;200,000,000
+              &#8358;{formatAmount(accountBalance?.availableBalance)}
             </h2>
             <div onClick={handleBlurToggle}>
               {isBlurred ? (
