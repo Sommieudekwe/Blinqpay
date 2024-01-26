@@ -106,4 +106,5 @@ export interface IProviders {
   status: "ACTIVE" | "COMING_SOON" | null;
   type: "BANK" | null | "EXCHANGE";
   updatedAt: string;
+  img?: string;
 }

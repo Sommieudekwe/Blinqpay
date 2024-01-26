@@ -13,17 +13,17 @@ import { useOrders } from "@/context/pendingOrder";
 import { Icons } from "@/components/icons";
 import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Combobox from "@/components/ui/combobox";
 
 import Select from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
+import { IProviders } from "@/types";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [connectedBanks, setAllConnectedBanks] = useState([]);
-  const [selectedBank, setSelectedBank] = useState();
+  const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
+  const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
   const [accountBalance, setAccountBalance] = useState(null);
 
   const openDialog = () => {
@@ -102,15 +102,13 @@ export default function Dashboard() {
     });
   };
 
-  const handleSelectChange = (selectedValue: any) => {
-    // if (typeof selectedValue === "string") {
-    // } else {
-    //   setSelectedBank(selectedValue);
-    //   console.log(selectedValue);
-    // }
+  const handleSelectChange = (id: string) => {
+    setSelectedBankId(id);
+    console.log(id);
 
-    // getConnectedBanksBalance(selectedValue.id);
-    console.log(selectedValue);
+    getConnectedBanksBalance(Number(id));
+    console.log(id);
+    return id;
   };
 
   useEffect(() => {
@@ -118,6 +116,7 @@ export default function Dashboard() {
     getAllConnectedBanks();
   }, []);
 
+  console.log(selectedBankId);
   console.log(accountBalance);
 
   return (
@@ -162,13 +161,12 @@ export default function Dashboard() {
             <p className="opacity-60 mb-2">Available Banks</p>
           </div>
           <div className="text-center">
-            {/* <Select
-              placeholder={sample[0].name}
-              options={sample}
+            <Select
+              placeholder={connectedBanks[0]?.name}
+              options={connectedBanks}
               className="w-44"
               onChange={handleSelectChange}
-            /> */}
-            <Combobox />
+            />
           </div>
         </div>
       </div>
