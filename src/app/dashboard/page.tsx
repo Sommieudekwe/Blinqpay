@@ -14,31 +14,17 @@ import { Icons } from "@/components/icons";
 import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const availableBanks = [
-  { label: "Kuda bank", value: "Kuda bank", img: "/dashboard/banks/kuda.svg" },
-  {
-    label: "Moniepoint",
-    value: "Moniepoint",
-    img: "/dashboard/banks/moniepoint.svg",
-  },
-  // {
-  //   label: "Access bank",
-  //   value: "Access bank",
-  //   img: "/dashboard/banks/kuda.svg",
-  // },
-  {
-    label: "Providus bank",
-    value: "Firstbank",
-    img: "/dashboard/banks/providus.svg",
-  },
-];
 import Select from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
+import { IProviders } from "@/types";
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
+  const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
+  const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
+  const [accountBalance, setAccountBalance] = useState(null);
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -62,7 +48,7 @@ export default function Dashboard() {
     setPendingOrders,
   } = useOrders();
 
-  const handleCallAllOrder = async () => {
+  const handleCancelAllOrder = async () => {
     setIsLoading(true);
     apiCAll({
       method: "post",
@@ -84,14 +70,54 @@ export default function Dashboard() {
     });
   };
 
+  const getAllConnectedBanks = async () => {
+    apiCAll({
+      method: "get",
+      url: "provider/banks",
+      sCB(res) {
+        setAllConnectedBanks(res.data);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
   const handleNoConfirmation = () => {
     setPendingOrdersIds([]);
     setIsDialogOpen(false);
   };
 
+  const getConnectedBanksBalance = async (id: number) => {
+    apiCAll({
+      method: "get",
+      url: `bank/${id}/balance`,
+      sCB(res) {
+        setAccountBalance(res.data);
+        console.log(res.data);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
+  const handleSelectChange = (id: string) => {
+    setSelectedBankId(id);
+    console.log(id);
+
+    getConnectedBanksBalance(Number(id));
+    console.log(id);
+    return id;
+  };
+
   useEffect(() => {
     getPendingOrders();
+    getAllConnectedBanks();
   }, []);
+
+  console.log(selectedBankId);
+  console.log(accountBalance);
 
   return (
     <div className="">
@@ -113,6 +139,7 @@ export default function Dashboard() {
                 isBlurred ? "blur" : ""
               }`}
             >
+              {/*  Account Balance rendered here. First check whether there is a connected bank */}
               &#8358;200,000,000
             </h2>
             <div onClick={handleBlurToggle}>
@@ -128,26 +155,19 @@ export default function Dashboard() {
                 </div>
               )}
             </div>
-            {/* <Image
-              src={isBlurred ? "/dashboard/eye.svg" : "/dashboard/lock.svg"}
-              alt="lock"
-              width={20}
-              height={16}
-              onClick={handleBlurToggle}
-            /> */}
           </div>
         </div>
         <div className="relative">
           <div className="flex items-center">
-            <p className="opacity-60 mb-2 ">Available Banks</p>
+            <p className="opacity-60 mb-2">Available Banks</p>
           </div>
           <div className="text-center">
             <Select
-              placeholder={availableBanks[0].label}
-              options={availableBanks}
+              placeholder={connectedBanks[0]?.name}
+              options={connectedBanks}
               className="w-44"
+              onChange={handleSelectChange}
             />
-            {/* <Dropdown options={availableBanks} /> */}
           </div>
         </div>
       </div>
@@ -273,7 +293,7 @@ export default function Dashboard() {
             <Button
               variant="primary"
               className="w-full mt-12"
-              onClick={handleCallAllOrder}
+              onClick={handleCancelAllOrder}
               isLoading={loading}
             >
               Yes

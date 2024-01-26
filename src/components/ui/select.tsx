@@ -5,6 +5,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { IProviders } from "@/types";
 
 const SelectDefault = SelectPrimitive.Root;
 
@@ -160,19 +161,19 @@ export {
   SelectDefault,
 };
 
-export type SelectOptions = {
-  label: string;
-  value: string;
-  img?: any;
-};
+// export type SelectOptions = {
+//   label: string;
+//   value: string;
+//   img?: any;
+// };
 
 export interface SelectProps {
   className?: string;
-  placeholder: string;
+  placeholder?: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: string) => string | void;
   label?: string;
-  options: SelectOptions[];
+  options: IProviders[];
 }
 
 export default function Select({
@@ -192,9 +193,9 @@ export default function Select({
         <SelectGroup>
           {label && <SelectLabel>{label}</SelectLabel>}
           {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem key={option.id} value={String(option.id)}>
               <div className="flex items-center gap-2">
-                {option.img && (
+                {option?.img && (
                   <img
                     src={option.img}
                     alt="img"
@@ -202,7 +203,7 @@ export default function Select({
                   />
                 )}
 
-                {option.label}
+                {option.name}
               </div>
             </SelectItem>
           ))}

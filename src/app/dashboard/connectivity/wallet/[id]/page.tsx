@@ -77,7 +77,7 @@ export default function Connectivity() {
   }
 
   async function onSubmit(values: ConnectionDetailsSchemaTypes) {
-    // setIsLoading(true);
+    setIsLoading(true);
 
     // if user signs to submit without accepting terms and conditions.
     if (!values.agree)
