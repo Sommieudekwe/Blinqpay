@@ -100,11 +100,11 @@ export interface ISell {
 }
 
 export interface IProviders {
-  createdAt: string;
-  id: number;
+  createdAt?: string;
+  id?: number;
   name: string;
-  status: "ACTIVE" | "COMING_SOON" | null;
-  type: "BANK" | null | "EXCHANGE";
-  updatedAt: string;
+  status?: "ACTIVE" | "COMING_SOON" | null;
+  type?: "BANK" | null | "EXCHANGE";
+  updatedAt?: string;
   img?: string;
 }

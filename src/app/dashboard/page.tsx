@@ -139,6 +139,7 @@ export default function Dashboard() {
                 isBlurred ? "blur" : ""
               }`}
             >
+              {/*  Account Balance rendered here. First check whether there is a connected bank */}
               &#8358;200,000,000
             </h2>
             <div onClick={handleBlurToggle}>
