@@ -14,7 +14,7 @@ import { Icons } from "@/components/icons";
 import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import Select from "@/components/ui/select";
+import {SelectConnectedBanks} from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
 import { IProviders } from "@/types";
 
@@ -162,7 +162,7 @@ export default function Dashboard() {
             <p className="opacity-60 mb-2">Available Banks</p>
           </div>
           <div className="text-center">
-            <Select
+            <SelectConnectedBanks
               placeholder={connectedBanks[0]?.name}
               options={connectedBanks}
               className="w-44"

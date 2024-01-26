@@ -20,7 +20,7 @@ import React from "react";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { IBankDetailsProps, IProviders } from "@/types";
 import Link from "next/link";
-import Select from "@/components/ui/select";
+import Select, { SelectOptions } from "@/components/ui/select";
 
 const Schema = yup.object().shape({
   bankName: yup.string().required("Bank name is required"),
@@ -30,19 +30,19 @@ const Schema = yup.object().shape({
 
 type SchemaTypes = yup.InferType<typeof Schema>;
 
-const Banks: IProviders[] = [
+const Banks: SelectOptions[] = [
   {
-    name: "Kuda",
-    // value: "kuda",
+    label: "Kuda",
+    value: "40",
   },
   {
-    name: "Moniepoint",
-    // value: "Moniepoint",
+    label: "Moniepoint",
+    value: "5",
   },
 
   {
-    name: "Providus Bank",
-    // value: "Providus Bank",
+    label: "Providus Bank",
+    value: "2",
   },
 ];
 
@@ -91,8 +91,8 @@ export default function PayMethodForm() {
                         error={form.formState.errors?.bankName?.message}
                   /> */}
                   <Select
-                    // onChange={field.onChange}
-                    // value={field.name}
+                    onChange={field.onChange}
+                    value={field.name}
                     placeholder={"Choose"}
                     options={Banks}
                   />
