@@ -51,10 +51,6 @@ export default function Connectivity() {
    *
    *
    */
-  function getBankLogo(bankName: string): string {
-    const bank = bankList.find((bank) => bank.name === bankName);
-    return bank?.logo as string;
-  }
 
   async function handleConnectToBank(apiVAlues: ConnectionDetailsSchemaTypes) {
     setisLoading(true);
@@ -103,10 +99,12 @@ export default function Connectivity() {
     <section className="w-full h-full lg:pt-16">
       <div className="pagination w-full flex justify-center">
         <div className="w-[18.75rem] flex justify-between">
-          <div className={cn("h-1 w-[8.75rem] bg-white")}></div>
+          <div
+            className={cn("h-1 w-[8.75rem] bg-gray-400 dark:bg-white")}
+          ></div>
           <div
             className={cn(
-              "h-1 w-[8.75rem] bg-white",
+              "h-1 w-[8.75rem] bg-black dark:bg-white",
               step === 1 ? "opacity-10" : "opacity-100"
             )}
           ></div>

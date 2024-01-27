@@ -48,9 +48,9 @@ export default function BankAPIDetailsForm({
   bankDetails,
 }: IBankDetailsProps & IBankDetailsForm) {
   const defaultValues: ConnectionDetailsSchemaTypes = {
-    apiKey: "",
-    accountReference: "",
-    narration: "",
+    apiKey: bankDetails.apiKey || "",
+    accountReference: bankDetails.accountReference || "",
+    narration: bankDetails.narration || "",
     agree: false,
   };
 
