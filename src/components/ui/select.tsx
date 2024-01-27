@@ -213,6 +213,7 @@ export interface ISelectConnectedBank {
   onChange?: (value: string) => string | void;
   label?: string;
   options: IProviders[];
+  defaultValue?: string;
 }
 
 export function SelectConnectedBanks({
@@ -222,11 +223,12 @@ export function SelectConnectedBanks({
   onChange,
   label,
   options,
+  defaultValue
 }: ISelectConnectedBank) {
   return (
     <SelectDefault value={value} onValueChange={onChange}>
       <SelectTrigger className={cn("", className)}>
-        <SelectValue placeholder={placeholder} />
+        <SelectValue placeholder={placeholder}/>
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
