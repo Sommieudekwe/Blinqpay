@@ -33,9 +33,8 @@ export default function Dashboard() {
   const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
     null
   );
-  const pathname = usePathname()
-  console.log(connectedBanks, 'HERE ARE THE CONNECTED BANKS');
-  
+  const pathname = usePathname();
+  console.log(connectedBanks, "HERE ARE THE CONNECTED BANKS");
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -132,7 +131,6 @@ export default function Dashboard() {
       getConnectedBanksBalance(connectedBanks[0].id as number);
       console.log("fetchingbalnace");
     }
-    
   }, [connectedBanks]);
 
   return (
@@ -182,7 +180,6 @@ export default function Dashboard() {
           </div>
           <div className="text-center">
             <SelectConnectedBanks
-              defaultValue={connectedBanks[0]?.id?.toString()}
               placeholder="Select Bank"
               options={connectedBanks}
               className="w-44"

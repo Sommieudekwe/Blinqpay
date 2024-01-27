@@ -171,12 +171,12 @@ export interface ISelectProps {
   className?: string;
   placeholder?: string;
   value?: string;
-  onChange?: (value: string) =>  void;
+  onChange?: (value: string) => void;
   label?: string;
   options: SelectOptions[];
 }
 
-export default function Select ({
+export default function Select({
   className,
   placeholder,
   value,
@@ -191,9 +191,7 @@ export default function Select ({
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {label &&
-            <SelectLabel>{label}</SelectLabel>
-          }
+          {label && <SelectLabel>{label}</SelectLabel>}
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
@@ -204,7 +202,6 @@ export default function Select ({
     </SelectDefault>
   );
 }
-
 
 export interface ISelectConnectedBank {
   className?: string;
@@ -223,12 +220,11 @@ export function SelectConnectedBanks({
   onChange,
   label,
   options,
-  defaultValue
 }: ISelectConnectedBank) {
   return (
     <SelectDefault value={value} onValueChange={onChange}>
       <SelectTrigger className={cn("", className)}>
-        <SelectValue placeholder={placeholder}/>
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
