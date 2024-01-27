@@ -17,6 +17,8 @@ import { cn } from "@/lib/utils";
 import { SelectConnectedBanks } from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
 import { IProviders } from "@/types";
+import { usePathname, useRouter } from "next/navigation";
+import { notify } from "@/components/ui/toast";
 
 type AccountBalance = {
   availableBalance: number;
@@ -31,6 +33,9 @@ export default function Dashboard() {
   const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
     null
   );
+  const pathname = usePathname()
+  console.log(connectedBanks, 'HERE ARE THE CONNECTED BANKS');
+  
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -120,7 +125,15 @@ export default function Dashboard() {
   useEffect(() => {
     getPendingOrders();
     getAllConnectedBanks();
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (connectedBanks.length >= 1) {
+      getConnectedBanksBalance(connectedBanks[0].id as number);
+      console.log("fetchingbalnace");
+    }
+    
+  }, [connectedBanks]);
 
   return (
     <div className="">
@@ -169,12 +182,12 @@ export default function Dashboard() {
           </div>
           <div className="text-center">
             <SelectConnectedBanks
-              // placeholder={connectedBanks[0]?.name}
-
+              defaultValue={connectedBanks[0]?.id?.toString()}
               placeholder="Select Bank"
               options={connectedBanks}
               className="w-44"
               onChange={handleSelectChange}
+              value={connectedBanks[0]?.id?.toString()}
             />
           </div>
         </div>
