@@ -218,16 +218,16 @@ export default function Dashboard() {
             <h3 className="sm:text-2xl font-bold whitespace-nowrap">
               <span>{pendingOrders.length} Active Orders</span>
             </h3>
-            {/* <button
+            <button
               onClick={getPendingOrders}
-              className="gap-1 items-center text-gray-500 flex"
+              className="gap-1 items-center text-gray-500  hidden md:flex"
             >
-              <div className="h-5 w-5 rounded-md border-2 flex items-center justify-center border-gray-500">
+              <div className="h-6 w-6 rounded-md border-2 flex items-center justify-center border-gray-500">
                 <div className={`${isLoading ? "animate-spin" : ""}`}>
                   <RefreshCcw size={12} />
                 </div>
               </div>
-            </button> */}
+            </button>
           </div>
 
           <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
@@ -248,23 +248,11 @@ export default function Dashboard() {
         </div>
         <button
           onClick={getPendingOrders}
-          className="flex gap-2 items-center bg-button-primary p-2 rounded-md mt-5 md:hidden text-white"
-        >
-          <p>REFRESH</p>
-          <div className="h-6 w-6 border flex items-center justify-center border-white rounded-md">
-            <div className={`${isLoading ? "animate-spin" : ""}`}>
-              <RefreshCcw size={12} />
-            </div>
-          </div>
-        </button>
-
-        <button
-          onClick={getPendingOrders}
-          className="flex gap-2 items-center p-2 md:hidden text-black fixed bottom-5 left-1/2 transform -translate-x-1/2 justify-center w-16 h-16 rounded-full bg-gray-500"
+          className="flex gap-2 items-center p-2 md:hidden text-black fixed bottom-5 left-1/2 transform -translate-x-1/2 justify-center w-16 h-16 rounded-full bg-onboard-bg dark:bg-gray-900"
         >
           <div className="h-8 w-8 flex items-center justify-center border-white rounded-md">
             <div className={`${isLoading ? "animate-spin" : ""}`}>
-              <RefreshCcw size={26} />
+              <RefreshCcw size={26} color="white" />
             </div>
           </div>
         </button>

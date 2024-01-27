@@ -41,9 +41,9 @@ export default function BankDetailsForm({
   setBankDetails,
 }: Pick<IBankDetailsProps, "setStep"> & IBankDetailsForm) {
   const defaultValues: ConnectionDetailsSchemaTypes = {
-    email: "",
-    accountNumber: "",
-    phone: "",
+    email: bankDetails.email || "",
+    accountNumber: bankDetails.accountNumber || "",
+    phone: bankDetails.phone || "",
   };
 
   const form = useForm<ConnectionDetailsSchemaTypes>({
@@ -73,6 +73,7 @@ export default function BankDetailsForm({
    *
    *
    */
+
   return (
     <Form {...form}>
       <form
