@@ -1,3 +1,5 @@
+import { notify } from "@/components/ui/toast";
+import { useRediret } from "@/hooks/useRedirect";
 import { fmtResponse, getToken, hasToken, removeToken } from "@/lib/utils";
 import axios, { AxiosRequestConfig } from "axios";
 
@@ -53,6 +55,9 @@ service.interceptors.response.use(
     
     if (unauthorized.includes(response?.data.message)) {
       removeToken();
+      const { redirect } = useRediret()
+      redirect('/login')
+      notify.error(response?.data.message)
     }
 
     if (error && !error?.response?.data) {
