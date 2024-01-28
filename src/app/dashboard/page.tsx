@@ -32,16 +32,19 @@ export default function Dashboard() {
   const [loading, setIsLoading] = useState(false);
   // const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
   // const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
-  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
-    null
-  );
+
   const pathname = usePathname();
   const {
     connectedBanks,
     getAllConnectedBanks,
     selectedBankId,
     setSelectedBankId,
+    cachedBalance,
+setCachedBalance
   } = useStore();
+  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
+   { availableBalance : cachedBalance as number}
+  );
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -86,18 +89,18 @@ export default function Dashboard() {
     });
   };
 
-  const getAllConnectedBanks = async () => {
-    apiCAll({
-      method: "get",
-      url: "provider/banks",
-      sCB(res) {
-        setAllConnectedBanks(res.data);
-      },
-      eCB(res) {
-        console.error(res.error);
-      },
-    });
-  };
+  // const getAllConnectedBanks = async () => {
+  //   apiCAll({
+  //     method: "get",
+  //     url: "provider/banks",
+  //     sCB(res) {
+  //       setAllConnectedBanks(res.data);
+  //     },
+  //     eCB(res) {
+  //       console.error(res.error);
+  //     },
+  //   });
+  // };
 
   const handleNoConfirmation = () => {
     setPendingOrdersIds([]);
@@ -109,7 +112,17 @@ export default function Dashboard() {
       method: "get",
       url: `bank/${id}/balance`,
       sCB(res) {
-        setAccountBalance(res.data);
+        // setAccountBalance(res.data);
+        // setCachedBalance(res.data)
+        if(cachedBalance && res.data.availableBalance === cachedBalance) {
+          notify.success("i am returning a cached balance");
+          return;
+        }else{
+          setAccountBalance(res.data);
+          setCachedBalance(res.data.availableBalance)
+        }
+        
+
       },
       eCB(res) {
         console.error(res.error);
@@ -119,27 +132,39 @@ export default function Dashboard() {
 
   const handleSelectChange = (id: string) => {
     setSelectedBankId(id);
-    console.log(id);
+   localStorage.setItem('selectedBankId', id);
 
     getConnectedBanksBalance(Number(id));
-    console.log(id);
     return id;
   };
+
 
   useEffect(() => {
     getPendingOrders();
     getAllConnectedBanks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
-    if (connectedBanks.length >= 1) {
-      getConnectedBanksBalance(connectedBanks[0].id as number);
+    const id = localStorage.getItem('selectedBankId');
+    if(id) {
+      getConnectedBanksBalance(Number(id));
+      notify.success('Bank balance fetched successfully');
+    } else {
+      if (connectedBanks.length >= 1) {
+         localStorage.setItem('selectedBankId', String(connectedBanks[0].id));
+         notify.error("No bank selected, default bank selected");
+      }
     }
-  }, [connectedBanks]);
+  }, []);
 
-  console.log(selectedBankId, connectedBanks);
+  // console.log(selectedBankId, connectedBanks);
 
-  console.log(accountBalance);
+  // console.log(accountBalance);
+
+  if(!connectedBanks.length) {
+    return <div></div>
+  }
 
   return (
     <div className="">
