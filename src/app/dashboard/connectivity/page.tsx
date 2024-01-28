@@ -28,6 +28,8 @@ export default function Connectivity() {
     getAllProviders();
   }, []);
 
+  console.log(providers);
+
   return (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">

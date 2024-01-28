@@ -19,6 +19,7 @@ import EmptyState from "@/components/empty-state";
 import { IProviders } from "@/types";
 import { usePathname, useRouter } from "next/navigation";
 import { notify } from "@/components/ui/toast";
+import { useStore } from "@/context/store";
 
 type AccountBalance = {
   availableBalance: number;
@@ -28,13 +29,18 @@ export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
-  const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
+  // const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
+  // const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
   const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
     null
   );
   const pathname = usePathname();
-  console.log(connectedBanks, "HERE ARE THE CONNECTED BANKS");
+  const {
+    connectedBanks,
+    getAllConnectedBanks,
+    selectedBankId,
+    setSelectedBankId,
+  } = useStore();
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -65,7 +71,6 @@ export default function Dashboard() {
       url: "/order/cancel",
       data: { orderIds: pendingOrdersIds },
       sCB(res) {
-        console.log(res, "All order has been cancelled");
         setPendingOrders([]);
         setIsLoading(false);
         setIsDialogOpen(false);
@@ -80,19 +85,6 @@ export default function Dashboard() {
     });
   };
 
-  const getAllConnectedBanks = async () => {
-    apiCAll({
-      method: "get",
-      url: "provider/banks",
-      sCB(res) {
-        setAllConnectedBanks(res.data);
-      },
-      eCB(res) {
-        console.error(res.error);
-      },
-    });
-  };
-
   const handleNoConfirmation = () => {
     setPendingOrdersIds([]);
     setIsDialogOpen(false);
@@ -104,7 +96,6 @@ export default function Dashboard() {
       url: `bank/${id}/balance`,
       sCB(res) {
         setAccountBalance(res.data);
-        console.log(res.data);
       },
       eCB(res) {
         console.error(res.error);
@@ -129,9 +120,10 @@ export default function Dashboard() {
   useEffect(() => {
     if (connectedBanks.length >= 1) {
       getConnectedBanksBalance(connectedBanks[0].id as number);
-      console.log("fetchingbalnace");
     }
   }, [connectedBanks]);
+
+  console.log(selectedBankId, connectedBanks);
 
   return (
     <div className="">
