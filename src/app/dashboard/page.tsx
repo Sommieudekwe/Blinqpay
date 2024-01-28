@@ -15,16 +15,33 @@ import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Combobox from "@/components/ui/combobox";
 
-import Select from "@/components/ui/select";
+import { SelectConnectedBanks } from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
+import { IProviders } from "@/types";
+import { usePathname, useRouter } from "next/navigation";
+import { notify } from "@/components/ui/toast";
+import { useStore } from "@/context/store";
+
+type AccountBalance = {
+  availableBalance: number;
+};
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [connectedBanks, setAllConnectedBanks] = useState([]);
-  const [selectedBank, setSelectedBank] = useState();
-  const [accountBalance, setAccountBalance] = useState(null);
+  // const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
+  // const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
+  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
+    null
+  );
+  const pathname = usePathname();
+  const {
+    connectedBanks,
+    getAllConnectedBanks,
+    selectedBankId,
+    setSelectedBankId,
+  } = useStore();
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -55,7 +72,6 @@ export default function Dashboard() {
       url: "/order/cancel",
       data: { orderIds: pendingOrdersIds },
       sCB(res) {
-        console.log(res, "All order has been cancelled");
         setPendingOrders([]);
         setIsLoading(false);
         setIsDialogOpen(false);
@@ -94,7 +110,6 @@ export default function Dashboard() {
       url: `bank/${id}/balance`,
       sCB(res) {
         setAccountBalance(res.data);
-        console.log(res.data);
       },
       eCB(res) {
         console.error(res.error);
@@ -102,21 +117,27 @@ export default function Dashboard() {
     });
   };
 
-  const handleSelectChange = (selectedValue: any) => {
-    // if (typeof selectedValue === "string") {
-    // } else {
-    //   setSelectedBank(selectedValue);
-    //   console.log(selectedValue);
-    // }
+  const handleSelectChange = (id: string) => {
+    setSelectedBankId(id);
+    console.log(id);
 
-    // getConnectedBanksBalance(selectedValue.id);
-    console.log(selectedValue);
+    getConnectedBanksBalance(Number(id));
+    console.log(id);
+    return id;
   };
 
   useEffect(() => {
     getPendingOrders();
     getAllConnectedBanks();
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (connectedBanks.length >= 1) {
+      getConnectedBanksBalance(connectedBanks[0].id as number);
+    }
+  }, [connectedBanks]);
+
+  console.log(selectedBankId, connectedBanks);
 
   console.log(accountBalance);
 
@@ -140,7 +161,11 @@ export default function Dashboard() {
                 isBlurred ? "blur" : ""
               }`}
             >
-              &#8358;200,000,000
+              {accountBalance !== null ? (
+                <p>&#8358;{formatAmount(accountBalance?.availableBalance)}</p>
+              ) : (
+                <p>&#8358;0.00</p>
+              )}
             </h2>
             <div onClick={handleBlurToggle}>
               {isBlurred ? (
@@ -162,13 +187,13 @@ export default function Dashboard() {
             <p className="opacity-60 mb-2">Available Banks</p>
           </div>
           <div className="text-center">
-            {/* <Select
-              placeholder={sample[0].name}
-              options={sample}
+            <SelectConnectedBanks
+              placeholder="Select Bank"
+              options={connectedBanks}
               className="w-44"
               onChange={handleSelectChange}
-            /> */}
-            <Combobox />
+              value={connectedBanks[0]?.id?.toString()}
+            />
           </div>
         </div>
       </div>
@@ -213,9 +238,9 @@ export default function Dashboard() {
             </h3>
             <button
               onClick={getPendingOrders}
-              className="gap-1 items-center text-gray-500 flex"
+              className="gap-1 items-center text-gray-500  hidden md:flex"
             >
-              <div className="h-5 w-5 rounded-md border-2 flex items-center justify-center border-gray-500">
+              <div className="h-6 w-6 rounded-md border-2 flex items-center justify-center border-gray-500">
                 <div className={`${isLoading ? "animate-spin" : ""}`}>
                   <RefreshCcw size={12} />
                 </div>
@@ -239,17 +264,16 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        {/* <button
+        <button
           onClick={getPendingOrders}
-          className="gap-1 grid grid-cols-2 items-center text-blue-600 mt-5 md:hidden"
+          className="flex gap-2 items-center p-2 md:hidden text-black fixed bottom-5 left-1/2 transform -translate-x-1/2 justify-center w-16 h-16 rounded-full bg-onboard-bg dark:bg-gray-900"
         >
-          <p>refresh</p>
-          <div className="h-6 w-6 border flex items-center justify-center border-blue-600 rounded-md">
+          <div className="h-8 w-8 flex items-center justify-center border-white rounded-md">
             <div className={`${isLoading ? "animate-spin" : ""}`}>
-              <RefreshCcw size={12} />
+              <RefreshCcw size={26} color="white" />
             </div>
           </div>
-        </button> */}
+        </button>
       </div>
 
       {/* Search icon */}

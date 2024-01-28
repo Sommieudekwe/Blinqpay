@@ -5,6 +5,8 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { IProviders } from "@/types";
+import Image from "next/image";
 
 const SelectDefault = SelectPrimitive.Root;
 
@@ -163,12 +165,11 @@ export {
 export type SelectOptions = {
   label: string;
   value: string;
-  img?: any;
 };
 
-export interface SelectProps {
+export interface ISelectProps {
   className?: string;
-  placeholder: string;
+  placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
   label?: string;
@@ -182,7 +183,7 @@ export default function Select({
   onChange,
   label,
   options,
-}: SelectProps) {
+}: ISelectProps) {
   return (
     <SelectDefault value={value} onValueChange={onChange}>
       <SelectTrigger className={cn("", className)}>
@@ -193,16 +194,53 @@ export default function Select({
           {label && <SelectLabel>{label}</SelectLabel>}
           {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </SelectDefault>
+  );
+}
+
+export interface ISelectConnectedBank {
+  className?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: (value: string) => string | void;
+  label?: string;
+  options: IProviders[];
+  defaultValue?: string;
+}
+
+export function SelectConnectedBanks({
+  className,
+  placeholder,
+  value,
+  onChange,
+  label,
+  options,
+}: ISelectConnectedBank) {
+  return (
+    <SelectDefault value={value} onValueChange={onChange}>
+      <SelectTrigger className={cn("", className)}>
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {label && <SelectLabel>{label}</SelectLabel>}
+          {options.map((option) => (
+            <SelectItem key={option.id} value={String(option.id)}>
               <div className="flex items-center gap-2">
-                {option.img && (
-                  <img
+                {option?.img && (
+                  <Image
                     src={option.img}
                     alt="img"
                     style={{ height: "26px", width: "26px" }}
                   />
                 )}
 
-                {option.label}
+                {option.name}
               </div>
             </SelectItem>
           ))}
