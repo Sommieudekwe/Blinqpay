@@ -1,6 +1,6 @@
 "use client";
 import { IBankHistory } from "@/types";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, formatDate } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -19,15 +19,16 @@ export default function BankHistoryDashboard({ data }: TableProps) {
       {data.map((d, index) => (
         <div
           key={index}
-          className="border-b border-t dark:border-white dark:border-opacity-25 py-6 flex justify-between"
+          className="border-b border-t dark:border-white dark:border-opacity-25 pt-6 flex justify-between"
         >
           <div className="flex justify-between w-full">
             <div className="space-y-3">
               {/* <p className="opacity-60">{d.orderNumber}</p> */}
               <h3 className="opacity-60">{d.accountName}</h3>
               <p className="opacity-60">{d.accountNumber}</p>
+              <p className="opacity-60">[{d.bankName}]</p>
               <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
-              <p className="opacity-60">{d.date}</p>
+              <p className="opacity-60">{formatDate(d.date)}</p>
               <p
                 className={cn(
                   "capitalize rounded-3xl py-1 text-sm",
@@ -43,7 +44,9 @@ export default function BankHistoryDashboard({ data }: TableProps) {
             </div>
 
             <div className="">
-              <Button className="text-right">Get Receipt</Button>
+              <Button className="text-right whitespace-nowrap">
+                Get Receipt
+              </Button>
             </div>
           </div>
         </div>

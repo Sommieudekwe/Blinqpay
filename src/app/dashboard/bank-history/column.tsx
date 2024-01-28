@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, formatAmount } from "@/lib/utils";
+import { cn, formatAmount, formatDate } from "@/lib/utils";
 import { IBankHistory } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -36,29 +36,29 @@ export const columns: ColumnDef<IBankHistory>[] = [
   {
     accessorKey: "date",
     header: "Date",
-    accessorFn: (row) => row.date,
+    cell: ({ row }) => <p>{formatDate(row.original.date)}</p>,
   },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const { status } = row.original;
-      return (
-        <p
-          className={cn(
-            "capitalize",
-            status === "successful"
-              ? "text-green-400"
-              : status === "failed"
-              ? "text-red-400"
-              : "text-pending"
-          )}
-        >
-          {status}
-        </p>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "status",
+  //   header: "Status",
+  //   cell: ({ row }) => {
+  //     const { status } = row.original;
+  //     return (
+  //       <p
+  //         className={cn(
+  //           "capitalize",
+  //           status === "successful"
+  //             ? "text-green-400"
+  //             : status === "failed"
+  //             ? "text-red-400"
+  //             : "text-pending"
+  //         )}
+  //       >
+  //         {status}
+  //       </p>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "id",
     header: "",

@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import {
   Dispatch,
   SetStateAction,
@@ -16,6 +16,12 @@ interface StoreContextProps {
   loggedIn: boolean;
   providers: IProviders[];
   getAllProviders: () => void;
+  connectedBanks: IProviders[];
+  getAllConnectedBanks: () => void;
+  selectedBankId: string | null;
+  setSelectedBankId: Dispatch<SetStateAction<string | null>>;
+  cachedBalance: number | null;
+  setCachedBalance: Dispatch<SetStateAction<number | null>>;
 }
 
 const StoreContext = createContext<StoreContextProps>({
@@ -24,12 +30,22 @@ const StoreContext = createContext<StoreContextProps>({
   loggedIn: false,
   providers: [],
   getAllProviders: () => {},
+  connectedBanks: [],
+  getAllConnectedBanks: () => {},
+  selectedBankId: "",
+  setSelectedBankId: (): string | null => "",
+  cachedBalance : null,
+setCachedBalance: (): number | null => null
 });
 
 const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   const [isloading, setIsloading] = useState(false);
   const [loggedIn, _setOnce] = useState(false);
   const [providers, setProviders] = useState<IProviders[]>([]);
+  const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
+  const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
+  const [cachedBalance, setCachedBalance] = useState<number | null>(null);
+
 
   async function getAllProviders() {
     setIsloading(true);
@@ -48,9 +64,34 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const getAllConnectedBanks = async () => {
+    apiCAll({
+      method: "get",
+      url: "provider/banks",
+      sCB(res) {
+        setAllConnectedBanks(res.data);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
   return (
     <StoreContext.Provider
-      value={{ isloading, setIsloading, loggedIn, providers, getAllProviders }}
+      value={{
+        isloading,
+        setIsloading,
+        loggedIn,
+        providers,
+        getAllProviders,
+        connectedBanks,
+        getAllConnectedBanks,
+        selectedBankId,
+        setSelectedBankId,
+        cachedBalance,
+        setCachedBalance
+      }}
     >
       {children}
     </StoreContext.Provider>
