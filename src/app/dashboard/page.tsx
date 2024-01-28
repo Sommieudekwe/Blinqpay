@@ -115,7 +115,6 @@ setCachedBalance
         // setAccountBalance(res.data);
         // setCachedBalance(res.data)
         if(cachedBalance && res.data.availableBalance === cachedBalance) {
-          notify.success("i am returning a cached balance");
           return;
         }else{
           setAccountBalance(res.data);
@@ -147,16 +146,19 @@ setCachedBalance
 
   useEffect(() => {
     const id = localStorage.getItem('selectedBankId');
+console.log(id);
+
     if(id) {
       getConnectedBanksBalance(Number(id));
-      notify.success('Bank balance fetched successfully');
     } else {
       if (connectedBanks.length >= 1) {
+         getConnectedBanksBalance(Number(connectedBanks[0].id));
+
          localStorage.setItem('selectedBankId', String(connectedBanks[0].id));
-         notify.error("No bank selected, default bank selected");
       }
     }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connectedBanks]);
 
   // console.log(selectedBankId, connectedBanks);
 
