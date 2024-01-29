@@ -41,9 +41,12 @@ export default function Connected() {
   async function disconnectProvider(id: number | undefined) {
     await apiCAll({
       url: `provider/${id}/disconnect`,
-      method: "get",
+      method: "post",
       sCB(res) {
         console.log(res);
+        setData((prevData) =>
+          prevData.filter((provider) => provider.id !== id)
+        );
       },
       eCB(res) {
         console.error(res.error);
