@@ -43,7 +43,7 @@ export default function Header() {
             isOpen ? "hidden lg:block" : "block"
           }`}
         >
-          <div className="h-[43px] w-[43px] bg-slate-300 rounded-full"></div>
+          <div className="">&#x1F44B;</div>
           <div>
             <h3 className="text-sm md:text-xl font-bold">OC</h3>
             <p className="opacity-40 text-[.75rem] md:text-base">Merchant</p>
