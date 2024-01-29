@@ -8,8 +8,6 @@ import { useStore } from "@/context/store";
 
 export default function Connectivity() {
   const router = useRouter();
-  // const AvailableBanks = ["Binance", "Kuda", "Paxful", "Moniepoint"];
-  // const AllBanks = ["Providus", "Kuda", "Moniepoint"];
   const { loggedIn, getAllProviders, providers } = useStore();
   console.log("user logged in?", loggedIn);
 
@@ -28,8 +26,6 @@ export default function Connectivity() {
     getAllProviders();
   }, []);
 
-  console.log(providers);
-
   return (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
@@ -40,7 +36,7 @@ export default function Connectivity() {
           >
             <div className="w-full max-w-[16.25rem] relative h-[3.438rem]">
               {/* Addd bank image */}
-              {/* <Image src={bank.logo} alt={"bank logo"} fill /> */}
+              <Image src={providers.logo} alt={"bank logo"} fill />
             </div>
             <div>{providers.name}</div>
             <Button
