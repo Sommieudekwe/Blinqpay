@@ -107,4 +107,5 @@ export interface IProviders {
   type?: "BANK" | null | "EXCHANGE";
   updatedAt?: string;
   img?: string;
+  logo: string;
 }
