@@ -13,12 +13,10 @@ import { useOrders } from "@/context/pendingOrder";
 import { Icons } from "@/components/icons";
 import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Combobox from "@/components/ui/combobox";
 
 import { SelectConnectedBanks } from "@/components/ui/select";
 import EmptyState from "@/components/empty-state";
-import { IProviders } from "@/types";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 
@@ -30,8 +28,6 @@ export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  // const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
-  // const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
 
   const pathname = usePathname();
   const {
@@ -40,23 +36,19 @@ export default function Dashboard() {
     selectedBankId,
     setSelectedBankId,
     cachedBalance,
-setCachedBalance
+    setCachedBalance,
   } = useStore();
-  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>(
-   { availableBalance : cachedBalance as number}
-  );
+  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>({
+    availableBalance: cachedBalance as number,
+  });
 
   const openDialog = () => {
     setIsDialogOpen(true);
   };
 
-  // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
-
   const handleBlurToggle = () => {
     setIsBlurred((prevIsBlurred) => !prevIsBlurred);
   };
-
-  // console.log(hasToken(), getToken(), 'HERE ARE THE TOKENS FROM THE COOKIES!!');
 
   // Get store values
   const {
@@ -89,19 +81,6 @@ setCachedBalance
     });
   };
 
-  // const getAllConnectedBanks = async () => {
-  //   apiCAll({
-  //     method: "get",
-  //     url: "provider/banks",
-  //     sCB(res) {
-  //       setAllConnectedBanks(res.data);
-  //     },
-  //     eCB(res) {
-  //       console.error(res.error);
-  //     },
-  //   });
-  // };
-
   const handleNoConfirmation = () => {
     setPendingOrdersIds([]);
     setIsDialogOpen(false);
@@ -114,14 +93,12 @@ setCachedBalance
       sCB(res) {
         // setAccountBalance(res.data);
         // setCachedBalance(res.data)
-        if(cachedBalance && res.data.availableBalance === cachedBalance) {
+        if (cachedBalance && res.data.availableBalance === cachedBalance) {
           return;
-        }else{
+        } else {
           setAccountBalance(res.data);
-          setCachedBalance(res.data.availableBalance)
+          setCachedBalance(res.data.availableBalance);
         }
-        
-
       },
       eCB(res) {
         console.error(res.error);
@@ -131,41 +108,38 @@ setCachedBalance
 
   const handleSelectChange = (id: string) => {
     setSelectedBankId(id);
-   localStorage.setItem('selectedBankId', id);
+    localStorage.setItem("selectedBankId", id);
 
     getConnectedBanksBalance(Number(id));
     return id;
   };
 
-
   useEffect(() => {
     getPendingOrders();
     getAllConnectedBanks();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   useEffect(() => {
-    const id = localStorage.getItem('selectedBankId');
-console.log(id);
+    const id = localStorage.getItem("selectedBankId");
+    console.log(id);
 
-    if(id) {
+    // On page refresh, if ther is an id in localStorage, fetch the balance with that id, otherwise if you first login into app and there is no ide, it first gets the
+    // connected banks and get the id of the first element there after which the id is set to local storage.
+    if (id) {
       getConnectedBanksBalance(Number(id));
     } else {
       if (connectedBanks.length >= 1) {
-         getConnectedBanksBalance(Number(connectedBanks[0].id));
-
-         localStorage.setItem('selectedBankId', String(connectedBanks[0].id));
+        getConnectedBanksBalance(Number(connectedBanks[0].id));
+        // set selectedbank id in local storage so that the request is made as component mounts.
+        localStorage.setItem("selectedBankId", String(connectedBanks[0].id));
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectedBanks]);
 
-  // console.log(selectedBankId, connectedBanks);
-
-  // console.log(accountBalance);
-
-  if(!connectedBanks.length) {
-    return <div></div>
+  if (!connectedBanks.length) {
+    return <div></div>;
   }
 
   return (
