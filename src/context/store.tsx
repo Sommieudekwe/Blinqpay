@@ -34,8 +34,8 @@ const StoreContext = createContext<StoreContextProps>({
   getAllConnectedBanks: () => {},
   selectedBankId: "",
   setSelectedBankId: (): string | null => "",
-  cachedBalance : null,
-setCachedBalance: (): number | null => null
+  cachedBalance: null,
+  setCachedBalance: (): number | null => null,
 });
 
 const StoreProvider = ({ children }: { children: React.ReactNode }) => {
@@ -45,7 +45,6 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
   const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
   const [cachedBalance, setCachedBalance] = useState<number | null>(null);
-
 
   async function getAllProviders() {
     setIsloading(true);
@@ -90,7 +89,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
         selectedBankId,
         setSelectedBankId,
         cachedBalance,
-        setCachedBalance
+        setCachedBalance,
       }}
     >
       {children}

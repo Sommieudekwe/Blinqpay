@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,7 +11,8 @@ import { useStore } from "@/context/store";
 
 export default function BankHistory() {
   const [data, setData] = useState([]);
-  const { connectedBanks, selectedBankId, getAllConnectedBanks } = useStore();
+  // const { connectedBanks, selectedBankId, getAllConnectedBanks } = useStore();
+  const selectedBankId = localStorage.getItem("selectedBankId")
   const getBankTransactionsHistory = async () => {
     if (selectedBankId !== null) {
       console.log("request sent");
@@ -32,9 +34,7 @@ export default function BankHistory() {
     getBankTransactionsHistory();
   }, [selectedBankId]);
 
-  useEffect(() => {
-    getAllConnectedBanks();
-  }, []);
+  console.log(selectedBankId);
 
   return (
     <section className="w-full h-full">
