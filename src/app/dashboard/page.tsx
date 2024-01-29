@@ -89,7 +89,7 @@ export default function Dashboard() {
   const getConnectedBanksBalance = async (id: number) => {
     apiCAll({
       method: "get",
-      url: `bank/${id}/balance`,
+      url: `/bank/${id}/balance`,
       sCB(res) {
         // setAccountBalance(res.data);
         // setCachedBalance(res.data)
@@ -138,9 +138,9 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connectedBanks]);
 
-  if (!connectedBanks.length) {
-    return <div></div>;
-  }
+  // if (!connectedBanks.length) {
+  //   return <div>Hello world</div>;
+  // }
 
   return (
     <div className="">
@@ -148,13 +148,13 @@ export default function Dashboard() {
         <div>
           <p className="flex items-center gap-x-2">
             <span className="opacity-50">Bank Balance</span>
-            <Image
+            {/* <Image
               src="/dashboard/banks/kuda.svg"
               alt="kuda.svg"
               className="opacity-100"
               width={30}
               height={20}
-            />
+            /> */}
           </p>
           <div className="flex items-center gap-2">
             <h2
@@ -207,7 +207,7 @@ export default function Dashboard() {
 
             <h3 className="opacity-50">Total Transfer Count</h3>
 
-            <h4 className="mt-3 text-2xl font-bold">5000</h4>
+            <h4 className="mt-3 text-2xl font-bold">0</h4>
           </div>
           <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
             <span className="text-3xl absolute right-5 top-0">...</span>
@@ -217,7 +217,7 @@ export default function Dashboard() {
             <h4
               className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}
             >
-              &#8358;11,000,000
+              &#8358;{formatAmount(0)}
             </h4>
           </div>
 
@@ -226,7 +226,7 @@ export default function Dashboard() {
               <h3 className="opacity-50">Wallet Ballance</h3>
 
               <h4 className="mt-3 text-2xl font-bold">
-                &#8358;{formatAmount(10000)}
+                &#8358;{formatAmount(0)}
               </h4>
             </div>
           </div>

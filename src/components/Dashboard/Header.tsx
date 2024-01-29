@@ -1,11 +1,36 @@
 "use client";
-
+import apiCAll from "@/lib/apiCall";
 import Hamburger from "hamburger-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Sidebar from "./Sidebar";
+
+type userProps = {
+  firstName: string;
+  role: string;
+};
+
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
+  const [user, setUser] = useState<userProps | null>(null);
+
+  const getUser = async () => {
+    apiCAll({
+      url: "/auth",
+      method: "get",
+      sCB(res) {
+        console.log(res.data);
+        setUser(res.data);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <nav className="flex items-center justify-between h-20 w-full lg:bg-[#EFEFEF] bg-white dark:bg-primary-dashboard sticky top-0 z-10 lg:px-10">
@@ -45,8 +70,10 @@ export default function Header() {
         >
           <div className="">&#x1F44B;</div>
           <div>
-            <h3 className="text-sm md:text-xl font-bold">OC</h3>
-            <p className="opacity-40 text-[.75rem] md:text-base">Merchant</p>
+            <h3 className="text-sm md:text-xl font-bold">{user?.firstName}</h3>
+            <p className="opacity-40 text-[.75rem] md:text-base">
+              {user?.role}
+            </p>
           </div>
         </div>
       </div>
