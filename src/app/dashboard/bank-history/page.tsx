@@ -12,7 +12,8 @@ import { useStore } from "@/context/store";
 export default function BankHistory() {
   const [data, setData] = useState([]);
   // const { connectedBanks, selectedBankId, getAllConnectedBanks } = useStore();
-  const selectedBankId = localStorage.getItem("selectedBankId")
+  const selectedBankId =
+    typeof window !== "undefined" && localStorage.getItem("selectedBankId");
   const getBankTransactionsHistory = async () => {
     if (selectedBankId !== null) {
       console.log("request sent");
