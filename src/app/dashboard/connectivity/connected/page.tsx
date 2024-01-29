@@ -38,12 +38,25 @@ export default function Connected() {
     getConnectedProviders();
   }, []);
 
+  async function disconnectProvider(id: number | undefined) {
+    await apiCAll({
+      url: `provider/${id}/disconnect`,
+      method: "get",
+      sCB(res) {
+        console.log(res);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  }
+
   console.log(data);
 
   return data.length > 0 ? (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
-        {data.map((bank, index) => (
+        {data.map((provider, index) => (
           <div
             key={index}
             className="w-full p-5 space-y-8 flex flex-col items-center border dark:border-border-connect bg-milky dark:bg-bank-bg"
@@ -53,8 +66,12 @@ export default function Connected() {
               {/* <Image src={bank.logo} alt={"bank logo"} fill /> */}
             </div>
 
-            <Button variant={"outline"} disabled={true} className="bg-gray-300">
-              Connected
+            <Button
+              variant={"outline"}
+              className="bg-gray-300"
+              onClick={() => disconnectProvider(provider?.id)}
+            >
+              Disconnect
             </Button>
           </div>
         ))}
