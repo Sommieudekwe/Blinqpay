@@ -117,7 +117,7 @@ export default function Dashboard() {
     apiCAll({
       method: "get",
       url: `/bank/${id}/balance`,
-      sCB(res) {z
+      sCB(res) {
         // setAccountBalance(res.data);
         // setCachedBalance(res.data)
         if (cachedBalance && res.data.availableBalance === cachedBalance) {
