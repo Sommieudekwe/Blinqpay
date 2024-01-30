@@ -21,7 +21,7 @@ import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 
 type AccountBalance = {
-  availableBalance: number;
+  AvailableBalance: number;
 };
 
 export default function Dashboard() {
@@ -39,7 +39,7 @@ export default function Dashboard() {
     setCachedBalance,
   } = useStore();
   const [accountBalance, setAccountBalance] = useState<AccountBalance | null>({
-    availableBalance: cachedBalance as number,
+    AvailableBalance: cachedBalance as number,
   });
 
   const openDialog = () => {
@@ -71,6 +71,7 @@ export default function Dashboard() {
         setIsLoading(false);
         setIsDialogOpen(false);
         setPendingOrdersIds([]);
+        console.log("Order cancelled");
       },
       eCB(res) {
         console.error(res);
@@ -142,6 +143,16 @@ export default function Dashboard() {
   //   return <div>Hello world</div>;
   // }
 
+  console.log(
+    "cached:",
+    cachedBalance,
+    accountBalance,
+    "selectedId:",
+    selectedBankId,
+    "connectedBanks:",
+    connectedBanks
+  );
+
   return (
     <div className="">
       <div className="lg:flex justify-between">
@@ -163,7 +174,7 @@ export default function Dashboard() {
               }`}
             >
               {accountBalance !== null ? (
-                <p>&#8358;{formatAmount(accountBalance?.availableBalance)}</p>
+                <p>&#8358;{formatAmount(accountBalance?.AvailableBalance)}</p>
               ) : (
                 <p>&#8358;0.00</p>
               )}
