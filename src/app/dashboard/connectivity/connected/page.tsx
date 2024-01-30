@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import apiCAll from "@/lib/apiCall";
 import { IProviders } from "@/types";
 import { AlertTriangle } from "lucide-react";
+import EmptyState from "@/components/empty-state";
 
 export default function Connected() {
   const router = useRouter();
@@ -81,16 +82,17 @@ export default function Connected() {
       </div>
     </section>
   ) : (
-    <div>
-      <div className="flex flex-col justify-center items-center h-[80vh]">
-        <div>
-          <AlertTriangle size={36} />
-        </div>
+    // <div>
+    //   <div className="flex flex-col justify-center items-center h-[80vh]">
+    //     <div>
+    //       <AlertTriangle size={36} />
+    //     </div>
 
-        <div className="max-w-sm text-center mt-2">
-          <span className="text-xl">No Exchange connected yet.</span>
-        </div>
-      </div>
-    </div>
+    //     <div className="max-w-sm text-center mt-2">
+    //       <span className="text-xl">No Exchange connected yet.</span>
+    //     </div>
+    //   </div>
+    // </div>
+    <EmptyState label="No Exchange connected yet." />
   );
 }

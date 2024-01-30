@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { bankList } from "./constants";
+import EmptyState from "@/components/empty-state";
 import { useStore } from "@/context/store";
 
 export default function Connectivity() {
@@ -28,7 +28,8 @@ export default function Connectivity() {
 
   return (
     <section className="w-full h-full">
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
+      {providers.length >= 1 ? (<div>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
         {providers.map((providers, i) => (
           <div
             key={i}
@@ -59,6 +60,8 @@ export default function Connectivity() {
           </div>
         ))}
       </div>
+      </div>) : (<EmptyState />)}
+      
     </section>
   );
 }

@@ -6,6 +6,7 @@ import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import CancelModal from "./cancelModal";
+import PayModal from "./payModal";
 
 interface TableProps {
   data: IDashboard[];
@@ -50,7 +51,7 @@ export default function MobileTable({ data }: TableProps) {
           </div>
 
           <div className="inline-flex flex-col space-y-2">
-            <Button className="whitespace-nowrap">Pay now</Button>
+            <PayModal orderId={d.id} />
             <CancelModal orderId={d.id} />
           </div>
         </div>

@@ -39,13 +39,19 @@ export default function BankHistory() {
 
   return (
     <section className="w-full h-full">
-      <div className="hidden lg:block">
-        <DataTable columns={columns} data={data} />
-      </div>
+      {data.length >= 1 ? (
+        <div>
+          <div className="hidden lg:block">
+            <DataTable columns={columns} data={data} />
+          </div>
 
-      <div className="block lg:hidden">
-        <BankHistoryDashboard data={data} />
-      </div>
+          <div className="block lg:hidden">
+            <BankHistoryDashboard data={data} />
+          </div>
+        </div>
+      ) : (
+        <EmptyState label="No transaction history found." />
+      )}
     </section>
   );
 }
