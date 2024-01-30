@@ -8,6 +8,7 @@ import { bankHistoryData } from "./data";
 import BankHistoryDashboard from "@/app/dashboard/bank-history/BankHistoryMobile";
 import apiCAll from "@/lib/apiCall";
 import { useStore } from "@/context/store";
+import EmptyState from "@/components/empty-state";
 
 export default function BankHistory() {
   const [data, setData] = useState([]);
@@ -16,7 +17,6 @@ export default function BankHistory() {
     typeof window !== "undefined" && localStorage.getItem("selectedBankId");
   const getBankTransactionsHistory = async () => {
     if (selectedBankId !== null) {
-      console.log("request sent");
       apiCAll({
         method: "get",
         url: `bank/${Number(selectedBankId)}/transactions?page=1&pageSize=5`,

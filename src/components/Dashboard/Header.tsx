@@ -19,7 +19,6 @@ export default function Header() {
       url: "/auth",
       method: "get",
       sCB(res) {
-        console.log(res.data);
         setUser(res.data);
       },
       eCB(res) {
