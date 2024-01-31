@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
+import PayModal from "./payModal";
 import CancelModal from "./cancelModal";
 
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
@@ -74,11 +75,10 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "action",
     header: () => <div className="w-28">Action</div>,
     cell: ({ row }) => {
+      const { id } = row.original;
       return (
-        <div className="">
-          <Button className="text-right font-normal bg-[#E9E7F5]">
-            Pay now
-          </Button>
+        <div className="w-28">
+          <PayModal orderId={id} />
         </div>
       );
     },

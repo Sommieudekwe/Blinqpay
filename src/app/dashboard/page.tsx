@@ -26,6 +26,7 @@ type AccountBalance = {
 
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isPayDialogOpen, setIsPayDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
 
@@ -44,6 +45,10 @@ export default function Dashboard() {
 
   const openDialog = () => {
     setIsDialogOpen(true);
+  };
+
+  const openPayDialog = () => {
+    setIsPayDialogOpen(true);
   };
 
   const handleBlurToggle = () => {
@@ -82,12 +87,33 @@ export default function Dashboard() {
     });
   };
 
+  const handlePayAllOrder = async () => {
+    setIsLoading(true);
+    apiCAll({
+      method: "post",
+      url: "/order/pay",
+      data: { orderIds: pendingOrdersIds },
+      sCB(res) {
+        setPendingOrders([]);
+        setIsLoading(false);
+        setIsPayDialogOpen(false);
+        setPendingOrdersIds([]);
+        console.log("order payed", res.data);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
   const handleNoConfirmation = () => {
     setPendingOrdersIds([]);
     setIsDialogOpen(false);
+    setIsPayDialogOpen(false);
   };
 
   const getConnectedBanksBalance = async (id: number) => {
+    console.log("id:", id);
     apiCAll({
       method: "get",
       url: `/bank/${id}/balance`,
@@ -142,16 +168,6 @@ export default function Dashboard() {
   // if (!connectedBanks.length) {
   //   return <div>Hello world</div>;
   // }
-
-  console.log(
-    "cached:",
-    cachedBalance,
-    accountBalance,
-    "selectedId:",
-    selectedBankId,
-    "connectedBanks:",
-    connectedBanks
-  );
 
   return (
     <div className="">
@@ -262,7 +278,11 @@ export default function Dashboard() {
 
           <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
             <div>
-              <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white">
+              <Button
+                className="!bg-button-primary text-[.75rem] lg:text-base text-white"
+                onClick={() => openPayDialog()}
+                // disabled={pendingOrders.length === 0}
+              >
                 Pay all
               </Button>
             </div>
@@ -270,6 +290,7 @@ export default function Dashboard() {
               <Button
                 className="bg-transparent text-[.75rem] lg:text-base"
                 onClick={() => openDialog()}
+                disabled={pendingOrders.length === 0}
               >
                 Cancel all
               </Button>
@@ -324,13 +345,43 @@ export default function Dashboard() {
             />
 
             <p className="mt-5 font-medium text-lg lg:text-2xl">
-              Are you sure you want to cancel this order?
+              Are you sure you want to cancel all orders?
             </p>
 
             <Button
               variant="primary"
               className="w-full mt-12"
               onClick={handleCancelAllOrder}
+              isLoading={loading}
+            >
+              Yes
+            </Button>
+            <Button className="w-full mt-5" onClick={handleNoConfirmation}>
+              No
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isPayDialogOpen} onOpenChange={setIsPayDialogOpen}>
+        <DialogContent className="text-center text-white">
+          <div className="flex flex-col items-center">
+            <Image
+              src="./dashboard/warning.svg"
+              alt="warning"
+              width={88}
+              height={88}
+              className="flex justify-center"
+            />
+
+            <p className="mt-5 font-medium text-lg lg:text-2xl">
+              Are you sure you want to pay all orders?
+            </p>
+
+            <Button
+              variant="primary"
+              className="w-full mt-12"
+              onClick={handlePayAllOrder}
               isLoading={loading}
             >
               Yes
