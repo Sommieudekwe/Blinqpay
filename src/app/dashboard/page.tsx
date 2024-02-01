@@ -120,6 +120,8 @@ export default function Dashboard() {
       sCB(res) {
         // setAccountBalance(res.data);
         // setCachedBalance(res.data)
+
+        console.log(res.data);
         if (cachedBalance && res.data.availableBalance === cachedBalance) {
           return;
         } else {

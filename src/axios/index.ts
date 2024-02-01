@@ -3,7 +3,7 @@ import { useRediret } from "@/hooks/useRedirect";
 import { fmtResponse, getToken, hasToken, removeToken } from "@/lib/utils";
 import axios, { AxiosRequestConfig } from "axios";
 
-let baseURL = "https://blinq-78a87a7e45b1.herokuapp.com/api/v1";
+let baseURL = "https://blinq-be-78cd13298835.herokuapp.com/api/v1";
 
 const service = axios.create({
   baseURL,
