@@ -100,11 +100,13 @@ export default function Connectivity() {
         data: walletCredentials,
         toast: true,
         method: "post",
-        sCB() {
+        sCB(res) {
           setIsLoading(false);
           setIsSuccess(true);
+          console.log(res)
         },
-        eCB() {
+        eCB(res) {
+          console.error(res.error)
           setIsLoading(false);
         },
       });
