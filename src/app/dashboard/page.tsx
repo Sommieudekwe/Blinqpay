@@ -21,7 +21,7 @@ import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 
 type AccountBalance = {
-  AvailableBalance: number;
+  availableBalance: number;
 };
 
 export default function Dashboard() {
@@ -40,7 +40,7 @@ export default function Dashboard() {
     setCachedBalance,
   } = useStore();
   const [accountBalance, setAccountBalance] = useState<AccountBalance | null>({
-    AvailableBalance: cachedBalance as number,
+    availableBalance: cachedBalance as number,
   });
 
   const openDialog = () => {
@@ -192,7 +192,7 @@ export default function Dashboard() {
               }`}
             >
               {accountBalance !== null ? (
-                <p>&#8358;{formatAmount(accountBalance?.AvailableBalance)}</p>
+                <p>&#8358;{formatAmount(accountBalance?.availableBalance)}</p>
               ) : (
                 <p>&#8358;0.00</p>
               )}

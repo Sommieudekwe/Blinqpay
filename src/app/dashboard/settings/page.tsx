@@ -112,6 +112,7 @@ export default function Connectivity() {
 
   const handleSignOut = () => {
     removeToken();
+    localStorage.clear();
     router.push("/auth");
   };
   /*
