@@ -55,8 +55,7 @@ service.interceptors.response.use(
 
     if (unauthorized.includes(response?.data.message)) {
       removeToken();
-      const { redirect } = useRediret();
-      redirect("/login");
+      window.location.href = "/auth"
       notify.error(response?.data.message);
     }
 
