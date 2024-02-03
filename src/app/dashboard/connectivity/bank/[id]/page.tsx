@@ -82,6 +82,7 @@ export default function Connectivity() {
         setIsSuccess(true);
       },
       eCB(res) {
+        console.error(res.error);
         setisLoading(false);
       },
     });
