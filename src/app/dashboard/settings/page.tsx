@@ -113,6 +113,7 @@ export default function Connectivity() {
   const handleSignOut = () => {
     removeToken();
     localStorage.clear();
+    localStorage.removeItem("selectedBankId");
     router.push("/auth");
   };
   /*

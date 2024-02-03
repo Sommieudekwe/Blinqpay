@@ -171,6 +171,8 @@ export default function Dashboard() {
   //   return <div>Hello world</div>;
   // }
 
+  console.log(connectedBanks);
+
   return (
     <div className="">
       <div className="lg:flex justify-between">
