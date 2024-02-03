@@ -54,8 +54,9 @@ service.interceptors.response.use(
     ];
 
     if (unauthorized.includes(response?.data.message)) {
+      localStorage.clear();
       removeToken();
-      window.location.href = "/auth"
+      window.location.href = "/auth";
       notify.error(response?.data.message);
     }
 
