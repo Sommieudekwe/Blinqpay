@@ -14,6 +14,7 @@ interface OrdersContextProps {
   getPendingOrders: () => void;
   setPendingOrders: Dispatch<SetStateAction<IDashboard[]>>;
   isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
   pendingOrdersIds: number[];
   setPendingOrdersIds: Dispatch<SetStateAction<number[]>>;
 }
@@ -51,6 +52,7 @@ const OrdersProvider = ({ children }: { children: React.ReactNode }) => {
         getPendingOrders,
         setPendingOrders,
         isLoading,
+        setIsLoading,
         pendingOrdersIds,
         setPendingOrdersIds,
       }}

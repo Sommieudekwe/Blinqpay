@@ -25,6 +25,8 @@ import {
 import * as React from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import EmptyState from "../empty-state";
+import { Button, buttonVariants } from "./button";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -41,14 +43,33 @@ interface DataTableProps<TData, TValue> {
   dummyData?: TData[];
   noHeader?: boolean;
   emptyStateLabel?: string;
+  paginationData?: PaginationTypes;
+  getPageData?: (page: number) => void;
 }
 
-export type ResourceQueryInput = {
+export type PaginationTypes = {
   pageSize: number;
-  pageNumber: number;
-  filterJsonString?: string;
-  order?: string;
+  page: number;
+  currentPage?: number;
+  hasNext?: boolean;
+  pages?: number;
+  lastPage?: number | null;
+  hasPrevious?: boolean;
+  next?: number | null;
+  prevPage?: number | null;
+  total?: string;
 };
+
+// "hasNext": true,
+// "pageSize": 10,
+// "currentPage": 1,
+// "page": 1,
+// "pages": 2,
+// "lastPage": 2,
+// "total": 11,
+// "hasPrevious": false,
+// "next": 2,
+// "prevPage": null
 
 export function DataTable<TData, TValue>({
   columns,
@@ -56,6 +77,8 @@ export function DataTable<TData, TValue>({
   emptyState,
   noHeader,
   show_pagination = true,
+  paginationData,
+  getPageData,
   emptyStateLabel,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
@@ -154,8 +177,34 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {show_pagination && table.getRowModel().rows?.length > 0 && (
-        <DataTablePagination table={table} />
+      {paginationData && (
+        // <DataTablePagination table={table} />
+        <div className="table-pagination w-auto flex space-x-2">
+          <Button
+            disabled={!paginationData.hasPrevious}
+            onClick={() =>
+              getPageData && getPageData(paginationData.prevPage as number)
+            }
+            className="capitalize bottom-0"
+          >
+            prev
+          </Button>
+          <div className={cn(buttonVariants({ variant: "default" }))}>
+            <p className="text-sm">
+              {paginationData.currentPage} of {paginationData.pages} pages
+            </p>
+          </div>
+
+          <Button
+            disabled={!paginationData.hasNext}
+            onClick={() =>
+              getPageData && getPageData(paginationData.next as number)
+            }
+            className="capitalize"
+          >
+            next
+          </Button>
+        </div>
       )}
     </div>
   );

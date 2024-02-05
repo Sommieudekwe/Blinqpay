@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable, PaginationTypes } from "@/components/ui/data-table";
 import { dashboardColumn } from "./home/column";
 import { Button } from "@/components/ui/button";
 import MobileTable from "@/app/dashboard/home/DashboardMobileTable";
@@ -19,6 +19,7 @@ import EmptyState from "@/components/empty-state";
 import { usePathname } from "next/navigation";
 import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
+import { IDashboard } from "@/types";
 
 type AccountBalance = {
   availableBalance: number;
@@ -29,6 +30,8 @@ export default function Dashboard() {
   const [isPayDialogOpen, setIsPayDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
+  const [paginationData, setPaginationData] = useState<PaginationTypes | undefined>()
+
 
   const pathname = usePathname();
   const {
@@ -141,6 +144,27 @@ export default function Dashboard() {
 
     getConnectedBanksBalance(Number(id));
     return id;
+  };
+
+  const getMorePendingOrders = async (page: number) => {
+    setIsLoading(true);
+    try {
+      await apiCAll({
+        url: "/order/all?page=1&pageSize=10",
+        method: "get",
+        sCB(res) {
+          const orders: IDashboard[] = res.data.data;
+          setPendingOrders(orders);
+          setPendingOrdersIds(orders.map((order) => order.id));
+          const paginationData: PaginationTypes = res.data.pagination;
+          setPaginationData(paginationData);
+        },
+      });
+    } catch (error) {
+      console.error(error, "this is the error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -324,6 +348,8 @@ export default function Dashboard() {
               columns={dashboardColumn}
               data={pendingOrders}
               emptyStateLabel="No active orders yet."
+              paginationData={paginationData}
+              getPageData={getMorePendingOrders}
             />
           </div>
 
