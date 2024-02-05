@@ -77,7 +77,7 @@ export function DataTable<TData, TValue>({
   emptyState,
   noHeader,
   show_pagination = true,
-  paginationData ,
+  paginationData,
   getPageData,
   emptyStateLabel,
 }: DataTableProps<TData, TValue>) {
@@ -180,16 +180,28 @@ export function DataTable<TData, TValue>({
       {paginationData && (
         // <DataTablePagination table={table} />
         <div className="table-pagination w-auto flex space-x-2">
-          <Button disabled={!paginationData.hasPrevious} onClick={() => getPageData && getPageData(paginationData.prevPage as number)}  className="capitalize">
+          <Button
+            disabled={!paginationData.hasPrevious}
+            onClick={() =>
+              getPageData && getPageData(paginationData.prevPage as number)
+            }
+            className="capitalize bottom-0"
+          >
             prev
           </Button>
-          <div className={cn(buttonVariants({variant: "default"}))}>
+          <div className={cn(buttonVariants({ variant: "default" }))}>
             <p className="text-sm">
               {paginationData.currentPage} of {paginationData.pages} pages
             </p>
           </div>
 
-          <Button disabled={!paginationData.hasNext} onClick={() => getPageData &&  getPageData(paginationData.next as number) }  className="capitalize">
+          <Button
+            disabled={!paginationData.hasNext}
+            onClick={() =>
+              getPageData && getPageData(paginationData.next as number)
+            }
+            className="capitalize"
+          >
             next
           </Button>
         </div>
