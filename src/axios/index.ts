@@ -55,6 +55,7 @@ service.interceptors.response.use(
 
     if (unauthorized.includes(response?.data.message)) {
       removeToken();
+      window.localStorage.clear()
       window.location.href = "/auth"
       notify.error(response?.data.message);
     }
