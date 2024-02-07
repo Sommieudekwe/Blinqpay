@@ -22,7 +22,7 @@ export default function BankHistory() {
     if (selectedBankId !== null) {
       apiCAll({
         method: "get",
-        url: `bank/${Number(selectedBankId)}/transactions?page=1&pageSize=5`,
+        url: `bank/${Number(selectedBankId)}/transactions?page=1&pageSize=50`,
         sCB(res) {
           setData(res.data.data);
           const paginationData: PaginationTypes = res.data.pagination;
@@ -39,7 +39,7 @@ export default function BankHistory() {
     if (selectedBankId !== null) {
       apiCAll({
         method: "get",
-        url: `bank/${Number(selectedBankId)}/transactions?page=${page}&pageSize=20`,
+        url: `bank/${Number(selectedBankId)}/transactions?page=${page}&pageSize=50`,
         sCB(res) {
           setData(res.data.data);
           const paginationData: PaginationTypes = res.data.pagination;
