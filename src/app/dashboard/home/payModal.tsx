@@ -29,6 +29,7 @@ export default function PayModal({ orderId }: dataProps) {
       },
       eCB(res) {
         setIsLoading(false);
+        setOpenDialog(false);
         console.error(res.error);
       },
       toast: true,

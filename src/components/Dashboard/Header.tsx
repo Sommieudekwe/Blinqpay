@@ -1,7 +1,7 @@
 "use client";
-import apiCAll from "@/lib/apiCall";
 import Hamburger from "hamburger-react";
 import { useState, useEffect } from "react";
+import { useUser } from "@/context/user";
 
 import Sidebar from "./Sidebar";
 
@@ -12,20 +12,8 @@ type userProps = {
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
-  const [user, setUser] = useState<userProps | null>(null);
 
-  const getUser = async () => {
-    apiCAll({
-      url: "/auth",
-      method: "get",
-      sCB(res) {
-        setUser(res.data);
-      },
-      eCB(res) {
-        console.error(res.error);
-      },
-    });
-  };
+  const { user, getUser } = useUser();
 
   useEffect(() => {
     getUser();

@@ -24,6 +24,7 @@ import { loginAPI, registerAPI } from "@/axios/endpoints/auth";
 import { notify } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
+import { useUser } from "@/context/user";
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
@@ -110,10 +111,11 @@ export default function Connectivity() {
     // const {error, serverResponse} = await registerAPI({name: "ifeoluwa"})
   }
 
+  const { user, getUser } = useUser();
+
   const handleSignOut = () => {
     removeToken();
-    localStorage.clear();
-    localStorage.removeItem("selectedBankId");
+    window.localStorage.clear();
     router.push("/auth");
   };
   /*
@@ -124,6 +126,7 @@ export default function Connectivity() {
    */
 
   useEffect(() => {
+    getUser();
     setMounted(true);
   }, []);
 
@@ -143,9 +146,11 @@ export default function Connectivity() {
 
             <div className="h-[2.938rem]">
               <p className="dark:text-white font-bold text-xl">
-                Olawale Chinedu
+                {user?.firstName} {user?.lastName}
               </p>
-              <p className="dark:text-white font-medium opacity-40">Merchant</p>
+              <p className="dark:text-white font-medium opacity-40">
+                {user?.role}
+              </p>
             </div>
           </div>
         </div>
