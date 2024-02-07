@@ -42,14 +42,14 @@ export default function OrderHistoryMobileTable({
             <p
               className={cn(
                 "capitalize rounded-3xl px-2.5 py-1 text-sm",
-                d.status === "COMPLETE"
+                d.status === "SUCCESSFULL"
                   ? "text-success bg-success bg-opacity-10 inline-flex"
                   : d.status === "FAILED"
                   ? "text-failed bg-failed bg-opacity-10 inline-flex"
                   : "text-pending bg-pending bg-opacity-10 inline-flex"
               )}
             >
-              PAID
+              Paid
             </p>
           </div>
         </div>
