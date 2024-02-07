@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toast/toaster";
 import StoreProvider from "@/context/store";
 import React from "react";
 import { OrdersProvider } from "@/context/pendingOrder";
+import { UsersProvider } from "@/context/user";
 import Guard from "@/lib/guard";
 import { ThemeProvider } from "@/lib/providers";
 
@@ -26,7 +27,9 @@ export default function RootLayout({
         <ThemeProvider enableSystem={true} attribute="class">
           <Guard>
             <StoreProvider>
-              <OrdersProvider>{children}</OrdersProvider>
+              <OrdersProvider>
+                <UsersProvider>{children}</UsersProvider>
+              </OrdersProvider>
             </StoreProvider>
             <Toaster />
           </Guard>
