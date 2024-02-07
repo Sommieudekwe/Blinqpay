@@ -19,7 +19,7 @@ export default function OrderHistory() {
   async function getOrders() {
     try {
       await apiCAll({
-        url: "order/history?page=1&pageSize=10",
+        url: "order/history?page=1&pageSize=50",
         method: "get",
         sCB(res) {
           setData(res.data.data);

@@ -2,13 +2,20 @@
 import { IBankHistory } from "@/types";
 import { cn, formatAmount, formatDate } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { PaginationTypes } from "@/components/ui/data-table";
 
 interface TableProps {
   data: IBankHistory[];
+  paginationData?: PaginationTypes;
+  getPageData?: (page: number) => void;
 }
 
-export default function BankHistoryDashboard({ data }: TableProps) {
+export default function BankHistoryDashboard({
+  data,
+  paginationData,
+  getPageData,
+}: TableProps) {
   return (
     <div className="w-full">
       <h3 className="text-xl font-semibold">Bank History </h3>
@@ -51,6 +58,35 @@ export default function BankHistoryDashboard({ data }: TableProps) {
           </div>
         </div>
       ))}
+      {paginationData && (
+        // <DataTablePagination table={table} />
+        <div className="table-pagination w-auto flex space-x-2 mt-6">
+          <Button
+            disabled={!paginationData.hasPrevious}
+            onClick={() =>
+              getPageData && getPageData(paginationData.prevPage as number)
+            }
+            className="capitalize bottom-0"
+          >
+            prev
+          </Button>
+          <div className={cn(buttonVariants({ variant: "default" }))}>
+            <p className="text-sm">
+              {paginationData.currentPage} of {paginationData.pages} pages
+            </p>
+          </div>
+
+          <Button
+            disabled={!paginationData.hasNext}
+            onClick={() =>
+              getPageData && getPageData(paginationData.next as number)
+            }
+            className="capitalize"
+          >
+            next
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

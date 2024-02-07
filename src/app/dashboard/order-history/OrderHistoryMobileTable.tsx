@@ -49,7 +49,7 @@ export default function OrderHistoryMobileTable({
                   : "text-pending bg-pending bg-opacity-10 inline-flex"
               )}
             >
-              {d.status}
+              Paid
             </p>
           </div>
         </div>
