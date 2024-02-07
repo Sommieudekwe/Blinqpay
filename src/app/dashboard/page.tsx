@@ -179,6 +179,7 @@ export default function Dashboard() {
     }
   };
 
+  // ---------
   useEffect(() => {
     getPendingOrders();
     getAllConnectedBanks();
@@ -187,25 +188,19 @@ export default function Dashboard() {
 
   useEffect(() => {
     const id = localStorage.getItem("selectedBankId");
-    console.log(id);
+    console.log(id, "this is the id currently in the local storage");
+    console.log(connectedBanks, "this is the connected banks at this time.");
 
-    // On page refresh, if ther is an id in localStorage, fetch the balance with that id, otherwise if you first login into app and there is no ide, it first gets the
-    // connected banks and get the id of the first element there after which the id is set to local storage.
     if (id) {
       getConnectedBanksBalance(Number(id));
     } else {
       if (connectedBanks.length >= 1) {
         getConnectedBanksBalance(Number(connectedBanks[0].id));
-        // set selectedbank id in local storage so that the request is made as component mounts.
         localStorage.setItem("selectedBankId", String(connectedBanks[0].id));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connectedBanks]);
-
-  // if (!connectedBanks.length) {
-  //   return <div>Hello world</div>;
-  // }
+  }, [connectedBanks, pathname]);
 
   const getDashboardSummary = async () => {
     apiCAll({

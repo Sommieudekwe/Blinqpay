@@ -16,10 +16,11 @@ import {
 } from "@/components/ui/form";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn, saveToken } from "@/lib/utils";
-import React from "react";
+import React, { useEffect } from "react";
 import apiCAll from "@/lib/apiCall";
 import { notify } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
+import { useStore } from "@/context/store";
 
 const Schema = yup.object().shape({
   email: yup.string().required("Email is required!"),
@@ -36,6 +37,8 @@ const defaultValues: SchemaTypes = {
 export default function Login() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter();
+    
+  const {setAllConnectedBanks} = useStore() 
 
   const form = useForm<SchemaTypes>({
     resolver: yupResolver(Schema),
@@ -79,6 +82,10 @@ export default function Login() {
    *
    *
    */
+  useEffect(() => {
+    setAllConnectedBanks([])
+  }, [])
+  
   return (
     <div className="lg:grid grid-cols-2 gap-x-12 xl:gap-x-20 bg-milky sm:bg-white dark:bg-primary dark:text-white lg:px-24 xl:px-36 min-h-screen items-center pt-12 lg:pt-0">
       {/* Illustration */}

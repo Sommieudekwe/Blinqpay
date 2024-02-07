@@ -25,6 +25,7 @@ import { notify } from "@/components/ui/toast";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { useUser } from "@/context/user";
+import { useStore } from "@/context/store";
 
 export default function Connectivity() {
   const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
@@ -34,6 +35,7 @@ export default function Connectivity() {
   const [changePayMethod, setChangePayMethod] = React.useState<boolean>(false);
   const [step, setStep] = React.useState<number>(1);
   const [mounted, setMounted] = useState(false);
+  const {setAllConnectedBanks} = useStore()
 
   const router = useRouter();
   const { theme, setTheme } = useTheme();
@@ -115,6 +117,7 @@ export default function Connectivity() {
 
   const handleSignOut = () => {
     removeToken();
+    setAllConnectedBanks([])
     window.localStorage.clear();
     router.push("/auth");
   };
