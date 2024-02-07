@@ -13,8 +13,8 @@ import EmptyState from "@/components/empty-state";
 export default function BankHistory() {
   const [data, setData] = useState([]);
   const [paginationData, setPaginationData] = useState<
-  PaginationTypes | undefined
->();
+    PaginationTypes | undefined
+  >();
   // const { connectedBanks, selectedBankId, getAllConnectedBanks } = useStore();
   const selectedBankId =
     typeof window !== "undefined" && localStorage.getItem("selectedBankId");
@@ -39,7 +39,9 @@ export default function BankHistory() {
     if (selectedBankId !== null) {
       apiCAll({
         method: "get",
-        url: `bank/${Number(selectedBankId)}/transactions?page=${page}&pageSize=50`,
+        url: `bank/${Number(
+          selectedBankId
+        )}/transactions?page=${page}&pageSize=50`,
         sCB(res) {
           setData(res.data.data);
           const paginationData: PaginationTypes = res.data.pagination;
@@ -56,19 +58,27 @@ export default function BankHistory() {
     getBankTransactionsHistory();
   }, [selectedBankId]);
 
-  console.log(selectedBankId, data, "whts the issue");
+  console.log(selectedBankId, data, "whats the issue");
 
   return (
     <section className="w-full h-full">
       {data.length >= 1 ? (
         <div>
           <div className="hidden lg:block">
-            <DataTable columns={columns} data={data}   paginationData={paginationData}
-          getPageData={getMoreBankTransactionsHistory}/>
+            <DataTable
+              columns={columns}
+              data={data}
+              paginationData={paginationData}
+              getPageData={getMoreBankTransactionsHistory}
+            />
           </div>
 
           <div className="block lg:hidden">
-            <BankHistoryDashboard data={data} />
+            <BankHistoryDashboard
+              data={data}
+              paginationData={paginationData}
+              getPageData={getMoreBankTransactionsHistory}
+            />
           </div>
         </div>
       ) : (
