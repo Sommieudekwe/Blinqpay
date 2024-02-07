@@ -82,6 +82,8 @@ export function DataTable<TData, TValue>({
   emptyStateLabel,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
+  console.log(data, "this is the data from the table!");
+  
 
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -204,6 +206,17 @@ export function DataTable<TData, TValue>({
           >
             next
           </Button>
+          {
+            paginationData.lastPage && <Button
+            onClick={() =>
+              getPageData && getPageData(paginationData.lastPage as number)
+            }
+            className="capitalize"
+          >
+            last page
+          </Button>
+          }
+          
         </div>
       )}
     </div>
