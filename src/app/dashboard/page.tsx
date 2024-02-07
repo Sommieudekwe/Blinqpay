@@ -25,13 +25,22 @@ type AccountBalance = {
   availableBalance: number;
 };
 
+type DashboardSummary = {
+  totalTransferCount: number;
+  totalTransferAmount: number;
+  walletBalance: number;
+};
+
 export default function Dashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isPayDialogOpen, setIsPayDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [paginationData, setPaginationData] = useState<PaginationTypes | undefined>()
-
+  const [dashboardSummary, setDashboardSummary] =
+    useState<DashboardSummary | null>(null);
+  const [paginationData, setPaginationData] = useState<
+    PaginationTypes | undefined
+  >();
 
   const pathname = usePathname();
   const {
@@ -101,11 +110,14 @@ export default function Dashboard() {
         setIsLoading(false);
         setIsPayDialogOpen(false);
         setPendingOrdersIds([]);
-        console.log("order payed", res.data);
+        console.log("order paid", res.data);
       },
       eCB(res) {
+        setIsLoading(false);
+        setIsPayDialogOpen(false);
         console.error(res.error);
       },
+      toast: true,
     });
   };
 
@@ -195,7 +207,25 @@ export default function Dashboard() {
   //   return <div>Hello world</div>;
   // }
 
+  const getDashboardSummary = async () => {
+    apiCAll({
+      method: "get",
+      url: "order/summary",
+      sCB(res) {
+        setDashboardSummary(res.data);
+        console.log("Dashboard Hiistory", res.data);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
   console.log(connectedBanks);
+
+  useEffect(() => {
+    getDashboardSummary();
+  }, []);
 
   return (
     <div className="">
@@ -262,7 +292,9 @@ export default function Dashboard() {
 
             <h3 className="opacity-50">Total Transfer Count</h3>
 
-            <h4 className="mt-3 text-2xl font-bold">0</h4>
+            <h4 className="mt-3 text-2xl font-bold">
+              {dashboardSummary?.totalTransferCount}
+            </h4>
           </div>
           <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
             <span className="text-3xl absolute right-5 top-0">...</span>
@@ -272,7 +304,17 @@ export default function Dashboard() {
             <h4
               className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}
             >
-              &#8358;{formatAmount(0)}
+              {dashboardSummary !== null ? (
+                <span>
+                  {" "}
+                  &#8358;
+                  {formatAmount(
+                    dashboardSummary?.totalTransferAmount as number
+                  )}
+                </span>
+              ) : (
+                <span> &#8358;0.00</span>
+              )}
             </h4>
           </div>
 
@@ -281,7 +323,14 @@ export default function Dashboard() {
               <h3 className="opacity-50">Wallet Ballance</h3>
 
               <h4 className="mt-3 text-2xl font-bold">
-                &#8358;{formatAmount(0)}
+                {dashboardSummary !== null ? (
+                  <span>
+                    &#8358;
+                    {formatAmount(dashboardSummary?.walletBalance as number)}
+                  </span>
+                ) : (
+                  <span> &#8358;0.00</span>
+                )}
               </h4>
             </div>
           </div>
