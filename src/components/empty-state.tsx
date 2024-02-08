@@ -20,7 +20,10 @@ export default function EmptyState({ label }: IEmptyState) {
 
   return isFetching ? (
     <div className="w-full grid place-content-center">
-      <Icons.spinner />
+      <div>
+        <Icons.spinner fill="white" className="hidden dark:block" />
+        <Icons.spinner fill="black" className="block dark:hidden" />
+      </div>
     </div>
   ) : (
     <div>

@@ -31,34 +31,28 @@ export const columns: ColumnDef<IBankHistory>[] = [
   {
     accessorKey: "amount",
     header: "Amount (NGN)",
-    cell: ({ row }) => <p>&#8358;{formatAmount(row.original.amount)}</p>,
+    cell: ({ row }) => {
+      const { type } = row.original;
+      return (
+        <p
+          className={`${
+            type === "debit"
+              ? "text-failed"
+              : type === "credit"
+              ? "text-success"
+              : "text-pending"
+          }`}
+        >
+          &#8358;{formatAmount(row.original.amount)}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date",
     header: "Date",
     cell: ({ row }) => <p>{formatDate(row.original.date)}</p>,
   },
-  // {
-  //   accessorKey: "status",
-  //   header: "Status",
-  //   cell: ({ row }) => {
-  //     const { status } = row.original;
-  //     return (
-  //       <p
-  //         className={cn(
-  //           "capitalize",
-  //           status === "successful"
-  //             ? "text-green-400"
-  //             : status === "failed"
-  //             ? "text-red-400"
-  //             : "text-pending"
-  //         )}
-  //       >
-  //         {status}
-  //       </p>
-  //     );
-  //   },
-  // },
   {
     accessorKey: "id",
     header: "",

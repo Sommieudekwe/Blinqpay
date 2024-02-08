@@ -15,11 +15,12 @@ export interface IBankHistory {
   accountNumber: string;
   date: string;
   no?: number;
+  type: string;
 }
 
 type metaProps = {
-  error: string
-}
+  error: string;
+};
 
 export interface IDashboard {
   id: number;
