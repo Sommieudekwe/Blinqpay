@@ -301,7 +301,6 @@ export default function Dashboard() {
             >
               {dashboardSummary !== null ? (
                 <span>
-                  {" "}
                   &#8358;
                   {formatAmount(
                     dashboardSummary?.totalTransferAmount as number
@@ -353,7 +352,7 @@ export default function Dashboard() {
               <Button
                 className="!bg-button-primary text-[.75rem] lg:text-base text-white"
                 onClick={() => openPayDialog()}
-                // disabled={pendingOrders.length === 0}
+                disabled={pendingOrders.length === 0}
               >
                 Pay all
               </Button>

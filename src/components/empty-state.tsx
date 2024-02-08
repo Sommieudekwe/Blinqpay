@@ -15,7 +15,7 @@ export default function EmptyState({ label }: IEmptyState) {
 
     setTimeout(() => {
       setIsFetching(false);
-    }, 6000);
+    }, 15000);
   }, [router.refresh]);
 
   return isFetching ? (

@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
 import { IDashboard } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import PayModal from "./payModal";
 import CancelModal from "./cancelModal";
+import { Pencil } from "lucide-react";
 
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
@@ -17,15 +17,38 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "accountNumber",
     header: () => <p className="w-32">Account Number</p>,
-    accessorFn: (row) => row.accountNumber,
+    // accessorFn: (row) => row.accountNumber,
+    cell: ({ row }) => {
+      const { accountNumber, meta } = row.original;
+      return (
+        <p>
+          {accountNumber}
+          {meta !== null && (
+            <span>
+              <Pencil />
+            </span>
+          )}
+        </p>
+      );
+    },
   },
 
   {
     accessorKey: "bankName",
     header: () => <p className="w-28">Bank Name</p>,
-    cell: ({ row }) => (
-      <p className="w-28">{capitalizeFirstLetter(row.original.bankName)}</p>
-    ),
+    cell: ({ row }) => {
+      const { bankName, meta } = row.original;
+      return (
+        <p className="w-28">
+          {capitalizeFirstLetter(bankName)}
+          {meta !== null && (
+            <span>
+              <Pencil />
+            </span>
+          )}
+        </p>
+      );
+    },
   },
 
   {
@@ -40,7 +63,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "status",
     header: () => <p className="w-28 text-">Status</p>,
     cell: ({ row }) => {
-      const { status } = row.original;
+      const { status, meta } = row.original;
       return (
         <p
           className={cn(
@@ -52,7 +75,11 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
               : "text-pending"
           )}
         >
-          {status}
+          {meta.error !== null ? (
+            <span>{meta.error}</span>
+          ) : (
+            <span>{status}</span>
+          )}
         </p>
       );
     },

@@ -17,6 +17,10 @@ export interface IBankHistory {
   no?: number;
 }
 
+type metaProps = {
+  error: string
+}
+
 export interface IDashboard {
   id: number;
   accountName: string;
@@ -27,7 +31,9 @@ export interface IDashboard {
   amount: number;
   createdAt: string;
   orderNumber: number;
+  meta: metaProps;
 }
+
 export interface IbankList {
   [x: string]: string;
 }

@@ -46,20 +46,7 @@ export const columns: ColumnDef<IOrderHistory>[] = [
     header: "Status",
     cell: ({ row }) => {
       const { status } = row.original;
-      return (
-        <p
-          className={cn(
-            "capitalize",
-            status === "SUCCESSFULL"
-              ? "text-success"
-              : status === "FAILED"
-              ? "text-failed"
-              : "text-pending"
-          )}
-        >
-          {status}
-        </p>
-      );
+      return <p className={cn("capitalize text-success")}>{status}</p>;
     },
   },
 

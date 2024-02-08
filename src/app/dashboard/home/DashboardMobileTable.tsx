@@ -3,10 +3,10 @@
 import { IDashboard } from "@/types";
 import { useState } from "react";
 import { cn, formatAmount, capitalizeFirstLetter } from "@/lib/utils";
-import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import CancelModal from "./cancelModal";
 import PayModal from "./payModal";
+import { Pencil } from "lucide-react";
 
 interface TableProps {
   data: IDashboard[];
@@ -32,8 +32,22 @@ export default function MobileTable({ data }: TableProps) {
             <h3 className="opacity-60">
               {capitalizeFirstLetter(d.accountName)}
             </h3>
-            <p className="opacity-60">{d.accountNumber}</p>
-            <p className="opacity-60">{capitalizeFirstLetter(d.bankName)}</p>
+            <p className="opacity-60">
+              {d.accountNumber}
+              {d.meta !== null && (
+                <span>
+                  <Pencil />
+                </span>
+              )}
+            </p>
+            <p className="opacity-60">
+              {capitalizeFirstLetter(d.bankName)}{" "}
+              {d.meta !== null && (
+                <span>
+                  <Pencil />
+                </span>
+              )}
+            </p>
             <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
             <p className="text-rate">&#8358;{formatAmount(d.rate)}</p>
             <p
@@ -46,7 +60,11 @@ export default function MobileTable({ data }: TableProps) {
                   : "text-pending bg-pending bg-opacity-10 inline-flex"
               )}
             >
-              {d.status}
+              {d.meta.error !== null ? (
+                <span>{d.meta.error}</span>
+              ) : (
+                <span>{d.status}</span>
+              )}
             </p>
           </div>
 

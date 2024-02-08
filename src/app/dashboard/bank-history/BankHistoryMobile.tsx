@@ -60,7 +60,7 @@ export default function BankHistoryDashboard({
       ))}
       {paginationData && (
         // <DataTablePagination table={table} />
-        <div className="table-pagination w-auto flex space-x-2 mt-6">
+        <div className="table-pagination w-auto flex space-x-2 mt-6 pb-4">
           <Button
             disabled={!paginationData.hasPrevious}
             onClick={() =>
