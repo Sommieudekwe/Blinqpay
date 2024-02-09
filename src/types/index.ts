@@ -15,7 +15,7 @@ export interface IBankHistory {
   accountNumber: string;
   date: string;
   no?: number;
-  type: string;
+  type?: string;
 }
 
 type metaProps = {
