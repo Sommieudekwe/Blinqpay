@@ -8,6 +8,8 @@ import CancelModal from "./cancelModal";
 import { Pencil } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import apiCAll from "@/lib/apiCall";
+import { useOrders } from "@/context/pendingOrder";
 
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
@@ -107,12 +109,44 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   },
 ];
 
+export type HandleEditTypes = {
+  newBankName?: string,
+  newAccountNumber?: string,
+  orderId: string
+
+}
+
+async function handleEditDetails({newBankName, newAccountNumber, orderId}: HandleEditTypes, cb: () => void ) {
+  console.log(newBankName, newAccountNumber);
+  
+  try {
+    await apiCAll({
+      url: `/order/${orderId}`,
+      method: "PATCH",
+      data: {
+        bankName: newBankName,
+        accountNumber: newAccountNumber
+      },
+      toast: true,
+      sCB: () => {
+        cb()
+      }
+    })
+  } catch (error) {
+    
+  }
+}
+
 
 function AccountNumber({rowData}:{ rowData: any}){
-  const { accountNumber, meta } = rowData;
+  const { accountNumber, meta, id } = rowData;
   const [isEditing, setIsEdditing] = useState(false)
   const [newAccount, setNewAccount] = useState('')
+  const {
+    getPendingOrders,
+  } = useOrders();
   function handleSubmit() {
+    handleEditDetails({orderId: id, newAccountNumber: newAccount}, getPendingOrders)
     console.log(newAccount);
     setIsEdditing(false)
   }
@@ -144,11 +178,15 @@ function AccountNumber({rowData}:{ rowData: any}){
 }
 
 function BankName({rowData}:{ rowData: any}){
-  const { bankName, meta } = rowData;
+  const { bankName, meta, id } = rowData;
   const [isEditing, setIsEdditing] = useState(false)
   const [newBankName, setNewBankName] = useState('')
+  const {
+    getPendingOrders,
+  } = useOrders();
   function handleSubmit() {
-    console.log(newBankName);setNewBankName
+    handleEditDetails({newBankName, orderId: id}, getPendingOrders)
+    console.log(newBankName);
     setIsEdditing(false)
   }
   return (
