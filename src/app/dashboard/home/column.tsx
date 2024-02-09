@@ -6,6 +6,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import PayModal from "./payModal";
 import CancelModal from "./cancelModal";
 import { Pencil } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
@@ -18,37 +20,14 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "accountNumber",
     header: () => <p className="w-32">Account Number</p>,
     // accessorFn: (row) => row.accountNumber,
-    cell: ({ row }) => {
-      const { accountNumber, meta } = row.original;
-      return (
-        <p>
-          {accountNumber}
-          {meta !== null && (
-            <span>
-              <Pencil />
-            </span>
-          )}
-        </p>
-      );
-    },
+    cell: ({ row }) =>  <AccountNumber rowData={row.original}/>,
   },
 
   {
     accessorKey: "bankName",
     header: () => <p className="w-28">Bank Name</p>,
-    cell: ({ row }) => {
-      const { bankName, meta } = row.original;
-      return (
-        <p className="w-28">
-          {capitalizeFirstLetter(bankName)}
-          {meta !== null && (
-            <span>
-              <Pencil />
-            </span>
-          )}
-        </p>
-      );
-    },
+    cell: ({ row }) => <BankName rowData={row.original}/>
+   
   },
 
   {
@@ -62,7 +41,8 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "status",
     header: () => <p className="w-28 text-">Status</p>,
-    cell: ({ row }) => {
+    cell: ({ row }) =>
+    {
       const { status, meta } = row.original;
       return (
         <p
@@ -71,8 +51,8 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
             status === "successful"
               ? "text-success"
               : status === "failed"
-              ? "text-failed"
-              : "text-pending"
+                ? "text-failed"
+                : "text-pending"
           )}
         >
           {meta?.error !== null ? (
@@ -89,7 +69,8 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "rate",
     header: () => <p className="w-28">Rate</p>,
     // accessorFn: (row) => row.rate,
-    cell: ({ row }) => {
+    cell: ({ row }) =>
+    {
       return (
         <p className="text-button-primary">
           &#8358;{formatAmount(row.original.rate)}
@@ -101,7 +82,8 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "action",
     header: () => <div className="w-28">Action</div>,
-    cell: ({ row }) => {
+    cell: ({ row }) =>
+    {
       const { id } = row.original;
       return (
         <div className="w-28">
@@ -113,7 +95,8 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
     accessorKey: "action",
     header: () => <div className="text-center w-28">Action</div>,
-    cell: ({ row }) => {
+    cell: ({ row }) =>
+    {
       const { id } = row.original;
       return (
         <div className="w-28 text-center">
@@ -123,3 +106,74 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     },
   },
 ];
+
+
+function AccountNumber({rowData}:{ rowData: any}){
+  const { accountNumber, meta } = rowData;
+  const [isEditing, setIsEdditing] = useState(false)
+  const [newAccount, setNewAccount] = useState('')
+  function handleSubmit() {
+    console.log(newAccount);
+    setIsEdditing(false)
+  }
+  return (
+    <div className="flex space-x-2">
+      {isEditing ? (
+        <form onSubmit={handleSubmit} className="">
+        <input className=" w-auto bg-transparent border-b border-gray-500 focus:border-b focus:outline-none focus:border-gray-500 placeholder:text-gray-600"
+          type=""
+          placeholder={accountNumber}
+          onChange={(e) => setNewAccount(e.target.value)}
+          value={newAccount}
+          />
+          </form>
+      ) : (
+        <>
+          <p>
+            {accountNumber}
+          </p>
+          {meta !== null && (
+            <button onClick={() => setIsEdditing(!isEditing)}>
+              <Pencil className="w-4 h-4" />
+            </button>
+          )}
+        </>)
+      }
+    </div>
+  );
+}
+
+function BankName({rowData}:{ rowData: any}){
+  const { bankName, meta } = rowData;
+  const [isEditing, setIsEdditing] = useState(false)
+  const [newBankName, setNewBankName] = useState('')
+  function handleSubmit() {
+    console.log(newBankName);setNewBankName
+    setIsEdditing(false)
+  }
+  return (
+    <div className="flex space-x-2">
+      {isEditing ? (
+        <form onSubmit={handleSubmit} className="w-auto">
+        <input className=" w-16 bg-transparent border-b border-gray-500 focus:border-b focus:outline-none focus:border-gray-500 placeholder:text-gray-600"
+          type=""
+          placeholder={bankName}
+          onChange={(e) => setNewBankName(e.target.value)}
+          value={newBankName}
+          />
+          </form>
+      ) : (
+        <>
+          <p>
+          {capitalizeFirstLetter(bankName)}
+          </p>
+          {meta !== null && (
+            <button onClick={() => setIsEdditing(!isEditing)}>
+              <Pencil className="w-4 h-4" />
+            </button>
+          )}
+        </>)
+      }
+    </div>
+  );
+}

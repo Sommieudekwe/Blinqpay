@@ -440,7 +440,7 @@ export default function Dashboard() {
           <div className="hidden lg:block">
             <DataTable
               columns={dashboardColumn}
-              data={pendingOrders}
+              data={pendingOrderss}
               emptyStateLabel="No active orders yet."
               paginationData={paginationData}
               getPageData={getMorePendingOrders}
