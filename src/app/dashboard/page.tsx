@@ -21,6 +21,49 @@ import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
 
+const pendingOrderss: IDashboard[] = [
+  {
+    id: 1,
+    accountNumber: "0226919832",
+    accountName: "Ayinde Olaolu",
+    bankName: "GTB",
+    amount: 5896,
+    rate: 11267,
+    status: "failed",
+    createdAt: "1233",
+    orderNumber: 123737747,
+    meta: {
+      error: "Invalid Bank",
+    },
+  },
+
+  {
+    id: 2,
+    accountNumber: "0226919831",
+    accountName: "Ayinde Olaolu",
+    bankName: "GTB Bank",
+    amount: 5896,
+    rate: 11267,
+    createdAt: "1233",
+    orderNumber: 123737747,
+    status: "failed",
+    meta: null,
+  },
+
+  {
+    id: 3,
+    accountNumber: "02269198352",
+    accountName: "Ayinde Olaolu",
+    bankName: "GTB Bank",
+    amount: 58989,
+    rate: 11267,
+    status: "failed",
+    meta: null,
+    createdAt: "1233",
+    orderNumber: 123737747,
+  },
+];
+
 type AccountBalance = {
   availableBalance: number;
 };
@@ -41,6 +84,9 @@ export default function Dashboard() {
   const [paginationData, setPaginationData] = useState<
     PaginationTypes | undefined
   >();
+
+  // newly added
+  const [pendingOrdersss, setPendingOrderss] = useState(pendingOrderss);
 
   const pathname = usePathname();
   const {
@@ -222,6 +268,11 @@ export default function Dashboard() {
     getDashboardSummary();
   }, []);
 
+  // newly added
+  const handleDataChange = (updatedData: IDashboard[]) => {
+    setPendingOrderss(updatedData);
+  };
+
   return (
     <div className="">
       <div className="lg:flex justify-between">
@@ -384,7 +435,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length >= 1 ? (
+      {pendingOrders.length < 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
@@ -397,7 +448,12 @@ export default function Dashboard() {
           </div>
 
           <div className="lg:hidden">
-            <MobileTable data={pendingOrders} />
+            <MobileTable
+              data={pendingOrderss}
+              onDataChange={handleDataChange}
+            />
+
+            {/* <MobileTable data={pendingOrders} onDataChange={handleDataChange} /> */}
           </div>
         </section>
       ) : (

@@ -32,7 +32,7 @@ export interface IDashboard {
   amount: number;
   createdAt: string;
   orderNumber: number;
-  meta: metaProps;
+  meta: metaProps | null;
 }
 
 export interface IbankList {
