@@ -262,7 +262,6 @@ export default function Dashboard() {
     });
   };
 
-  console.log(connectedBanks);
 
   useEffect(() => {
     getDashboardSummary();
@@ -435,7 +434,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length < 1 ? (
+      {pendingOrders.length > 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
