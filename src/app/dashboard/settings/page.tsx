@@ -118,7 +118,8 @@ export default function Connectivity() {
   const handleSignOut = () => {
     removeToken();
     setAllConnectedBanks([])
-    window.localStorage.clear();
+    // window.localStorage.clear();
+    localStorage.removeItem("selectedBankId")
     router.push("/auth");
   };
   /*

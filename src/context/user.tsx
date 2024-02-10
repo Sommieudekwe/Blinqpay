@@ -6,6 +6,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
 } from "react";
 
 import apiCAll from "@/lib/apiCall";
@@ -20,6 +21,8 @@ type userProps = {
 interface userStoreContextProps {
   user: userProps | null;
   getUser: () => void;
+  toggleState: boolean;
+  toggle: () => void;
 }
 
 const UsersContext = createContext<userStoreContextProps | undefined>(
@@ -28,6 +31,7 @@ const UsersContext = createContext<userStoreContextProps | undefined>(
 
 const UsersProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<userProps | null>(null);
+  const [toggleState, setToggleState] = useState<boolean>(false);
 
   const getUser = async () => {
     apiCAll({
@@ -41,11 +45,26 @@ const UsersProvider = ({ children }: { children: React.ReactNode }) => {
       },
     });
   };
+
+  useEffect(() => {
+    const storedToggleState = localStorage.getItem("toggleState");
+    if (storedToggleState !== null) {
+      setToggleState(JSON.parse(storedToggleState));
+    }
+  }, []);
+
+  const toggle = () => {
+    const newToggleState = !toggleState;
+    setToggleState(!newToggleState);
+    localStorage.setItem("toggleState", JSON.stringify(newToggleState));
+  };
   return (
     <UsersContext.Provider
       value={{
         user,
         getUser,
+        toggle,
+        toggleState,
       }}
     >
       {children}

@@ -20,6 +20,7 @@ import { usePathname } from "next/navigation";
 import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
+import AutoPay from "./home/autopay";
 
 const pendingOrderss: IDashboard[] = [
   {
@@ -398,7 +399,7 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
+          <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end items-center">
             <div>
               <Button
                 className="!bg-button-primary text-[.75rem] lg:text-base text-white"
@@ -409,13 +410,14 @@ export default function Dashboard() {
               </Button>
             </div>
             <div>
-              <Button
+              {/* <Button
                 className="bg-transparent text-[.75rem] lg:text-base"
                 onClick={() => openDialog()}
                 disabled={pendingOrders.length === 0}
               >
                 Cancel all
-              </Button>
+              </Button> */}
+              <AutoPay onAutoPayToggle ={handlePayAllOrder} />
             </div>
           </div>
         </div>
@@ -435,7 +437,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length < 1 ? (
+      {pendingOrders.length > 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
@@ -462,7 +464,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="text-center text-white">
           <div className="flex flex-col items-center">
             <Image
@@ -490,7 +492,7 @@ export default function Dashboard() {
             </Button>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
       <Dialog open={isPayDialogOpen} onOpenChange={setIsPayDialogOpen}>
         <DialogContent className="text-center text-white">

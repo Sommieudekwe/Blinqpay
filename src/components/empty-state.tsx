@@ -22,7 +22,7 @@ export default function EmptyState({ label }: IEmptyState) {
     <div className="w-full grid place-content-center">
       <div>
         <Icons.spinner fill="white" className="hidden dark:block" />
-        <Icons.spinner fill="black" className="block dark:hidden" />
+        <Icons.spinner fill="black" className="block dark:!hidden" />
       </div>
     </div>
   ) : (
