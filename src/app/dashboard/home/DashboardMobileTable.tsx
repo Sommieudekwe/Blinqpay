@@ -8,6 +8,7 @@ import CancelModal from "./cancelModal";
 import PayModal from "./payModal";
 import { Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import apiCAll from "@/lib/apiCall";
 
 interface TableProps {
   data: IDashboard[];
@@ -26,32 +27,64 @@ export default function MobileTable({ data, onDataChange }: TableProps) {
   };
 
   // save new number and send to backend to update the order through its id
-  const handleSaveAmount = (index: number) => {
-    const newData = [...data];
-    newData[index].accountNumber = editedNumber;
-    onDataChange(newData);
-    // send the new number to the backend (make api call)
-    setEditableAmountIndex(-1);
-  };
+  // const handleSaveAmount = (index: number) => {
+  //   const newData = [...data];
+  //   newData[index].accountNumber = editedNumber;
+  //   onDataChange(newData);
+  //   // send the new number to the backend (make api call)
+  //   setEditableAmountIndex(-1);
+  // };
 
   const handleBankEdit = (index: number, initialBankName: string) => {
     setEditableBankIndex(index);
     setEditedBankName(initialBankName);
   };
 
-  const handleSaveBank = (index: number) => {
-    const newData = [...data];
-    newData[index].bankName = editedBankName;
-    onDataChange(newData);
-    // send the new number to the backend (make api call)
-    setEditableBankIndex(-1);
-  };
+  // const handleSaveBank = async (index: number) => {
+  //   const newData = [...data];
+  //   newData[index as number].bankName = editedBankName;
+  //   onDataChange(newData);
+  //   // send the new number to the backend (make api call)
+
+  //   setEditableBankIndex(-1);
+  // };
 
   const handleCancel = () => {
     setEditableAmountIndex(-1);
     setEditedNumber("");
     setEditableBankIndex(-1);
     setEditedBankName("");
+  };
+
+  const handleSave = async (
+    index: number,
+    orderId: number,
+    newValue: string,
+    fieldType: "bankName" | "accountNumber"
+  ) => {
+    const newData = [...data];
+    newData[index][fieldType] = newValue;
+    onDataChange(newData);
+    await apiCAll({
+      url: `/order/${orderId}`,
+      method: "PATCH",
+      data: {
+        [fieldType]: newValue,
+      },
+      sCB(res) {
+        if (fieldType === "bankName") {
+          setEditableBankIndex(-1);
+        } else if (fieldType === "accountNumber") {
+          setEditableAmountIndex(-1);
+        }
+      },
+      eCB(error) {
+        console.error(error);
+      },
+      toast: true,
+    });
+
+    console.log(fieldType, newValue);
   };
 
   return (
@@ -75,9 +108,14 @@ export default function MobileTable({ data, onDataChange }: TableProps) {
                     type="number"
                     value={editedNumber}
                     onChange={(e) => setEditedNumber(e.target.value)}
+                    required
                   />
                   <div className="mt-2 space-x-2">
-                    <Button onClick={() => handleSaveAmount(index)}>
+                    <Button
+                      onClick={() =>
+                        handleSave(index, d.id, editedNumber, "accountNumber")
+                      }
+                    >
                       Save
                     </Button>
                     <Button onClick={handleCancel}>Cancel</Button>
@@ -109,9 +147,16 @@ export default function MobileTable({ data, onDataChange }: TableProps) {
                     type="text"
                     value={editedBankName}
                     onChange={(e) => setEditedBankName(e.target.value)}
+                    required
                   />
                   <div className="mt-2 space-x-2">
-                    <Button onClick={() => handleSaveBank(index)}>Save</Button>
+                    <Button
+                      onClick={() =>
+                        handleSave(index, d.id, editedBankName, "bankName")
+                      }
+                    >
+                      Save
+                    </Button>
                     <Button onClick={handleCancel}>Cancel</Button>
                   </div>
                 </>

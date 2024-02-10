@@ -6,6 +6,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import PayModal from "./payModal";
 import CancelModal from "./cancelModal";
 import { Pencil } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import apiCAll from "@/lib/apiCall";
+import { useOrders } from "@/context/pendingOrder";
 
 export const dashboardColumn: ColumnDef<IDashboard>[] = [
   {
@@ -18,37 +22,13 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     accessorKey: "accountNumber",
     header: () => <p className="w-32">Account Number</p>,
     // accessorFn: (row) => row.accountNumber,
-    cell: ({ row }) => {
-      const { accountNumber, meta } = row.original;
-      return (
-        <p>
-          {accountNumber}
-          {meta !== null && (
-            <span>
-              <Pencil />
-            </span>
-          )}
-        </p>
-      );
-    },
+    cell: ({ row }) => <AccountNumber rowData={row.original} />,
   },
 
   {
     accessorKey: "bankName",
     header: () => <p className="w-28">Bank Name</p>,
-    cell: ({ row }) => {
-      const { bankName, meta } = row.original;
-      return (
-        <p className="w-28">
-          {capitalizeFirstLetter(bankName)}
-          {meta !== null && (
-            <span>
-              <Pencil />
-            </span>
-          )}
-        </p>
-      );
-    },
+    cell: ({ row }) => <BankName rowData={row.original} />,
   },
 
   {
@@ -75,11 +55,7 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
               : "text-pending"
           )}
         >
-          {meta?.error !== null ? (
-            <span>{meta?.error}</span>
-          ) : (
-            <span>{status}</span>
-          )}
+          {meta !== null ? <span>{meta?.error}</span> : <span>{status}</span>}
         </p>
       );
     },
@@ -123,3 +99,109 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
     },
   },
 ];
+
+export type HandleEditTypes = {
+  index?: number;
+  newBankName?: string;
+  newAccountNumber?: string;
+  orderId: string;
+};
+
+async function handleEditDetails(
+  { newBankName, newAccountNumber, orderId }: HandleEditTypes,
+  cb: () => void
+) {
+  console.log(newBankName, newAccountNumber);
+
+  try {
+    await apiCAll({
+      url: `/order/${orderId}`,
+      method: "PATCH",
+      data: {
+        bankName: newBankName,
+        accountNumber: newAccountNumber,
+      },
+      toast: true,
+      sCB: () => {
+        cb();
+      },
+    });
+  } catch (error) {}
+}
+
+function AccountNumber({ rowData }: { rowData: any }) {
+  const { accountNumber, meta, id } = rowData;
+  const [isEditing, setIsEdditing] = useState(false);
+  const [newAccount, setNewAccount] = useState("");
+  const { getPendingOrders } = useOrders();
+  function handleSubmit() {
+    handleEditDetails(
+      { orderId: id, newAccountNumber: newAccount },
+      getPendingOrders
+    );
+    console.log(newAccount);
+    setIsEdditing(false);
+  }
+  return (
+    <div className="flex space-x-2">
+      {isEditing ? (
+        <form onSubmit={handleSubmit} className="">
+          <input
+            className=" w-auto bg-transparent border-b border-gray-500 focus:border-b focus:outline-none focus:border-gray-500 placeholder:text-gray-600"
+            type=""
+            placeholder={accountNumber}
+            onChange={(e) => setNewAccount(e.target.value)}
+            value={newAccount}
+            required
+          />
+        </form>
+      ) : (
+        <>
+          <p>{accountNumber}</p>
+          {meta !== null && (
+            <button onClick={() => setIsEdditing(!isEditing)}>
+              <Pencil className="w-4 h-4" />
+            </button>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+function BankName({ rowData }: { rowData: any }) {
+  const { bankName, meta, id } = rowData;
+  const [isEditing, setIsEdditing] = useState(false);
+  const [newBankName, setNewBankName] = useState("");
+  const { getPendingOrders } = useOrders();
+  function handleSubmit() {
+    handleEditDetails({ newBankName, orderId: id }, getPendingOrders);
+    console.log(newBankName);
+    setIsEdditing(false);
+  }
+  return (
+    <div className="flex space-x-2">
+      {isEditing ? (
+        <form onSubmit={handleSubmit} className="w-auto">
+          <input
+            className=" w-16 bg-transparent border-b border-gray-500 focus:border-b focus:outline-none focus:border-gray-500 placeholder:text-gray-600"
+            type=""
+            placeholder={bankName}
+            onChange={(e) => setNewBankName(e.target.value)}
+            value={newBankName}
+            required
+          />
+        </form>
+      ) : (
+        <>
+          <p>{capitalizeFirstLetter(bankName)}</p>
+          {meta !== null && (
+            <button onClick={() => setIsEdditing(!isEditing)}>
+              <Pencil className="w-4 h-4" />
+            </button>
+          )}
+        </>
+      )}
+    </div>
+  );
+}

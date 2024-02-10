@@ -22,48 +22,48 @@ import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
 import AutoPay from "./home/autopay";
 
-const pendingOrderss: IDashboard[] = [
-  {
-    id: 1,
-    accountNumber: "0226919832",
-    accountName: "Ayinde Olaolu",
-    bankName: "GTB",
-    amount: 5896,
-    rate: 11267,
-    status: "failed",
-    createdAt: "1233",
-    orderNumber: 123737747,
-    meta: {
-      error: "Invalid Bank",
-    },
-  },
+// const pendingOrderss: IDashboard[] = [
+//   {
+//     id: 1,
+//     accountNumber: "0226919832",
+//     accountName: "Ayinde Olaolu",
+//     bankName: "GTB",
+//     amount: 5896,
+//     rate: 11267,
+//     status: "failed",
+//     createdAt: "1233",
+//     orderNumber: 123737747,
+//     meta: {
+//       error: "Invalid Bank",
+//     },
+//   },
 
-  {
-    id: 2,
-    accountNumber: "0226919831",
-    accountName: "Ayinde Olaolu",
-    bankName: "GTB Bank",
-    amount: 5896,
-    rate: 11267,
-    createdAt: "1233",
-    orderNumber: 123737747,
-    status: "failed",
-    meta: null,
-  },
+//   {
+//     id: 2,
+//     accountNumber: "0226919831",
+//     accountName: "Ayinde Olaolu",
+//     bankName: "GTB Bank",
+//     amount: 5896,
+//     rate: 11267,
+//     createdAt: "1233",
+//     orderNumber: 123737747,
+//     status: "failed",
+//     meta: null,
+//   },
 
-  {
-    id: 3,
-    accountNumber: "02269198352",
-    accountName: "Ayinde Olaolu",
-    bankName: "GTB Bank",
-    amount: 58989,
-    rate: 11267,
-    status: "failed",
-    meta: null,
-    createdAt: "1233",
-    orderNumber: 123737747,
-  },
-];
+//   {
+//     id: 3,
+//     accountNumber: "02269198352",
+//     accountName: "Ayinde Olaolu",
+//     bankName: "GTB Bank",
+//     amount: 58989,
+//     rate: 11267,
+//     status: "failed",
+//     meta: null,
+//     createdAt: "1233",
+//     orderNumber: 123737747,
+//   },
+// ];
 
 type AccountBalance = {
   availableBalance: number;
@@ -87,7 +87,7 @@ export default function Dashboard() {
   >();
 
   // newly added
-  const [pendingOrdersss, setPendingOrderss] = useState(pendingOrderss);
+  // const [pendingOrdersss, setPendingOrderss] = useState(pendingOrderss);
 
   const pathname = usePathname();
   const {
@@ -263,16 +263,16 @@ export default function Dashboard() {
     });
   };
 
-  console.log(connectedBanks);
-
   useEffect(() => {
     getDashboardSummary();
   }, []);
 
   // newly added
   const handleDataChange = (updatedData: IDashboard[]) => {
-    setPendingOrderss(updatedData);
+    setPendingOrders(updatedData);
   };
+
+  console.log(pendingOrders);
 
   return (
     <div className="">
@@ -417,7 +417,7 @@ export default function Dashboard() {
               >
                 Cancel all
               </Button> */}
-              <AutoPay onAutoPayToggle ={handlePayAllOrder} />
+              <AutoPay onAutoPayToggle={handlePayAllOrder} />
             </div>
           </div>
         </div>
@@ -437,7 +437,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length > 1 ? (
+      {pendingOrders.length < 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
@@ -450,10 +450,7 @@ export default function Dashboard() {
           </div>
 
           <div className="lg:hidden">
-            <MobileTable
-              data={pendingOrderss}
-              onDataChange={handleDataChange}
-            />
+            <MobileTable data={pendingOrders} onDataChange={handleDataChange} />
 
             {/* <MobileTable data={pendingOrders} onDataChange={handleDataChange} /> */}
           </div>
