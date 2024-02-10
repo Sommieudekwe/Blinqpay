@@ -20,6 +20,50 @@ import { usePathname } from "next/navigation";
 import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
+import AutoPay from "./home/autopay";
+
+// const pendingOrderss: IDashboard[] = [
+//   {
+//     id: 1,
+//     accountNumber: "0226919832",
+//     accountName: "Ayinde Olaolu",
+//     bankName: "GTB",
+//     amount: 5896,
+//     rate: 11267,
+//     status: "failed",
+//     createdAt: "1233",
+//     orderNumber: 123737747,
+//     meta: {
+//       error: "Invalid Bank",
+//     },
+//   },
+
+//   {
+//     id: 2,
+//     accountNumber: "0226919831",
+//     accountName: "Ayinde Olaolu",
+//     bankName: "GTB Bank",
+//     amount: 5896,
+//     rate: 11267,
+//     createdAt: "1233",
+//     orderNumber: 123737747,
+//     status: "failed",
+//     meta: null,
+//   },
+
+//   {
+//     id: 3,
+//     accountNumber: "02269198352",
+//     accountName: "Ayinde Olaolu",
+//     bankName: "GTB Bank",
+//     amount: 58989,
+//     rate: 11267,
+//     status: "failed",
+//     meta: null,
+//     createdAt: "1233",
+//     orderNumber: 123737747,
+//   },
+// ];
 
 type AccountBalance = {
   availableBalance: number;
@@ -41,6 +85,9 @@ export default function Dashboard() {
   const [paginationData, setPaginationData] = useState<
     PaginationTypes | undefined
   >();
+
+  // newly added
+  // const [pendingOrdersss, setPendingOrderss] = useState(pendingOrderss);
 
   const pathname = usePathname();
   const {
@@ -179,6 +226,7 @@ export default function Dashboard() {
     }
   };
 
+  // ---------
   useEffect(() => {
     getPendingOrders();
     getAllConnectedBanks();
@@ -187,25 +235,19 @@ export default function Dashboard() {
 
   useEffect(() => {
     const id = localStorage.getItem("selectedBankId");
-    console.log(id);
+    console.log(id, "this is the id currently in the local storage");
+    console.log(connectedBanks, "this is the connected banks at this time.");
 
-    // On page refresh, if ther is an id in localStorage, fetch the balance with that id, otherwise if you first login into app and there is no ide, it first gets the
-    // connected banks and get the id of the first element there after which the id is set to local storage.
     if (id) {
       getConnectedBanksBalance(Number(id));
     } else {
       if (connectedBanks.length >= 1) {
         getConnectedBanksBalance(Number(connectedBanks[0].id));
-        // set selectedbank id in local storage so that the request is made as component mounts.
         localStorage.setItem("selectedBankId", String(connectedBanks[0].id));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [connectedBanks]);
-
-  // if (!connectedBanks.length) {
-  //   return <div>Hello world</div>;
-  // }
+  }, [connectedBanks, pathname]);
 
   const getDashboardSummary = async () => {
     apiCAll({
@@ -221,11 +263,16 @@ export default function Dashboard() {
     });
   };
 
-  console.log(connectedBanks);
-
   useEffect(() => {
     getDashboardSummary();
   }, []);
+
+  // newly added
+  const handleDataChange = (updatedData: IDashboard[]) => {
+    setPendingOrders(updatedData);
+  };
+
+  console.log(pendingOrders);
 
   return (
     <div className="">
@@ -306,7 +353,6 @@ export default function Dashboard() {
             >
               {dashboardSummary !== null ? (
                 <span>
-                  {" "}
                   &#8358;
                   {formatAmount(
                     dashboardSummary?.totalTransferAmount as number
@@ -353,24 +399,25 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end">
+          <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end items-center">
             <div>
               <Button
                 className="!bg-button-primary text-[.75rem] lg:text-base text-white"
                 onClick={() => openPayDialog()}
-                // disabled={pendingOrders.length === 0}
+                disabled={pendingOrders.length === 0}
               >
                 Pay all
               </Button>
             </div>
             <div>
-              <Button
+              {/* <Button
                 className="bg-transparent text-[.75rem] lg:text-base"
                 onClick={() => openDialog()}
                 disabled={pendingOrders.length === 0}
               >
                 Cancel all
-              </Button>
+              </Button> */}
+              <AutoPay onAutoPayToggle={handlePayAllOrder} />
             </div>
           </div>
         </div>
@@ -390,7 +437,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length >= 1 ? (
+      {pendingOrders.length < 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
@@ -403,7 +450,9 @@ export default function Dashboard() {
           </div>
 
           <div className="lg:hidden">
-            <MobileTable data={pendingOrders} />
+            <MobileTable data={pendingOrders} onDataChange={handleDataChange} />
+
+            {/* <MobileTable data={pendingOrders} onDataChange={handleDataChange} /> */}
           </div>
         </section>
       ) : (
@@ -412,7 +461,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="text-center text-white">
           <div className="flex flex-col items-center">
             <Image
@@ -440,7 +489,7 @@ export default function Dashboard() {
             </Button>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
 
       <Dialog open={isPayDialogOpen} onOpenChange={setIsPayDialogOpen}>
         <DialogContent className="text-center text-white">

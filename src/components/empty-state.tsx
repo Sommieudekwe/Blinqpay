@@ -15,12 +15,15 @@ export default function EmptyState({ label }: IEmptyState) {
 
     setTimeout(() => {
       setIsFetching(false);
-    }, 6000);
+    }, 15000);
   }, [router.refresh]);
 
   return isFetching ? (
     <div className="w-full grid place-content-center">
-      <Icons.spinner />
+      <div>
+        <Icons.spinner fill="white" className="hidden dark:block" />
+        <Icons.spinner fill="black" className="block dark:!hidden" />
+      </div>
     </div>
   ) : (
     <div>

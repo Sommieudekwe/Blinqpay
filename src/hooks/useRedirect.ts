@@ -6,7 +6,8 @@ export const useRediret = () => {
   const router = useRouter();
 
   const redirect = (path: string) => {
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.removeItem("selectedBankId");
     router.push(path);
   };
 

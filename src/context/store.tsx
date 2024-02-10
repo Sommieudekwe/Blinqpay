@@ -22,6 +22,8 @@ interface StoreContextProps {
   setSelectedBankId: Dispatch<SetStateAction<string | null>>;
   cachedBalance: number | null;
   setCachedBalance: Dispatch<SetStateAction<number | null>>;
+  setAllConnectedBanks: Dispatch<SetStateAction<IProviders[]>>;
+  
 }
 
 const StoreContext = createContext<StoreContextProps>({
@@ -36,6 +38,7 @@ const StoreContext = createContext<StoreContextProps>({
   setSelectedBankId: (): string | null => "",
   cachedBalance: null,
   setCachedBalance: (): number | null => null,
+  setAllConnectedBanks: (): IProviders[] | null => [],
 });
 
 const StoreProvider = ({ children }: { children: React.ReactNode }) => {
@@ -90,6 +93,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
         setSelectedBankId,
         cachedBalance,
         setCachedBalance,
+        setAllConnectedBanks
       }}
     >
       {children}

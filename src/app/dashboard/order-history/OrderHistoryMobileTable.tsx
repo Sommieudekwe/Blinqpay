@@ -41,12 +41,7 @@ export default function OrderHistoryMobileTable({
           <div>
             <p
               className={cn(
-                "capitalize rounded-3xl px-2.5 py-1 text-sm",
-                d.status === "SUCCESSFULL"
-                  ? "text-success bg-success bg-opacity-10 inline-flex"
-                  : d.status === "FAILED"
-                  ? "text-failed bg-failed bg-opacity-10 inline-flex"
-                  : "text-pending bg-pending bg-opacity-10 inline-flex"
+                "capitalize rounded-3xl px-2.5 py-1 text-sm text-success bg-success bg-opacity-10"
               )}
             >
               Paid
@@ -56,7 +51,7 @@ export default function OrderHistoryMobileTable({
       ))}
       {paginationData && (
         // <DataTablePagination table={table} />
-        <div className="table-pagination w-auto flex space-x-2 mt-6">
+        <div className="table-pagination w-auto flex space-x-2 mt-6 pb-4">
           <Button
             disabled={!paginationData.hasPrevious}
             onClick={() =>

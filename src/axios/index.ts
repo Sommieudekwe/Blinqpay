@@ -56,7 +56,8 @@ service.interceptors.response.use(
     if (unauthorized.includes(response?.data.message)) {
       // localStorage.clear();
       removeToken();
-      window.localStorage.clear();
+      // window.localStorage.clear();
+      window.localStorage.removeItem("selectedBankIdId");
       window.location.href = "/auth";
       notify.error(response?.data.message);
     }

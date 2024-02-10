@@ -44,6 +44,7 @@ export default function BankHistory() {
         )}/transactions?page=${page}&pageSize=50`,
         sCB(res) {
           setData(res.data.data);
+          console.log(res.data.data);
           const paginationData: PaginationTypes = res.data.pagination;
           setPaginationData(paginationData);
         },

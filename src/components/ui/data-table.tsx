@@ -82,8 +82,7 @@ export function DataTable<TData, TValue>({
   emptyStateLabel,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
-  console.log(data, "this is the data from the table!");
-  
+  // console.log(data, "this is the data from the table!");
 
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
@@ -101,6 +100,11 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+    },
+    initialState: {
+      pagination: {
+        pageSize: 50,
+      },
     },
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
@@ -181,7 +185,7 @@ export function DataTable<TData, TValue>({
       </div>
       {paginationData && (
         // <DataTablePagination table={table} />
-        <div className="table-pagination w-auto flex space-x-2">
+        <div className="table-pagination w-auto flex space-x-2 pb-4">
           <Button
             disabled={!paginationData.hasPrevious}
             onClick={() =>
@@ -206,17 +210,16 @@ export function DataTable<TData, TValue>({
           >
             next
           </Button>
-          {
-            paginationData.lastPage && <Button
-            onClick={() =>
-              getPageData && getPageData(paginationData.lastPage as number)
-            }
-            className="capitalize"
-          >
-            last page
-          </Button>
-          }
-          
+          {paginationData.lastPage && (
+            <Button
+              onClick={() =>
+                getPageData && getPageData(paginationData.lastPage as number)
+              }
+              className="capitalize"
+            >
+              last page
+            </Button>
+          )}
         </div>
       )}
     </div>

@@ -34,7 +34,18 @@ export default function BankHistoryDashboard({
               <h3 className="opacity-60">{d.accountName}</h3>
               <p className="opacity-60">{d.accountNumber}</p>
               <p className="opacity-60">[{d.bankName}]</p>
-              <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
+              <p
+                className={`opacity-60 ${
+                  d.type === "debit"
+                    ? "text-failed"
+                    : d.type === "credit"
+                    ? "text-success"
+                    : "text-pending"
+                }`}
+              >
+                {d.type === "debit" ? "-" : d.type === "credit" ? "+" : ""}
+                &#8358;{formatAmount(d.amount)}
+              </p>
               <p className="opacity-60">{formatDate(d.date)}</p>
               <p
                 className={cn(
@@ -60,7 +71,7 @@ export default function BankHistoryDashboard({
       ))}
       {paginationData && (
         // <DataTablePagination table={table} />
-        <div className="table-pagination w-auto flex space-x-2 mt-6">
+        <div className="table-pagination w-auto flex space-x-2 mt-6 pb-4">
           <Button
             disabled={!paginationData.hasPrevious}
             onClick={() =>
