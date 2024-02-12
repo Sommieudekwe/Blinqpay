@@ -17,6 +17,7 @@ const buttonVariants = cva(
           "bg-button-primary  rounded-[4.625rem] px-5 p-4 text-white font-medium hover: focus-visible:ring-ring-button-primary",
         "ghost-red":
           "bg-transparent border border-ghost-border rounded-[4.625rem] px-5 p-4 text-ghost-text font-medium hover: focus-visible:ring-ring-ghost-text",
+        "landing-outline": "",
       },
       size: {
         default: "h-10 px-4",
