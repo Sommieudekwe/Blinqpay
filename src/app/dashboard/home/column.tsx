@@ -146,9 +146,8 @@ function AccountNumber({ rowData }: { rowData: any }) {
     <div className="flex space-x-2">
       {isEditing ? (
         <form onSubmit={handleSubmit} className="">
-          <input
-            className=" w-auto bg-transparent border-b border-gray-500 focus:border-b focus:outline-none focus:border-gray-500 placeholder:text-gray-600"
-            type=""
+          <Input
+            type="number"
             placeholder={accountNumber}
             onChange={(e) => setNewAccount(e.target.value)}
             value={newAccount}
@@ -183,9 +182,8 @@ function BankName({ rowData }: { rowData: any }) {
     <div className="flex space-x-2">
       {isEditing ? (
         <form onSubmit={handleSubmit} className="w-auto">
-          <input
-            className=" w-16 bg-transparent border-b border-gray-500 focus:border-b focus:outline-none focus:border-gray-500 placeholder:text-gray-600"
-            type=""
+          <Input
+            type="text"
             placeholder={bankName}
             onChange={(e) => setNewBankName(e.target.value)}
             value={newBankName}

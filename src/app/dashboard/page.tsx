@@ -124,27 +124,27 @@ export default function Dashboard() {
     setPendingOrders,
   } = useOrders();
 
-  const handleCancelAllOrder = async () => {
-    setIsLoading(true);
-    apiCAll({
-      method: "post",
-      url: "/order/cancel",
-      data: { orderIds: pendingOrdersIds },
-      sCB(res) {
-        setPendingOrders([]);
-        setIsLoading(false);
-        setIsDialogOpen(false);
-        setPendingOrdersIds([]);
-        console.log("Order cancelled");
-      },
-      eCB(res) {
-        console.error(res);
-        setIsLoading(false);
-        setIsLoading(false);
-      },
-      toast: true,
-    });
-  };
+  // const handleCancelAllOrder = async () => {
+  //   setIsLoading(true);
+  //   apiCAll({
+  //     method: "post",
+  //     url: "/order/cancel",
+  //     data: { orderIds: pendingOrdersIds },
+  //     sCB(res) {
+  //       setPendingOrders([]);
+  //       setIsLoading(false);
+  //       setIsDialogOpen(false);
+  //       setPendingOrdersIds([]);
+  //       console.log("Order cancelled");
+  //     },
+  //     eCB(res) {
+  //       console.error(res);
+  //       setIsLoading(false);
+  //       setIsLoading(false);
+  //     },
+  //     toast: true,
+  //   });
+  // };
 
   const handlePayAllOrder = async () => {
     setIsLoading(true);
@@ -175,7 +175,7 @@ export default function Dashboard() {
   };
 
   const getConnectedBanksBalance = async (id: number) => {
-    console.log("id:", id);
+    // console.log("id:", id);
     apiCAll({
       method: "get",
       url: `/bank/${id}/balance`,
@@ -183,7 +183,7 @@ export default function Dashboard() {
         // setAccountBalance(res.data);
         // setCachedBalance(res.data)
 
-        console.log(res.data);
+        // console.log(res.data);
         if (cachedBalance && res.data.availableBalance === cachedBalance) {
           return;
         } else {
@@ -235,14 +235,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     const id = localStorage.getItem("selectedBankId");
-    console.log(id, "this is the id currently in the local storage");
-    console.log(connectedBanks, "this is the connected banks at this time.");
-
+    setSelectedBankId(id);
     if (id) {
       getConnectedBanksBalance(Number(id));
     } else {
       if (connectedBanks.length >= 1) {
-        getConnectedBanksBalance(Number(connectedBanks[0].id));
+        const defaultBankId = connectedBanks[0]?.id;
+        setSelectedBankId(String(defaultBankId));
+        getConnectedBanksBalance(Number(defaultBankId));
         localStorage.setItem("selectedBankId", String(connectedBanks[0].id));
       }
     }
@@ -255,7 +255,7 @@ export default function Dashboard() {
       url: "order/summary",
       sCB(res) {
         setDashboardSummary(res.data);
-        console.log("Dashboard Hiistory", res.data);
+        // console.log("Dashboard Hiistory", res.data);
       },
       eCB(res) {
         console.error(res.error);
@@ -437,7 +437,7 @@ export default function Dashboard() {
       <div></div>
 
       {/* Table */}
-      {pendingOrders.length < 1 ? (
+      {pendingOrders.length >= 1 ? (
         <section className="w-full h-full mt-10">
           <div className="hidden lg:block">
             <DataTable
@@ -451,8 +451,6 @@ export default function Dashboard() {
 
           <div className="lg:hidden">
             <MobileTable data={pendingOrders} onDataChange={handleDataChange} />
-
-            {/* <MobileTable data={pendingOrders} onDataChange={handleDataChange} /> */}
           </div>
         </section>
       ) : (

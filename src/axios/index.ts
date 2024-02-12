@@ -57,7 +57,7 @@ service.interceptors.response.use(
       // localStorage.clear();
       removeToken();
       // window.localStorage.clear();
-      window.localStorage.removeItem("selectedBankIdId");
+      window.localStorage.removeItem("selectedBankId");
       window.location.href = "/auth";
       notify.error(response?.data.message);
     }

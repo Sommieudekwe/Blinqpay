@@ -26,28 +26,10 @@ export default function MobileTable({ data, onDataChange }: TableProps) {
     setEditedNumber(initialNumber);
   };
 
-  // save new number and send to backend to update the order through its id
-  // const handleSaveAmount = (index: number) => {
-  //   const newData = [...data];
-  //   newData[index].accountNumber = editedNumber;
-  //   onDataChange(newData);
-  //   // send the new number to the backend (make api call)
-  //   setEditableAmountIndex(-1);
-  // };
-
   const handleBankEdit = (index: number, initialBankName: string) => {
     setEditableBankIndex(index);
     setEditedBankName(initialBankName);
   };
-
-  // const handleSaveBank = async (index: number) => {
-  //   const newData = [...data];
-  //   newData[index as number].bankName = editedBankName;
-  //   onDataChange(newData);
-  //   // send the new number to the backend (make api call)
-
-  //   setEditableBankIndex(-1);
-  // };
 
   const handleCancel = () => {
     setEditableAmountIndex(-1);
@@ -56,6 +38,7 @@ export default function MobileTable({ data, onDataChange }: TableProps) {
     setEditedBankName("");
   };
 
+  // save new number and send to backend to update the order through its id
   const handleSave = async (
     index: number,
     orderId: number,
