@@ -14,7 +14,6 @@ export default function AutoPay({ onAutoPayToggle }: AutoPayProps) {
   };
   return (
     <div className="text-sm">
-      Auto Pay{" "}
       <Switch
         checked={toggleState}
         onCheckedChange={handleToggle}

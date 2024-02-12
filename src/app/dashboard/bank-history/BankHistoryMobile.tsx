@@ -1,6 +1,6 @@
 "use client";
 import { IBankHistory } from "@/types";
-import { cn, formatAmount, formatDate } from "@/lib/utils";
+import { cn, formatAmount, formatDate, formatTime } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { PaginationTypes } from "@/components/ui/data-table";
@@ -46,7 +46,10 @@ export default function BankHistoryDashboard({
                 {d.type === "debit" ? "-" : d.type === "credit" ? "+" : ""}
                 &#8358;{formatAmount(d.amount)}
               </p>
-              <p className="opacity-60">{formatDate(d.date)}</p>
+              <p className="opacity-60 space-x-2">
+                <span>{formatDate(d.date)}</span>
+                <span>{formatTime(d.date)}</span>
+              </p>
               <p
                 className={cn(
                   "capitalize rounded-3xl py-1 text-sm",
