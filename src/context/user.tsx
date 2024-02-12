@@ -58,12 +58,13 @@ const UsersProvider = ({ children }: { children: React.ReactNode }) => {
     const newToggleState = !toggleState;
     setToggleState(newToggleState);
     localStorage.setItem("toggleState", JSON.stringify(newToggleState));
-    if (toggleState) {
+    if (newToggleState) {
       notify.success("Autopay enabled");
     } else {
       notify.error("Autopay disabled");
     }
   };
+
   return (
     <UsersContext.Provider
       value={{
