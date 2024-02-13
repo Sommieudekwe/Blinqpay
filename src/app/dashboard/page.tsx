@@ -270,9 +270,7 @@ export default function Dashboard() {
   // newly added
   const handleDataChange = (updatedData: IDashboard[]) => {
     setPendingOrders(updatedData);
-  };
-
-  console.log(pendingOrders);
+  };  
 
   return (
     <div className="">
