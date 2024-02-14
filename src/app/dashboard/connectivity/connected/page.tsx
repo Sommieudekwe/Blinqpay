@@ -46,7 +46,7 @@ export default function Connected() {
       sCB(res) {
         console.log(res);
         setData((prevData) =>
-          prevData.filter((provider) => provider.id !== id)
+          prevData.filter((provider) => provider?.id !== id)
         );
       },
       eCB(res) {
@@ -57,7 +57,7 @@ export default function Connected() {
 
   console.log(data);
 
-  return data.length > 0 ? (
+  return data?.length > 0 ? (
     <section className="w-full h-full">
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 pt-10 lg:pt-20 px-9">
         {data.map((provider, index) => (

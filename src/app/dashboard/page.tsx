@@ -270,7 +270,9 @@ export default function Dashboard() {
   // newly added
   const handleDataChange = (updatedData: IDashboard[]) => {
     setPendingOrders(updatedData);
-  };  
+  };
+
+  console.log(connectedBanks);
 
   return (
     <div className="">
@@ -323,7 +325,8 @@ export default function Dashboard() {
               options={connectedBanks}
               className="w-44"
               onChange={handleSelectChange}
-              value={connectedBanks[0]?.id?.toString()}
+              // value={connectedBanks[0]?.id?.toString()}
+              value={selectedBankId?.toString()}
             />
           </div>
         </div>
