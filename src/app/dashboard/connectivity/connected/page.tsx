@@ -67,7 +67,7 @@ export default function Connected() {
           >
             <div className="w-full max-w-[16.25rem] relative h-[3.438rem]">
               {/* Add image when they come from the backend */}
-              <Image src={provider.logo} alt={"bank logo"} fill />
+              <Image src={provider?.logo} alt={"bank logo"} fill />
             </div>
 
             <Button
