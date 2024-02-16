@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="pt-48">
       <hr className="opacity-10" />
 
-      <div className="grid grid-cols-12 py-16 px-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 py-16 px-4 md:px-12 space-y-8 lg:space-y-0">
         <h1 className="col-span-4 font-bold text-2xl">Blingpay</h1>
 
         {/* <div className="flex-grow-0"></div> */}
