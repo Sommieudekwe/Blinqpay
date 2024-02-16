@@ -24,37 +24,37 @@ import BankAPIDetailsForm, {
 import apiCAll from "@/lib/apiCall";
 
 export interface IBankDetails {
-	name: string;
-	apiKey: string;
-	phone: string;
-	email: string;
-	accountNumber: string;
-	narration: string;
-	accountReference: string;
+  name: string;
+  apiKey: string;
+  phone: string;
+  email: string;
+  accountNumber: string;
+  narration: string;
+  accountReference: string;
 }
 export default function Connectivity() {
-	const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
-	const [isLoading, setisLoading] = React.useState<boolean>(false);
-	const [step, setStep] = React.useState<number>(1);
-	const { id } = useParams();
-	const { providers, getAllProviders } = useStore();
-	const data = providers.filter((provider) => provider.name === id);
-	console.log(data);
-	const [bankDetails, setBankDetails] = React.useState<IBankDetails>({
-		name: String(id).toUpperCase(),
-		apiKey: "",
-		phone: "",
-		email: "",
-		accountNumber: "",
-		narration: "",
-		accountReference: "",
-	});
-	/*
-	 *
-	 *
-	 *
-	 *
-	 */
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
+  const [isLoading, setisLoading] = React.useState<boolean>(false);
+  const [step, setStep] = React.useState<number>(1);
+  const { id } = useParams();
+  const { providers, getAllProviders } = useStore();
+  const data = providers.filter((provider) => provider.name === id);
+  console.log(data);
+  const [bankDetails, setBankDetails] = React.useState<IBankDetails>({
+    name: String(id).toUpperCase(),
+    apiKey: "",
+    phone: "",
+    email: "",
+    accountNumber: "",
+    narration: "",
+    accountReference: "",
+  });
+  /*
+   *
+   *
+   *
+   *
+   */
 
 	async function handleConnectToBank(
 		apiVAlues: ConnectionDetailsSchemaTypes | MonniefyDetailsSchemaTypes | BlocDetailsSchemaTypes
@@ -123,66 +123,80 @@ export default function Connectivity() {
 				sCB(res) {
 					console.log(res);
 
-					setisLoading(false);
-					setIsSuccess(true);
-				},
-				eCB(res) {
-					console.error(res.error);
-					setisLoading(false);
-				},
-			});
-		}
-	}
-	/*
-	 *
-	 *
-	 *
-	 *
-	 */
-	useEffect(() => {
-		getAllProviders();
-	}, []);
+          setisLoading(false);
+          setIsSuccess(true);
+        },
+        eCB(res) {
+          console.error(res.error);
+          setisLoading(false);
+        },
+      });
+    }
+  }
+  /*
+   *
+   *
+   *
+   *
+   */
+  useEffect(() => {
+    getAllProviders();
+  }, []);
 
-	if (id === "MONIEPOINT") {
-		return (
-			<section className="w-full h-full lg:pt-8">
-				<div className="max-w-[35rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
-					{data.map((d, i) => (
-						<div key={i} className="text-center">
-							{d.name}
-						</div>
-					))}
+  if (id === "MONNIFY") {
+    return (
+      <section className="w-full h-full lg:pt-8">
+        <div className="max-w-[35rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
+          {data.map((d, i) => (
+            <div key={i} className="text-center">
+              {d.name}
+            </div>
+          ))}
 
-					{/* logo */}
-					{/* <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto"> */}
-					<div className="w-full max-w-[16.25rem] relative h-[rem] mx-auto">
-						{/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
-					</div>
-					<MofifyDetailsForm
-						setStep={setStep}
-						handleConnectToBank={handleConnectToBank}
-						bankDetails={bankDetails}
-						setBankDetails={setBankDetails}
-						isLoading={isLoading}
-					/>
-				</div>
-				<Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-					<DialogContent className="text-center dark:text-white">
-						<Image src={"/dashboard/success.svg"} alt="success icon" width={88} height={88} className="mx-auto" />
+          {/* logo */}
+          {/* <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto"> */}
+          <div className="w-full max-w-[16.25rem] relative h-[rem] mx-auto">
+            {/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
+          </div>
+          <MofifyDetailsForm
+            setStep={setStep}
+            handleConnectToBank={handleConnectToBank}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+            isLoading={isLoading}
+          />
+        </div>
+        <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
+          <DialogContent className="text-center dark:text-white">
+            <Image
+              src={"/dashboard/success.svg"}
+              alt="success icon"
+              width={88}
+              height={88}
+              className="mx-auto"
+            />
 
-						<div className="space-y-3 mt-4">
-							<p className="opacity-60 font-aeonikRegular text-lg">API Connected</p>
-							<p className="font-bold text-3xl">Successfully</p>
-						</div>
+            <div className="space-y-3 mt-4">
+              <p className="opacity-60 font-aeonikRegular text-lg">
+                API Connected
+              </p>
+              <p className="font-bold text-3xl">Successfully</p>
+            </div>
 
-						<Link href={"/dashboard"} className={cn("w-full mt-[1.938rem]", buttonVariants({ variant: "primary" }))}>
-							Go to Dashboard
-						</Link>
-					</DialogContent>
-				</Dialog>
-			</section>
-		);
-	}
+            <Link
+              href={"/dashboard"}
+              className={cn(
+                "w-full mt-[1.938rem]",
+                buttonVariants({ variant: "primary" })
+              )}
+            >
+              Go to Dashboard
+            </Link>
+          </DialogContent>
+        </Dialog>
+      </section>
+    );
+  }
 
 	if (id === "BLOC") {
 		return (
@@ -236,46 +250,66 @@ export default function Connectivity() {
 				</div>
 			</div>
 
-			<div className="max-w-[35rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
-				<div>{step !== 1 && <ArrowLeft size={36} onClick={() => setStep(1)} />}</div>
-				{data.map((d, i) => (
-					<div key={i} className="text-center">
-						{d.name}
-					</div>
-				))}
+      <div className="max-w-[35rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
+        <div>
+          {step !== 1 && <ArrowLeft size={36} onClick={() => setStep(1)} />}
+        </div>
+        {data.map((d, i) => (
+          <div key={i} className="text-center">
+            {d.name}
+          </div>
+        ))}
 
-				{/* logo */}
-				{/* <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto"> */}
-				<div className="w-full max-w-[16.25rem] relative h-[rem] mx-auto">
-					{/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
-				</div>
+        {/* logo */}
+        {/* <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto"> */}
+        <div className="w-full max-w-[16.25rem] relative h-[rem] mx-auto">
+          {/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
+        </div>
 
-				{step === 1 ? (
-					<BankDetailsForm setStep={setStep} bankDetails={bankDetails} setBankDetails={setBankDetails} />
-				) : (
-					<BankAPIDetailsForm
-						setStep={setStep}
-						handleConnectToBank={handleConnectToBank}
-						bankDetails={bankDetails}
-						setBankDetails={setBankDetails}
-						isLoading={isLoading}
-					/>
-				)}
-			</div>
-			<Dialog open={isSuccess} onOpenChange={setIsSuccess}>
-				<DialogContent className="text-center dark:text-white">
-					<Image src={"/dashboard/success.svg"} alt="success icon" width={88} height={88} className="mx-auto" />
+        {step === 1 ? (
+          <BankDetailsForm
+            setStep={setStep}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+          />
+        ) : (
+          <BankAPIDetailsForm
+            setStep={setStep}
+            handleConnectToBank={handleConnectToBank}
+            bankDetails={bankDetails}
+            setBankDetails={setBankDetails}
+            isLoading={isLoading}
+          />
+        )}
+      </div>
+      <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
+        <DialogContent className="text-center dark:text-white">
+          <Image
+            src={"/dashboard/success.svg"}
+            alt="success icon"
+            width={88}
+            height={88}
+            className="mx-auto"
+          />
 
-					<div className="space-y-3 mt-4">
-						<p className="opacity-60 font-aeonikRegular text-lg">API Connected</p>
-						<p className="font-bold text-3xl">Successfully</p>
-					</div>
+          <div className="space-y-3 mt-4">
+            <p className="opacity-60 font-aeonikRegular text-lg">
+              API Connected
+            </p>
+            <p className="font-bold text-3xl">Successfully</p>
+          </div>
 
-					<Link href={"/dashboard"} className={cn("w-full mt-[1.938rem]", buttonVariants({ variant: "primary" }))}>
-						Go to Dashboard
-					</Link>
-				</DialogContent>
-			</Dialog>
-		</section>
-	);
+          <Link
+            href={"/dashboard"}
+            className={cn(
+              "w-full mt-[1.938rem]",
+              buttonVariants({ variant: "primary" })
+            )}
+          >
+            Go to Dashboard
+          </Link>
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
 }
