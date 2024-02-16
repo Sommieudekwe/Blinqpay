@@ -224,7 +224,7 @@ export function MofifyDetailsForm({
 	 */
 	async function onSubmit(values: MonniefyDetailsSchemaTypes) {
 		if (!values.agree) {
-			return notify.error("Agree to terms and conditions!iiii");
+			return notify.error("Agree to terms and conditions!");
 		}
 		handleConnectToBank(values);
 	}
