@@ -26,7 +26,7 @@ export default function Connectivity() {
     getAllProviders();
   }, []);
 
-  console.log(providers);
+  // console.log(providers);
 
   return (
     <section className="w-full h-full">
