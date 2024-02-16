@@ -15,6 +15,8 @@ import { bankList } from "@/app/dashboard/connectivity/constants";
 import BankDetailsForm from "../../../../../components/Dashboard/connectivity/details-form";
 import { useStore } from "@/context/store";
 import BankAPIDetailsForm, {
+	BlocDetailsForm,
+	BlocDetailsSchemaTypes,
 	ConnectionDetailsSchemaTypes,
 	MofifyDetailsForm,
 	MonniefyDetailsSchemaTypes,
@@ -54,23 +56,25 @@ export default function Connectivity() {
 	 *
 	 */
 
-	async function handleConnectToBank(apiVAlues: ConnectionDetailsSchemaTypes | MonniefyDetailsSchemaTypes) {
+	async function handleConnectToBank(
+		apiVAlues: ConnectionDetailsSchemaTypes | MonniefyDetailsSchemaTypes | BlocDetailsSchemaTypes
+	) {
 		setisLoading(true);
 		const { email } = bankDetails;
 
 		if (id === "MONIEPOINT") {
-			console.log(apiVAlues);
-			const monifyDetails = {
-					// @ts-ignore
-				apiSecret: apiVAlues?.secret_key,
-				narration: apiVAlues?.narration,
-				apiKey: apiVAlues?.apiKey,
-			};
+			// console.log(apiVAlues);
+			// const monifyDetails = {
+			// 	// @ts-ignore
+			// 	apiSecret: apiVAlues?.secret_key,
+			// 	narration: apiVAlues?.narration,
+			// 	apiKey: apiVAlues?.apiKey,
+			// };
 
-      await apiCAll({
+			await apiCAll({
 				url: "provider/connect/monnify",
 				method: "post",
-				data: monifyDetails,
+				data: apiVAlues,
 				toast: true,
 				sCB(res) {
 					console.log(res);
@@ -82,7 +86,26 @@ export default function Connectivity() {
 					console.error(res.error);
 					setisLoading(false);
 				},
-			})
+			});
+		} else if (id === "BLOC") {
+			console.log(apiVAlues);
+			
+			await apiCAll({
+				url: "provider/connect/bloc",
+				method: "post",
+				data: apiVAlues,
+				toast: true,
+				sCB(res) {
+					console.log(res);
+
+					setisLoading(false);
+					setIsSuccess(true);
+				},
+				eCB(res) {
+					console.error(res.error);
+					setisLoading(false);
+				},
+			});
 		} else {
 			await apiCAll({
 				url: "provider/connect/kuda",
@@ -90,6 +113,7 @@ export default function Connectivity() {
 				data: {
 					...bankDetails,
 					email: email.toLowerCase(),
+					// @ts-ignore
 					apiKey: apiVAlues.apiKey,
 					// @ts-ignore
 					accountReference: apiVAlues?.accountReference,
@@ -135,6 +159,47 @@ export default function Connectivity() {
 						{/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
 					</div>
 					<MofifyDetailsForm
+						setStep={setStep}
+						handleConnectToBank={handleConnectToBank}
+						bankDetails={bankDetails}
+						setBankDetails={setBankDetails}
+						isLoading={isLoading}
+					/>
+				</div>
+				<Dialog open={isSuccess} onOpenChange={setIsSuccess}>
+					<DialogContent className="text-center dark:text-white">
+						<Image src={"/dashboard/success.svg"} alt="success icon" width={88} height={88} className="mx-auto" />
+
+						<div className="space-y-3 mt-4">
+							<p className="opacity-60 font-aeonikRegular text-lg">API Connected</p>
+							<p className="font-bold text-3xl">Successfully</p>
+						</div>
+
+						<Link href={"/dashboard"} className={cn("w-full mt-[1.938rem]", buttonVariants({ variant: "primary" }))}>
+							Go to Dashboard
+						</Link>
+					</DialogContent>
+				</Dialog>
+			</section>
+		);
+	}
+
+	if (id === "BLOC") {
+		return (
+			<section className="w-full h-full lg:pt-8">
+				<div className="max-w-[35rem] mx-auto rounded-xl bg-milky dark:bg-onboard-bg border border-white py-10 px-4 md:px-[1.875rem] border-opacity-25 mt-16 mb-4 md:mt-[6rem]">
+					{data.map((d, i) => (
+						<div key={i} className="text-center">
+							{d.name}
+						</div>
+					))}
+
+					{/* logo */}
+					{/* <div className="w-full max-w-[16.25rem] relative h-[3.438rem] mx-auto"> */}
+					<div className="w-full max-w-[16.25rem] relative h-[rem] mx-auto">
+						{/* <Image src={getBankLogo(id as string)} alt={"bank logo"} fill /> */}
+					</div>
+					<BlocDetailsForm
 						setStep={setStep}
 						handleConnectToBank={handleConnectToBank}
 						bankDetails={bankDetails}
