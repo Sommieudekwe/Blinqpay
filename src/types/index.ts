@@ -1,4 +1,4 @@
-import { ConnectionDetailsSchemaTypes, MonniefyDetailsSchemaTypes } from "@/components/Dashboard/connectivity/apikey-form";
+import { BlocDetailsSchemaTypes, ConnectionDetailsSchemaTypes, MonniefyDetailsSchemaTypes } from "@/components/Dashboard/connectivity/apikey-form";
 
 export interface IRoutes {
   name: string;
@@ -41,7 +41,7 @@ export interface IbankList {
 
 export interface IBankDetailsProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  handleConnectToBank: (apiVAlues: ConnectionDetailsSchemaTypes | MonniefyDetailsSchemaTypes) => void;
+  handleConnectToBank: (apiVAlues: ConnectionDetailsSchemaTypes | MonniefyDetailsSchemaTypes | BlocDetailsSchemaTypes ) => void;
 }
 
 export interface IOrderHistory {
