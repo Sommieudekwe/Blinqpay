@@ -59,8 +59,6 @@ export default function BankHistory() {
     getBankTransactionsHistory();
   }, [selectedBankId]);
 
-  console.log(selectedBankId, data, "whats the issue");
-
   return (
     <section className="w-full h-full">
       {data.length >= 1 ? (

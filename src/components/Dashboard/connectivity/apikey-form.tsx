@@ -24,15 +24,39 @@ import { IBankDetails } from "@/app/dashboard/connectivity/bank/[id]/page";
 
 const ConnectionDetailsSchema = yup.object().shape({
   apiKey: yup.string().required("Api key is required!"),
-  accountReference: yup
-    .string()
-    .required("accountReference reference is required"),
   narration: yup.string().required("Naration is required"),
   agree: yup.boolean().required("Agree to terms"),
+  accountReference: yup
+  .string()
+  .required("accountReference reference is required"),
 });
+
+const MonifyDetailsSchema = yup.object().shape({
+  apiKey: yup.string().required("Api key is required!"),
+  narration: yup.string().required("Naration is required"),
+  agree: yup.boolean().required("Agree to terms"),
+  secret_key: yup.string().required("Secret key is required"),
+});
+
+// const KudaDetailsSchema = yup.object().shape({
+//   apiKey: yup.string().required("Api key is required!"),
+//   narration: yup.string().required("Naration is required"),
+//   agree: yup.boolean().required("Agree to terms"),
+//   accountReference: yup
+//   .string()
+//   .required("accountReference reference is required"),
+// });
+
+
+
+
 
 export type ConnectionDetailsSchemaTypes = yup.InferType<
   typeof ConnectionDetailsSchema
+>;
+
+export type MonniefyDetailsSchemaTypes = yup.InferType<
+  typeof MonifyDetailsSchema
 >;
 
 interface IBankDetailsForm {
@@ -47,11 +71,16 @@ export default function BankAPIDetailsForm({
   setBankDetails,
   bankDetails,
 }: IBankDetailsProps & IBankDetailsForm) {
+
+
+
+  
   const defaultValues: ConnectionDetailsSchemaTypes = {
     apiKey: bankDetails.apiKey || "",
     accountReference: bankDetails.accountReference || "",
     narration: bankDetails.narration || "",
     agree: false,
+    // secret_key: ""
   };
 
   const form = useForm<ConnectionDetailsSchemaTypes>({
@@ -83,6 +112,8 @@ export default function BankAPIDetailsForm({
    *
    *
    */
+  console.log(form.formState.errors, "form.errors");
+  
   return (
     <Form {...form}>
       <form
@@ -115,7 +146,7 @@ export default function BankAPIDetailsForm({
             )}
           />
 
-          <FormField
+         <FormField
             control={form.control}
             name="accountReference"
             render={({ field }) => (
@@ -139,6 +170,152 @@ export default function BankAPIDetailsForm({
               </FormItem>
             )}
           />
+        
+
+          <FormField
+            control={form.control}
+            name="narration"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    id="narration"
+                    placeholder="Transaction Narration"
+                    {...field}
+                    error={form.formState.errors?.narration?.message}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <Button
+          isLoading={isLoading}
+          variant={"primary"}
+          className="w-full mt-[3.7rem]"
+        >
+          Submit
+        </Button>
+        <FormField
+          control={form.control}
+          name="agree"
+          render={({ field }) => (
+            <FormItem className="flex space-x-3 space-y-0 mt-6">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  className="rounded-full bg-button-connect"
+                />
+              </FormControl>
+              <FormDescription className="mt-0">
+                Terms and conditions guiding this information privacy policy and
+                all will be here and by clicking submit you agree to this
+                privacy policy
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+      </form>
+    </Form>
+  );
+}
+
+export function MofifyDetailsForm({
+  isLoading,
+  handleConnectToBank,
+  setBankDetails,
+  bankDetails,
+}: IBankDetailsProps & IBankDetailsForm) {
+
+
+
+  
+  const defaultValues: MonniefyDetailsSchemaTypes = {
+    apiKey: bankDetails.apiKey || "",
+    narration: bankDetails.narration || "",
+    agree: false,
+    secret_key: ""
+  };
+
+  const form = useForm<MonniefyDetailsSchemaTypes>({
+    resolver: yupResolver(MonifyDetailsSchema),
+    defaultValues,
+    mode: "all",
+  });
+  /*
+   *
+   *
+   *
+   *
+   */
+  async function onSubmit(values: MonniefyDetailsSchemaTypes) {
+    if (!values.agree) {
+      return notify.error("Agree to terms and conditions!iiii");
+    }
+    handleConnectToBank(values);
+  }
+  /*
+   *
+   *
+   *
+   *
+   */
+  console.log(form.formState.errors, "form.errors");
+  
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full mt-[3.375rem] "
+      >
+        <div className="space-y-6">
+          <FormField
+            control={form.control}
+            name="apiKey"
+            render={({ field }) => (
+              <FormItem>
+                {/* <FormLabel htmlFor="apiKey">API Key</FormLabel> */}
+                <FormControl>
+                  <Input
+                    id="apiKey"
+                    placeholder="API Key"
+                    {...field}
+                    error={form.formState.errors?.apiKey?.message}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Can’t find your API Key?
+                  <Link href={"/"} className="text-button-primary">
+                    Watch this video
+                  </Link>
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+           <FormField
+                control={form.control}
+                name="secret_key"
+                render={({ field }) => (
+                  <FormItem>
+                    {/* <FormLabel htmlFor="secret_key">API Key</FormLabel> */}
+                    <FormControl>
+                      <Input
+                        id="secret_key"
+                        placeholder="Secret Key"
+                        {...field}
+                        error={form.formState.errors?.secret_key?.message}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+          
 
           <FormField
             control={form.control}

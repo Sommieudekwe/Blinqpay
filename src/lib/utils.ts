@@ -36,6 +36,25 @@ export function formatDate(dateString: string): string {
   return formattedDate;
 }
 
+export function formatTime(dateString: string) {
+  const dateObject = new Date(dateString);
+
+  // Get hours, minutes, and seconds
+  const hours = dateObject.getHours();
+  const minutes = dateObject.getMinutes();
+  const seconds = dateObject.getSeconds();
+
+  // Format the time components with leading zeros if necessary
+  const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+  // Format the time as a string
+  const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+  return timeString;
+}
+
 export function formatPhone(phoneNumber: string) {
   if (/^\+\d{1,3}\d{10}$/.test(phoneNumber)) {
     return phoneNumber;

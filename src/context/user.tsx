@@ -8,6 +8,7 @@ import {
   useState,
   useEffect,
 } from "react";
+import { notify } from "@/components/ui/toast";
 
 import apiCAll from "@/lib/apiCall";
 
@@ -55,9 +56,15 @@ const UsersProvider = ({ children }: { children: React.ReactNode }) => {
 
   const toggle = () => {
     const newToggleState = !toggleState;
-    setToggleState(!newToggleState);
+    setToggleState(newToggleState);
     localStorage.setItem("toggleState", JSON.stringify(newToggleState));
+    if (newToggleState) {
+      notify.success("Autopay enabled");
+    } else {
+      notify.error("Autopay disabled");
+    }
   };
+
   return (
     <UsersContext.Provider
       value={{

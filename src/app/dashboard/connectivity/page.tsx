@@ -39,8 +39,10 @@ export default function Connectivity() {
                 className="w-full p-5 space-y-8 flex flex-col items-center border dark:border-border-connect bg-milky dark:bg-bank-bg "
               >
                 <div className="w-full max-w-[16.25rem] relative h-[3.438rem]">
-                  {/* Addd bank image */}
-                  <Image src={providers.logo} alt={"bank logo"} fill />
+                  {/* Add bank image */}
+                  {providers?.logo && (
+                    <Image src={providers?.logo} alt={"bank logo"} fill />
+                  )}
                 </div>
                 <Button
                   onClick={() =>

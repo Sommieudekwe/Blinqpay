@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, formatAmount, formatDate } from "@/lib/utils";
+import { cn, formatAmount, formatDate, formatTime } from "@/lib/utils";
 import { IBankHistory } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -51,7 +51,12 @@ export const columns: ColumnDef<IBankHistory>[] = [
   {
     accessorKey: "date",
     header: "Date",
-    cell: ({ row }) => <p>{formatDate(row.original.date)}</p>,
+    cell: ({ row }) => (
+      <p className="space-x-2">
+        <span>{formatDate(row.original.date)}</span>
+        <span>{formatTime(row.original.date)}</span>
+      </p>
+    ),
   },
   {
     accessorKey: "id",
