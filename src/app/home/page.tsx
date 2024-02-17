@@ -89,7 +89,7 @@ export default function Home() {
         </div>
 
         {/* Partners */}
-        <div className="flex flex-row flex-wrap justify-between items-center px-4 lg:px-16 gap-y-10 gap-x-6">
+        <div className="flex flex-wrap justify-between items-center px-4 lg:px-16 gap-y-10 gap-x-6">
           <Image
             src="/landing/partners/binance.svg"
             alt="partner"
@@ -143,8 +143,8 @@ export default function Home() {
           <Tabs defaultValue="signup" className="w-full mt-9">
             <TabsList className="mb-[3.75rem]">
               <TabsTrigger value="signup">Sign up</TabsTrigger>
-              <TabsTrigger value="dashboard">User Dashboard</TabsTrigger>
-              <TabsTrigger value="payment">Payment Approval</TabsTrigger>
+              <TabsTrigger value="dashboard">Connect</TabsTrigger>
+              <TabsTrigger value="payment">Payouts</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signup">
@@ -166,48 +166,33 @@ export default function Home() {
           </h1>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Omoshalawe"
+              content="I love the page responsivess and user interface design. It's just a cool app to use. As for the registration, it's just fast and I was happyy I could start making payments easily within 10mins."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Yakubu"
+              content="I love how fast the customer service representative was. She was too polite and had good knowledge of everything. With her help, I was able to connect my exchanges within minutes."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Okechukwu"
+              content="The feature whereby you can connect to more than one bank is simply amazing. Everything about the app is nothing short of amazing. Bad network cant stop me from trading."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Mohammed"
+              content="My favorite feature is the fact that you can use dark or light mode. I appreciate this feature because light sensivity can be an issue when you stay on the computer for too long."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Chukwuemeka"
+              content="This appp is a 5 star app. They practically raise the bnar too high. Now I can exploit the merchant space on different exchanges. Nice one guys."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
-              description="Founder of Blinqpay"
-            />
-            <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
-              description="Founder of Blinqpay"
-            />
-            <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
-              description="Founder of Blinqpay"
-            />
-            <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Kola"
+              content="The partnership feature was a breath of fresh air. It's wonderful to see a company who is all about growth for both customers and themselves. I am happy to be among your first set of partners."
               description="Founder of Blinqpay"
             />
           </div>
