@@ -3,18 +3,15 @@ import { Button } from "../ui/button";
 
 export default function Dashboard() {
   return (
-    <div className="border border-white border-opacity-20 rounded-[55px] w-full p-28 flex justify-between items-center">
+    <div className="border border-white border-opacity-20 rounded-[55px] w-full p-8 md:p-12 lg:p-28 flex flex-col lg:flex-row justify-between items-center">
       <div className="max-w-xl">
-        <h1 className="text-3xl font-bold">
-          Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-          vulputate libero.
+        <h1 className="text-2xl md:text-3xl font-bold">
+          Connect to top exchanges and Banks
         </h1>
         <p className="text-lg mt-6">
-          Porem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-          vulputate libero et velit interdum, ac aliquet odio mattis. Class
-          aptent taciti sociosqu ad litora torquent per conubia nostra, per
-          inceptos himenaeos. Curabitur tempus urna at turpis condimentum
-          lobortis.
+          Connect to exchanges like binance, kucoin,paxful, noones, remitano,
+          bybit and banks to start making automated fiat payments. Trading has
+          never been this easy and instant.
         </p>
 
         <Button variant="primary" className="mt-10 w-60">

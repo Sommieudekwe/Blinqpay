@@ -7,13 +7,15 @@ import Payment from "@/components/LandingPage/Payment";
 import PeopleCard from "@/components/LandingPage/Card";
 import FAQ from "@/components/LandingPage/FAQ";
 import Footer from "@/components/LandingPage/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative px-8">
-      {/* Hero */}
+    <div className="relative px-4 md:px-8">
       <div className="">
-        <div className="hero relative px-16">
+        {/* Hero */}
+
+        <div className="hero relative px-4 md:px-8 lg:px-16">
           <div className="absolute inset-0 z-0">
             <Image
               src="/landing/gradient.png"
@@ -25,8 +27,10 @@ export default function Home() {
           </div>
           <div className="z-10">
             {/* navbar */}
-            <nav className="flex items-center justify-between py-6">
-              <div className="text-3xl font-bold hidden lg:block">BlinqPay</div>
+            {/* <nav className="flex items-center justify-between py-6">
+              <div className="text-2xl md:text-3xl font-bold hidden lg:block">
+                BlinqPay
+              </div>
               <div>
                 <ul className="flex space-x-12">
                   <li>Home</li>
@@ -42,10 +46,10 @@ export default function Home() {
                 </Button>
                 <Button variant="landing-outline">Sign up</Button>
               </div>
-            </nav>
+            </nav> */}
 
             {/* texts */}
-            <div className="flex items-center justify-between py-32">
+            <div className="flex flex-col md:flex-row items-center justify-between py-16 md:pt-24 lg:py-32">
               <Image
                 src="/landing/blue.svg"
                 alt="blue"
@@ -54,7 +58,7 @@ export default function Home() {
                 className="absolute left-0 top-0"
               />
               <div className="max-w-2xl z-20">
-                <h1 className="text-4xl md:text-7xl font-bold ">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold ">
                   Bridging the gap between crypto and fiat economies
                 </h1>
                 <p className="mt-6">
@@ -70,6 +74,14 @@ export default function Home() {
                   alt="hero.svg"
                   width={458}
                   height={403}
+                  className="hidden md:block"
+                />
+                <Image
+                  src="/landing/hero.svg"
+                  alt="hero.svg"
+                  width={308}
+                  height={253}
+                  className="block md:hidden mt-10"
                 />
               </div>
             </div>
@@ -77,7 +89,7 @@ export default function Home() {
         </div>
 
         {/* Partners */}
-        <div className="flex justify-between items-center px-16">
+        <div className="flex flex-wrap justify-between items-center px-4 lg:px-16 gap-y-10 gap-x-6">
           <Image
             src="/landing/partners/binance.svg"
             alt="partner"
@@ -124,15 +136,15 @@ export default function Home() {
 
         {/* How to use Blinqpay */}
         <div className="mt-28">
-          <h1 className="text-3xl font-bold text-opacity-20">
+          <h1 className="text-2xl md:text-3xl font-bold text-opacity-20">
             How to use BlinqPay in these three steps?
           </h1>
 
           <Tabs defaultValue="signup" className="w-full mt-9">
             <TabsList className="mb-[3.75rem]">
               <TabsTrigger value="signup">Sign up</TabsTrigger>
-              <TabsTrigger value="dashboard">User Dashboard</TabsTrigger>
-              <TabsTrigger value="payment">Payment Approval</TabsTrigger>
+              <TabsTrigger value="dashboard">Connect</TabsTrigger>
+              <TabsTrigger value="payment">Payouts</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signup">
@@ -149,51 +161,38 @@ export default function Home() {
 
         {/* Testimonial */}
         <div className="mt-28">
-          <h1 className="text-3xl font-bold">What people say about us</h1>
-          <div className="mt-10 grid grid-cols-3 gap-5">
+          <h1 className="text-2xl md:text-3xl font-bold">
+            What people say about us
+          </h1>
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Omoshalawe"
+              content="I love the page responsivess and user interface design. It's just a cool app to use. As for the registration, it's just fast and I was happyy I could start making payments easily within 10mins."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Yakubu"
+              content="I love how fast the customer service representative was. She was too polite and had good knowledge of everything. With her help, I was able to connect my exchanges within minutes."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Okechukwu"
+              content="The feature whereby you can connect to more than one bank is simply amazing. Everything about the app is nothing short of amazing. Bad network cant stop me from trading."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Mohammed"
+              content="My favorite feature is the fact that you can use dark or light mode. I appreciate this feature because light sensivity can be an issue when you stay on the computer for too long."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Chukwuemeka"
+              content="This appp is a 5 star app. They practically raise the bnar too high. Now I can exploit the merchant space on different exchanges. Nice one guys."
               description="Founder of Blinqpay"
             />
             <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
-              description="Founder of Blinqpay"
-            />
-            <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
-              description="Founder of Blinqpay"
-            />
-            <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
-              description="Founder of Blinqpay"
-            />
-            <PeopleCard
-              name="Somto Udekwe"
-              content="Borem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor pur"
+              name="Kola"
+              content="The partnership feature was a breath of fresh air. It's wonderful to see a company who is all about growth for both customers and themselves. I am happy to be among your first set of partners."
               description="Founder of Blinqpay"
             />
           </div>
@@ -201,7 +200,7 @@ export default function Home() {
 
         {/* FAQ */}
         <div className="mt-28">
-          <h1 className="text-3xl font-bold">FAG</h1>
+          <h1 className="text-2xl md:text-3xl font-bold">FAG</h1>
           <div className="mt-10">
             <FAQ />
           </div>
@@ -209,7 +208,7 @@ export default function Home() {
 
         {/* Unkwown text */}
         <div className="mt-40 text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-3xl md:text-4xl font-bold">
             Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero.
           </h1>
