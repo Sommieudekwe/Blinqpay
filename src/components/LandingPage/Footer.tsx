@@ -50,7 +50,7 @@ export default function Footer() {
 
       <hr className="opacity-10" />
 
-      <div className="px-12 pt-10 pb-16 opacity-80">
+      <div className="px-4 md:px-12 pt-10 pb-16 opacity-80">
         <span>&copy; 2023 Blinqpay Inc. All Rights Reserved</span>
       </div>
     </footer>
