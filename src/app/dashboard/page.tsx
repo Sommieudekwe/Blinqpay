@@ -22,49 +22,6 @@ import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
 import AutoPay from "./home/autopay";
 
-// const pendingOrderss: IDashboard[] = [
-//   {
-//     id: 1,
-//     accountNumber: "0226919832",
-//     accountName: "Ayinde Olaolu",
-//     bankName: "GTB",
-//     amount: 5896,
-//     rate: 11267,
-//     status: "failed",
-//     createdAt: "1233",
-//     orderNumber: 123737747,
-//     meta: {
-//       error: "Invalid Bank",
-//     },
-//   },
-
-//   {
-//     id: 2,
-//     accountNumber: "0226919831",
-//     accountName: "Ayinde Olaolu",
-//     bankName: "GTB Bank",
-//     amount: 5896,
-//     rate: 11267,
-//     createdAt: "1233",
-//     orderNumber: 123737747,
-//     status: "failed",
-//     meta: null,
-//   },
-
-//   {
-//     id: 3,
-//     accountNumber: "02269198352",
-//     accountName: "Ayinde Olaolu",
-//     bankName: "GTB Bank",
-//     amount: 58989,
-//     rate: 11267,
-//     status: "failed",
-//     meta: null,
-//     createdAt: "1233",
-//     orderNumber: 123737747,
-//   },
-// ];
-
 type AccountBalance = {
   availableBalance: number;
 };
@@ -85,9 +42,6 @@ export default function Dashboard() {
   const [paginationData, setPaginationData] = useState<
     PaginationTypes | undefined
   >();
-
-  // newly added
-  // const [pendingOrdersss, setPendingOrderss] = useState(pendingOrderss);
 
   const pathname = usePathname();
   const {
@@ -124,28 +78,6 @@ export default function Dashboard() {
     setPendingOrders,
   } = useOrders();
 
-  // const handleCancelAllOrder = async () => {
-  //   setIsLoading(true);
-  //   apiCAll({
-  //     method: "post",
-  //     url: "/order/cancel",
-  //     data: { orderIds: pendingOrdersIds },
-  //     sCB(res) {
-  //       setPendingOrders([]);
-  //       setIsLoading(false);
-  //       setIsDialogOpen(false);
-  //       setPendingOrdersIds([]);
-  //       console.log("Order cancelled");
-  //     },
-  //     eCB(res) {
-  //       console.error(res);
-  //       setIsLoading(false);
-  //       setIsLoading(false);
-  //     },
-  //     toast: true,
-  //   });
-  // };
-
   const handlePayAllOrder = async () => {
     setIsLoading(true);
     apiCAll({
@@ -153,11 +85,10 @@ export default function Dashboard() {
       url: "/order/pay",
       data: { orderIds: pendingOrdersIds },
       sCB(res) {
-        setPendingOrders([]);
         setIsLoading(false);
         setIsPayDialogOpen(false);
-        setPendingOrdersIds([]);
-        console.log("order paid", res.data);
+        getPendingOrders();
+        // setPendingOrdersIds([]);
       },
       eCB(res) {
         setIsLoading(false);
@@ -202,6 +133,7 @@ export default function Dashboard() {
     localStorage.setItem("selectedBankId", id);
 
     getConnectedBanksBalance(Number(id));
+    setPayoutAccount(Number(id));
     return id;
   };
 
@@ -233,11 +165,25 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  const setPayoutAccount = async (id: number) => {
+    await apiCAll({
+      url: `/bank/activate/${id}`,
+      method: "post",
+      sCB(res) {
+        console.log(res);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
   useEffect(() => {
     const id = localStorage.getItem("selectedBankId");
     setSelectedBankId(id);
     if (id) {
       getConnectedBanksBalance(Number(id));
+      setPayoutAccount(Number(id));
     } else {
       if (connectedBanks.length >= 1) {
         const defaultBankId = connectedBanks[0]?.id;
@@ -280,13 +226,6 @@ export default function Dashboard() {
         <div>
           <p className="flex items-center gap-x-2">
             <span className="opacity-50">Bank Balance</span>
-            {/* <Image
-              src="/dashboard/banks/kuda.svg"
-              alt="kuda.svg"
-              className="opacity-100"
-              width={30}
-              height={20}
-            /> */}
           </p>
           <div className="flex items-center gap-2">
             <h2
@@ -325,7 +264,6 @@ export default function Dashboard() {
               options={connectedBanks}
               className="w-44"
               onChange={handleSelectChange}
-              // value={connectedBanks[0]?.id?.toString()}
               value={selectedBankId?.toString()}
             />
           </div>
