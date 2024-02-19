@@ -4,6 +4,7 @@ import apiCAll from "@/lib/apiCall";
 import Image from "next/image";
 import { useState } from "react";
 import { useOrders } from "@/context/pendingOrder";
+import { useStore } from "@/context/store";
 
 interface dataProps {
   orderId: number;
@@ -14,10 +15,11 @@ export default function PayModal({ orderId }: dataProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { getPendingOrders } = useOrders();
+  const { getConnectedBanksBalance } = useStore();
 
   async function handlePayPendingOrder() {
     setIsLoading(true);
-
+    const id = localStorage.getItem("selectedBankId");
     await apiCAll({
       url: `/order/${orderId}/pay`,
       method: "post",
@@ -26,6 +28,7 @@ export default function PayModal({ orderId }: dataProps) {
         setOpenDialog(false);
         setIsLoading(false);
         getPendingOrders();
+        getConnectedBanksBalance(Number(id));
       },
       eCB(res) {
         setIsLoading(false);

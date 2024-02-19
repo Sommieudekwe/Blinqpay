@@ -22,10 +22,6 @@ import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
 import AutoPay from "./home/autopay";
 
-type AccountBalance = {
-  availableBalance: number;
-};
-
 type DashboardSummary = {
   totalTransferCount: number;
   totalTransferAmount: number;
@@ -49,12 +45,9 @@ export default function Dashboard() {
     getAllConnectedBanks,
     selectedBankId,
     setSelectedBankId,
-    cachedBalance,
-    setCachedBalance,
+    accountBalance,
+    getConnectedBanksBalance,
   } = useStore();
-  const [accountBalance, setAccountBalance] = useState<AccountBalance | null>({
-    availableBalance: cachedBalance as number,
-  });
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -80,6 +73,7 @@ export default function Dashboard() {
 
   const handlePayAllOrder = async () => {
     setIsLoading(true);
+    const id = localStorage.getItem("selectedBankId");
     apiCAll({
       method: "post",
       url: "/order/pay",
@@ -89,6 +83,8 @@ export default function Dashboard() {
         setIsPayDialogOpen(false);
         getPendingOrders();
         // setPendingOrdersIds([]);
+
+        getConnectedBanksBalance(Number(id));
       },
       eCB(res) {
         setIsLoading(false);
@@ -103,29 +99,6 @@ export default function Dashboard() {
     setPendingOrdersIds([]);
     setIsDialogOpen(false);
     setIsPayDialogOpen(false);
-  };
-
-  const getConnectedBanksBalance = async (id: number) => {
-    // console.log("id:", id);
-    apiCAll({
-      method: "get",
-      url: `/bank/${id}/balance`,
-      sCB(res) {
-        // setAccountBalance(res.data);
-        // setCachedBalance(res.data)
-
-        // console.log(res.data);
-        if (cachedBalance && res.data.availableBalance === cachedBalance) {
-          return;
-        } else {
-          setAccountBalance(res.data);
-          setCachedBalance(res.data.availableBalance);
-        }
-      },
-      eCB(res) {
-        console.error(res.error);
-      },
-    });
   };
 
   const handleSelectChange = (id: string) => {
@@ -234,7 +207,7 @@ export default function Dashboard() {
               }`}
             >
               {accountBalance !== null ? (
-                <p>&#8358;{formatAmount(accountBalance?.availableBalance)}</p>
+                <p>&#8358;{formatAmount(accountBalance)}</p>
               ) : (
                 <p>&#8358;0.00</p>
               )}
@@ -349,13 +322,6 @@ export default function Dashboard() {
               </Button>
             </div>
             <div>
-              {/* <Button
-                className="bg-transparent text-[.75rem] lg:text-base"
-                onClick={() => openDialog()}
-                disabled={pendingOrders.length === 0}
-              >
-                Cancel all
-              </Button> */}
               <AutoPay onAutoPayToggle={handlePayAllOrder} />
             </div>
           </div>
@@ -397,36 +363,6 @@ export default function Dashboard() {
           <EmptyState label="No pending order." />
         </div>
       )}
-
-      {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="text-center text-white">
-          <div className="flex flex-col items-center">
-            <Image
-              src="./dashboard/warning.svg"
-              alt="warning"
-              width={88}
-              height={88}
-              className="flex justify-center"
-            />
-
-            <p className="mt-5 font-medium text-lg lg:text-2xl">
-              Are you sure you want to cancel all orders?
-            </p>
-
-            <Button
-              variant="primary"
-              className="w-full mt-12"
-              onClick={handleCancelAllOrder}
-              isLoading={loading}
-            >
-              Yes
-            </Button>
-            <Button className="w-full mt-5" onClick={handleNoConfirmation}>
-              No
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog> */}
 
       <Dialog open={isPayDialogOpen} onOpenChange={setIsPayDialogOpen}>
         <DialogContent className="text-center text-white">

@@ -23,7 +23,8 @@ interface StoreContextProps {
   cachedBalance: number | null;
   setCachedBalance: Dispatch<SetStateAction<number | null>>;
   setAllConnectedBanks: Dispatch<SetStateAction<IProviders[]>>;
-  
+  accountBalance: number | null;
+  getConnectedBanksBalance: (id: number) => void;
 }
 
 const StoreContext = createContext<StoreContextProps>({
@@ -39,6 +40,8 @@ const StoreContext = createContext<StoreContextProps>({
   cachedBalance: null,
   setCachedBalance: (): number | null => null,
   setAllConnectedBanks: (): IProviders[] | null => [],
+  accountBalance: null,
+  getConnectedBanksBalance: (id: number) => {},
 });
 
 const StoreProvider = ({ children }: { children: React.ReactNode }) => {
@@ -48,6 +51,7 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
   const [connectedBanks, setAllConnectedBanks] = useState<IProviders[]>([]);
   const [selectedBankId, setSelectedBankId] = useState<string | null>(null);
   const [cachedBalance, setCachedBalance] = useState<number | null>(null);
+  const [accountBalance, setAccountBalance] = useState<number | null>(null);
 
   async function getAllProviders() {
     setIsloading(true);
@@ -79,6 +83,19 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  const getConnectedBanksBalance = async (id: number) => {
+    apiCAll({
+      method: "get",
+      url: `/bank/${id}/balance`,
+      sCB(res) {
+        setAccountBalance(res.data.availableBalance);
+      },
+      eCB(res) {
+        console.error(res.error);
+      },
+    });
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -93,7 +110,9 @@ const StoreProvider = ({ children }: { children: React.ReactNode }) => {
         setSelectedBankId,
         cachedBalance,
         setCachedBalance,
-        setAllConnectedBanks
+        setAllConnectedBanks,
+        accountBalance,
+        getConnectedBanksBalance,
       }}
     >
       {children}
