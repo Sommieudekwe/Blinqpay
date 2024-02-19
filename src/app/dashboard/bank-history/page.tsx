@@ -29,7 +29,7 @@ export default function BankHistory() {
           setPaginationData(paginationData);
         },
         eCB(res) {
-          console.error(res.error);
+          console.error(res .error);
         },
       });
     }
