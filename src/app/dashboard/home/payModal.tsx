@@ -24,11 +24,10 @@ export default function PayModal({ orderId }: dataProps) {
       url: `/order/${orderId}/pay`,
       method: "post",
       sCB(res) {
-        console.log("order paid", res);
         setOpenDialog(false);
         setIsLoading(false);
         getPendingOrders();
-        getConnectedBanksBalance(Number(id));
+        setTimeout(() => getConnectedBanksBalance(Number(id)), 5000);
       },
       eCB(res) {
         setIsLoading(false);

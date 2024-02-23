@@ -55,7 +55,16 @@ export const dashboardColumn: ColumnDef<IDashboard>[] = [
               : "text-pending"
           )}
         >
-          {meta !== null ? <span>{meta?.error}</span> : <span>{status}</span>}
+          {/* {meta !== null ? <span>{meta?.err}</span> : <span>{status}</span>} */}
+          {meta !== null ? (
+            meta.err ? (
+              <span>{meta.err}</span>
+            ) : (
+              <span>{JSON.stringify(meta)}</span>
+            )
+          ) : (
+            <span>{status}</span>
+          )}
         </p>
       );
     },

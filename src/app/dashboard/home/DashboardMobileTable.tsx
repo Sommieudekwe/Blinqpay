@@ -173,7 +173,11 @@ export default function MobileTable({ data, onDataChange }: TableProps) {
               )}
             >
               {d.meta !== null ? (
-                <span>{d.meta.error}</span>
+                d.meta.err ? (
+                  <span>{d.meta.err}</span>
+                ) : (
+                  <span>{JSON.stringify(d.meta)}</span>
+                )
               ) : (
                 <span>{d.status}</span>
               )}

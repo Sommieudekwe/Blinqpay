@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative px-4 md:px-8">
+    <div className="relative px-4 md:px-8 overflow-hidden">
       <div className="">
         {/* Hero */}
 
@@ -89,49 +89,119 @@ export default function Home() {
         </div>
 
         {/* Partners */}
-        <div className="flex flex-wrap justify-between items-center px-4 lg:px-16 gap-y-10 gap-x-6">
-          <Image
-            src="/landing/partners/binance.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
-          <Image
-            src="/landing/partners/paxful.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
-          <Image
-            src="/landing/partners/kucoin.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
-          <Image
-            src="/landing/partners/remitano.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
-          <Image
-            src="/landing/partners/bybit.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
-          <Image
-            src="/landing/partners/kuda.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
-          <Image
-            src="/landing/partners/providus.svg"
-            alt="partner"
-            width={176}
-            height={38}
-          />
+        <div className="flex justify-between marquee">
+          {/* Original */}
+          <div className="ul">
+            <div>
+              <img
+                src="/partners/binance.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+            <div className="relative">
+              <img
+                src="partners/paxful.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div className="relative">
+              <img
+                src="/partners/kucoin.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+            <div className="relative">
+              <img
+                src="/landing/partners/remitano.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/partners/bybit.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/partners/kuda-bank.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/landing/partners/providus.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            {/* Duplicate */}
+
+            <div>
+              <img
+                src="/partners/binance.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+            <div className="relative">
+              <img
+                src="partners/paxful.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div className="relative">
+              <img
+                src="/partners/kucoin.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+            <div className="relative">
+              <img
+                src="/landing/partners/remitano.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/partners/bybit.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/partners/kuda-bank.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+
+            <div>
+              <img
+                src="/landing/partners/providus.svg"
+                alt="partner"
+                className="w-44 h-28"
+              />
+            </div>
+          </div>
         </div>
 
         {/* How to use Blinqpay */}
