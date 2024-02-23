@@ -83,8 +83,8 @@ export default function Dashboard() {
         setIsPayDialogOpen(false);
         getPendingOrders();
         // setPendingOrdersIds([]);
-
-        getConnectedBanksBalance(Number(id));
+        // getConnectedBanksBalance(Number(id));
+        setTimeout(() => getConnectedBanksBalance(Number(id)), 5000);
       },
       eCB(res) {
         setIsLoading(false);
@@ -143,13 +143,15 @@ export default function Dashboard() {
       url: `/bank/activate/${id}`,
       method: "post",
       sCB(res) {
-        console.log(res);
+        console.log("payout account is bank with id", id);
       },
       eCB(res) {
         console.error(res.error);
       },
     });
   };
+
+  console.log(pendingOrders);
 
   useEffect(() => {
     const id = localStorage.getItem("selectedBankId");
