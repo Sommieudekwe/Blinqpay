@@ -102,14 +102,14 @@ export default function Home() {
               <img
                 src="/partners/binance.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="w-md:w-44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
                 src="partners/paxful.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -117,14 +117,14 @@ export default function Home() {
               <img
                 src="/partners/kucoin.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
                 src="/partners/remitano.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -132,7 +132,7 @@ export default function Home() {
               <img
                 src="/partners/bybit.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -140,7 +140,7 @@ export default function Home() {
               <img
                 src="/partners/kuda-bank.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -148,7 +148,7 @@ export default function Home() {
               <img
                 src="/partners/providus.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
           </div>
@@ -159,14 +159,14 @@ export default function Home() {
               <img
                 src="/partners/binance.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
                 src="partners/paxful.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -174,14 +174,14 @@ export default function Home() {
               <img
                 src="/partners/kucoin.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
                 src="/partners/remitano.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -189,7 +189,7 @@ export default function Home() {
               <img
                 src="/partners/bybit.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -197,7 +197,7 @@ export default function Home() {
               <img
                 src="/partners/kuda-bank.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
 
@@ -205,7 +205,7 @@ export default function Home() {
               <img
                 src="/partners/providus.svg"
                 alt="partner"
-                className="md:44 md:h-28"
+                className="md:w-44 md:h-28"
               />
             </div>
           </div>
@@ -277,7 +277,7 @@ export default function Home() {
 
         {/* FAQ */}
         <div className="mt-28">
-          <h1 className="text-2xl md:text-3xl font-bold">FAG</h1>
+          <h1 className="text-2xl md:text-3xl font-bold">FAQ</h1>
           <div className="mt-10">
             <FAQ />
           </div>
