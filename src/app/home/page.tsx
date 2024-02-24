@@ -27,11 +27,9 @@ export default function Home() {
           </div>
           <div className="z-10">
             {/* navbar */}
-            {/* <nav className="flex items-center justify-between py-6">
-              <div className="text-2xl md:text-3xl font-bold hidden lg:block">
-                BlinqPay
-              </div>
-              <div>
+            <nav className="flex items-center justify-between py-6 relative z-50">
+              <div className="text-xl md:text-3xl font-bold">BlinqPay</div>
+              {/* <div>
                 <ul className="flex space-x-12">
                   <li>Home</li>
                   <li>Solutions</li>
@@ -39,14 +37,22 @@ export default function Home() {
                   <li>Pricing</li>
                   <li>Docs</li>
                 </ul>
-              </div>
-              <div className="space-x-5">
-                <Button variant="primary" className="px-16">
+              </div> */}
+              <div className="space-x-3 md:space-x-5">
+                <Link
+                  href="/auth"
+                  className="px-8 md:px-16 cursor-pointer bg-[#4A33FB] py-2 md:py-3 rounded-[30px] hover:bg-opacity-75 transition-all ease-in-out duration-200"
+                >
                   Login
-                </Button>
-                <Button variant="landing-outline">Sign up</Button>
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="py-2 md:py-3 rounded-[30px] hover:opacity-75 transition-all ease-in-out duration-200"
+                >
+                  Sign up
+                </Link>
               </div>
-            </nav> */}
+            </nav>
 
             {/* texts */}
             <div className="flex flex-col md:flex-row items-center justify-between py-16 md:pt-24 lg:py-32">
@@ -89,21 +95,21 @@ export default function Home() {
         </div>
 
         {/* Partners */}
-        <div className="flex justify-between marquee">
+        <div className="flex">
           {/* Original */}
-          <div className="ul">
+          <div className="flex items-center animate-marquee font-black font-display gap-4 relative">
             <div>
               <img
                 src="/partners/binance.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
                 src="partners/paxful.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
@@ -111,14 +117,14 @@ export default function Home() {
               <img
                 src="/partners/kucoin.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
-                src="/landing/partners/remitano.svg"
+                src="/partners/remitano.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
@@ -126,7 +132,7 @@ export default function Home() {
               <img
                 src="/partners/bybit.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
@@ -134,32 +140,33 @@ export default function Home() {
               <img
                 src="/partners/kuda-bank.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
             <div>
               <img
-                src="/landing/partners/providus.svg"
+                src="/partners/providus.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
+          </div>
+          {/* Duplicate */}
 
-            {/* Duplicate */}
-
+          <div className="flex items-center animate-marquee2 font-black font-display gap-4 absolute tracking-widest uppercase whitespace-nowrap">
             <div>
               <img
                 src="/partners/binance.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
                 src="partners/paxful.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
@@ -167,14 +174,14 @@ export default function Home() {
               <img
                 src="/partners/kucoin.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
             <div className="relative">
               <img
-                src="/landing/partners/remitano.svg"
+                src="/partners/remitano.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
@@ -182,7 +189,7 @@ export default function Home() {
               <img
                 src="/partners/bybit.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
@@ -190,15 +197,15 @@ export default function Home() {
               <img
                 src="/partners/kuda-bank.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
 
             <div>
               <img
-                src="/landing/partners/providus.svg"
+                src="/partners/providus.svg"
                 alt="partner"
-                className="w-44 h-28"
+                className="md:44 md:h-28"
               />
             </div>
           </div>

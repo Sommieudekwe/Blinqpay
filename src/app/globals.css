@@ -40,26 +40,3 @@ body {
 	justify-content: center !important;
 	align-items: center !important;
 } */
-
-.marquee {
-  width: 100%;
-  overflow: hidden;
-}
-
-.marquee .ul {
-  display: flex;
-  animation: marquee 10s linear infinite;
-}
-
-.marquee .ul div {
-  padding: 0 10px; /* Adjust spacing between items */
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
