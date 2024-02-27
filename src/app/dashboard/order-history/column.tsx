@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn, formatAmount, formatDate } from "@/lib/utils";
+import { cn, formatAmount, formatDate, formatTime } from "@/lib/utils";
 import { IOrderHistory } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -54,6 +54,6 @@ export const columns: ColumnDef<IOrderHistory>[] = [
     accessorKey: "date",
     header: "Date",
     // accessorFn: (row) => <p>{formatDate(row.createdAt)}</p>,
-    cell: ({ row }) => <p>{formatDate(row.original.createdAt)}</p>,
+    cell: ({ row }) => <p>{formatDate(row.original.createdAt)} {formatTime(row.original.createdAt)}</p>,
   },
 ];
