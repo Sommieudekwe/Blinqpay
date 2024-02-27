@@ -15,7 +15,7 @@ import { RefreshCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { SelectConnectedBanks } from "@/components/ui/select";
-import EmptyState from "@/components/empty-state";
+import PendingOrdersEmptyState from "@/components/pendingOrdersEmptyState";
 import { usePathname } from "next/navigation";
 import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
@@ -362,7 +362,7 @@ export default function Dashboard() {
         </section>
       ) : (
         <div className="mt-10">
-          <EmptyState label="No pending order." />
+          <PendingOrdersEmptyState label="No pending orders." />
         </div>
       )}
 
