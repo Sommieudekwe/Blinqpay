@@ -74,31 +74,52 @@ export default function BankHistoryDashboard({
       ))}
       {paginationData && (
         // <DataTablePagination table={table} />
-        <div className="table-pagination w-auto flex space-x-2 mt-6 pb-4">
+        <div className="table-pagination w-auto flex space-x-2 pb-4 mt-4">
           <Button
             disabled={!paginationData.hasPrevious}
             onClick={() =>
               getPageData && getPageData(paginationData.prevPage as number)
             }
-            className="capitalize bottom-0"
+            className="capitalize bottom-0 rounded-full"
           >
-            prev
+            {"<"}
           </Button>
-          <div className={cn(buttonVariants({ variant: "default" }))}>
-            <p className="text-sm">
-              {paginationData.currentPage} of {paginationData.pages} pages
-            </p>
-          </div>
+          {[1, 2, 3, 4, 5].map((page, index) => (
+            <Button
+              key={index}
+              onClick={() => getPageData && getPageData(page)}
+              className="rounded-full"
+              variant={paginationData.page === page ? "primary" : "default"}
+            >
+              {page}
+            </Button>
+          ))}
+
+          {paginationData.page && paginationData.page > 5 && (
+            <Button className="rounded-full" variant={"primary"}>
+              {paginationData.page}
+            </Button>
+          )}
 
           <Button
             disabled={!paginationData.hasNext}
             onClick={() =>
               getPageData && getPageData(paginationData.next as number)
             }
-            className="capitalize"
+            className="rounded-full"
           >
-            next
+            {">"}
           </Button>
+          {/* {paginationData.lastPage && (
+            <Button
+              onClick={() =>
+                getPageData && getPageData(paginationData.lastPage as number)
+              }
+              className="capitalize"
+            >
+              last page
+            </Button>
+          )} */}
         </div>
       )}
     </div>

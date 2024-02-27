@@ -11,10 +11,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="relative px-4 md:px-8 overflow-hidden">
+    <div className="relative px-4 md:px-8">
       <div className="">
         {/* Hero */}
-
         <div className="hero relative px-4 md:px-8 lg:px-16">
           <div className="absolute inset-0 z-0">
             <Image
@@ -93,11 +92,84 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* partners */}
+        <div className="relative w-full">
+          <div className="flex w-full">
+            {/* original */}
+            <div className="flex justify-between items-center animate-marquee w-full gap-x-4">
+              <img
+                src="/partners/binance.svg"
+                alt=""
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/paxful.svg"
+                alt=""
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/kucoin.svg"
+                alt="partner"
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/remitano.svg"
+                alt="partner"
+                className="w-16 h-16 md:w-28 md:h-28"
+              />
+              <img
+                src="/partners/bybit.svg"
+                alt="partner"
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/kuda-bank.svg"
+                alt="partner"
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+            </div>
+
+            {/* duplicate */}
+
+            {/* <div className="flex justify-center items-center animate-marquee2 font-black font-display w-full gap-x-4">
+              <img
+                src="/partners/binance.svg"
+                alt=""
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/paxful.svg"
+                alt=""
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/kucoin.svg"
+                alt="partner"
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/remitano.svg"
+                alt="partner"
+                className="w-16 h-16 md:w-28 md:h-28"
+              />
+              <img
+                src="/partners/bybit.svg"
+                alt="partner"
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+              <img
+                src="/partners/kuda-bank.svg"
+                alt="partner"
+                className="w-32 h-16 md:w-44 md:h-28"
+              />
+            </div> */}
+          </div>
+        </div>
 
         {/* Partners */}
         <div className="flex">
           {/* Original */}
-          <div className="flex items-center animate-marquee font-black font-display gap-4 relative">
+          {/* <div className="flex items-center animate-marquee font-black font-display gap-4 relative tracking-widest uppercase whitespace-nowrap">
             <div>
               <img
                 src="/partners/binance.svg"
@@ -107,7 +179,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <img
-                src="partners/paxful.svg"
+                src="/partners/paxful.svg"
                 alt="partner"
                 className="md:w-44 md:h-28"
               />
@@ -151,10 +223,10 @@ export default function Home() {
                 className="md:w-44 md:h-28"
               />
             </div>
-          </div>
-          {/* Duplicate */}
+          </div> */}
 
-          <div className="flex items-center animate-marquee2 font-black font-display gap-4 absolute tracking-widest uppercase whitespace-nowrap">
+          {/* Duplicate */}
+          {/* <div className="flex items-center animate-marquee2 font-black font-display gap-4 absolute tracking-widest uppercase whitespace-nowrap">
             <div>
               <img
                 src="/partners/binance.svg"
@@ -208,9 +280,8 @@ export default function Home() {
                 className="md:w-44 md:h-28"
               />
             </div>
-          </div>
+          </div> */}
         </div>
-
         {/* How to use Blinqpay */}
         <div className="mt-28">
           <h1 className="text-2xl md:text-3xl font-bold text-opacity-20">
@@ -235,7 +306,6 @@ export default function Home() {
             </TabsContent>
           </Tabs>
         </div>
-
         {/* Testimonial */}
         <div className="mt-28">
           <h1 className="text-2xl md:text-3xl font-bold">
@@ -274,7 +344,6 @@ export default function Home() {
             />
           </div>
         </div>
-
         {/* FAQ */}
         <div className="mt-28">
           <h1 className="text-2xl md:text-3xl font-bold">FAQ</h1>
@@ -282,7 +351,6 @@ export default function Home() {
             <FAQ />
           </div>
         </div>
-
         {/* Unkwown text */}
         <div className="mt-40 text-center max-w-3xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold">
@@ -303,9 +371,7 @@ export default function Home() {
             <Button variant="landing-outline">Try it for free</Button>
           </div>
         </div>
-
         {/* Footer */}
-
         <div className="relative">
           <div className="absolute inset-0">
             <Image

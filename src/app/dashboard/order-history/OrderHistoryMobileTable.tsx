@@ -1,7 +1,7 @@
 "use client";
 
 import { IOrderHistory } from "@/types";
-import { cn, formatAmount, formatDate } from "@/lib/utils";
+import { cn, formatAmount, formatDate, formatTime } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { PaginationTypes } from "@/components/ui/data-table";
@@ -36,7 +36,9 @@ export default function OrderHistoryMobileTable({
               {d.accountNumber} [ {d.bankName} ]
             </p>
             <p className="opacity-60">&#8358;{formatAmount(d.amount)}</p>
-            <p className="opacity-60">{formatDate(d.createdAt)}</p>
+            <p className="opacity-60">
+              {formatDate(d.createdAt)} {formatTime(d.createdAt)}
+            </p>
           </div>
           <div>
             <p
@@ -49,7 +51,7 @@ export default function OrderHistoryMobileTable({
           </div>
         </div>
       ))}
-       {paginationData && (
+      {paginationData && (
         // <DataTablePagination table={table} />
         <div className="table-pagination w-auto flex space-x-2 pb-4 mt-4">
           <Button
@@ -61,30 +63,22 @@ export default function OrderHistoryMobileTable({
           >
             {"<"}
           </Button>
-          {
-            [1, 2, 3, 4, 5].map((page, index) => (
-              <Button
-                key={index}
-                onClick={() => getPageData && getPageData(page)}
-                className="rounded-full"
-                variant={paginationData.page === page ? "primary" : "default"}
-              >
-                {page}
-              </Button>
-            ))
-          }
+          {[1, 2, 3, 4, 5].map((page, index) => (
+            <Button
+              key={index}
+              onClick={() => getPageData && getPageData(page)}
+              className="rounded-full"
+              variant={paginationData.page === page ? "primary" : "default"}
+            >
+              {page}
+            </Button>
+          ))}
 
-          {
-            paginationData.page &&  (paginationData.page > 5) && (
-              <Button
-               
-                className="rounded-full"
-                variant={"primary"}
-              >
-                {paginationData.page}
-              </Button>
-            )
-          }
+          {paginationData.page && paginationData.page > 5 && (
+            <Button className="rounded-full" variant={"primary"}>
+              {paginationData.page}
+            </Button>
+          )}
 
           <Button
             disabled={!paginationData.hasNext}
@@ -93,7 +87,7 @@ export default function OrderHistoryMobileTable({
             }
             className="rounded-full"
           >
-                        {">"}
+            {">"}
           </Button>
           {/* {paginationData.lastPage && (
             <Button
