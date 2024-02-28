@@ -117,10 +117,10 @@ export default function Home() {
                 </Link> */}
                 <Link
                   href="/auth"
-                  className="px-8 md:px-16 py-2 md:py-3 rounded-[30px] relative bg-[#4A33FB] text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
+                  className="px-6 md:px-16 py-2 md:py-3 rounded-[30px] relative bg-[#4A33FB] text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
                 >
                   <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
-                  <span className="relative z-20">Top gradient</span>
+                  <span className="relative z-20">Login</span>
                 </Link>
                 <Link
                   href="/auth/register"
