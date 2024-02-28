@@ -16,7 +16,7 @@ const tiers = [
       "Lorem ipsum",
       "Lorem Ipsum",
     ],
-    price: 55000,
+    price: 50,
     action: () => console.log("Montly package clicked"),
   },
 
@@ -32,7 +32,7 @@ const tiers = [
       "Lorem ipsum",
       "Lorem Ipsum",
     ],
-    price: 12000,
+    price: 15,
     action: () => console.log("Weekly package clicked"),
   },
 
@@ -48,7 +48,7 @@ const tiers = [
       "Lorem ipsum",
       "Lorem Ipsum",
     ],
-    price: 1990,
+    price: 2.5,
     action: () => console.log("Weekly package clicked"),
   },
 ];
@@ -80,16 +80,16 @@ export default function Subscription() {
             {tier.tier} Package
           </h3>
           <p className="text-sm opacity-50 mt-3">{tier.text}</p>
-          <ul className="mt-5">
+          {/* <ul className="mt-5">
             {tier.benefits?.map((benefit, index) => (
               <li key={index} className="list-disc list-inside">
                 {benefit}
               </li>
             ))}
-          </ul>
+          </ul> */}
 
           <Button className="w-full mt-7 py-4" onClick={tier.action}>
-            Pay &#8358;{formatAmount(tier.price)}
+            Pay {formatAmount(tier.price)} USDT
           </Button>
         </div>
       ))}

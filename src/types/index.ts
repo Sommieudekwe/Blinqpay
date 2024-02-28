@@ -100,7 +100,6 @@ export interface NotifyVariant {
 export interface IPartners {
   accountName: string;
   amount: number;
-  status: "pending" | "successful" | "failed";
   date: string;
   time: string;
 }
