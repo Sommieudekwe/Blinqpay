@@ -17,11 +17,11 @@ const imgs = [
     className: "w-32 h-16 md:w-44 md:h-28",
   },
   {
-    img: "/partners/paxful.svg",
+    img: "/partners/Paxful.svg",
     className: "w-32 h-16 md:w-44 md:h-28",
   },
   {
-    img: "/partners/kucoin.svg",
+    img: "/partners/Kucoin.svg",
     className: "w-32 h-16 md:w-44 md:h-28",
   },
   {
