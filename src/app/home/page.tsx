@@ -21,7 +21,7 @@ const imgs = [
     className: "w-32 h-16 md:w-44 md:h-28",
   },
   {
-    img: "/partners/Kucoin.svg",
+    img: "/partners/KuCoin.svg",
     className: "w-32 h-16 md:w-44 md:h-28",
   },
   {
