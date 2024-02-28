@@ -20,17 +20,8 @@ export default function PartnersMobileTable({ data }: TableProps) {
           </div>
 
           <div>
-            <p
-              className={cn(
-                "capitalize rounded-3xl px-2.5 py-1 text-sm",
-                d.status === "successful"
-                  ? "text-success bg-success bg-opacity-10 inline-flex"
-                  : d.status === "failed"
-                  ? "text-failed bg-failed bg-opacity-10 inline-flex"
-                  : "text-pending bg-pending bg-opacity-10 inline-flex"
-              )}
-            >
-              {d.status}
+            <p className="capitalize rounded-3xl px-2.5 py-1 text-sm text-success inline-flex bg-success bg-opacity-10 ">
+              Commission
             </p>
           </div>
         </div>
@@ -38,3 +29,12 @@ export default function PartnersMobileTable({ data }: TableProps) {
     </div>
   );
 }
+
+// className={cn(
+//   "capitalize rounded-3xl px-2.5 py-1 text-sm",
+//   d.status === "successful"
+//     ? "text-success bg-success bg-opacity-10 inline-flex"
+//     : d.status === "failed"
+//     ? "text-failed bg-failed bg-opacity-10 inline-flex"
+//     : "text-pending bg-pending bg-opacity-10 inline-flex"
+// )}

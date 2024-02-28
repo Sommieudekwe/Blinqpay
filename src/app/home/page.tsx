@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+"use client";
 import Image from "next/image";
-import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
+// import { Tabs, TabsContent, TabsTrigger, TabsList } from "@/components/ui/tabs";
 import TabSignUp from "@/components/LandingPage/SignUp";
 import Dashboard from "@/components/LandingPage/Dashboard";
 import Payment from "@/components/LandingPage/Payment";
@@ -8,8 +8,79 @@ import PeopleCard from "@/components/LandingPage/Card";
 import FAQ from "@/components/LandingPage/FAQ";
 import Footer from "@/components/LandingPage/Footer";
 import Link from "next/link";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-card";
+import { Tabs } from "@/components/ui/atabs";
+const imgs = [
+  {
+    img: "/partners/binance.svg",
+    className: "w-32 h-16 md:w-44 md:h-28",
+  },
+  {
+    img: "/partners/paxful.svg",
+    className: "w-32 h-16 md:w-44 md:h-28",
+  },
+  {
+    img: "/partners/kucoin.svg",
+    className: "w-32 h-16 md:w-44 md:h-28",
+  },
+  {
+    img: "/partners/remitano.svg",
+    className: "w-16 h-16 md:w-28 md:h-28",
+  },
+  {
+    img: "/partners/bybit.svg",
+    className: "w-32 h-16 md:w-44 md:h-28",
+  },
+  {
+    img: "/partners/kuda-bank.svg",
+    className: "w-32 h-16 md:w-44 md:h-28",
+  },
+  {
+    img: "/partners/providus.svg",
+    className: "w-32 h-[20px] md:w-44 md:h-[20px]",
+  },
+  // {
+  //   img: "/partners/bloc.webp",
+  //   className: "w-32 h-[20px] md:w-44 md:h-[20px]",
+  // },
+];
 
 export default function Home() {
+  const words = `Bridging the gap between crypto and fiat economies`;
+
+  const tabs = [
+    {
+      title: "Sign up",
+      value: "signup",
+      content: (
+        <div className="">
+          <TabSignUp />
+        </div>
+      ),
+    },
+
+    {
+      title: "Connect",
+      value: "connect",
+      content: (
+        <div className="">
+          <Dashboard />
+        </div>
+      ),
+    },
+
+    {
+      title: "Payment",
+      value: "payment",
+      content: (
+        <div className="">
+          <Payment />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="relative px-4 md:px-8">
       <div className="">
@@ -38,11 +109,18 @@ export default function Home() {
                 </ul>
               </div> */}
               <div className="space-x-3 md:space-x-5">
-                <Link
+                {/* <Link
                   href="/auth"
                   className="px-8 md:px-16 cursor-pointer bg-[#4A33FB] py-2 md:py-3 rounded-[30px] hover:bg-opacity-75 transition-all ease-in-out duration-200"
                 >
-                  Login
+                  
+                </Link> */}
+                <Link
+                  href="/auth"
+                  className="px-8 md:px-16 py-2 md:py-3 rounded-[30px] relative bg-[#4A33FB] text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
+                >
+                  <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+                  <span className="relative z-20">Top gradient</span>
                 </Link>
                 <Link
                   href="/auth/register"
@@ -63,9 +141,14 @@ export default function Home() {
                 className="absolute left-0 top-0"
               />
               <div className="max-w-2xl z-20">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold ">
-                  Bridging the gap between crypto and fiat economies
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">
+                  <TextGenerateEffect words={words} />
                 </h1>
+
+                {/* <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold ">
+                  Bridging the gap between crypto and fiat economies
+                </h1> */}
+
                 <p className="mt-6">
                   Blinqpay provides an infrastructure for crypto vendors across
                   different exchanges and never needing to worry about manually
@@ -95,200 +178,21 @@ export default function Home() {
         {/* partners */}
         <div className="relative w-full">
           <div className="flex w-full">
-            {/* original */}
-            <div className="flex justify-between items-center animate-marquee w-full gap-x-4">
-              <img
-                src="/partners/binance.svg"
-                alt=""
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/paxful.svg"
-                alt=""
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/kucoin.svg"
-                alt="partner"
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/remitano.svg"
-                alt="partner"
-                className="w-16 h-16 md:w-28 md:h-28"
-              />
-              <img
-                src="/partners/bybit.svg"
-                alt="partner"
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/kuda-bank.svg"
-                alt="partner"
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-            </div>
-
-            {/* duplicate */}
-
-            {/* <div className="flex justify-center items-center animate-marquee2 font-black font-display w-full gap-x-4">
-              <img
-                src="/partners/binance.svg"
-                alt=""
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/paxful.svg"
-                alt=""
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/kucoin.svg"
-                alt="partner"
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/remitano.svg"
-                alt="partner"
-                className="w-16 h-16 md:w-28 md:h-28"
-              />
-              <img
-                src="/partners/bybit.svg"
-                alt="partner"
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-              <img
-                src="/partners/kuda-bank.svg"
-                alt="partner"
-                className="w-32 h-16 md:w-44 md:h-28"
-              />
-            </div> */}
+            <InfiniteMovingCards
+              items={imgs}
+              pauseOnHover={true}
+              speed="slow"
+            />
           </div>
         </div>
 
-        {/* Partners */}
-        <div className="flex">
-          {/* Original */}
-          {/* <div className="flex items-center animate-marquee font-black font-display gap-4 relative tracking-widest uppercase whitespace-nowrap">
-            <div>
-              <img
-                src="/partners/binance.svg"
-                alt="partner"
-                className="w-md:w-44 md:h-28"
-              />
-            </div>
-            <div className="relative">
-              <img
-                src="/partners/paxful.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div className="relative">
-              <img
-                src="/partners/kucoin.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-            <div className="relative">
-              <img
-                src="/partners/remitano.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/partners/bybit.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/partners/kuda-bank.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/partners/providus.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-          </div> */}
-
-          {/* Duplicate */}
-          {/* <div className="flex items-center animate-marquee2 font-black font-display gap-4 absolute tracking-widest uppercase whitespace-nowrap">
-            <div>
-              <img
-                src="/partners/binance.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-            <div className="relative">
-              <img
-                src="partners/paxful.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div className="relative">
-              <img
-                src="/partners/kucoin.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-            <div className="relative">
-              <img
-                src="/partners/remitano.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/partners/bybit.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/partners/kuda-bank.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-
-            <div>
-              <img
-                src="/partners/providus.svg"
-                alt="partner"
-                className="md:w-44 md:h-28"
-              />
-            </div>
-          </div> */}
-        </div>
         {/* How to use Blinqpay */}
         <div className="mt-28">
           <h1 className="text-2xl md:text-3xl font-bold text-opacity-20">
             How to use BlinqPay in these three steps?
           </h1>
 
-          <Tabs defaultValue="signup" className="w-full mt-9">
+          {/* <Tabs defaultValue="signup" className="w-full mt-9">
             <TabsList className="mb-[3.75rem]">
               <TabsTrigger value="signup">Sign up</TabsTrigger>
               <TabsTrigger value="dashboard">Connect</TabsTrigger>
@@ -304,7 +208,10 @@ export default function Home() {
             <TabsContent value="payment">
               <Payment />
             </TabsContent>
-          </Tabs>
+          </Tabs> */}
+          <div className="h-[44rem] md:h-[44rem] [perspective:1000px] relative flex flex-col w-full items-start justify-start mt-9">
+            <Tabs tabs={tabs} />
+          </div>
         </div>
         {/* Testimonial */}
         <div className="mt-28">
@@ -315,32 +222,32 @@ export default function Home() {
             <PeopleCard
               name="Omoshalawe"
               content="I love the page responsivess and user interface design. It's just a cool app to use. As for the registration, it's just fast and I was happyy I could start making payments easily within 10mins."
-              description="Founder of Blinqpay"
+              description="Crypto Merchant"
             />
             <PeopleCard
               name="Yakubu"
               content="I love how fast the customer service representative was. She was too polite and had good knowledge of everything. With her help, I was able to connect my exchanges within minutes."
-              description="Founder of Blinqpay"
+              description="Crypto Merchant"
             />
             <PeopleCard
               name="Okechukwu"
               content="The feature whereby you can connect to more than one bank is simply amazing. Everything about the app is nothing short of amazing. Bad network cant stop me from trading."
-              description="Founder of Blinqpay"
+              description="Crypto Merchant"
             />
             <PeopleCard
               name="Mohammed"
               content="My favorite feature is the fact that you can use dark or light mode. I appreciate this feature because light sensivity can be an issue when you stay on the computer for too long."
-              description="Founder of Blinqpay"
+              description="Crypto Merchant"
             />
             <PeopleCard
               name="Chukwuemeka"
               content="This appp is a 5 star app. They practically raise the bnar too high. Now I can exploit the merchant space on different exchanges. Nice one guys."
-              description="Founder of Blinqpay"
+              description="Crypto Merchant"
             />
             <PeopleCard
               name="Kola"
               content="The partnership feature was a breath of fresh air. It's wonderful to see a company who is all about growth for both customers and themselves. I am happy to be among your first set of partners."
-              description="Founder of Blinqpay"
+              description="Crypto Merchant"
             />
           </div>
         </div>
@@ -352,24 +259,22 @@ export default function Home() {
           </div>
         </div>
         {/* Unkwown text */}
-        <div className="mt-40 text-center max-w-3xl mx-auto">
+        <div className="mt-40 text-center max-w-2xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold">
-            Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero.
+            Become a faster and reliable crypto vendor in the BLINQ of an eye
           </h1>
 
           <p className="text-lg mt-6">
-            Porem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Class
-            aptent taciti sociosqu
+            Start using blinq for free, no credit card or personal info needed,
+            use blinq for 3 days free!!!
           </p>
 
-          <div className="space-x-4 mt-16">
-            <Button variant="primary" className="py-6 px-6">
+          {/* <div className="space-x-4 mt-16">
+            <Link variant="primary" className="py-6 px-6">
               Request a demo
-            </Button>
-            <Button variant="landing-outline">Try it for free</Button>
-          </div>
+            </Link>
+            <Link variant="landing-outline">Try it for free</Link>
+          </div> */}
         </div>
         {/* Footer */}
         <div className="relative">

@@ -11,9 +11,6 @@ export default function PeopleCard({ description, content, name }: CardProps) {
     <Card className="max-w-lg px-3">
       <CardHeader className="gap-2">
         <div>
-          <img src="/landing/avatar.png" alt="avatar" />
-        </div>
-        <div>
           <h3>{name}</h3>
           <CardDescription>{description}</CardDescription>
         </div>
