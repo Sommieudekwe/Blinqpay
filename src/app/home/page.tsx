@@ -11,6 +11,7 @@ import Link from "next/link";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-card";
 import { Tabs } from "@/components/ui/atabs";
+
 const imgs = [
   {
     img: "/partners/binance.svg",
@@ -40,10 +41,10 @@ const imgs = [
     img: "/partners/providus.svg",
     className: "w-32 h-[20px] md:w-44 md:h-[20px]",
   },
-  // {
-  //   img: "/partners/bloc.webp",
-  //   className: "w-32 h-[20px] md:w-44 md:h-[20px]",
-  // },
+  {
+    img: "https://i0.wp.com/blog.noones.com/wp-content/uploads/2023/06/1cd3b064a253651ab1e963f31d72400283e9bb04-1.png?fit=188%2C62&ssl=1",
+    className: "w-32 h-[20px] md:w-44 md:h-[20px]",
+  },
 ];
 
 export default function Home() {
@@ -181,7 +182,7 @@ export default function Home() {
             <InfiniteMovingCards
               items={imgs}
               pauseOnHover={true}
-              speed="slow"
+              speed="normal"
             />
           </div>
         </div>
@@ -269,12 +270,15 @@ export default function Home() {
             use blinq for 3 days free!!!
           </p>
 
-          {/* <div className="space-x-4 mt-16">
-            <Link variant="primary" className="py-6 px-6">
-              Request a demo
+          <div className="space-x-4 mt-16">
+            <Link
+              href="/auth"
+              className="px-6 md:px-16 font-medium py-2 md:py-3 rounded-[30px] relative bg-[#4A33FB] text-white text-sm hover:shadow-2xl hover:shadow-white/[0.1] transition duration-200 border border-slate-600"
+            >
+              <div className="absolute inset-x-0 h-px w-1/2 mx-auto -top-px shadow-2xl  bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
+              <span className="relative z-20">Try it for free</span>
             </Link>
-            <Link variant="landing-outline">Try it for free</Link>
-          </div> */}
+          </div>
         </div>
         {/* Footer */}
         <div className="relative">
