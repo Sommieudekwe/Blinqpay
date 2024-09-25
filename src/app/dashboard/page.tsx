@@ -320,7 +320,7 @@ export default function Dashboard() {
                 onClick={() => openPayDialog()}
                 disabled={pendingOrders.length === 0}
               >
-                Pay all
+                Status
               </Button>
             </div>
             <div>

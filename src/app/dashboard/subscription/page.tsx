@@ -16,7 +16,7 @@ const tiers = [
       "Lorem ipsum",
       "Lorem Ipsum",
     ],
-    price: 50,
+    price: null,
     action: () => console.log("Montly package clicked"),
   },
 
@@ -32,7 +32,7 @@ const tiers = [
       "Lorem ipsum",
       "Lorem Ipsum",
     ],
-    price: 15,
+    price: null,
     action: () => console.log("Weekly package clicked"),
   },
 
@@ -48,7 +48,7 @@ const tiers = [
       "Lorem ipsum",
       "Lorem Ipsum",
     ],
-    price: 2.5,
+    price:null ,
     action: () => console.log("Weekly package clicked"),
   },
 ];
