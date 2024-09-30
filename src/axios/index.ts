@@ -3,7 +3,7 @@ import { useRediret } from "@/hooks/useRedirect";
 import { fmtResponse, getToken, hasToken, removeToken } from "@/lib/utils";
 import axios, { AxiosRequestConfig } from "axios";
 
-let baseURL = "http://localhost:5000/api/v1";
+let baseURL = "https://blinq-api.onrender.com";
 
 const service = axios.create({
   baseURL,
