@@ -33,11 +33,8 @@ export default function Dashboard() {
   const [isPayDialogOpen, setIsPayDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
   const [loading, setIsLoading] = useState(false);
-  const [dashboardSummary, setDashboardSummary] =
-    useState<DashboardSummary | null>(null);
-  const [paginationData, setPaginationData] = useState<
-    PaginationTypes | undefined
-  >();
+  const [dashboardSummary, setDashboardSummary] = useState<DashboardSummary | null>(null);
+  const [paginationData, setPaginationData] = useState<PaginationTypes | undefined>();
 
   const pathname = usePathname();
   const {
@@ -62,14 +59,8 @@ export default function Dashboard() {
   };
 
   // Get store values
-  const {
-    pendingOrders,
-    getPendingOrders,
-    isLoading,
-    pendingOrdersIds,
-    setPendingOrdersIds,
-    setPendingOrders,
-  } = useOrders();
+  const { pendingOrders, getPendingOrders, isLoading, pendingOrdersIds, setPendingOrdersIds, setPendingOrders } =
+    useOrders();
 
   const handlePayAllOrder = async () => {
     setIsLoading(true);
@@ -133,7 +124,7 @@ export default function Dashboard() {
 
   // ---------
   useEffect(() => {
-    getPendingOrders();
+    //getPendingOrders();
     getAllConnectedBanks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
@@ -150,8 +141,6 @@ export default function Dashboard() {
       },
     });
   };
-
-  console.log(pendingOrders);
 
   useEffect(() => {
     const id = localStorage.getItem("selectedBankId");
@@ -193,8 +182,6 @@ export default function Dashboard() {
     setPendingOrders(updatedData);
   };
 
-  console.log(connectedBanks);
-
   return (
     <div className="">
       <div className="lg:flex justify-between">
@@ -203,16 +190,8 @@ export default function Dashboard() {
             <span className="opacity-50">Bank Balance</span>
           </p>
           <div className="flex items-center gap-2">
-            <h2
-              className={`text-4xl flex items-center gap-x-2 font-bold ${
-                isBlurred ? "blur" : ""
-              }`}
-            >
-              {accountBalance !== null ? (
-                <p>&#8358;{formatAmount(accountBalance)}</p>
-              ) : (
-                <p>&#8358;0.00</p>
-              )}
+            <h2 className={`text-4xl flex items-center gap-x-2 font-bold ${isBlurred ? "blur" : ""}`}>
+              {accountBalance !== null ? <p>&#8358;{formatAmount(accountBalance)}</p> : <p>&#8358;0.00</p>}
             </h2>
             <div onClick={handleBlurToggle}>
               {isBlurred ? (
@@ -253,24 +232,18 @@ export default function Dashboard() {
 
             <h3 className="opacity-50">Total Transfer Count</h3>
 
-            <h4 className="mt-3 text-2xl font-bold">
-              {dashboardSummary?.totalTransferCount}
-            </h4>
+            <h4 className="mt-3 text-2xl font-bold">{dashboardSummary?.totalTransferCount}</h4>
           </div>
           <div className="relative bg-milky dark:bg-input rounded-3xl border border-white border-opacity-25 px-3 py-3 xl:py-4">
             <span className="text-3xl absolute right-5 top-0">...</span>
 
             <h3 className="opacity-50">Total Amount Transferred</h3>
 
-            <h4
-              className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}
-            >
+            <h4 className={`mt-3 text-2xl font-bold ${isBlurred ? "blur" : ""}`}>
               {dashboardSummary !== null ? (
                 <span>
                   &#8358;
-                  {formatAmount(
-                    dashboardSummary?.totalTransferAmount as number
-                  )}
+                  {formatAmount(dashboardSummary?.totalTransferAmount as number)}
                 </span>
               ) : (
                 <span> &#8358;0.00</span>
@@ -302,7 +275,7 @@ export default function Dashboard() {
               <span>{pendingOrders.length} Active Orders</span>
             </h3>
             <button
-              onClick={getPendingOrders}
+              //onClick={getPendingOrders}
               className="gap-1 items-center text-gray-500  hidden md:flex"
             >
               <div className="h-6 w-6 rounded-md border-2 flex items-center justify-center border-gray-500">
@@ -324,12 +297,15 @@ export default function Dashboard() {
               </Button>
             </div>
             <div>
-              <AutoPay onAutoPayToggle={handlePayAllOrder} />
+              <AutoPay
+                onAutoPayToggle={() => {}}
+                //onAutoPayToggle={handlePayAllOrder}
+              />
             </div>
           </div>
         </div>
         <button
-          onClick={getPendingOrders}
+          //onClick={getPendingOrders}
           className="flex gap-2 items-center p-2 md:hidden text-black fixed bottom-5 left-1/2 transform -translate-x-1/2 justify-center w-16 h-16 rounded-full bg-onboard-bg dark:bg-gray-900"
         >
           <div className="h-8 w-8 flex items-center justify-center border-white rounded-md">
@@ -369,27 +345,23 @@ export default function Dashboard() {
       <Dialog open={isPayDialogOpen} onOpenChange={setIsPayDialogOpen}>
         <DialogContent className="text-center text-white">
           <div className="flex flex-col items-center">
-            <Image
-              src="./dashboard/warning.svg"
-              alt="warning"
-              width={88}
-              height={88}
-              className="flex justify-center"
-            />
+            <Image src="./dashboard/warning.svg" alt="warning" width={88} height={88} className="flex justify-center" />
 
-            <p className="mt-5 font-medium text-lg lg:text-2xl">
-              Are you sure you want to pay all orders?
-            </p>
+            <p className="mt-5 font-medium text-lg lg:text-2xl">Are you sure you want to pay all orders?</p>
 
             <Button
               variant="primary"
-              className="w-full mt-12"
-              onClick={handlePayAllOrder}
+              onClick={() => {}}
               isLoading={loading}
+              className="w-full mt-12"
+              //onClick={handlePayAllOrder}
             >
               Yes
             </Button>
-            <Button className="w-full mt-5" onClick={handleNoConfirmation}>
+            <Button
+              className="w-full mt-5"
+              //onClick={handleNoConfirmation}
+            >
               No
             </Button>
           </div>
