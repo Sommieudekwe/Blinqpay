@@ -3,7 +3,7 @@ import { exec, ChildProcess } from "child_process";
 let process: null | ChildProcess;
 
 const start = () => {
-  process = exec("pm2 start ./src/app/api/atlas/index.ts", (error, stdout, stderr) => {
+  process = exec("npx pm2 start ./src/app/api/atlas/index.ts", (error, stdout, stderr) => {
     if (error) {
       console.error(`Error starting Atlas: ${error.message}`);
       return;
@@ -24,11 +24,12 @@ const stop = async () => {
 
 export async function POST() {
   try {
-    await stop();
-    start();
-  } catch (error) {
-    console.log(error);
-  }
+    if (process) {
+      await stop();
+    } else {
+      start();
+    }
+  } catch (error) {}
 
   return Response.json({});
 }
