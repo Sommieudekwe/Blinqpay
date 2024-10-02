@@ -21,6 +21,7 @@ import { notify } from "@/components/ui/toast";
 import { useStore } from "@/context/store";
 import { IDashboard } from "@/types";
 import AutoPay from "./home/autopay";
+import axios from "axios";
 
 type DashboardSummary = {
   totalTransferCount: number;
@@ -29,6 +30,7 @@ type DashboardSummary = {
 };
 
 export default function Dashboard() {
+  const [allOrders, getAllOrders] = useState([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isPayDialogOpen, setIsPayDialogOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
@@ -122,12 +124,52 @@ export default function Dashboard() {
     }
   };
 
+  console.log(pendingOrders);
+
+  const getOrders = async () => {
+    console.log("here");
+    console.log(isLoading);
+    if (isLoading) return;
+    setIsLoading(true);
+
+    try {
+      const orders: any = await axios.get("/api/order");
+
+      const pOrders = orders?.data?.map((o: any) => ({
+        id: 0,
+        accountName: o.accountName,
+        accountNumber: o.accountNumber,
+        bankName: o.bankName,
+        status: "pending",
+        rate: +o.rate?.replace("NGN", "")?.replace(",", "")?.trim(),
+        amount: +o.amountInNaira?.replace("NGN", "")?.replace(",", "")?.trim(),
+        createdAt: new Date(),
+        orderNumber: o.orderId,
+        meta: null,
+      }));
+
+      console.log("jhere", pOrders);
+
+      setPendingOrders(pOrders);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
   // ---------
   useEffect(() => {
     //getPendingOrders();
     getAllConnectedBanks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  useEffect(() => {
+    const id = setInterval(() => getOrders(), 5000);
+
+    return clearInterval(id);
+  }, []);
 
   const setPayoutAccount = async (id: number) => {
     await apiCAll({
@@ -177,9 +219,17 @@ export default function Dashboard() {
     getDashboardSummary();
   }, []);
 
+  useEffect(() => {
+    setInterval(() => getOrders, 10000);
+  }, []);
+
   // newly added
   const handleDataChange = (updatedData: IDashboard[]) => {
     setPendingOrders(updatedData);
+  };
+
+  const toggleAtlas = () => {
+    axios.post("/api/process");
   };
 
   return (
@@ -288,17 +338,13 @@ export default function Dashboard() {
 
           <div className="flex gap-x-1 sm:gap-x-1.5 lg:gap-x-5 col-span-5 justify-end items-center">
             <div>
-              <Button
-                className="!bg-button-primary text-[.75rem] lg:text-base text-white"
-                onClick={() => openPayDialog()}
-                disabled={pendingOrders.length === 0}
-              >
-                Status
+              <Button className="!bg-button-primary text-[.75rem] lg:text-base text-white" onClick={getOrders}>
+                S
               </Button>
             </div>
             <div>
               <AutoPay
-                onAutoPayToggle={() => {}}
+                onAutoPayToggle={toggleAtlas}
                 //onAutoPayToggle={handlePayAllOrder}
               />
             </div>
