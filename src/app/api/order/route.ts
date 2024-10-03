@@ -3,7 +3,9 @@ const orders: any[] = [];
 import Redis from "ioredis";
 import { NextRequest } from "next/server";
 
-const redis = new Redis();
+const redis = new Redis(
+  "rediss://red-cqh3sl4s1f4s73bit8lg:JomzZ7RnR46p85ZSg8rE7gmRRAL9I7qM@oregon-redis.render.com:6379"
+);
 
 export async function POST(request: NextRequest) {
   const body = await request.json();

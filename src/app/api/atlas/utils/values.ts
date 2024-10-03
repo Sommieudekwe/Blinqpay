@@ -8,7 +8,9 @@ export interface IOrder {
   status: TStatus;
 }
 
-export const redis = new Redis();
+export const redis = new Redis(
+  "rediss://red-cqh3sl4s1f4s73bit8lg:JomzZ7RnR46p85ZSg8rE7gmRRAL9I7qM@oregon-redis.render.com:6379"
+);
 
 export const orders: Map<string, IOrder> = new Map();
 
